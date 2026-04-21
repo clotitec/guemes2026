@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -26,7 +26,7 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body { height: 100%; background: var(--bg-deep); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+  html, body { height: 100%; background: var(--bg-deep); color: var(--text); font-family: 'Geist', system-ui, sans-serif; overflow: hidden; }
 
   #app { position: relative; width: 100vw; height: 100vh; min-height: 600px; }
 
@@ -41,19 +41,19 @@
   /* Hero title */
   .hero { position: absolute; top: 4%; left: 0; width: 100%; z-index: 10; text-align: center; pointer-events: none; }
   .hero .eyebrow {
-    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+    font-family: 'Geist', sans-serif; font-size: 11px; font-weight: 500;
     letter-spacing: 0.35em; text-transform: uppercase; color: var(--corten-br);
     opacity: 0; animation: fadeIn 1.2s ease-out 0.3s forwards;
   }
   .hero h1 {
-    font-family: 'Fraunces', serif; font-size: clamp(30px, 5vw, 64px);
+    font-family: 'Instrument Serif', serif; font-size: clamp(30px, 5vw, 64px);
     font-weight: 300; font-style: italic; letter-spacing: -0.02em; line-height: 1.05;
     margin-top: 12px; color: var(--text);
     opacity: 0; animation: fadeIn 1.4s ease-out 0.8s forwards;
   }
   .hero h1 em { color: var(--corten-br); font-style: italic; font-weight: 500; }
   .hero .sub {
-    font-family: 'Inter', sans-serif; font-size: clamp(10px, 0.9vw, 13px);
+    font-family: 'Geist', sans-serif; font-size: clamp(10px, 0.9vw, 13px);
     font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--text-mut); margin-top: 14px;
     opacity: 0; animation: fadeIn 1.2s ease-out 1.4s forwards;
@@ -67,7 +67,7 @@
   .ctrl-btn {
     background: rgba(16, 26, 48, 0.7); border: 1px solid var(--line);
     color: var(--text); padding: 8px 16px; border-radius: 2px;
-    font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.15em;
+    font-family: 'Geist', sans-serif; font-size: 11px; letter-spacing: 0.15em;
     text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   }
@@ -104,13 +104,13 @@
   .info-body { padding: 24px 28px; overflow-y: auto; }
 
   .info-panel .tag {
-    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+    font-family: 'Geist', sans-serif; font-size: 10px; font-weight: 600;
     letter-spacing: 0.3em; text-transform: uppercase; color: var(--corten-br);
     margin-bottom: 10px;
   }
 
   .info-panel h2 {
-    font-family: 'Fraunces', serif; font-size: 26px; font-weight: 400;
+    font-family: 'Instrument Serif', serif; font-size: 26px; font-weight: 400;
     font-style: italic; line-height: 1.15; margin-bottom: 12px;
   }
 
@@ -125,7 +125,7 @@
 
   .info-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
   .info-actions a {
-    font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.15em;
+    font-family: 'Geist', sans-serif; font-size: 10px; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--corten-br); text-decoration: none;
     padding: 6px 12px; border: 1px solid var(--corten-dk); border-radius: 2px;
     transition: all 0.2s;
@@ -142,7 +142,7 @@
     background: rgba(16, 26, 48, 0.7); backdrop-filter: blur(8px);
     border: 1px solid transparent; border-radius: 2px; padding: 10px 16px;
     cursor: pointer; transition: all 0.3s ease; opacity: 0.5;
-    font-family: 'Inter', sans-serif; color: var(--text);
+    font-family: 'Geist', sans-serif; color: var(--text);
   }
   .legend-item.active { opacity: 1; border-color: var(--line); background: rgba(200, 148, 80, 0.15); }
   .legend-item:hover { opacity: 0.9; }
@@ -168,7 +168,7 @@
 
   .pin-label {
     position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-    margin-top: 6px; font-family: 'Inter', sans-serif; font-size: 10px;
+    margin-top: 6px; font-family: 'Geist', sans-serif; font-size: 10px;
     font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--text); white-space: nowrap; pointer-events: none;
     text-shadow: 0 1px 3px rgba(0,0,0,0.9); background: rgba(10,17,32,0.7);
@@ -198,7 +198,7 @@
   .route-line { fill: none; stroke: var(--corten); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 8; opacity: 0.6; }
 
   /* Tile overrides */
-  .leaflet-tile-pane { filter: brightness(0.55) contrast(1.1) hue-rotate(-10deg) saturate(0.7); }
+  .leaflet-tile-pane { filter: brightness(0.88) contrast(1.05) saturate(0.85); }
   .leaflet-container { background: var(--bg-deep); }
   .leaflet-control-attribution { background: rgba(10, 17, 32, 0.8) !important; color: var(--text-mut) !important; font-size: 9px !important; }
   .leaflet-control-attribution a { color: var(--corten) !important; }
@@ -218,12 +218,12 @@
     padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px;
   }
   .gallery-title {
-    font-family: 'Fraunces', serif; font-size: 22px; font-style: italic;
+    font-family: 'Instrument Serif', serif; font-size: 22px; font-style: italic;
     color: var(--text); font-weight: 400;
   }
   .gallery-header-right { display: flex; align-items: center; gap: 16px; }
   .gallery-counter {
-    font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.2em;
+    font-family: 'Geist', sans-serif; font-size: 11px; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--text-mut);
   }
 
@@ -248,7 +248,7 @@
   }
   .gallery-thumb-label {
     position: absolute; bottom: 8px; left: 10px; z-index: 2;
-    font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.15em;
+    font-family: 'Geist', sans-serif; font-size: 10px; letter-spacing: 0.15em;
     text-transform: uppercase; color: #fff;
     text-shadow: 0 1px 3px rgba(0,0,0,0.9);
   }
@@ -275,7 +275,7 @@
     border: 1px solid var(--line); color: var(--text);
     border-radius: 50%; cursor: pointer; font-size: 22px; line-height: 1;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Inter', sans-serif; transition: all 0.25s;
+    font-family: 'Geist', sans-serif; transition: all 0.25s;
   }
   .gallery-nav:hover { background: var(--corten-br); color: var(--bg-deep); border-color: var(--corten-br); }
   .gallery-nav.prev { left: 24px; }
@@ -308,7 +308,7 @@
   .modal-close:hover { background: var(--corten-br); color: var(--bg-deep); }
   .modal-title {
     position: absolute; top: 16px; left: 20px; z-index: 10;
-    font-family: 'Fraunces', serif; font-size: 18px; font-style: italic;
+    font-family: 'Instrument Serif', serif; font-size: 18px; font-style: italic;
     color: var(--text); text-shadow: 0 1px 4px rgba(0,0,0,0.8);
   }
   .modal-iframe { width: 100%; height: 100%; border: 0; }
@@ -606,7 +606,7 @@
     attribution: '&copy; OSM &copy; CARTO', subdomains: 'abcd', maxZoom: 19,
   }).addTo(map);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 19, opacity: 0.35,
+    subdomains: 'abcd', maxZoom: 19, opacity: 0.85,
   }).addTo(map);
 
   // ==========================================
