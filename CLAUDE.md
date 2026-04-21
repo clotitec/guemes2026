@@ -9,11 +9,40 @@ This is **not** a software project. It is a formal candidacy to the **Premio Pue
 All deliverables are static HTML documents. The repository holds the dossier submitted to the jury plus its source materials and the deployed public website.
 
 **GitHub repo**: `clotitec/guemes2026` (public) — https://github.com/clotitec/guemes2026
-**Vercel target**: auto-deploy from `main` branch, serving the `public/` folder
+**Vercel target**: auto-deploy from `main` branch
 **Public URL**: https://guemes-pueblo-cantabria-2026.vercel.app/
 **QR code**: generated at `public/qr/` in 3 variants (corten PNG, B&W PNG, scalable SVG)
 
-⚠️ Known config issue as of first deploy: Vercel Root Directory was initially set wrong (serving `app/` instead of `public/`). Fix in Vercel dashboard → Settings → General → Root Directory = `public` → Redeploy. The new landing only shows after this fix.
+### Deployment routing — important
+
+Vercel serves from the `public/` folder automatically. This is a Vercel convention for static sites when Framework Preset = "Other" and the repo has a `public/` directory: Vercel treats `public/` as the serving root regardless of what the Root Directory setting says (which shows `.` but behaves as if it's `public/`).
+
+Consequence: **`app/*` is NOT served via the public URL** — only `public/*` is. The `app/` directory is kept as a legacy reference to the earlier deployment that used green+gold institutional palette, but nothing in it is live.
+
+**Editing rule**: to change what's published, edit `public/*`. Do not waste effort editing `app/*` — those changes never reach production.
+
+Standard URL mapping (cleanUrls on, .html stripped):
+- `/` → `public/index.html`
+- `/mapa/mapa_mundial_hermanos.html` → `public/mapa/mapa_mundial_hermanos.html`
+- `/docs/memoria-economica` → `public/docs/memoria-economica.html`
+- `/paneles/` → `public/paneles/index.html`
+- `/archivos/*.pdf` → `public/archivos/*.pdf`
+
+### Deploy commands
+
+```bash
+# Standard CLI deploy (auto-picks up latest git HEAD):
+cd "D:/..... continua claude/Guemes_2026"
+vercel --prod --yes --scope clotitecs-projects
+
+# Regenerate a PDF from a live page:
+"/c/Program Files/Google/Chrome/Application/chrome.exe" \
+  --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
+  --virtual-time-budget=15000 --run-all-compositor-stages-before-draw \
+  --window-size=1100,1500 \
+  --print-to-pdf="D:/..../public/archivos/FILENAME.pdf" \
+  "https://guemes-pueblo-cantabria-2026.vercel.app/PATH"
+```
 
 ## Critical dates and budget
 
