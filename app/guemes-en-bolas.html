@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enróllate en Güemes — Guemes 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--g6:#1b4332;--g5:#2d6a4f;--g4:#40916c;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--o5:#b85c14;--o4:#d4841a;--o3:#e8a929;--o0:#fef7ec;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}
+.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}.nav a svg{width:16px;height:16px}
+.nav .title{font-size:.82rem;color:var(--x5);font-weight:500}
+.nav .actions{display:flex;gap:.5rem}.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem;transition:all .15s}.nav .actions button:hover{background:var(--x2);color:var(--x9)}
+.hero{background:linear-gradient(135deg,var(--o3) 0%,var(--o4) 50%,var(--o5) 100%);color:var(--w);padding:3rem 2rem;text-align:center}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:.03em;text-transform:uppercase}
+.hero .line{width:60px;height:3px;background:var(--w);margin:.75rem auto;border-radius:2px}
+.hero .sub{font-size:1rem;font-weight:300;opacity:.9;margin-bottom:.5rem}
+.hero .budget{font-size:1.8rem;font-weight:800;margin:.5rem 0}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.15);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;backdrop-filter:blur(4px)}
+.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:1.75rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
+.card h2{font-size:1rem;font-weight:700;color:var(--o5);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid #f0d9a8;text-transform:uppercase;letter-spacing:.03em}
+.card h3{font-size:.88rem;font-weight:700;color:var(--o4);margin:1rem 0 .4rem}
+.card p{color:var(--x6);margin-bottom:.5rem;font-size:.85rem;text-align:justify}
+.card ul,.card ol{margin:.4rem 0 .8rem 1.4rem;color:var(--x6);font-size:.85rem}
+.card li{margin-bottom:.25rem}
+.hl{background:var(--o0);border-left:3px solid var(--o3);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#6b5e4a;margin:.75rem 0}.hl strong{color:var(--o5)}
+.hlg{background:var(--g0);border-left:3px solid var(--g5);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#2d5040;margin:.75rem 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.vs-c{padding:1rem;border-radius:8px}.vs-c.ref{background:#f0f4f8;border-top:3px solid #4a90d9}.vs-c.prop{background:var(--o0);border-top:3px solid var(--o3)}
+.vs-c h4{margin-bottom:.5rem;font-size:.88rem}.vs-c.ref h4{color:#2b6cb0}.vs-c.prop h4{color:var(--o5)}
+.vs-c ul{margin:0 0 0 1.1rem;font-size:.8rem}.vs-c li{margin-bottom:.2rem}
+.loc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin:1rem 0}
+.loc{background:var(--o0);border-radius:8px;padding:.9rem;border-left:3px solid var(--o3)}
+.loc .name{font-weight:700;color:var(--o5);font-size:.88rem}.loc .desc{font-size:.75rem;color:#6b5e4a;margin-top:.15rem}.loc .count{font-size:.72rem;color:var(--o4);font-weight:600;margin-top:.25rem}
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1rem 0}
+.imp{background:var(--o0);border-radius:8px;padding:.9rem;text-align:center}
+.imp .t{font-weight:700;color:var(--o5);font-size:.82rem;margin-bottom:.15rem}.imp .d{font-size:.75rem;color:#6b5e4a}
+table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.82rem}
+th{background:var(--o5);color:var(--w);padding:.45rem .6rem;text-align:left;font-weight:600;font-size:.75rem}
+td{padding:.4rem .6rem;border-bottom:1px solid #f0e6d6;color:var(--x6)}
+td:last-child,th:last-child{text-align:right}
+.total td{font-weight:700;color:var(--o5);border-top:2px solid var(--o5)}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.5rem;margin:1rem 0}
+.tl-s{background:var(--o0);border-radius:6px;padding:.7rem;text-align:center}.tl-s .d{font-weight:700;color:var(--o5);font-size:.75rem;text-transform:uppercase}.tl-s .a{font-size:.72rem;color:#6b5e4a;margin-top:.15rem}
+.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;opacity:0;transition:all .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media(max-width:768px){.vs{grid-template-columns:1fr}.main{padding:1.25rem 1rem}.card{padding:1.25rem}}
+@media print{.nav{position:static}.card{box-shadow:none;border:1px solid #ddd}.hero{padding:1.5rem}}
+</style>
+</head>
+<body>
+<div class="nav">
+<a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Guemes 2026</a>
+<span class="title">Enróllate en Güemes</span>
+<div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div>
+</div>
+
+<div class="hero">
+<h1>Enróllate en Güemes</h1>
+<div class="line"></div>
+<div class="sub">Festival de arte rural, gamificacion y promocion comarcal</div>
+<div class="budget">15.000 &euro;</div>
+<div class="badge">Verano 2026-2027 · Municipio de Bareyo</div>
+</div>
+
+<div class="main">
+
+<div class="card">
+<h2>Resumen ejecutivo</h2>
+<p><strong>"Enróllate en Güemes"</strong> transforma bolas de ensilado pintadas en una red de puntos de interes por todo Bareyo, conectando el Faro de Ajo (250.000 visitantes/ano), las playas y la ruta circular de Guemes en un circuito de arte al aire libre con gamificacion, QR interactivos y eventos festivos.</p>
+<div class="hl"><strong>La idea en una frase:</strong> Bolas de silo pintadas por artistas cantabros distribuidas desde el Faro de Ajo hasta las 4 plazoletas de la Senda de las Estatuas, con QR que cuentan historias, proponen retos y guian a los 250.000 visitantes del faro hacia Guemes por una ruta llana de 6 km ciclable y familiar.</div>
+</div>
+
+<div class="card">
+<h2>Modelo de referencia vs. propuesta</h2>
+<div class="vs">
+<div class="vs-c ref"><h4>Porrua en Bolas (Llanes)</h4><ul><li>Desde 2021 (5 ediciones)</li><li>~400 habitantes</li><li>~12 artistas por edicion</li><li>1 fin de semana en julio</li><li>Solo en Porrua</li><li>Patrocinio empresarial (Ibersa)</li></ul></div>
+<div class="vs-c prop"><h4>Enróllate en Güemes (propuesta)</h4><ul><li>Primera edicion verano 2026</li><li>301 hab + 250K visitantes Faro</li><li>15-20 artistas cantabros</li><li>2 fines de semana con eventos</li><li>Expansion a todo Bareyo</li><li>Gamificacion QR + storytelling IA</li><li>Patrocinios: Nisol, Lupa, Santander</li><li>Taller peregrinos + difusion intl.</li><li>Bar en comision para Junta Vecinal</li></ul></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Distribucion de bolas por el municipio</h2>
+<div class="loc-grid">
+<div class="loc"><div class="name">Faro de Ajo</div><div class="desc">Estructura 2 alturas junto al faro. Punto de inicio del circuito.</div><div class="count">5-10 bolas + estructura</div></div>
+<div class="loc"><div class="name">Playa de Cuberros</div><div class="desc">Entrada de la playa. Reclamo visual para banistas.</div><div class="count">2 bolas</div></div>
+<div class="loc"><div class="name">Playa de la Antuerta</div><div class="desc">Entrada playa. Conexion costa-interior.</div><div class="count">2 bolas</div></div>
+<div class="loc"><div class="name">Oficina Turismo Ajo</div><div class="desc">Info completa de ruta. Punto de distribucion mapas.</div><div class="count">1 bola</div></div>
+<div class="loc"><div class="name">Iglesia Sta. Maria Bareyo</div><div class="desc">Entrada iglesia. Patrimonio religioso.</div><div class="count">1 bola</div></div>
+<div class="loc"><div class="name">Senda de las Estatuas</div><div class="desc">4 plazoletas. Destino final del circuito.</div><div class="count">4-8 bolas</div></div>
+</div>
+<div class="hl"><strong>Total: 20-25 bolas pintadas.</strong> Cada bola lleva QR con historia, ficha del artista, reto de gamificacion y enlace a la ruta completa.</div>
+</div>
+
+<div class="card">
+<h2>Gamificacion y experiencia digital</h2>
+<h3>Retos y puntos</h3>
+<ul><li><strong>Colecciona las bolas:</strong> Escanea el QR de cada bola para sumar puntos. Completa todas = diploma "Explorador de Guemes".</li><li><strong>Reto fotografico:</strong> Foto con cada bola + #GuemesEnBolas = participar en sorteo.</li><li><strong>Quiz de historia:</strong> Pregunta en cada QR. Acierta todas = premio en el bar del pueblo.</li></ul>
+<h3>Storytelling con IA</h3>
+<ul><li><strong>Videos 1-2 min</strong> con historia de cada lugar narrada de forma cinematica.</li><li><strong>4 Guemes del mundo:</strong> Conexion Cantabria-Argentina-EEUU-Canada.</li><li><strong>Camino de Santiago:</strong> Testimonios peregrinos e historia del Padre Ernesto.</li></ul>
+<h3>Para ninos y familias</h3>
+<ul><li><strong>Pasaporte de las bolas:</strong> Cuadernillo con sellos en cada bola.</li><li><strong>Busqueda del tesoro:</strong> Pistas en QR hacia "tesoro" en el albergue.</li><li><strong>Pinta tu mini-bola:</strong> Bolas pequenas para pintar in situ.</li></ul>
+</div>
+
+<div class="card">
+<h2>Programa de eventos</h2>
+<h3>Fin de semana 1: "Festival de las Bolas" (julio)</h3>
+<p><strong>Viernes:</strong> 18h inauguracion + presentacion artistas · 19:30 aperitivo local · 21h concierto acustico</p>
+<p><strong>Sabado:</strong> 10-14h pintura en directo · 11-13h taller infantil + taller peregrinos · 14h parrillada popular · 17h taller intergeneracional · 18:30 ruta guiada Bolas+Senda · 20:30 tardeo con musica</p>
+<p><strong>Domingo:</strong> 10-13h acabado bolas · 11h mercadillo artesania · 13h inauguracion circuito · 13:30 jornada de sidra</p>
+<h3>Fin de semana 2: "Tardeo de las Bolas" (agosto)</h3>
+<p>Sabado: tardeo musical + bar comision · Repintado y mantenimiento · Taller artistas. Domingo: ruta ciclable familiar · Premios gamificacion y sorteo.</p>
+<div class="hl"><strong>Despues:</strong> Las bolas permanecen todo el verano/otono como ruta de arte visitable. Los QR siguen activos. Al final del otono las bolas se abren para alimentar al ganado: el arte vuelve a la tierra.</div>
+</div>
+
+<div class="card">
+<h2>Estrategia: del Faro de Ajo a Guemes</h2>
+<ol>
+<li><strong>Captacion en el Faro:</strong> Visitante ve estructura de bolas de 2 alturas. Escanea QR.</li>
+<li><strong>Descubrimiento:</strong> QR muestra mapa completo de bolas y ruta de 6 km.</li>
+<li><strong>Playas:</strong> Ve bolas en Cuberros y Antuerta. Cada bola tiene un reto.</li>
+<li><strong>Llegada a Guemes:</strong> Completa ruta circular (1h a pie, llana, ciclable, familiar).</li>
+<li><strong>Esculturas:</strong> En las 4 plazoletas descubre los 4 Guemes del mundo.</li>
+<li><strong>Experiencia completa:</strong> Albergue, ermita, palacio. Come en el pueblo. Comparte en redes.</li>
+</ol>
+<div class="hlg"><strong>Objetivo:</strong> 2% de visitantes del Faro = <strong>5.000 visitantes/ano a Guemes</strong>. Multiplicar x16 el trafico actual.</div>
+</div>
+
+<div class="card">
+<h2>Modelo de patrocinio</h2>
+<table><tr><th>Empresa/Entidad</th><th>Colaboracion</th></tr>
+<tr><td><strong>Pinturas Nisol</strong></td><td>Suministro pintura exteriores. Logo en bolas y carteleria.</td></tr>
+<tr><td><strong>Lupa</strong></td><td>Patrocinio comida popular. Logo en eventos.</td></tr>
+<tr><td><strong>Banco Santander</strong></td><td>Patrocinio principal. Publicidad y gamificacion.</td></tr>
+<tr><td><strong>Asoc. artistas cantabros</strong></td><td>Coordinacion artistas participantes.</td></tr>
+<tr><td><strong>Albergue Guemes</strong></td><td>Taller peregrinos. Difusion internacional.</td></tr>
+<tr><td><strong>Of. Turismo Ajo</strong></td><td>Distribucion mapas y promocion circuito.</td></tr></table>
+<p style="margin-top:.5rem"><strong>Ingresos Junta Vecinal:</strong> Bar en comision (tardeos, bebidas), publicidad en bolas, merchandising (camisetas, imanes, postales).</p>
+</div>
+
+<div class="card">
+<h2>Presupuesto: 15.000 &euro;</h2>
+<table><tr><th>Concepto</th><th>Importe</th></tr>
+<tr><td>Bolas secas de silo y preparacion (20-25 uds.)</td><td>1.500 &euro;</td></tr>
+<tr><td>Pinturas y materiales artisticos</td><td>1.800 &euro;</td></tr>
+<tr><td>Instalacion y transporte puntos estrategicos</td><td>1.200 &euro;</td></tr>
+<tr><td>Eventos musicales (2 fines de semana)</td><td>3.000 &euro;</td></tr>
+<tr><td>Catering (parrillada, sidra, comida popular)</td><td>2.000 &euro;</td></tr>
+<tr><td>Talleres (infantil + artistas)</td><td>1.200 &euro;</td></tr>
+<tr><td>QR, gamificacion, contenido digital</td><td>1.000 &euro;</td></tr>
+<tr><td>Carteleria y difusion</td><td>1.000 &euro;</td></tr>
+<tr><td>Seguros y logistica</td><td>800 &euro;</td></tr>
+<tr><td>Coordinacion artistas</td><td>500 &euro;</td></tr>
+<tr><td>Imprevistos</td><td>1.000 &euro;</td></tr>
+<tr class="total"><td>TOTAL</td><td>15.000 &euro;</td></tr></table>
+</div>
+
+<div class="card">
+<h2>Impacto esperado</h2>
+<div class="impact-grid">
+<div class="imp"><div class="t">250K visitantes</div><div class="d">Publico del Faro de Ajo como objetivo. 2% = 5.000 nuevos a Guemes.</div></div>
+<div class="imp"><div class="t">Difusion intl.</div><div class="d">Peregrinos de +100 paises comparten en redes. Organica, sin coste.</div></div>
+<div class="imp"><div class="t">Ingresos</div><div class="d">Bar comision + patrocinios + merchandising para Junta Vecinal.</div></div>
+<div class="imp"><div class="t">Cohesion</div><div class="d">Parrilladas, talleres, tardeos. El pueblo se activa.</div></div>
+<div class="imp"><div class="t">Candidatura</div><div class="d">Originalidad, cultura, utilidad, belleza. Diferenciador claro.</div></div>
+<div class="imp"><div class="t">Escalable</div><div class="d">2a edicion mas grande. Expansion Trasmiera. Modelo exportable.</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>Cronograma</h2>
+<div class="tl">
+<div class="tl-s"><div class="d">Abril</div><div class="a">Aprobacion. Contacto ganaderos y artistas.</div></div>
+<div class="tl-s"><div class="d">Mayo</div><div class="a">Convocatoria artistas. Patrocinadores.</div></div>
+<div class="tl-s"><div class="d">Junio</div><div class="a">Seleccion. Compra materiales. Plataforma QR.</div></div>
+<div class="tl-s"><div class="d">Julio</div><div class="a">Fin semana 1: Festival de las Bolas.</div></div>
+<div class="tl-s"><div class="d">Agosto</div><div class="a">Fin semana 2: Tardeo de las Bolas.</div></div>
+<div class="tl-s"><div class="d">Sep-Nov</div><div class="a">Ruta visitable. Evaluacion. Plan 2a edicion.</div></div>
+</div>
+</div>
+
+</div>
+<div class="footer">Propuesta Enróllate en Güemes · Junta Vecinal de Guemes (Bareyo) · Abril 2026</div>
+<div class="toast" id="toast"></div>
+<script>
+async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Guemes 2026 — Enróllate en Güemes',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}
+function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+</script>
+</body>
+</html>
