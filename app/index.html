@@ -412,6 +412,29 @@
   .flex-row { display: flex; flex-direction: row; }
   .gap-md { gap: 24px; }
 
+
+  /* ========== PRINT ========== */
+  @media print {
+    @page { margin: 12mm; size: A4; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    nav.topbar, .scroll-hint, .hero-bg::after { display: none !important; }
+    .hero-section { min-height: auto; padding: 60px 40px 40px; break-after: page; }
+    .hero-bg { animation: none; filter: brightness(0.5); }
+    section { min-height: auto !important; padding: 50px 40px !important; break-inside: avoid; }
+    .stat, .tl-item, .bloque, .doc-card, .sculpt-card, .artifice, .pullquote { break-inside: avoid; }
+    .map-embed { break-inside: avoid; page-break-inside: avoid; }
+    .map-embed iframe { display: none !important; }
+    .map-embed::before {
+      content: "Mapa mundial interactivo disponible en guemes-pueblo-cantabria-2026.vercel.app/mapa";
+      display: block; padding: 60px 40px; text-align: center;
+      background: var(--bg-navy); border: 1px solid var(--line);
+      font-family: "Instrument Serif", serif; font-style: italic;
+      font-size: 20px; color: var(--corten-br);
+    }
+    footer.closing { padding: 60px 40px; }
+    .footer-grid { gap: 30px; }
+  }
 </style>
 </head>
 <body>
