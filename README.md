@@ -2,7 +2,8 @@
 
 Sitio web oficial de la candidatura de Güemes (Bareyo, Cantabria) al **Premio Pueblo de Cantabria 2026** (Orden OBR/2/2017 del Gobierno de Cantabria).
 
-🌐 **URL pública**: (pendiente de desplegar en Vercel)
+🌐 **URL pública**: https://guemes-pueblo-cantabria-2026.vercel.app/
+📱 **QR imprimible**: `public/qr/qr-guemes-2026-1000.png` (corten/navy) · `qr-guemes-2026-bw-1000.png` (blanco y negro) · `qr-guemes-2026.svg` (escalable)
 
 ---
 
