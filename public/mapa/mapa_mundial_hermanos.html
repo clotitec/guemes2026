@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abriendo Caminos de Amistad — Güemes 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+<style>
+  :root {
+    --bg-deep:   #0a1120;
+    --bg-navy:   #101a30;
+    --corten:    #c89450;
+    --corten-br: #f4c77b;
+    --corten-dk: #7a5a30;
+    --text:      #e8e6e1;
+    --text-mut:  #8a8680;
+    --line:      rgba(244, 199, 123, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; background: var(--bg-deep); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+
+  #app { position: relative; width: 100vw; height: 100vh; min-height: 600px; }
+
+  #map { position: absolute; inset: 0; background: var(--bg-deep); z-index: 1; }
+
+  .vignette {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 30%, var(--bg-deep) 95%);
+    z-index: 2;
+  }
+
+  /* Hero title */
+  .hero { position: absolute; top: 4%; left: 0; width: 100%; z-index: 10; text-align: center; pointer-events: none; }
+  .hero .eyebrow {
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--corten-br);
+    opacity: 0; animation: fadeIn 1.2s ease-out 0.3s forwards;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-size: clamp(30px, 5vw, 64px);
+    font-weight: 300; font-style: italic; letter-spacing: -0.02em; line-height: 1.05;
+    margin-top: 12px; color: var(--text);
+    opacity: 0; animation: fadeIn 1.4s ease-out 0.8s forwards;
+  }
+  .hero h1 em { color: var(--corten-br); font-style: italic; font-weight: 500; }
+  .hero .sub {
+    font-family: 'Inter', sans-serif; font-size: clamp(10px, 0.9vw, 13px);
+    font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-mut); margin-top: 14px;
+    opacity: 0; animation: fadeIn 1.2s ease-out 1.4s forwards;
+  }
+
+  /* Top-right controls */
+  .controls-top {
+    position: absolute; top: 3%; right: 3%; z-index: 10;
+    display: flex; gap: 8px;
+  }
+  .ctrl-btn {
+    background: rgba(16, 26, 48, 0.7); border: 1px solid var(--line);
+    color: var(--text); padding: 8px 16px; border-radius: 2px;
+    font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .ctrl-btn:hover { background: rgba(200, 148, 80, 0.25); color: var(--corten-br); border-color: var(--corten); }
+  .ctrl-btn.active { background: rgba(200, 148, 80, 0.3); color: var(--corten-br); border-color: var(--corten-br); }
+
+  /* Info panel */
+  .info-panel {
+    position: absolute; bottom: 4%; right: 3%; z-index: 10;
+    width: min(400px, 90vw);
+    background: rgba(16, 26, 48, 0.88);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--line); border-radius: 4px;
+    color: var(--text);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    overflow: hidden;
+    max-height: 80vh;
+    display: flex; flex-direction: column;
+  }
+  .info-panel.visible { opacity: 1; transform: translateY(0); }
+
+  .info-img {
+    width: 100%; height: 160px;
+    background: var(--bg-navy); background-size: cover; background-position: center;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .info-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(16,26,48,0.6));
+  }
+
+  .info-body { padding: 24px 28px; overflow-y: auto; }
+
+  .info-panel .tag {
+    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--corten-br);
+    margin-bottom: 10px;
+  }
+
+  .info-panel h2 {
+    font-family: 'Fraunces', serif; font-size: 26px; font-weight: 400;
+    font-style: italic; line-height: 1.15; margin-bottom: 12px;
+  }
+
+  .info-panel .meta {
+    display: grid; grid-template-columns: auto 1fr; gap: 4px 16px;
+    font-size: 12px; margin: 14px 0 16px; color: var(--text-mut);
+  }
+  .info-panel .meta strong { color: var(--text); font-weight: 500; }
+
+  .info-panel .story { font-size: 13.5px; line-height: 1.6; color: var(--text); font-weight: 300; }
+  .info-panel .story em { color: var(--corten-br); font-style: italic; }
+
+  .info-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .info-actions a {
+    font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--corten-br); text-decoration: none;
+    padding: 6px 12px; border: 1px solid var(--corten-dk); border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .info-actions a:hover { background: var(--corten-br); color: var(--bg-deep); }
+
+  /* Legend bottom-left */
+  .legend {
+    position: absolute; bottom: 4%; left: 3%; z-index: 10;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(16, 26, 48, 0.7); backdrop-filter: blur(8px);
+    border: 1px solid transparent; border-radius: 2px; padding: 10px 16px;
+    cursor: pointer; transition: all 0.3s ease; opacity: 0.5;
+    font-family: 'Inter', sans-serif; color: var(--text);
+  }
+  .legend-item.active { opacity: 1; border-color: var(--line); background: rgba(200, 148, 80, 0.15); }
+  .legend-item:hover { opacity: 0.9; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--corten); flex-shrink: 0; }
+  .legend-item.espana .legend-dot { background: var(--corten-br); box-shadow: 0 0 12px var(--corten-br); }
+  .legend-text { font-size: 13px; letter-spacing: 0.04em; }
+  .legend-text small { display: block; font-size: 10px; color: var(--text-mut); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+
+  /* Pins */
+  .pin { position: relative; width: 40px; height: 40px; }
+  .pin-pulse, .pin-core {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); border-radius: 50%;
+  }
+  .pin-pulse { width: 40px; height: 40px; background: var(--corten); opacity: 0; animation: pulse 2.2s ease-out infinite; }
+  .pin-core { width: 12px; height: 12px; background: var(--corten-br); box-shadow: 0 0 16px var(--corten-br), 0 0 4px #fff; z-index: 2; }
+  .pin.main .pin-core { width: 16px; height: 16px; background: #fff; box-shadow: 0 0 24px var(--corten-br), 0 0 8px #fff; }
+  .pin.main .pin-pulse { background: var(--corten-br); }
+  .pin.small .pin-core { width: 8px; height: 8px; }
+  .pin.small .pin-pulse { width: 24px; height: 24px; }
+  .pin.patrimonio .pin-core { background: #7bc6f4; box-shadow: 0 0 10px #7bc6f4; }
+  .pin.patrimonio .pin-pulse { background: #7bc6f4; }
+
+  .pin-label {
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    margin-top: 6px; font-family: 'Inter', sans-serif; font-size: 10px;
+    font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text); white-space: nowrap; pointer-events: none;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9); background: rgba(10,17,32,0.7);
+    padding: 3px 8px; border-radius: 2px; border: 1px solid var(--line);
+  }
+
+  @keyframes pulse {
+    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Arcs */
+  .arc-path {
+    fill: none; stroke: var(--corten-br); stroke-width: 1.8; stroke-linecap: round;
+    stroke-dasharray: 3000; stroke-dashoffset: 3000;
+    filter: drop-shadow(0 0 4px rgba(244, 199, 123, 0.6));
+    opacity: 0;
+  }
+  .arc-path.drawing { opacity: 1; animation: draw 2.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* Route line for local view */
+  .route-line { fill: none; stroke: var(--corten); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 8; opacity: 0.6; }
+
+  /* Tile overrides */
+  .leaflet-tile-pane { filter: brightness(0.55) contrast(1.1) hue-rotate(-10deg) saturate(0.7); }
+  .leaflet-container { background: var(--bg-deep); }
+  .leaflet-control-attribution { background: rgba(10, 17, 32, 0.8) !important; color: var(--text-mut) !important; font-size: 9px !important; }
+  .leaflet-control-attribution a { color: var(--corten) !important; }
+
+  /* Aerial Gallery */
+  .gallery-backdrop {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(5, 10, 20, 0.95);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    display: none; flex-direction: column;
+    padding: 20px 40px;
+  }
+  .gallery-backdrop.open { display: flex; }
+
+  .gallery-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px;
+  }
+  .gallery-title {
+    font-family: 'Fraunces', serif; font-size: 22px; font-style: italic;
+    color: var(--text); font-weight: 400;
+  }
+  .gallery-header-right { display: flex; align-items: center; gap: 16px; }
+  .gallery-counter {
+    font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-mut);
+  }
+
+  .gallery-grid {
+    flex: 1; overflow-y: auto; padding: 4px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px; align-content: start;
+  }
+  .gallery-thumb {
+    aspect-ratio: 3 / 2; background-size: cover; background-position: center;
+    background-color: var(--bg-navy);
+    cursor: pointer; border-radius: 2px; border: 1px solid transparent;
+    transition: all 0.3s ease; position: relative; overflow: hidden;
+  }
+  .gallery-thumb:hover {
+    border-color: var(--corten-br); transform: scale(1.02);
+  }
+  .gallery-thumb::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.7));
+    pointer-events: none;
+  }
+  .gallery-thumb-label {
+    position: absolute; bottom: 8px; left: 10px; z-index: 2;
+    font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+  }
+
+  .gallery-viewer {
+    position: absolute; inset: 0; z-index: 110;
+    background: rgba(0, 0, 0, 0.97); display: none;
+    align-items: center; justify-content: center;
+    padding: 60px 80px;
+  }
+  .gallery-viewer.open { display: flex; }
+  .gallery-viewer img {
+    max-width: 100%; max-height: 100%; object-fit: contain;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.8);
+    animation: photoFade 0.4s ease;
+  }
+  @keyframes photoFade {
+    from { opacity: 0; transform: scale(0.98); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .gallery-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 54px; height: 54px; background: rgba(16,26,48,0.75);
+    border: 1px solid var(--line); color: var(--text);
+    border-radius: 50%; cursor: pointer; font-size: 22px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; transition: all 0.25s;
+  }
+  .gallery-nav:hover { background: var(--corten-br); color: var(--bg-deep); border-color: var(--corten-br); }
+  .gallery-nav.prev { left: 24px; }
+  .gallery-nav.next { right: 24px; }
+  .gallery-viewer .modal-close {
+    top: 24px; right: 24px;
+  }
+
+  /* Modal for Street View */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(5, 10, 20, 0.9);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center;
+    padding: 40px;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal-box {
+    position: relative; width: min(1200px, 95vw); height: min(700px, 85vh);
+    background: var(--bg-navy); border: 1px solid var(--line);
+    border-radius: 4px; overflow: hidden; box-shadow: 0 30px 100px rgba(0,0,0,0.6);
+  }
+  .modal-close {
+    position: absolute; top: 10px; right: 10px; z-index: 10;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(10,17,32,0.8); border: 1px solid var(--line);
+    color: var(--text); font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { background: var(--corten-br); color: var(--bg-deep); }
+  .modal-title {
+    position: absolute; top: 16px; left: 20px; z-index: 10;
+    font-family: 'Fraunces', serif; font-size: 18px; font-style: italic;
+    color: var(--text); text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .modal-iframe { width: 100%; height: 100%; border: 0; }
+
+  /* Mobile */
+  @media (max-width: 760px) {
+    .info-panel { bottom: 2%; right: 2%; left: 2%; width: auto; max-height: 55vh; }
+    .info-panel h2 { font-size: 20px; }
+    .info-img { height: 110px; }
+    .legend { display: none; }
+    .hero { top: 2%; }
+    .controls-top { top: 2%; right: 2%; }
+    .ctrl-btn { padding: 6px 10px; font-size: 10px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="app">
+  <div id="map"></div>
+  <div class="vignette"></div>
+
+  <div class="hero">
+    <div class="eyebrow" data-i18n="eyebrow">Güemes · Bareyo · Cantabria</div>
+    <h1 data-i18n="title"></h1>
+    <div class="sub" data-i18n="sub">Candidatura Pueblo de Cantabria 2026</div>
+  </div>
+
+  <div class="controls-top">
+    <button class="ctrl-btn" id="btn-replay" onclick="startNarrative(true)" data-i18n="replay">↻ Volver a empezar</button>
+    <button class="ctrl-btn" id="btn-gallery" onclick="openGallery()" data-i18n="gallery">Visor aéreo</button>
+    <button class="ctrl-btn" id="btn-lang" onclick="toggleLang()">EN</button>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="info-panel" id="panel">
+    <div class="info-img" id="p-img"></div>
+    <div class="info-body">
+      <div class="tag" id="p-tag"></div>
+      <h2 id="p-title"></h2>
+      <div class="meta" id="p-meta"></div>
+      <div class="story" id="p-story"></div>
+      <div class="info-actions" id="p-actions"></div>
+    </div>
+  </div>
+
+  <!-- Aerial Gallery -->
+  <div class="gallery-backdrop" id="gallery-modal">
+    <div class="gallery-header">
+      <div class="gallery-title" data-i18n="galleryTitle">Visor aéreo — Güemes desde el cielo</div>
+      <div class="gallery-header-right">
+        <span class="gallery-counter" id="gallery-counter"></span>
+        <button class="modal-close" onclick="closeGallery()" style="position:relative;top:auto;right:auto;">✕</button>
+      </div>
+    </div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+
+    <div class="gallery-viewer" id="gallery-viewer">
+      <button class="gallery-nav prev" onclick="navigatePhoto(-1)">‹</button>
+      <img id="gallery-photo" src="" alt="">
+      <button class="gallery-nav next" onclick="navigatePhoto(1)">›</button>
+      <button class="modal-close" onclick="closeViewer()">✕</button>
+    </div>
+  </div>
+
+  <!-- Street View Modal -->
+  <div class="modal-backdrop" id="sv-modal">
+    <div class="modal-box">
+      <div class="modal-title" id="sv-title"></div>
+      <button class="modal-close" onclick="closeStreetView()">✕</button>
+      <iframe class="modal-iframe" id="sv-iframe" src="" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+  // ==========================================
+  // INTERNATIONALIZATION (ES / EN)
+  // ==========================================
+  const I18N = {
+    es: {
+      eyebrow: 'Güemes · Bareyo · Cantabria',
+      title: 'Abriendo <em>caminos</em> de amistad',
+      sub: 'Candidatura Pueblo de Cantabria 2026',
+      replay: '↻ Volver a empezar',
+      gallery: 'Visor aéreo',
+      galleryTitle: 'Visor aéreo — Güemes desde el cielo',
+      galleryLabel: 'Vista',
+      galleryCount: 'vistas',
+      lang: 'EN',
+      viewLocal: 'Ver el pueblo',
+      viewWorld: 'Volver al mundo',
+      aerial: 'Visor aéreo',
+      streetView: 'Caminar por la ruta',
+      from: 'Desde',
+      population: 'Población',
+      distance: 'Distancia',
+      svTitleGuemes: 'Ruta de la iglesia de San Vicente y del hospital de peregrinos de San Julián',
+      svTitleAlbergue: 'Albergue La Cabaña del Abuelo Peuto',
+    },
+    en: {
+      eyebrow: 'Güemes · Bareyo · Cantabria, Spain',
+      title: 'Opening <em>paths</em> of friendship',
+      sub: 'Candidacy · Village of Cantabria 2026',
+      replay: '↻ Replay',
+      gallery: 'Aerial viewer',
+      galleryTitle: 'Aerial viewer — Güemes from above',
+      galleryLabel: 'View',
+      galleryCount: 'views',
+      lang: 'ES',
+      viewLocal: 'See the village',
+      viewWorld: 'Back to the world',
+      aerial: 'Aerial viewer',
+      streetView: 'Walk the route',
+      from: 'Since',
+      population: 'Population',
+      distance: 'Distance',
+      svTitleGuemes: 'Route of the church of San Vicente and the pilgrims\' hospital of San Julián',
+      svTitleAlbergue: 'Hostel La Cabaña del Abuelo Peuto',
+    }
+  };
+
+  let currentLang = 'es';
+
+  // ==========================================
+  // DATA: 4 BROTHERS AROUND THE WORLD
+  // ==========================================
+  const PUEBLOS = {
+    espana: {
+      coords: [43.4555, -3.6372],
+      img: 'imagenes/ESPANA.jpeg',
+      es: {
+        tag: 'España · El origen',
+        titulo: 'Güemes, Bareyo',
+        year: '1084',
+        pob: '301 hab.',
+        dist: null,
+        historia: 'Primera cita documental en <em>1084</em>. Cuna del apellido. Durante nueve siglos, sus canteros, escultores y fundidores levantaron catedrales desde Santiago hasta Pamplona. Su hospital medieval de San Julián atendió peregrinos desde el siglo XIV — hoy lo continúa el Albergue <em>La Cabaña del Abuelo Peuto</em>.',
+      },
+      en: {
+        tag: 'Spain · The origin',
+        titulo: 'Güemes, Bareyo',
+        year: '1084',
+        pob: '301 pop.',
+        dist: null,
+        historia: 'First documented mention in <em>1084</em>. Cradle of the surname. For nine centuries, its stonemasons, sculptors and bell-founders built cathedrals from Santiago to Pamplona. Its medieval pilgrims\' hospital of San Julián welcomed travellers from the 14th century — today continued by the <em>La Cabaña del Abuelo Peuto</em> hostel.',
+      },
+    },
+    argentina: {
+      coords: [-24.6667, -65.0500],
+      img: 'imagenes/ARGENTINA.jpeg',
+      es: {
+        tag: 'Argentina · Provincia de Salta',
+        titulo: 'General Güemes',
+        year: '1888',
+        pob: '56.948 hab.',
+        dist: '10.400 km',
+        historia: 'Fundada el <em>23 de julio de 1888</em> en honor a <em>Martín Miguel de Güemes</em> (1785–1821), héroe nacional argentino. Su padre, Gabriel de Güemes Montero, procedía de Cantabria. La ciudad de casi 57.000 habitantes es hoy el mayor de los Güemes del mundo. El 17 de junio es el Día Nacional de la Libertad Latinoamericana.',
+      },
+      en: {
+        tag: 'Argentina · Province of Salta',
+        titulo: 'General Güemes',
+        year: '1888',
+        pob: '56,948 pop.',
+        dist: '10,400 km',
+        historia: 'Founded on <em>23 July 1888</em> in honour of <em>Martín Miguel de Güemes</em> (1785–1821), Argentine national hero. His father, Gabriel de Güemes Montero, came from Cantabria. The city of nearly 57,000 inhabitants is today the largest of the Güemes of the world. 17 June is the National Day of Latin American Freedom.',
+      },
+    },
+    mexico: {
+      coords: [23.9186, -99.0067],
+      img: 'imagenes/MEXICO.jpeg',
+      es: {
+        tag: 'México · Tamaulipas',
+        titulo: 'Güémez',
+        year: '1749',
+        pob: '1.731 hab.',
+        dist: '8.750 km',
+        historia: 'Fundado el <em>1 de enero de 1749</em> por José de Escandón en honor al virrey <em>Juan Francisco de Güemes y Horcasitas</em>, primer conde de Revillagigedo. Su iglesia de San Francisco de Asís, del siglo XVIII, guarda un parecido arquitectónico sorprendente con la iglesia de Güemes de Cantabria.',
+      },
+      en: {
+        tag: 'Mexico · Tamaulipas',
+        titulo: 'Güémez',
+        year: '1749',
+        pob: '1,731 pop.',
+        dist: '8,750 km',
+        historia: 'Founded on <em>1 January 1749</em> by José de Escandón in honour of viceroy <em>Juan Francisco de Güemes y Horcasitas</em>, first Count of Revillagigedo. Its 18th-century church of San Francisco de Asís shows a striking architectural resemblance to the church of Güemes in Cantabria.',
+      },
+    },
+    eeuu: {
+      coords: [48.5478, -122.6244],
+      img: 'imagenes/EEUU.jpeg',
+      es: {
+        tag: 'Estados Unidos · Washington',
+        titulo: 'Guemes Island',
+        year: '1791',
+        pob: '~600 hab.',
+        dist: '8.100 km',
+        historia: 'Bautizada en <em>1791</em> por el explorador español José María Narváez, en la expedición de Francisco de Eliza, en honor a <em>Juan Vicente de Güemes</em>, 2º conde de Revillagigedo y también virrey. En <em>2009</em>, un peregrino de esta isla llamado Bob llegó al albergue de Güemes; de aquel encuentro nació este proyecto.',
+      },
+      en: {
+        tag: 'United States · Washington',
+        titulo: 'Guemes Island',
+        year: '1791',
+        pob: '~600 pop.',
+        dist: '8,100 km',
+        historia: 'Named in <em>1791</em> by Spanish explorer José María Narváez during the expedition led by Francisco de Eliza, honouring <em>Juan Vicente de Güemes</em>, 2nd Count of Revillagigedo and also viceroy. In <em>2009</em>, a pilgrim from this island named Bob arrived at the Güemes hostel — from that encounter this project was born.',
+      },
+    },
+  };
+
+  const ORDER = ['espana', 'argentina', 'mexico', 'eeuu'];
+
+  // ==========================================
+  // LOCAL DATA: Güemes-Bareyo village
+  // ==========================================
+  // Statue coordinates are PROVISIONAL — to be adjusted from user's Google My Maps KML
+  const LOCAL_POI = {
+    estatua_espana: {
+      coords: [43.4557, -3.6369],
+      type: 'estatua',
+      es: { tag: 'Estatua · España', titulo: 'Güemes de España', sub: 'Junto a la Iglesia de San Vicente — centro del pueblo' },
+      en: { tag: 'Sculpture · Spain', titulo: 'Güemes of Spain', sub: 'Next to the Church of San Vicente — village centre' },
+    },
+    estatua_argentina: {
+      coords: [43.4540, -3.6400],
+      type: 'estatua',
+      es: { tag: 'Estatua · Argentina', titulo: 'Güemes de Argentina', sub: 'Plazoleta grande de entrada por Galizano' },
+      en: { tag: 'Sculpture · Argentina', titulo: 'Güemes of Argentina', sub: 'Large plaza at the Galizano entrance' },
+    },
+    estatua_mexico: {
+      coords: [43.4565, -3.6340],
+      type: 'estatua',
+      es: { tag: 'Estatua · México', titulo: 'Güemes de México', sub: 'Parque dirección Meruelo' },
+      en: { tag: 'Sculpture · Mexico', titulo: 'Güemes of Mexico', sub: 'Park towards Meruelo' },
+    },
+    estatua_eeuu: {
+      coords: [43.4553, -3.6378],
+      type: 'estatua',
+      es: { tag: 'Estatua · EE.UU.', titulo: 'Güemes de EE.UU.', sub: 'El Quejigal, cerca de la Ermita de San Julián' },
+      en: { tag: 'Sculpture · USA', titulo: 'Güemes of the USA', sub: 'El Quejigal, near the Hermitage of San Julián' },
+    },
+    iglesia: {
+      coords: [43.4555278, -3.6363889],
+      type: 'patrimonio',
+      es: { tag: 'Patrimonio · Siglo XI–XVII', titulo: 'Iglesia de San Vicente Mártir', sub: 'Documentada desde 1084. Retablo mayor de 1677 con las primeras columnas salomónicas de Cantabria.' },
+      en: { tag: 'Heritage · 11th–17th c.', titulo: 'Church of San Vicente Mártir', sub: 'Documented since 1084. Main altarpiece from 1677 with the first Solomonic columns of Cantabria.' },
+    },
+    ermita: {
+      coords: [43.4553692, -3.6371699],
+      type: 'patrimonio',
+      es: { tag: 'Patrimonio · Siglo XII–XIII', titulo: 'Ermita de San Julián', sub: 'Antiguo hospital de peregrinos del Camino de Santiago. Futuro Centro de Interpretación Digital.' },
+      en: { tag: 'Heritage · 12th–13th c.', titulo: 'Hermitage of San Julián', sub: 'Former pilgrims\' hospital on the Camino de Santiago. Future Digital Interpretation Centre.' },
+    },
+    albergue: {
+      coords: [43.4477667, -3.6446],
+      type: 'patrimonio',
+      es: { tag: 'Lugar · 1999', titulo: 'Albergue La Cabaña del Abuelo Peuto', sub: 'Donde en 2009 Ernesto Bustio conoció a Bob, peregrino de Guemes Island — origen de este proyecto.' },
+      en: { tag: 'Place · 1999', titulo: 'Hostel La Cabaña del Abuelo Peuto', sub: 'Where in 2009 Ernesto Bustio met Bob, a pilgrim from Guemes Island — the origin of this project.' },
+    },
+  };
+
+  // Street View panorama IDs (from user-provided URLs)
+  const STREETVIEW = {
+    iglesia: {
+      pano: 'CIHM0ogKEICAgIDH4IuNWw',
+      coords: [43.4555278, -3.6363889],
+      heading: 228.44, pitch: -3.27,
+      titleKey: 'svTitleGuemes',
+    },
+    albergue: {
+      pano: 'CAoSHENJQUJJaEJaQ2IwSmUwZnhnM0N3cU96bG84dXQ.',
+      coords: [43.4477667, -3.6446],
+      heading: 96.20, pitch: -19.54,
+      titleKey: 'svTitleAlbergue',
+    },
+  };
+
+  // ==========================================
+  // MAP INIT
+  // ==========================================
+  const map = L.map('map', {
+    zoomControl: false, attributionControl: true,
+    worldCopyJump: false, minZoom: 2, maxZoom: 18,
+    center: [25, -40], zoom: 2.3,
+    scrollWheelZoom: false, doubleClickZoom: false,
+    boxZoom: false, keyboard: false,
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OSM &copy; CARTO', subdomains: 'abcd', maxZoom: 19,
+  }).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+    subdomains: 'abcd', maxZoom: 19, opacity: 0.35,
+  }).addTo(map);
+
+  // ==========================================
+  // STATE: world | local
+  // ==========================================
+  let mode = 'world';
+  const worldMarkers = {};
+  const localMarkers = {};
+  const arcLayers = {};
+  let narrativeTimers = [];
+
+  // ==========================================
+  // WORLD PINS
+  // ==========================================
+  function createWorldPins() {
+    Object.entries(PUEBLOS).forEach(([key, p]) => {
+      const isMain = key === 'espana';
+      const icon = L.divIcon({
+        className: 'pin-marker',
+        html: '<div class="pin' + (isMain ? ' main' : '') + '"><div class="pin-pulse"></div><div class="pin-core"></div></div>',
+        iconSize: [40, 40], iconAnchor: [20, 20],
+      });
+      const m = L.marker(p.coords, { icon }).addTo(map);
+      m.on('click', () => focusPin(key));
+      worldMarkers[key] = m;
+    });
+  }
+
+  function removeWorldPins() {
+    Object.values(worldMarkers).forEach(m => m.remove());
+    Object.keys(worldMarkers).forEach(k => delete worldMarkers[k]);
+    Object.values(arcLayers).forEach(a => a.remove());
+    Object.keys(arcLayers).forEach(k => delete arcLayers[k]);
+  }
+
+  // ==========================================
+  // LOCAL PINS
+  // ==========================================
+  function createLocalPins() {
+    Object.entries(LOCAL_POI).forEach(([key, p]) => {
+      const isMain = p.type === 'estatua' && key === 'estatua_espana';
+      const isSmall = p.type === 'patrimonio';
+      const classes = 'pin' + (isMain ? ' main' : '') + (isSmall ? ' small patrimonio' : '');
+      const content = p[currentLang];
+      const icon = L.divIcon({
+        className: 'pin-marker',
+        html: '<div class="' + classes + '"><div class="pin-pulse"></div><div class="pin-core"></div></div><div class="pin-label">' + content.titulo + '</div>',
+        iconSize: [40, 60], iconAnchor: [20, 20],
+      });
+      const m = L.marker(p.coords, { icon }).addTo(map);
+      m.on('click', () => focusLocal(key));
+      localMarkers[key] = m;
+    });
+  }
+
+  function removeLocalPins() {
+    Object.values(localMarkers).forEach(m => m.remove());
+    Object.keys(localMarkers).forEach(k => delete localMarkers[k]);
+  }
+
+  // ==========================================
+  // ARCS (world view)
+  // ==========================================
+  function bezierArc(from, to, curvature = 0.35, steps = 100) {
+    const mid = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2];
+    const dLat = to[0] - from[0];
+    const dLng = to[1] - from[1];
+    const dist = Math.sqrt(dLat * dLat + dLng * dLng);
+    const ctrl = [mid[0] + curvature * dist, mid[1] - curvature * dLat * 0.2];
+    const pts = [];
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const lat = (1-t)*(1-t)*from[0] + 2*(1-t)*t*ctrl[0] + t*t*to[0];
+      const lng = (1-t)*(1-t)*from[1] + 2*(1-t)*t*ctrl[1] + t*t*to[1];
+      pts.push([lat, lng]);
+    }
+    return pts;
+  }
+
+  function drawArc(targetKey) {
+    if (arcLayers[targetKey]) arcLayers[targetKey].remove();
+    const from = PUEBLOS.espana.coords;
+    const to = PUEBLOS[targetKey].coords;
+    const pts = bezierArc(from, to, 0.4);
+    const poly = L.polyline(pts, {
+      color: '#f4c77b', weight: 1.8, opacity: 0,
+      className: 'arc-path', smoothFactor: 1.2,
+    }).addTo(map);
+    requestAnimationFrame(() => {
+      const el = poly.getElement();
+      if (el) {
+        el.classList.add('arc-path');
+        void el.getBoundingClientRect();
+        el.classList.add('drawing');
+      }
+    });
+    arcLayers[targetKey] = poly;
+  }
+
+  // ==========================================
+  // PANEL
+  // ==========================================
+  const panel = document.getElementById('panel');
+
+  function renderPanel(content) {
+    const t = I18N[currentLang];
+    document.getElementById('p-tag').textContent = content.tag;
+    document.getElementById('p-title').textContent = content.titulo;
+    document.getElementById('p-story').innerHTML = content.historia || content.sub || '';
+
+    const meta = document.getElementById('p-meta');
+    meta.innerHTML = '';
+    const addRow = (k, v) => {
+      if (!v) return;
+      meta.innerHTML += '<div>' + k + '</div><div><strong>' + v + '</strong></div>';
+    };
+    if (content.year) addRow(t.from, content.year);
+    if (content.pob) addRow(t.population, content.pob);
+    if (content.dist) addRow(t.distance, content.dist);
+
+    // Image
+    const imgEl = document.getElementById('p-img');
+    if (content.img) {
+      imgEl.style.backgroundImage = 'url(' + content.img + ')';
+      imgEl.style.display = 'block';
+    } else {
+      imgEl.style.display = 'none';
+    }
+
+    // Actions
+    const actions = document.getElementById('p-actions');
+    actions.innerHTML = '';
+    if (content.actions) {
+      content.actions.forEach(a => {
+        actions.innerHTML += '<a href="#" onclick="' + a.onclick + '; return false;">' + a.label + '</a>';
+      });
+    }
+
+    panel.classList.add('visible');
+  }
+
+  function showPanelWorld(key) {
+    const p = PUEBLOS[key];
+    const t = I18N[currentLang];
+    const content = { ...p[currentLang], img: p.img };
+
+    content.actions = [];
+    if (key === 'espana') {
+      content.actions.push({ label: t.viewLocal, onclick: "switchMode('local')" });
+      content.actions.push({ label: t.aerial, onclick: "openGallery()" });
+      content.actions.push({ label: t.streetView, onclick: "openStreetView('iglesia')" });
+    }
+    renderPanel(content);
+    highlightLegend(key);
+  }
+
+  function showPanelLocal(key) {
+    const p = LOCAL_POI[key];
+    const t = I18N[currentLang];
+    const content = { ...p[currentLang] };
+    content.historia = p[currentLang].sub;
+    content.img = null;
+
+    content.actions = [];
+    if (key === 'iglesia' || key === 'estatua_espana') {
+      content.actions.push({ label: t.streetView, onclick: "openStreetView('iglesia')" });
+    }
+    if (key === 'albergue') {
+      content.actions.push({ label: t.streetView, onclick: "openStreetView('albergue')" });
+    }
+    content.actions.push({ label: t.viewWorld, onclick: "switchMode('world')" });
+    renderPanel(content);
+  }
+
+  function highlightLegend(key) {
+    document.querySelectorAll('.legend-item').forEach(el => {
+      el.classList.toggle('active', el.dataset.key === key);
+    });
+  }
+
+  function focusPin(key) {
+    showPanelWorld(key);
+    const coords = PUEBLOS[key].coords;
+    map.flyTo(coords, key === 'espana' ? 4 : 5, { duration: 1.6, easeLinearity: 0.3 });
+  }
+
+  function focusLocal(key) {
+    showPanelLocal(key);
+    map.flyTo(LOCAL_POI[key].coords, 17, { duration: 1.2 });
+  }
+
+  // ==========================================
+  // MODE SWITCHER (world <-> local)
+  // ==========================================
+  function switchMode(newMode) {
+    if (newMode === mode) return;
+    mode = newMode;
+    clearNarrative();
+    panel.classList.remove('visible');
+
+    if (newMode === 'world') {
+      removeLocalPins();
+      setTimeout(() => {
+        createWorldPins();
+        map.flyTo([25, -40], 2.3, { duration: 1.6 });
+        setTimeout(() => startNarrative(false), 1800);
+      }, 200);
+    } else {
+      removeWorldPins();
+      setTimeout(() => {
+        createLocalPins();
+        map.flyTo([43.4540, -3.6380], 16, { duration: 1.8 });
+      }, 200);
+    }
+
+    renderLegend();
+  }
+
+  // ==========================================
+  // STREET VIEW MODAL
+  // ==========================================
+  function openStreetView(key) {
+    const sv = STREETVIEW[key];
+    if (!sv) return;
+    const t = I18N[currentLang];
+    const title = t[sv.titleKey] || '';
+    document.getElementById('sv-title').textContent = title;
+    const src = 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s' + sv.pano +
+      '!2m2!1d' + sv.coords[0] + '!2d' + sv.coords[1] +
+      '!3f' + sv.heading + '!4f' + sv.pitch + '!5f0.7820865974627469';
+    document.getElementById('sv-iframe').src = src;
+    document.getElementById('sv-modal').classList.add('open');
+  }
+  function closeStreetView() {
+    document.getElementById('sv-modal').classList.remove('open');
+    document.getElementById('sv-iframe').src = '';
+  }
+
+  // ==========================================
+  // AERIAL GALLERY
+  // ==========================================
+  const AERIAL = [
+    'imagenes/aereas/aerea_01.jpg', 'imagenes/aereas/aerea_02.jpg',
+    'imagenes/aereas/aerea_03.jpg', 'imagenes/aereas/aerea_04.jpg',
+    'imagenes/aereas/aerea_05.jpg', 'imagenes/aereas/aerea_06.jpg',
+    'imagenes/aereas/aerea_07.jpg', 'imagenes/aereas/aerea_08.jpg',
+    'imagenes/aereas/aerea_09.jpg', 'imagenes/aereas/aerea_10.jpg',
+    'imagenes/aereas/aerea_11.jpg', 'imagenes/aereas/aerea_12.jpg',
+    'imagenes/aereas/aerea_13.jpg', 'imagenes/aereas/aerea_14.jpg',
+    'imagenes/aereas/aerea_15.jpg', 'imagenes/aereas/aerea_16.jpg',
+    'imagenes/aereas/aerea_17.jpg', 'imagenes/aereas/aerea_18.jpg',
+    'imagenes/aereas/aerea_19.jpg', 'imagenes/aereas/aerea_20.jpg',
+    'imagenes/aereas/aerea_21.jpg', 'imagenes/aereas/aerea_22.jpg',
+    'imagenes/aereas/aerea_23.jpg',
+  ];
+  let currentPhoto = 0;
+
+  function openGallery() {
+    const t = I18N[currentLang];
+    const grid = document.getElementById('gallery-grid');
+    grid.innerHTML = AERIAL.map((src, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      return '<div class="gallery-thumb" style="background-image:url(' + src + ')" onclick="openPhoto(' + i + ')"><div class="gallery-thumb-label">' + t.galleryLabel + ' ' + num + '</div></div>';
+    }).join('');
+    document.getElementById('gallery-counter').textContent = AERIAL.length + ' ' + t.galleryCount;
+    document.getElementById('gallery-modal').classList.add('open');
+    document.getElementById('gallery-viewer').classList.remove('open');
+  }
+
+  function closeGallery() {
+    document.getElementById('gallery-modal').classList.remove('open');
+    document.getElementById('gallery-viewer').classList.remove('open');
+  }
+
+  function openPhoto(idx) {
+    currentPhoto = idx;
+    const photo = document.getElementById('gallery-photo');
+    // trigger fade animation by resetting src
+    photo.src = '';
+    setTimeout(() => { photo.src = AERIAL[idx]; }, 10);
+    document.getElementById('gallery-viewer').classList.add('open');
+    updatePhotoCounter();
+  }
+
+  function closeViewer() {
+    document.getElementById('gallery-viewer').classList.remove('open');
+    const t = I18N[currentLang];
+    document.getElementById('gallery-counter').textContent = AERIAL.length + ' ' + t.galleryCount;
+  }
+
+  function navigatePhoto(dir) {
+    currentPhoto = (currentPhoto + dir + AERIAL.length) % AERIAL.length;
+    const photo = document.getElementById('gallery-photo');
+    photo.src = '';
+    setTimeout(() => { photo.src = AERIAL[currentPhoto]; }, 10);
+    updatePhotoCounter();
+  }
+
+  function updatePhotoCounter() {
+    const t = I18N[currentLang];
+    document.getElementById('gallery-counter').textContent = (currentPhoto + 1) + ' / ' + AERIAL.length;
+  }
+
+  // ==========================================
+  // LEGEND
+  // ==========================================
+  function renderLegend() {
+    const legend = document.getElementById('legend');
+    legend.innerHTML = '';
+    if (mode === 'world') {
+      ORDER.forEach(key => {
+        const p = PUEBLOS[key];
+        const c = p[currentLang];
+        const isEspana = key === 'espana' ? 'espana' : '';
+        legend.innerHTML += `
+          <div class="legend-item ${isEspana}" data-key="${key}" onclick="focusPin('${key}')">
+            <div class="legend-dot"></div>
+            <div class="legend-text">${c.titulo} <small>${c.tag.split('·')[0].trim()} · ${c.year}</small></div>
+          </div>
+        `;
+      });
+    } else {
+      const order = ['estatua_espana','estatua_argentina','estatua_mexico','estatua_eeuu','iglesia','ermita','albergue'];
+      order.forEach(key => {
+        const p = LOCAL_POI[key];
+        const c = p[currentLang];
+        legend.innerHTML += `
+          <div class="legend-item" data-key="${key}" onclick="focusLocal('${key}')">
+            <div class="legend-dot" style="background:${p.type==='patrimonio'?'#7bc6f4':'#c89450'}"></div>
+            <div class="legend-text">${c.titulo}</div>
+          </div>
+        `;
+      });
+    }
+  }
+
+  // ==========================================
+  // NARRATIVE SEQUENCE
+  // ==========================================
+  function clearNarrative() {
+    narrativeTimers.forEach(t => clearTimeout(t));
+    narrativeTimers = [];
+    Object.values(arcLayers).forEach(l => l.remove());
+    Object.keys(arcLayers).forEach(k => delete arcLayers[k]);
+  }
+
+  function startNarrative(reset = false) {
+    if (mode !== 'world') return;
+    if (reset) {
+      clearNarrative();
+      map.flyTo([25, -40], 2.3, { duration: 1.0 });
+    }
+    narrativeTimers.push(setTimeout(() => showPanelWorld('espana'), 1800));
+    narrativeTimers.push(setTimeout(() => { drawArc('argentina'); showPanelWorld('argentina'); }, 3800));
+    narrativeTimers.push(setTimeout(() => { drawArc('mexico'); showPanelWorld('mexico'); }, 7200));
+    narrativeTimers.push(setTimeout(() => { drawArc('eeuu'); showPanelWorld('eeuu'); }, 10600));
+    narrativeTimers.push(setTimeout(() => showPanelWorld('espana'), 14800));
+  }
+
+  // ==========================================
+  // LANGUAGE TOGGLE
+  // ==========================================
+  function applyLang() {
+    const t = I18N[currentLang];
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key]) el.innerHTML = t[key];
+    });
+    document.getElementById('btn-lang').textContent = t.lang;
+    renderLegend();
+    // Re-render panel if visible
+    if (panel.classList.contains('visible')) {
+      const activeKey = document.querySelector('.legend-item.active')?.dataset.key;
+      if (mode === 'world' && activeKey && PUEBLOS[activeKey]) showPanelWorld(activeKey);
+      else if (mode === 'local' && activeKey && LOCAL_POI[activeKey]) showPanelLocal(activeKey);
+    }
+    // Re-create local pin labels if in local mode
+    if (mode === 'local') {
+      removeLocalPins();
+      createLocalPins();
+    }
+  }
+
+  function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    applyLang();
+  }
+
+  // ==========================================
+  // INIT
+  // ==========================================
+  applyLang();
+  createWorldPins();
+  renderLegend();
+  window.addEventListener('load', () => {
+    setTimeout(() => startNarrative(false), 400);
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeStreetView();
+      if (document.getElementById('gallery-viewer').classList.contains('open')) closeViewer();
+      else closeGallery();
+    }
+    if (document.getElementById('gallery-viewer').classList.contains('open')) {
+      if (e.key === 'ArrowLeft') navigatePhoto(-1);
+      if (e.key === 'ArrowRight') navigatePhoto(1);
+    }
+  });
+
+</script>
+
+</body>
+</html>

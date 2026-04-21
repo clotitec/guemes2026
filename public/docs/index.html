@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guemes — Premio Pueblo de Cantabria 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-900: #0d1f12;
+            --green-800: #14532d;
+            --green-700: #1a3c34;
+            --green-600: #1b4332;
+            --green-500: #2d6a4f;
+            --green-400: #40916c;
+            --green-300: #52b788;
+            --green-200: #95d5b2;
+            --green-100: #d8f3dc;
+            --green-50: #f0f7f2;
+            --gold-600: #92710c;
+            --gold-500: #b8960f;
+            --gold-400: #c9a227;
+            --gold-300: #d4a853;
+            --gold-200: #e8d5a0;
+            --gold-100: #fdf8ed;
+            --orange-500: #b85c14;
+            --orange-400: #d4841a;
+            --orange-300: #e8a929;
+            --gray-900: #111827;
+            --gray-800: #1f2937;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --gray-50: #f9fafb;
+            --white: #ffffff;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --radius-xs: 4px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === HERO === */
+        .hero {
+            background: linear-gradient(160deg, var(--green-900) 0%, var(--green-700) 35%, var(--green-500) 100%);
+            color: var(--white);
+            padding: 3rem 2rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212,168,83,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+        }
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold-300);
+            margin-bottom: 1.25rem;
+            backdrop-filter: blur(4px);
+        }
+        .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-300); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 0.4rem;
+        }
+        .hero h1 span { color: var(--gold-400); }
+        .hero .tagline {
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: var(--green-200);
+            margin-bottom: 1.75rem;
+            max-width: 600px;
+        }
+
+        /* Hero stats bar */
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            padding: 0.5rem 0.9rem;
+            backdrop-filter: blur(4px);
+        }
+        .hero-stat .val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+        .hero-stat .lbl {
+            font-size: 0.68rem;
+            color: var(--green-200);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        /* === COUNTDOWN === */
+        .countdown-bar {
+            background: var(--gold-100);
+            border-bottom: 1px solid var(--gold-200);
+            padding: 0.6rem 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--gold-600);
+            font-weight: 500;
+        }
+        .countdown-bar strong { color: var(--orange-500); font-weight: 700; }
+
+        /* === MAIN CONTENT === */
+        .main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        /* Section headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            margin-top: 2rem;
+        }
+        .section-header:first-child { margin-top: 0; }
+        .section-header .line { flex: 1; height: 1px; background: var(--gray-200); }
+        .section-header h2 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-500);
+            white-space: nowrap;
+        }
+
+        /* === DOCUMENT CARDS === */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+        }
+        .doc-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--gray-100);
+        }
+        .doc-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+        .doc-card-header {
+            padding: 1.25rem 1.25rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .doc-badge {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--white);
+        }
+        .doc-badge.mem { background: var(--green-600); }
+        .doc-badge.eco { background: var(--gold-400); }
+        .doc-badge.cul { background: var(--orange-400); }
+        .doc-badge.sol { background: #3b82f6; }
+        .doc-badge.rut { background: #6366f1; }
+        .doc-badge.web { background: var(--gray-800); }
+
+        .doc-card-meta { flex: 1; }
+        .doc-card-meta h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            line-height: 1.3;
+            margin-bottom: 0.15rem;
+        }
+        .doc-card-meta .type {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--gray-400);
+        }
+
+        .doc-card-body {
+            padding: 0.75rem 1.25rem;
+            flex: 1;
+        }
+        .doc-card-body p {
+            font-size: 0.82rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        .doc-card-stats {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0 1.25rem;
+            flex-wrap: wrap;
+        }
+        .doc-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+        }
+        .doc-stat .n {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--green-600);
+        }
+        .doc-stat .u {
+            font-size: 0.68rem;
+            color: var(--gray-400);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .doc-card-actions {
+            display: flex;
+            border-top: 1px solid var(--gray-100);
+            margin-top: 0.75rem;
+        }
+        .doc-card-actions a, .doc-card-actions button {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.65rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            font-family: inherit;
+        }
+        .doc-card-actions a:hover, .doc-card-actions button:hover {
+            background: var(--gray-50);
+            color: var(--green-600);
+        }
+        .doc-card-actions a.primary {
+            color: var(--green-600);
+            font-weight: 700;
+        }
+        .doc-card-actions .divider {
+            width: 1px;
+            background: var(--gray-100);
+        }
+
+        /* === ROUTE SECTION === */
+        .route-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-100);
+        }
+        .route-header {
+            background: linear-gradient(135deg, var(--green-600) 0%, var(--green-500) 100%);
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .route-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .route-header .route-stats {
+            display: flex;
+            gap: 1.25rem;
+        }
+        .route-header .route-stat {
+            text-align: center;
+        }
+        .route-header .route-stat .v {
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: block;
+        }
+        .route-header .route-stat .l {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.7;
+        }
+
+        .route-body { padding: 1.5rem; }
+        .route-zones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+        .zone-card {
+            background: var(--gray-50);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            border-left: 3px solid var(--green-500);
+            position: relative;
+        }
+        .zone-num {
+            position: absolute;
+            top: -6px;
+            left: 10px;
+            background: var(--green-600);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+        .zone-card h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.15rem;
+            padding-top: 0.2rem;
+        }
+        .zone-card .zone-desc {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            line-height: 1.4;
+        }
+        .zone-card .zone-sculpt {
+            margin-top: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--gold-400);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        /* Elevation-style decorative bar */
+        .elev-bar {
+            height: 40px;
+            background: var(--green-50);
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+        .elev-bar svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* === PRESUPUESTO BAR === */
+        .budget-visual {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-100);
+        }
+        .budget-bar-container {
+            display: flex;
+            height: 32px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .budget-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transition: flex 0.3s;
+        }
+        .budget-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 0.75rem;
+        }
+        .budget-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+        }
+        .budget-legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .budget-legend-item .amt {
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        .budget-legend-item .lbl {
+            color: var(--gray-500);
+        }
+
+        /* === TIMELINE === */
+        .timeline-row {
+            display: flex;
+            gap: 0;
+            margin-bottom: 1.5rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--gray-100);
+        }
+        .tl-step {
+            flex: 1;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            border-right: 1px solid var(--gray-100);
+            position: relative;
+        }
+        .tl-step:last-child { border-right: none; }
+        .tl-step.active { background: var(--green-50); }
+        .tl-step.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--green-500);
+        }
+        .tl-step .date {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--green-600);
+            margin-bottom: 0.2rem;
+        }
+        .tl-step .task {
+            font-size: 0.72rem;
+            color: var(--gray-500);
+            line-height: 1.3;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            background: var(--gray-900);
+            color: var(--gray-400);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.78rem;
+            line-height: 1.8;
+            margin-top: 2rem;
+        }
+        .footer a { color: var(--green-300); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .footer .sep { margin: 0 0.5rem; opacity: 0.3; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero { padding: 2rem 1.25rem 1.75rem; }
+            .hero-stats { gap: 0.4rem; }
+            .hero-stat { padding: 0.4rem 0.7rem; }
+            .hero-stat .val { font-size: 0.95rem; }
+            .doc-grid { grid-template-columns: 1fr; }
+            .route-zones { grid-template-columns: 1fr; }
+            .timeline-row { flex-direction: column; }
+            .tl-step { border-right: none; border-bottom: 1px solid var(--gray-100); }
+            .main { padding: 1.25rem 1rem; }
+        }
+
+        /* === PRINT === */
+        @media print {
+            body { background: white; }
+            .hero { padding: 1.5rem; min-height: auto; }
+            .doc-card:hover { transform: none; box-shadow: var(--shadow); }
+            .countdown-bar { background: #fff; border: 1px solid #ddd; }
+            .footer { background: white; color: #666; }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--gray-900);
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">
+            <div class="dot"></div>
+            Candidatura activa — Plazo hasta 4 mayo 2026
+        </div>
+        <h1>GUEMES<span>.</span></h1>
+        <p class="tagline">Candidatura al Premio Pueblo de Cantabria 2026. Senda de las Estatuas, arte rural y 942 anos de historia viva.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="val">301</div>
+                <div class="lbl">Habitantes</div>
+            </div>
+            <div class="hero-stat">
+                <div class="val">942</div>
+                <div class="lbl">Anos de<br>historia</div>
+            </div>
+            <div class="hero-stat">
+                <div class="val">+50K</div>
+                <div class="lbl">Peregrinos<br>acogidos</div>
+            </div>
+            <div class="hero-stat">
+                <div class="val">6,9</div>
+                <div class="lbl">Km ruta<br>circular</div>
+            </div>
+            <div class="hero-stat">
+                <div class="val">160K</div>
+                <div class="lbl">Presupuesto<br>total &euro;</div>
+            </div>
+            <div class="hero-stat">
+                <div class="val">250K</div>
+                <div class="lbl">Visitantes/ano<br>Faro Ajo</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="countdown-bar" id="countdown">
+    <strong id="days-left"></strong> dias restantes para la presentacion telematica
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- ROUTE: SENDA DE LAS ESTATUAS -->
+    <div class="section-header">
+        <div class="line"></div>
+        <h2>Actuacion principal</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="route-card">
+        <div class="route-header">
+            <div>
+                <h3>Senda de las Estatuas de Guemes</h3>
+                <div style="font-size:0.78rem; opacity:0.8; margin-top:0.2rem;">Ruta 4 de Bareyo — Recorrido circular</div>
+            </div>
+            <div class="route-stats">
+                <div class="route-stat"><span class="v">6,9</span><span class="l">Km</span></div>
+                <div class="route-stat"><span class="v">4</span><span class="l">Zonas</span></div>
+                <div class="route-stat"><span class="v">4</span><span class="l">Esculturas</span></div>
+                <div class="route-stat"><span class="v">~1h45</span><span class="l">A pie</span></div>
+            </div>
+        </div>
+        <div class="route-body">
+            <div class="route-zones">
+                <div class="zone-card">
+                    <div class="zone-num">1</div>
+                    <h4>Iglesia de San Vicente Martir</h4>
+                    <div class="zone-desc">s. XVI-XVII · Fundacion monacal s. VIII · Punto de inicio</div>
+                    <div class="zone-sculpt">Escultura: Guemes de Cantabria</div>
+                </div>
+                <div class="zone-card">
+                    <div class="zone-num">2</div>
+                    <h4>Palacio de Guemes</h4>
+                    <div class="zone-desc">1915-1920 · Regionalista · Familia Guemes Campero</div>
+                    <div class="zone-sculpt">Escultura: Guemes de Argentina</div>
+                </div>
+                <div class="zone-card">
+                    <div class="zone-num">3</div>
+                    <h4>Ermita de San Julian</h4>
+                    <div class="zone-desc">s. XII-XIII · Hospital de peregrinos medieval</div>
+                    <div class="zone-sculpt">Escultura: Guemes de EEUU</div>
+                </div>
+                <div class="zone-card">
+                    <div class="zone-num">4</div>
+                    <h4>Albergue La Cabana del Abuelo Peuto</h4>
+                    <div class="zone-desc">1999 · Padre Ernesto · +50.000 peregrinos, +100 paises</div>
+                    <div class="zone-sculpt">Escultura: Guemes de Canada</div>
+                </div>
+            </div>
+        </div>
+        <div class="elev-bar">
+            <svg viewBox="0 0 1000 40" preserveAspectRatio="none">
+                <path d="M0,35 Q50,30 100,28 Q200,20 250,22 Q350,15 400,18 Q500,10 550,12 Q650,8 700,15 Q800,22 850,20 Q950,28 1000,35 L1000,40 L0,40 Z" fill="rgba(45,106,79,0.12)"/>
+                <path d="M0,35 Q50,30 100,28 Q200,20 250,22 Q350,15 400,18 Q500,10 550,12 Q650,8 700,15 Q800,22 850,20 Q950,28 1000,35" fill="none" stroke="rgba(45,106,79,0.3)" stroke-width="1.5"/>
+                <circle cx="0" cy="35" r="3" fill="#2d6a4f"/>
+                <circle cx="350" cy="15" r="3" fill="#2d6a4f"/>
+                <circle cx="550" cy="12" r="3" fill="#2d6a4f"/>
+                <circle cx="800" cy="22" r="3" fill="#2d6a4f"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- PRESUPUESTO -->
+    <div class="budget-visual">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+                <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-400);">Presupuesto total</div>
+                <div style="font-size:1.6rem; font-weight:800; color:var(--gray-900);">160.000 <span style="font-size:0.9rem; color:var(--gray-400);">&euro;</span></div>
+            </div>
+            <div style="font-size:0.75rem; color:var(--gray-400); text-align:right;">4 bloques de actuacion<br>Importes estimados</div>
+        </div>
+        <div class="budget-bar-container">
+            <div class="budget-segment" style="flex:60; background: var(--green-600);">60K</div>
+            <div class="budget-segment" style="flex:45; background: var(--green-400);">45K</div>
+            <div class="budget-segment" style="flex:15; background: var(--orange-300);">15K</div>
+            <div class="budget-segment" style="flex:40; background: var(--gray-600);">40K</div>
+        </div>
+        <div class="budget-legend">
+            <div class="budget-legend-item">
+                <div class="budget-legend-dot" style="background:var(--green-600);"></div>
+                <span class="amt">60.000 &euro;</span>
+                <span class="lbl">Senda Estatuas</span>
+            </div>
+            <div class="budget-legend-item">
+                <div class="budget-legend-dot" style="background:var(--green-400);"></div>
+                <span class="amt">45.000 &euro;</span>
+                <span class="lbl">Preservacion</span>
+            </div>
+            <div class="budget-legend-item">
+                <div class="budget-legend-dot" style="background:var(--orange-300);"></div>
+                <span class="amt">15.000 &euro;</span>
+                <span class="lbl">Enróllate en Güemes</span>
+            </div>
+            <div class="budget-legend-item">
+                <div class="budget-legend-dot" style="background:var(--gray-600);"></div>
+                <span class="amt">40.000 &euro;</span>
+                <span class="lbl">Complementarias</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline-row">
+        <div class="tl-step active">
+            <div class="date">7 Abr</div>
+            <div class="task">Presentacion a alcaldesa y tecnico</div>
+        </div>
+        <div class="tl-step">
+            <div class="date">13 Abr</div>
+            <div class="task">Junta Vecinal: aprobacion</div>
+        </div>
+        <div class="tl-step">
+            <div class="date">14-25 Abr</div>
+            <div class="task">Certificados, firmas, fotos</div>
+        </div>
+        <div class="tl-step">
+            <div class="date">28 Abr</div>
+            <div class="task">Revision final</div>
+        </div>
+        <div class="tl-step">
+            <div class="date">4 May</div>
+            <div class="task">Presentacion telematica</div>
+        </div>
+    </div>
+
+    <!-- DOCUMENTOS: MEMORIAS -->
+    <div class="section-header">
+        <div class="line"></div>
+        <h2>Memorias y proyecto</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="doc-grid">
+        <!-- Memoria de Actuacion -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge mem">MEM</div>
+                <div class="doc-card-meta">
+                    <h3>Memoria de Actuacion</h3>
+                    <div class="type">Documento central</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Documento principal de la candidatura. Describe la Senda de las Estatuas, las 4 zonas de actuacion, el impacto esperado y la conexion con el Camino de Santiago.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">12</span><span class="u">secciones</span></div>
+                <div class="doc-stat"><span class="n">4</span><span class="u">zonas</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./memoria-actuacion.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Memoria de Actuacion','memoria-actuacion.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Memoria Economica -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge eco">ECO</div>
+                <div class="doc-card-meta">
+                    <h3>Memoria Economica</h3>
+                    <div class="type">Presupuesto desglosado</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Presupuesto completo de 160.000 EUR en 4 bloques: Senda de las Estatuas, preservacion, Enróllate en Güemes y actuaciones complementarias.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">160K</span><span class="u">&euro; total</span></div>
+                <div class="doc-stat"><span class="n">4</span><span class="u">bloques</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./memoria-economica.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Memoria Economica','memoria-economica.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Dossier Historico -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge cul">HIS</div>
+                <div class="doc-card-meta">
+                    <h3>Dossier Historico-Cultural</h3>
+                    <div class="type">Historia completa de Guemes</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>942 anos de historia documentada. Desde la fundacion monacal hasta el Albergue del Padre Ernesto. Personajes ilustres y patrimonio.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">11</span><span class="u">secciones</span></div>
+                <div class="doc-stat"><span class="n">942</span><span class="u">anos</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./dossier-historico.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Dossier Historico-Cultural','dossier-historico.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Estrategia Puntuacion -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge sol">EST</div>
+                <div class="doc-card-meta">
+                    <h3>Estrategia de Puntuacion</h3>
+                    <div class="type">Analisis de criterios del jurado</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Analisis detallado de los 8 criterios de valoracion (100 puntos). Estrategia para maximizar la puntuacion de Guemes en cada criterio.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">100</span><span class="u">pts max</span></div>
+                <div class="doc-stat"><span class="n">8</span><span class="u">criterios</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./estrategia-puntuacion.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Estrategia de Puntuacion','estrategia-puntuacion.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOCUMENTOS: PROPUESTAS -->
+    <div class="section-header">
+        <div class="line"></div>
+        <h2>Propuestas y eventos</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="doc-grid">
+        <!-- Enróllate en Güemes -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge cul">BOLA</div>
+                <div class="doc-card-meta">
+                    <h3>Enróllate en Güemes</h3>
+                    <div class="type">Festival de arte rural y gamificacion</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>20-25 bolas pintadas por todo Bareyo. Desde el Faro de Ajo hasta Guemes. Gamificacion QR, eventos musicales, talleres y conexion costa-interior.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">15K</span><span class="u">&euro;</span></div>
+                <div class="doc-stat"><span class="n">25</span><span class="u">bolas</span></div>
+                <div class="doc-stat"><span class="n">2</span><span class="u">fines semana</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./guemes-en-bolas.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Enróllate en Güemes','guemes-en-bolas.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Itinerario Jurado -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge rut">RUT</div>
+                <div class="doc-card-meta">
+                    <h3>Itinerario del Jurado</h3>
+                    <div class="type">Visita guiada preparada</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Recorrido optimizado de 6 paradas en 2h30 para la visita del jurado. Incluye puntos clave, tiempos y recomendaciones.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">6</span><span class="u">paradas</span></div>
+                <div class="doc-stat"><span class="n">2h30</span><span class="u">duracion</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./itinerario-jurado.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Itinerario del Jurado','itinerario-jurado.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOCUMENTOS: SOLICITUD -->
+    <div class="section-header">
+        <div class="line"></div>
+        <h2>Solicitud y tramites</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="doc-grid">
+        <!-- Resumen Ejecutivo -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge sol">RES</div>
+                <div class="doc-card-meta">
+                    <h3>Resumen Ejecutivo</h3>
+                    <div class="type">Presentacion 2 paginas</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Resumen visual de toda la candidatura para reuniones y presentaciones. Datos clave, presupuesto, pilares y calendario.</p>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./resumen-ejecutivo.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Resumen Ejecutivo','resumen-ejecutivo.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge sol">CHK</div>
+                <div class="doc-card-meta">
+                    <h3>Checklist Documentacion</h3>
+                    <div class="type">Control de documentos obligatorios</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Checklist interactivo con todos los documentos obligatorios y recomendados. Barra de progreso y notas.</p>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./checklist.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Checklist Documentacion','checklist.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Cartas de Apoyo -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge sol">APO</div>
+                <div class="doc-card-meta">
+                    <h3>Modelos Cartas de Apoyo</h3>
+                    <div class="type">4 modelos listos para firmar</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Cartas tipo para vecinos, albergue, asociaciones y empresas. Listos para imprimir y recoger firmas.</p>
+            </div>
+            <div class="doc-card-stats">
+                <div class="doc-stat"><span class="n">4</span><span class="u">modelos</span></div>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./cartas-apoyo.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Cartas de Apoyo','cartas-apoyo.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+
+        <!-- Acta Junta Vecinal -->
+        <div class="doc-card">
+            <div class="doc-card-header">
+                <div class="doc-badge web">ACT</div>
+                <div class="doc-card-meta">
+                    <h3>Modelo Acta Junta Vecinal</h3>
+                    <div class="type">Sesion 13 de abril 2026</div>
+                </div>
+            </div>
+            <div class="doc-card-body">
+                <p>Acta modelo para la sesion extraordinaria de aprobacion de candidatura, presupuesto y programa. 7 puntos del orden del dia.</p>
+            </div>
+            <div class="doc-card-actions">
+                <a href="./acta-junta.html" class="primary">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12H3m0 0l4-4m-4 4l4 4"/><path d="M21 5v14"/></svg>
+                    Ver documento
+                </a>
+                <div class="divider"></div>
+                <button onclick="share('Acta Junta Vecinal','acta-junta.html')">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                    Compartir
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    Junta Vecinal de Guemes <span class="sep">|</span> Municipio de Bareyo, Cantabria
+    <br>
+    <a href="https://www.alberguedeguemes.es" target="_blank">alberguedeguemes.es</a>
+    <span class="sep">|</span>
+    <a href="https://www.aytobareyo.org" target="_blank">aytobareyo.org</a>
+    <span class="sep">|</span>
+    <a href="https://clotitec.github.io/bareyo2026" target="_blank">Descubre Bareyo</a>
+    <br>
+    <span style="font-size:0.7rem; color:var(--gray-600); margin-top:0.5rem; display:inline-block;">
+        Candidatura Premio Pueblo de Cantabria 2026 — Orden OBR/002/2017
+    </span>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+    // Countdown
+    const deadline = new Date('2026-05-04T23:59:59');
+    const now = new Date();
+    const diff = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+    document.getElementById('days-left').textContent = diff;
+
+    // Share function
+    async function share(title, path) {
+        const url = window.location.origin + window.location.pathname.replace('index.html','') + path;
+        const data = { title: 'Guemes 2026 — ' + title, url: url };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(data);
+            } catch(e) {
+                copyToClipboard(url);
+            }
+        } else {
+            copyToClipboard(url);
+        }
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Enlace copiado al portapapeles');
+        }).catch(() => {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('Enlace copiado al portapapeles');
+        });
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2500);
+    }
+</script>
+
+</body>
+</html>

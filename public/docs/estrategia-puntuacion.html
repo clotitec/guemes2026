@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estrategia de Puntuacion — Guemes 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--g6:#1b4332;--g5:#2d6a4f;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--bl:#3b82f6;--bll:#eff6ff;--gd:#d69e2e;--gdl:#fffff0;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1)}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.6;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}.nav a svg{width:16px;height:16px}.nav .title{font-size:.82rem;color:var(--x5)}.nav .actions{display:flex;gap:.5rem}.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem}.nav .actions button:hover{background:var(--x2)}
+.hero{background:linear-gradient(160deg,#1e3a5f 0%,#2563eb 100%);color:var(--w);padding:2.5rem 2rem;text-align:center}
+.hero h1{font-size:1.8rem;font-weight:800;letter-spacing:-.01em}.hero .sub{font-size:.9rem;font-weight:300;opacity:.8;margin-top:.3rem}
+.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
+.sc{background:var(--w);border-radius:var(--r);padding:1rem;text-align:center;box-shadow:var(--sh);border:1px solid var(--x1)}
+.sc .v{font-size:1.5rem;font-weight:800}.sc .v.hi{color:var(--bl)}.sc .v.md{color:var(--gd)}.sc .v.gn{color:#059669}
+.sc .l{color:var(--x5);font-size:.72rem;margin-top:.1rem}
+.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:1.75rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
+.card h2{font-size:1rem;font-weight:700;color:var(--x9);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid var(--x2)}
+.bar-row{display:flex;align-items:center;margin-bottom:.5rem}.bar-label{width:170px;font-size:.8rem;color:var(--x6);text-align:right;padding-right:.6rem;flex-shrink:0}
+.bar-track{flex:1;background:var(--x1);border-radius:6px;height:26px;overflow:hidden}.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--w);font-size:.72rem;font-weight:700}
+.bar-fill.t1{background:linear-gradient(90deg,#2563eb,#60a5fa)}.bar-fill.t2{background:linear-gradient(90deg,#d69e2e,#fbbf24)}
+.criterion{margin-bottom:1.25rem;padding:1rem;border-radius:8px;border-left:4px solid}
+.criterion.high{border-color:var(--bl);background:var(--bll)}.criterion.med{border-color:var(--gd);background:var(--gdl)}
+.criterion h3{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;font-size:.9rem}
+.pts{font-size:.72rem;padding:2px 8px;border-radius:4px;color:var(--w);font-weight:700}
+.criterion.high .pts{background:var(--bl)}.criterion.med .pts{background:var(--gd)}
+.criterion p{color:var(--x6);font-size:.84rem;line-height:1.5}
+.criterion ul{margin:.3rem 0 0 1.2rem;font-size:.82rem;color:var(--x6)}
+.strat{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:.75rem;margin-top:.6rem}
+.strat h4{color:#166534;font-size:.8rem;margin-bottom:.3rem}.strat ul{margin-left:1.1rem;color:#15803d;font-size:.8rem}
+.total-row{display:flex;justify-content:space-between;font-size:1.1rem;font-weight:800;padding:.75rem 1rem;background:var(--bll);border-radius:8px;margin-top:.5rem}
+.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;opacity:0;transition:all .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media(max-width:768px){.summary{grid-template-columns:repeat(2,1fr)}.bar-label{width:120px;font-size:.72rem}.main{padding:1.25rem 1rem}}
+@media print{.nav{position:static}.card{box-shadow:none;border:1px solid #ddd}}
+</style>
+</head>
+<body>
+<div class="nav"><a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Guemes 2026</a><span class="title">Estrategia de Puntuacion</span><div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div></div>
+
+<div class="hero"><h1>Estrategia de Puntuacion</h1><div class="sub">8 criterios · 100 puntos · Guemes 2026</div></div>
+
+<div class="main">
+<div class="summary">
+<div class="sc"><div class="v hi">100</div><div class="l">Puntuacion maxima</div></div>
+<div class="sc"><div class="v hi">60</div><div class="l">Criterios 15 pts (x4)</div></div>
+<div class="sc"><div class="v md">40</div><div class="l">Criterios 10 pts (x4)</div></div>
+<div class="sc"><div class="v gn">60%</div><div class="l">Peso alto valor</div></div>
+</div>
+
+<div class="card">
+<h2>Distribucion de puntos</h2>
+<div class="bar-row"><span class="bar-label">a) Originalidad</span><div class="bar-track"><div class="bar-fill t1" style="width:100%">15 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">b) Valor cultural</span><div class="bar-track"><div class="bar-fill t1" style="width:100%">15 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">c) Rehabilitacion zonas</span><div class="bar-track"><div class="bar-fill t2" style="width:66.6%">10 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">d) Recuperacion entornos</span><div class="bar-track"><div class="bar-fill t2" style="width:66.6%">10 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">e) Utilidad publica</span><div class="bar-track"><div class="bar-fill t2" style="width:66.6%">10 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">f) Calidad trabajos</span><div class="bar-track"><div class="bar-fill t2" style="width:66.6%">10 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">g) Belleza y armonia</span><div class="bar-track"><div class="bar-fill t1" style="width:100%">15 pts</div></div></div>
+<div class="bar-row"><span class="bar-label">h) Otros meritos</span><div class="bar-track"><div class="bar-fill t1" style="width:100%">15 pts</div></div></div>
+<div class="total-row"><span>Total</span><span>100 puntos</span></div>
+</div>
+
+<div class="card">
+<h2>Estrategia por criterio</h2>
+
+<div class="criterion high"><h3>a) Originalidad <span class="pts">15 PTS — ALTO</span></h3><p>Grado de originalidad de la actuacion propuesta.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>4 esculturas = 4 Guemes del mundo. Concepto unico, sin precedentes.</li><li>"Enróllate en Güemes" = primer festival de bolas de silo de Cantabria.</li><li>Gamificacion QR: retos, puntos, storytelling con IA. Ninguna candidatura ha propuesto esto.</li><li>Concepto "4 puntos cardinales": esculturas como conexion global desde un pueblo de 301 hab.</li></ul></div></div>
+
+<div class="criterion high"><h3>b) Valor cultural e historico <span class="pts">15 PTS — ALTO</span></h3><p>Valor cultural, historico, artistico o social de la actuacion.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>942 anos de historia documentada (desde 1084).</li><li>Camino de Santiago UNESCO 2015.</li><li>Virrey de Mexico (1681) + heroe nacional argentino (1785-1821).</li><li>Padre Ernesto: referente internacional de hospitalidad.</li><li>+800 anos de hospitalidad peregrina ininterrumpida.</li></ul></div></div>
+
+<div class="criterion med"><h3>c) Rehabilitacion de zonas degradadas <span class="pts">10 PTS — MEDIO</span></h3><p>Mejora de zonas degradadas o en desuso.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>4 plazoletas nuevas en zonas sin urbanizar.</li><li>Restauracion parcial Ermita de San Julian (12.000 EUR).</li><li>Mejora caminos vecinales y accesos.</li><li>Desbroce y limpieza de 4 zonas de actuacion.</li></ul></div></div>
+
+<div class="criterion med"><h3>d) Recuperacion de entornos naturales <span class="pts">10 PTS — MEDIO</span></h3><p>Integracion con el entorno natural y paisajistico.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>Esculturas de acero corten: se integran con el paisaje (patina natural).</li><li>Ajardinamiento con especies autoctonas.</li><li>Ruta circular que pone en valor el paisaje del valle.</li><li>Bolas pintadas en prados verdes: fusion arte-naturaleza.</li></ul></div></div>
+
+<div class="criterion med"><h3>e) Utilidad publica <span class="pts">10 PTS — MEDIO</span></h3><p>Beneficio para la comunidad y uso publico.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>Ruta de 6,9 km llana, ciclable, familiar. Accesible para todos.</li><li>Eventos comunitarios: parrilladas, talleres, tardeos, jornadas de sidra.</li><li>Talleres infantiles e intergeneracionales.</li><li>Infraestructura turistica permanente (bancos, mesas, senalizacion).</li></ul></div></div>
+
+<div class="criterion med"><h3>f) Calidad de los trabajos <span class="pts">10 PTS — MEDIO</span></h3><p>Calidad de materiales y ejecucion.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>Acero corten: material duradero, sin mantenimiento, patina natural.</li><li>Proyecto tecnico profesional (arquitecto + direccion de obra).</li><li>Mobiliario de madera tratada para exteriores.</li><li>Paneles interpretativos de calidad con QR en acero inoxidable.</li></ul></div></div>
+
+<div class="criterion high"><h3>g) Belleza y armonia <span class="pts">15 PTS — ALTO</span></h3><p>Resultado estetico y armonia con el entorno.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>Esculturas en acero corten en paisaje verde: impacto visual excepcional.</li><li>Bolas pintadas en prados con el mar de fondo: altamente fotografico.</li><li>Valle protegido con vistas a la costa: marco natural privilegiado.</li><li>Diseno coherente de mobiliario y senalizacion.</li></ul></div></div>
+
+<div class="criterion high"><h3>h) Otros meritos <span class="pts">15 PTS — ALTO</span></h3><p>Cualquier otro merito valorable.</p>
+<div class="strat"><h4>Estrategia Guemes:</h4><ul><li>Lucha contra la despoblacion: 301 habitantes que se organizan.</li><li>Modelo economico sostenible: bar en comision, patrocinios, gamificacion.</li><li>Proyeccion turistica: conexion costa-interior, 250K visitantes Faro como publico.</li><li>Difusion internacional organica: peregrinos de +100 paises.</li><li>Expansion comarcal: no solo Guemes, todo Bareyo se beneficia.</li></ul></div></div>
+
+</div>
+</div>
+<div class="footer">Estrategia de Puntuacion · Junta Vecinal de Guemes · Municipio de Bareyo · Cantabria</div>
+<div class="toast" id="toast"></div>
+<script>async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Guemes 2026 — Estrategia Puntuacion',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}</script>
+</body>
+</html>

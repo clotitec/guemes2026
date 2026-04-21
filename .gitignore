@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+*.bak
+
+# Claude Code local settings (keep CLAUDE.md, ignore personal settings)
+.claude/settings.local.json
+
+# Stray aerial duplicates at project root
+# (canonical copies live in public/mapa/imagenes/aereas/)
+/aerea_*.jpg
+
+# Temp/logs
+*.tmp
+*.log
+
+# Node (in case we add build later)
+node_modules/
+
+# Vercel
+.vercel
