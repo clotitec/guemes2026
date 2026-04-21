@@ -3,203 +3,507 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Memoria Economica — Guemes 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Memoria económica — Güemes 2026</title>
+<meta name="description" content="Desglose del presupuesto de 160.000 € en 4 bloques · Candidatura Güemes Pueblo de Cantabria 2026">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
 <style>
-:root{--g6:#1b4332;--g5:#2d6a4f;--g4:#40916c;--g3:#52b788;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--o5:#b85c14;--o3:#e8a929;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06)}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.6;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}
-.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
-.nav a svg{width:16px;height:16px}.nav .title{font-size:.82rem;color:var(--x5);font-weight:500}
-.nav .actions{display:flex;gap:.5rem}.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem;transition:all .15s}
-.nav .actions button:hover{background:var(--x2);color:var(--x9)}
-.hero{background:linear-gradient(160deg,#0d1f12 0%,var(--g6) 50%,var(--g5) 100%);color:var(--w);padding:2.5rem 2rem;position:relative}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--go4),transparent)}
-.hero-inner{max-width:900px;margin:0 auto}
-.hero .pre{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--go3);margin-bottom:.5rem}
-.hero h1{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.3rem}
-.hero h1 span{color:var(--go4)}
-.hero .sub{font-size:.88rem;font-weight:300;color:var(--g3)}
-.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:1.75rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
-.card h2{font-size:1rem;font-weight:700;color:var(--g6);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid var(--go3);text-transform:uppercase;letter-spacing:.04em}
-.card h3{font-size:.88rem;font-weight:700;color:var(--g5);margin:1rem 0 .4rem}
-.card p{color:var(--x6);margin-bottom:.5rem;font-size:.85rem}
-.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1rem 0}
-.sg-item{background:var(--x0);border-radius:8px;padding:1rem;text-align:center;border-top:3px solid var(--g6)}
-.sg-item .v{font-size:1.3rem;font-weight:800;color:var(--g6)}
-.sg-item .l{font-size:.68rem;color:var(--x5);margin-top:.1rem}
-.bar-c{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:.75rem 0}
-.bar-s{display:flex;align-items:center;justify-content:center;color:var(--w);font-size:.68rem;font-weight:700}
-.legend{display:flex;flex-wrap:wrap;gap:1rem;margin:.5rem 0}
-.leg-i{display:flex;align-items:center;gap:.35rem;font-size:.78rem}
-.leg-d{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.leg-i .a{font-weight:700;color:var(--x9)}.leg-i .l{color:var(--x5)}
-table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.82rem}
-th{background:var(--g6);color:var(--w);padding:.45rem .6rem;text-align:left;font-weight:600;font-size:.75rem}
-td{padding:.4rem .6rem;border-bottom:1px solid var(--x2);color:var(--x6)}
-td:last-child,th:last-child{text-align:right}tr:nth-child(even){background:var(--x0)}
-.subtotal td{font-weight:600;color:var(--g5);background:var(--g0)}
-.total td{font-weight:700;color:var(--g6);border-top:2px solid var(--g6);background:var(--g0)}
-.gran-total td{font-weight:800;color:var(--w);background:var(--g6);border:none;font-size:.88rem}
-.hl{background:var(--go1);border-left:3px solid var(--go4);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#6b5e4a;margin:.75rem 0}
-.hl strong{color:var(--g6)}
-.hlg{background:var(--g0);border-left:3px solid var(--g5);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#2d5040;margin:.75rem 0}
-.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;opacity:0;transition:all .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-@media(max-width:768px){.summary-grid{grid-template-columns:repeat(2,1fr)}.main{padding:1.25rem 1rem}.card{padding:1.25rem}}
-@media print{.nav{position:static}.card{box-shadow:none;border:1px solid #ddd}}
+  :root {
+    --bg-deep: #0a1120;
+    --bg-navy: #101a30;
+    --bg-card: #141f38;
+    --corten: #c89450;
+    --corten-br: #f4c77b;
+    --corten-dk: #7a5a30;
+    --text: #e8e6e1;
+    --text-dim: #b8b5af;
+    --text-mut: #8a8680;
+    --line: rgba(244, 199, 123, 0.22);
+    --line-soft: rgba(232, 230, 225, 0.08);
+    --ok: #7bc6f4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-deep); color: var(--text);
+    font-family: 'Satoshi', system-ui, sans-serif;
+    font-weight: 300; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.15; }
+  em { font-style: italic; color: var(--corten-br); font-weight: 500; }
+  strong { color: var(--text); font-weight: 500; }
+
+  /* ========== NAV ========== */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,17,32,0.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 16px; font-weight: 400;
+  }
+  .nav .brand small {
+    font-family: 'Satoshi', sans-serif; font-style: normal;
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--corten-br); font-weight: 500; margin-left: 10px;
+  }
+  .nav .nav-center {
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--text-mut); font-weight: 500;
+  }
+  .nav .actions { display: flex; gap: 8px; }
+  .nav .actions button {
+    background: transparent; border: 1px solid var(--line);
+    color: var(--text-dim); padding: 7px 14px; border-radius: 2px;
+    font-family: 'Satoshi', sans-serif; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav .actions button:hover { background: var(--corten-br); color: var(--bg-deep); border-color: var(--corten-br); }
+
+  /* ========== HERO ========== */
+  .hero {
+    padding: 80px 28px 60px;
+    max-width: 1000px; margin: 0 auto;
+    text-align: left;
+  }
+  .hero .eyebrow {
+    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--corten-br); font-weight: 500; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 80px); font-style: italic; font-weight: 400;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero .sub {
+    font-size: 17px; color: var(--text-dim); max-width: 680px;
+  }
+  .hero .sub em { color: var(--corten-br); font-style: italic; }
+
+  /* ========== MAIN ========== */
+  .main { max-width: 1000px; margin: 0 auto; padding: 0 28px 80px; }
+
+  .card {
+    background: var(--bg-navy);
+    border: 1px solid var(--line-soft);
+    border-radius: 2px;
+    padding: 40px 36px;
+    margin-bottom: 24px;
+  }
+
+  .card > h2 {
+    font-size: 30px; font-style: italic;
+    padding-bottom: 18px; margin-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 20px;
+  }
+  .card > h2 .amount {
+    font-family: 'Satoshi', sans-serif; font-style: normal; font-weight: 500;
+    font-size: 18px; color: var(--corten-br); letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .card > h2 .letter {
+    font-family: 'Satoshi', sans-serif; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--corten);
+    font-style: normal; display: block; margin-bottom: 6px;
+  }
+
+  h3 {
+    font-size: 19px; color: var(--text); font-style: italic;
+    margin: 26px 0 12px;
+  }
+
+  p { color: var(--text-dim); margin-bottom: 12px; font-size: 14.5px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* ========== SUMMARY ========== */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; background: var(--line-soft);
+    margin: 20px 0 28px;
+  }
+  @media (max-width: 720px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+  .sg-item {
+    background: var(--bg-card); padding: 22px 18px;
+    display: flex; flex-direction: column; gap: 8px;
+    border-top: 3px solid var(--corten-dk);
+  }
+  .sg-item.a { border-top-color: var(--corten-br); }
+  .sg-item.b { border-top-color: var(--corten); }
+  .sg-item.c { border-top-color: var(--corten-dk); }
+  .sg-item.d { border-top-color: var(--ok); }
+  .sg-item .v {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    font-size: 30px; color: var(--text); letter-spacing: -0.02em; line-height: 1;
+  }
+  .sg-item .l {
+    font-size: 11px; color: var(--text-mut); letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500; line-height: 1.4;
+  }
+  .sg-item .l strong { display: block; color: var(--text-dim); font-size: 12px; font-style: italic; letter-spacing: 0; text-transform: none; font-family: 'Instrument Serif', serif; margin-top: 2px; }
+
+  .bar-container {
+    display: flex; height: 38px;
+    border-radius: 2px; overflow: hidden; margin: 10px 0 14px;
+    border: 1px solid var(--line-soft);
+  }
+  .bar-segment {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bg-deep); font-family: 'Satoshi', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  }
+
+  /* ========== TABLES ========== */
+  table {
+    width: 100%; border-collapse: collapse; margin: 10px 0 12px;
+    font-size: 13.5px;
+  }
+  th {
+    background: var(--bg-card); color: var(--corten-br);
+    padding: 10px 14px; text-align: left; font-weight: 500;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: 'Satoshi', sans-serif;
+    border-bottom: 1px solid var(--line);
+  }
+  th:last-child, td:last-child { text-align: right; }
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--text-dim);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr.subtotal td {
+    font-weight: 500; color: var(--text);
+    background: rgba(200, 148, 80, 0.08);
+    border-top: 1px solid var(--line);
+  }
+  tr.gran-total td {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    font-size: 18px; color: var(--corten-br);
+    background: var(--bg-card);
+    border: 1px solid var(--corten-dk);
+    padding: 14px 14px;
+  }
+
+  /* ========== CALLOUTS ========== */
+  .callout {
+    border-left: 2px solid var(--corten-br);
+    padding: 14px 20px; margin: 20px 0;
+    font-size: 14px; color: var(--text-dim);
+    background: rgba(200, 148, 80, 0.05);
+  }
+  .callout strong { color: var(--corten-br); font-weight: 500; }
+
+  .callout.blue {
+    border-left-color: var(--ok);
+    background: rgba(123, 198, 244, 0.06);
+  }
+  .callout.blue strong { color: var(--ok); }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    text-align: center; padding: 60px 28px 40px;
+    border-top: 1px solid var(--line-soft);
+    color: var(--text-mut); font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .footer strong { color: var(--corten-br); font-weight: 500; }
+
+  /* ========== PRINT ========== */
+  @media print {
+    @page { margin: 14mm; size: A4; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    .nav { position: static; display: none; }
+    .hero { padding: 0 0 40px; }
+    .main { padding: 0; }
+    .card { break-inside: avoid; margin-bottom: 18px; }
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 720px) {
+    .nav { padding: 10px 16px; }
+    .nav .nav-center { display: none; }
+    .nav .actions button { padding: 6px 10px; font-size: 9px; }
+    .hero { padding: 50px 20px 40px; }
+    .main { padding: 0 18px 60px; }
+    .card { padding: 26px 22px; }
+    .card > h2 { flex-direction: column; gap: 4px; font-size: 22px; }
+    h3 { font-size: 17px; }
+    td, th { padding: 8px 10px; font-size: 12px; }
+  }
 </style>
 </head>
 <body>
+
 <div class="nav">
-<a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Guemes 2026</a>
-<span class="title">Memoria Economica</span>
-<div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div>
+  <a href="./" class="brand">
+    Güemes <small>Memoria económica</small>
+  </a>
+  <div class="nav-center">Candidatura Pueblo de Cantabria 2026</div>
+  <div class="actions">
+    <button onclick="window.print()">↓ Imprimir</button>
+    <button onclick="history.back()">← Volver</button>
+  </div>
 </div>
 
-<div class="hero"><div class="hero-inner">
-<div class="pre">Presupuesto desglosado</div>
-<h1>Memoria Economica<span>.</span></h1>
-<div class="sub">160.000 EUR · 4 bloques de actuacion · Premio Pueblo de Cantabria 2026</div>
-</div></div>
+<section class="hero">
+  <div class="eyebrow">04 · Memoria económica</div>
+  <h1>160.000 € en cuatro bloques.</h1>
+  <p class="sub">Desglose detallado de la inversión propuesta. Los bloques reflejan las actuaciones aprobadas por la Junta Vecinal tras la reunión pública del <em>19 de abril de 2026</em> y las prioridades indicadas por el alcalde.</p>
+</section>
 
 <div class="main">
 
+<!-- ============ RESUMEN ============ -->
 <div class="card">
-<h2>Resumen del presupuesto</h2>
-<div class="summary-grid">
-<div class="sg-item"><div class="v">60.000 &euro;</div><div class="l">Senda Estatuas · 37,5%</div></div>
-<div class="sg-item"><div class="v">45.000 &euro;</div><div class="l">Preservacion · 28,1%</div></div>
-<div class="sg-item"><div class="v">15.000 &euro;</div><div class="l">Enróllate en Güemes · 9,4%</div></div>
-<div class="sg-item"><div class="v">40.000 &euro;</div><div class="l">Complementarias · 25%</div></div>
-</div>
-<div class="bar-c">
-<div class="bar-s" style="flex:60;background:var(--g6)">60K</div>
-<div class="bar-s" style="flex:45;background:var(--g4)">45K</div>
-<div class="bar-s" style="flex:15;background:var(--o3)">15K</div>
-<div class="bar-s" style="flex:40;background:var(--x6)">40K</div>
-</div>
-<div class="legend">
-<div class="leg-i"><div class="leg-d" style="background:var(--g6)"></div><span class="a">60K</span><span class="l">Senda Estatuas</span></div>
-<div class="leg-i"><div class="leg-d" style="background:var(--g4)"></div><span class="a">45K</span><span class="l">Preservacion</span></div>
-<div class="leg-i"><div class="leg-d" style="background:var(--o3)"></div><span class="a">15K</span><span class="l">Enróllate en Güemes</span></div>
-<div class="leg-i"><div class="leg-d" style="background:var(--x6)"></div><span class="a">40K</span><span class="l">Complementarias</span></div>
-</div>
+  <h2>
+    <span>Resumen del presupuesto</span>
+    <span class="amount">160.000 €</span>
+  </h2>
+
+  <div class="summary-grid">
+    <div class="sg-item a">
+      <div class="v">60.000 €</div>
+      <div class="l">37,5%<strong>Senda de las Estatuas</strong></div>
+    </div>
+    <div class="sg-item b">
+      <div class="v">45.000 €</div>
+      <div class="l">28,1%<strong>Preservación + 14 km Camino</strong></div>
+    </div>
+    <div class="sg-item c">
+      <div class="v">15.000 €</div>
+      <div class="l">9,4%<strong>Enróllate en Güemes</strong></div>
+    </div>
+    <div class="sg-item d">
+      <div class="v">40.000 €</div>
+      <div class="l">25,0%<strong>Complementarias + Ermita Digital</strong></div>
+    </div>
+  </div>
+
+  <div class="bar-container">
+    <div class="bar-segment" style="flex:60;background:var(--corten-br)">60 K</div>
+    <div class="bar-segment" style="flex:45;background:var(--corten)">45 K</div>
+    <div class="bar-segment" style="flex:15;background:var(--corten-dk);color:var(--text)">15 K</div>
+    <div class="bar-segment" style="flex:40;background:var(--ok);color:var(--bg-deep)">40 K</div>
+  </div>
+
+  <div class="callout">
+    <strong>Nota:</strong> El Premio Pueblo de Cantabria 2026 otorga <strong>160.000 €</strong> íntegros al municipio ganador. Toda la partida se invierte localmente en el pueblo de Güemes (Bareyo) y en la puesta en valor de los 14 km del Camino de Santiago que atraviesan el municipio.
+  </div>
 </div>
 
+<!-- ============ BLOQUE A ============ -->
 <div class="card">
-<h2>Bloque A: Senda de las Estatuas — 60.000 &euro;</h2>
-<h3>A1. Elementos escultoricos</h3>
-<table><tr><th>Concepto</th><th>Importe</th></tr>
-<tr><td>Diseno, creacion y ejecucion de 4 esculturas acero corten</td><td>22.000 &euro;</td></tr>
-<tr><td>Cimentacion y anclaje</td><td>3.500 &euro;</td></tr>
-<tr><td>Transporte e instalacion</td><td>2.500 &euro;</td></tr>
-<tr class="subtotal"><td>Subtotal A1</td><td>28.000 &euro;</td></tr></table>
-<h3>A2. Mobiliario urbano (4 zonas)</h3>
-<table><tr><th>Concepto</th><th>Uds.</th><th>Precio/ud.</th><th>Importe</th></tr>
-<tr><td>Banco madera tratada (3 plazas)</td><td>8</td><td>550 &euro;</td><td>4.400 &euro;</td></tr>
-<tr><td>Mesa merendero con asientos</td><td>4</td><td>750 &euro;</td><td>3.000 &euro;</td></tr>
-<tr><td>Papelera diseno rural</td><td>4</td><td>280 &euro;</td><td>1.120 &euro;</td></tr>
-<tr><td>Instalacion y cimentacion</td><td>-</td><td>-</td><td>1.480 &euro;</td></tr>
-<tr class="subtotal"><td colspan="3">Subtotal A2</td><td>10.000 &euro;</td></tr></table>
-<h3>A3. Senalizacion y paneles</h3>
-<table><tr><th>Concepto</th><th>Uds.</th><th>Precio/ud.</th><th>Importe</th></tr>
-<tr><td>Panel gran formato (inicio ruta)</td><td>1</td><td>1.200 &euro;</td><td>1.200 &euro;</td></tr>
-<tr><td>Panel interpretativo zona</td><td>4</td><td>650 &euro;</td><td>2.600 &euro;</td></tr>
-<tr><td>Poste direccional madera</td><td>8</td><td>180 &euro;</td><td>1.440 &euro;</td></tr>
-<tr><td>Placa QR acero inox.</td><td>4</td><td>90 &euro;</td><td>360 &euro;</td></tr>
-<tr><td>Diseno grafico</td><td>-</td><td>-</td><td>1.200 &euro;</td></tr>
-<tr><td>Instalacion</td><td>-</td><td>-</td><td>700 &euro;</td></tr>
-<tr class="subtotal"><td colspan="3">Subtotal A3</td><td>7.500 &euro;</td></tr></table>
-<h3>A4. Obra civil y paisajismo</h3>
-<table><tr><th>Concepto</th><th>Importe</th></tr>
-<tr><td>Desbroce y limpieza 4 zonas</td><td>2.000 &euro;</td></tr>
-<tr><td>Preparacion plazoletas</td><td>3.000 &euro;</td></tr>
-<tr><td>Mejora accesos y firmes</td><td>3.500 &euro;</td></tr>
-<tr><td>Ajardinamiento autoctono</td><td>1.500 &euro;</td></tr>
-<tr class="subtotal"><td>Subtotal A4</td><td>10.000 &euro;</td></tr></table>
-<h3>A5. Proyecto tecnico</h3>
-<table><tr><th>Concepto</th><th>Importe</th></tr>
-<tr><td>Redaccion proyecto (arquitecto)</td><td>2.800 &euro;</td></tr>
-<tr><td>Direccion de obra</td><td>1.200 &euro;</td></tr>
-<tr><td>Contenido digital (QR, web)</td><td>500 &euro;</td></tr>
-<tr class="subtotal"><td>Subtotal A5</td><td>4.500 &euro;</td></tr></table>
-<table><tr class="gran-total"><td>TOTAL BLOQUE A</td><td>60.000 &euro;</td></tr></table>
+  <h2>
+    <span>
+      <span class="letter">Bloque A</span>
+      Senda de las Estatuas
+    </span>
+    <span class="amount">60.000 €</span>
+  </h2>
+
+  <p>Recorrido circular de 6,9 km con 4 esculturas en acero corten — una por cada Güemes del mundo — con mobiliario, señalización interpretativa, QR multiidioma y obra civil de urbanización.</p>
+
+  <h3>A1 · Elementos escultóricos</h3>
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Diseño, creación y ejecución de 4 esculturas en acero corten</td><td>22.000 €</td></tr>
+    <tr><td>Cimentación y anclaje (obra civil local)</td><td>3.500 €</td></tr>
+    <tr><td>Transporte e instalación</td><td>2.500 €</td></tr>
+    <tr class="subtotal"><td>Subtotal A1</td><td>28.000 €</td></tr>
+  </table>
+
+  <h3>A2 · Mobiliario urbano (4 plazoletas)</h3>
+  <table>
+    <tr><th>Concepto</th><th>Uds.</th><th>Precio/ud.</th><th>Importe</th></tr>
+    <tr><td>Banco madera tratada (3 plazas)</td><td>8</td><td>550 €</td><td>4.400 €</td></tr>
+    <tr><td>Mesa merendero con asientos</td><td>4</td><td>750 €</td><td>3.000 €</td></tr>
+    <tr><td>Papelera diseño rural</td><td>4</td><td>280 €</td><td>1.120 €</td></tr>
+    <tr><td>Instalación y cimentación</td><td>–</td><td>–</td><td>1.480 €</td></tr>
+    <tr class="subtotal"><td colspan="3">Subtotal A2</td><td>10.000 €</td></tr>
+  </table>
+
+  <h3>A3 · Señalización y paneles interpretativos</h3>
+  <table>
+    <tr><th>Concepto</th><th>Uds.</th><th>Precio/ud.</th><th>Importe</th></tr>
+    <tr><td>Panel inicio de ruta (gran formato)</td><td>1</td><td>1.200 €</td><td>1.200 €</td></tr>
+    <tr><td>Panel interpretativo bilingüe ES+EN (uno por escultura)</td><td>4</td><td>650 €</td><td>2.600 €</td></tr>
+    <tr><td>Postes direccionales en madera</td><td>8</td><td>180 €</td><td>1.440 €</td></tr>
+    <tr><td>Placas QR acero inoxidable (multiidioma)</td><td>4</td><td>90 €</td><td>360 €</td></tr>
+    <tr><td>Diseño gráfico + traducción (FR, DE, IT)</td><td>–</td><td>–</td><td>1.200 €</td></tr>
+    <tr><td>Instalación</td><td>–</td><td>–</td><td>700 €</td></tr>
+    <tr class="subtotal"><td colspan="3">Subtotal A3</td><td>7.500 €</td></tr>
+  </table>
+
+  <h3>A4 · Obra civil y paisajismo de plazoletas</h3>
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Desbroce y limpieza de las 4 zonas</td><td>2.000 €</td></tr>
+    <tr><td>Preparación y pavimentado de las plazoletas</td><td>3.000 €</td></tr>
+    <tr><td>Mejora de accesos y firmes peatonales</td><td>3.500 €</td></tr>
+    <tr><td>Ajardinamiento con especies autóctonas</td><td>1.500 €</td></tr>
+    <tr class="subtotal"><td>Subtotal A4</td><td>10.000 €</td></tr>
+  </table>
+
+  <h3>A5 · Proyecto técnico y dirección de obra</h3>
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Redacción del proyecto (arquitecto técnico)</td><td>2.800 €</td></tr>
+    <tr><td>Dirección de obra</td><td>1.200 €</td></tr>
+    <tr><td>Producción del contenido digital (QR landing pages)</td><td>500 €</td></tr>
+    <tr class="subtotal"><td>Subtotal A5</td><td>4.500 €</td></tr>
+  </table>
+
+  <table><tr class="gran-total"><td>TOTAL BLOQUE A</td><td>60.000 €</td></tr></table>
 </div>
 
+<!-- ============ BLOQUE B ============ -->
 <div class="card">
-<h2>Bloque B: Preservacion del pueblo — 45.000 &euro;</h2>
-<table><tr><th>Concepto</th><th>Importe</th></tr>
-<tr><td>Restauracion Ermita de San Julian (cubierta, muros)</td><td>12.000 &euro;</td></tr>
-<tr><td>Mejora caminos vecinales y accesos</td><td>10.000 &euro;</td></tr>
-<tr><td>Espacios publicos (iluminacion, jardineria)</td><td>6.000 &euro;</td></tr>
-<tr><td>Entorno Iglesia San Vicente Martir</td><td>5.000 &euro;</td></tr>
-<tr><td>Reparaciones infraestructuras comunitarias</td><td>5.000 &euro;</td></tr>
-<tr><td>Senalizacion general del pueblo</td><td>3.500 &euro;</td></tr>
-<tr><td>Imprevistos y actuaciones urgentes</td><td>3.500 &euro;</td></tr>
-<tr class="gran-total"><td>TOTAL BLOQUE B</td><td>45.000 &euro;</td></tr></table>
-<div class="hlg"><strong>Priorizacion:</strong> Las actuaciones concretas seran aprobadas por la Junta Vecinal segun necesidades mas urgentes.</div>
+  <h2>
+    <span>
+      <span class="letter">Bloque B</span>
+      Preservación del pueblo + 14 km del Camino
+    </span>
+    <span class="amount">45.000 €</span>
+  </h2>
+
+  <p>Actuaciones menores sobre caminos, espacios públicos y señalización. Incluye la puesta en valor de los <em>14 km del Camino de Santiago</em> que cruzan todo el municipio de Bareyo, desde la entrada del término hasta el paso por Güemes y Galizano.</p>
+
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Señalización, hitos y limpieza de los <strong>14 km del Camino</strong> en Bareyo</td><td>18.000 €</td></tr>
+    <tr><td>Mejora de caminos vecinales y accesos peatonales</td><td>8.000 €</td></tr>
+    <tr><td>Iluminación suave y jardinería en espacios públicos</td><td>6.000 €</td></tr>
+    <tr><td>Adecuación del entorno de la Iglesia de San Vicente (sin intervenir el edificio)</td><td>4.000 €</td></tr>
+    <tr><td>Actuaciones menores de preservación y reparaciones urgentes</td><td>5.000 €</td></tr>
+    <tr><td>Imprevistos</td><td>4.000 €</td></tr>
+    <tr class="gran-total"><td>TOTAL BLOQUE B</td><td>45.000 €</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Feedback del alcalde (8 abril 2026):</strong> Bloque B reorientado — se retiran las obras estructurales en iglesia y ermita. Lo priorizado es la red del Camino de Santiago y los accesos vecinales.
+  </div>
 </div>
 
+<!-- ============ BLOQUE C ============ -->
 <div class="card">
-<h2>Bloque C: Enróllate en Güemes — 15.000 &euro;</h2>
-<table><tr><th>Concepto</th><th>Importe</th></tr>
-<tr><td>Bolas secas de silo y preparacion (20-25 uds.)</td><td>1.500 &euro;</td></tr>
-<tr><td>Pinturas y materiales artisticos</td><td>1.800 &euro;</td></tr>
-<tr><td>Instalacion y transporte a puntos estrategicos</td><td>1.200 &euro;</td></tr>
-<tr><td>Eventos musicales (2 fines de semana)</td><td>3.000 &euro;</td></tr>
-<tr><td>Catering (parrillada, sidra, comida popular)</td><td>2.000 &euro;</td></tr>
-<tr><td>Talleres (infantil + artistas cantabros)</td><td>1.200 &euro;</td></tr>
-<tr><td>QR, gamificacion y contenido digital</td><td>1.000 &euro;</td></tr>
-<tr><td>Carteleria y difusion</td><td>1.000 &euro;</td></tr>
-<tr><td>Seguros y logistica</td><td>800 &euro;</td></tr>
-<tr><td>Coordinacion artistas</td><td>500 &euro;</td></tr>
-<tr><td>Imprevistos</td><td>1.000 &euro;</td></tr>
-<tr class="gran-total"><td>TOTAL BLOQUE C</td><td>15.000 &euro;</td></tr></table>
-<div class="hl"><strong>Ingresos complementarios:</strong> Bar en comision, patrocinios (Nisol, Lupa, Santander), publicidad en bolas, merchandising. Revertiran en la Junta Vecinal.</div>
+  <h2>
+    <span>
+      <span class="letter">Bloque C</span>
+      Enróllate en Güemes
+    </span>
+    <span class="amount">15.000 €</span>
+  </h2>
+
+  <p><em>"Enróllate en Güemes"</em> es el festival de arte rural del pueblo. Dos fines de semana al año (julio y agosto), artistas cántabros, vecinos, peregrinos y visitantes crean e instalan obras efímeras en espacios singulares del pueblo y del municipio. Nombre definitivo aprobado el <em>21 de abril de 2026</em> — sustituye al provisional "Güemes en Bolas".</p>
+
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Producción de elementos artísticos al aire libre (soportes, bolas pintadas, figuras)</td><td>3.500 €</td></tr>
+    <tr><td>Programación musical (2 fines de semana)</td><td>3.000 €</td></tr>
+    <tr><td>Catering popular: parrillada, sidra, talleres participativos</td><td>2.500 €</td></tr>
+    <tr><td>Talleres infantil + integración peregrinos</td><td>1.500 €</td></tr>
+    <tr><td>Gamificación QR, pasaporte Güemes, storytelling con IA</td><td>1.500 €</td></tr>
+    <tr><td>Cartelería y difusión (redes, radio comarcal, prensa)</td><td>1.000 €</td></tr>
+    <tr><td>Coordinación de artistas y logística</td><td>800 €</td></tr>
+    <tr><td>Seguros, permisos, higiene</td><td>700 €</td></tr>
+    <tr><td>Imprevistos</td><td>500 €</td></tr>
+    <tr class="gran-total"><td>TOTAL BLOQUE C</td><td>15.000 €</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Ingresos complementarios (no incluidos):</strong> bar en comisión para la Junta Vecinal, patrocinios buscados (Pinturas Nisol, Lupa, Banco Santander), publicidad en elementos artísticos y merchandising. Revierten íntegramente en la Junta Vecinal.
+  </div>
 </div>
 
+<!-- ============ BLOQUE D ============ -->
 <div class="card">
-<h2>Bloque D: Actuaciones complementarias — 40.000 &euro;</h2>
-<table><tr><th>Linea</th><th>Importe</th></tr>
-<tr><td>Promocion turistica digital (Descubre Bareyo, audioguias, app)</td><td>8.000 &euro;</td></tr>
-<tr><td>Adecuacion Ermita como Centro Interpretacion Camino</td><td>10.000 &euro;</td></tr>
-<tr><td>Eventos culturales y programacion anual</td><td>6.000 &euro;</td></tr>
-<tr><td>Mejora conectividad ruta ciclable</td><td>5.000 &euro;</td></tr>
-<tr><td>Videos y contenido IA (storytelling)</td><td>3.000 &euro;</td></tr>
-<tr><td>Mobiliario adicional areas descanso</td><td>4.000 &euro;</td></tr>
-<tr><td>Reserva Junta Vecinal</td><td>4.000 &euro;</td></tr>
-<tr class="gran-total"><td>TOTAL BLOQUE D</td><td>40.000 &euro;</td></tr></table>
-<div class="hlg"><strong>Flexibilidad:</strong> Partida abierta para que la Junta Vecinal adapte las actuaciones a necesidades reales.</div>
+  <h2>
+    <span>
+      <span class="letter">Bloque D</span>
+      Actuaciones complementarias
+    </span>
+    <span class="amount">40.000 €</span>
+  </h2>
+
+  <p>Partida concretada tras la reunión del pueblo del 19 de abril de 2026. Incluye la mejora del equipamiento deportivo (pádel y atletismo) y la creación del <em>Centro de Interpretación Digital del Peregrino</em> dentro de la Ermita de San Julián — un servicio 24/7 para los peregrinos del Camino sin alterar el patrimonio arquitectónico.</p>
+
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Sustitución de la pista de pádel y acondicionamiento de su entorno</td><td>14.000 €</td></tr>
+    <tr><td>Vallado perimetral y acondicionamiento de la pista de atletismo</td><td>7.000 €</td></tr>
+    <tr><td><strong>Centro de Interpretación Digital</strong> en la Ermita de San Julián (tótem + app multiidioma + cámara seguridad + contador + dashboard)</td><td>8.000 €</td></tr>
+    <tr><td>Mobiliario adicional en áreas de descanso y miradores</td><td>3.500 €</td></tr>
+    <tr><td>Programación cultural anual (concursos, exposiciones itinerantes)</td><td>3.000 €</td></tr>
+    <tr><td>Reserva Junta Vecinal para actuaciones por decidir</td><td>4.500 €</td></tr>
+    <tr class="gran-total"><td>TOTAL BLOQUE D</td><td>40.000 €</td></tr>
+  </table>
+
+  <div class="callout blue">
+    <strong>Centro de Interpretación Digital del Peregrino:</strong> se instala en el interior de la Ermita de San Julián sin modificar su fábrica histórica. El tótem táctil (tablet industrial antivandálica) ofrece contenidos en <strong>ES · EN · FR · DE · IT</strong> sobre la historia del pueblo, el Camino y los 4 Güemes del mundo. Incorpora cámara de seguridad con cartelería RGPD conforme, contador de visitas y dashboard analítico accesible para la Junta Vecinal.
+  </div>
+
+  <div class="callout">
+    <strong>Cumplimiento del feedback del alcalde:</strong> el Centro de Interpretación Digital <strong>no es obra estructural</strong> sobre la ermita — es contenido + dispositivos que se instalan en el interior sin tocar la fábrica del siglo XIII. Conforme con la indicación expresa de no intervenir sobre iglesias ni ermitas.
+  </div>
 </div>
 
+<!-- ============ FINANCIACION ============ -->
 <div class="card">
-<h2>Financiacion</h2>
-<table><tr><th>Fuente</th><th>Tipo</th><th>Importe</th></tr>
-<tr><td><strong>Premio Pueblo de Cantabria 2026</strong></td><td>Subvencion</td><td>160.000 &euro;</td></tr>
-<tr class="gran-total"><td colspan="2">TOTAL</td><td>160.000 &euro;</td></tr></table>
-<div class="hl"><strong>Financiacion complementaria (no incluida):</strong> Patrocinios empresariales, bar en comision, Ayuntamiento (en especie), subvenciones dinamizacion rural, albergue (voluntariado y difusion).</div>
+  <h2>
+    <span>Financiación</span>
+    <span class="amount">160.000 €</span>
+  </h2>
+  <table>
+    <tr><th>Fuente</th><th>Tipo</th><th>Importe</th></tr>
+    <tr><td><strong>Premio Pueblo de Cantabria 2026</strong></td><td>Subvención</td><td>160.000 €</td></tr>
+    <tr class="gran-total"><td colspan="2">TOTAL</td><td>160.000 €</td></tr>
+  </table>
+  <div class="callout">
+    <strong>Financiación complementaria (no incluida en el presupuesto):</strong> patrocinios empresariales para <em>Enróllate en Güemes</em>, bar en comisión, aportación en especie del Ayuntamiento de Bareyo, subvenciones de dinamización rural, voluntariado vecinal coordinado desde el Albergue.
+  </div>
 </div>
 
+<!-- ============ CRONOGRAMA ============ -->
 <div class="card">
-<h2>Cronograma de ejecucion</h2>
-<table><tr><th>Fase</th><th>Periodo</th><th>Actuaciones</th><th>Importe</th></tr>
-<tr><td>1</td><td>Jun-Sep 2026</td><td>Proyecto tecnico, licitacion, obra civil</td><td>20.000 &euro;</td></tr>
-<tr><td>2</td><td>Jul-Ago 2026</td><td>Enróllate en Güemes (1a edicion)</td><td>15.000 &euro;</td></tr>
-<tr><td>3</td><td>Sep-Nov 2026</td><td>Esculturas, mobiliario, senalizacion</td><td>40.000 &euro;</td></tr>
-<tr><td>4</td><td>Oct-Dic 2026</td><td>Obras preservacion</td><td>45.000 &euro;</td></tr>
-<tr><td>5</td><td>Ene-Jun 2027</td><td>Actuaciones complementarias</td><td>40.000 &euro;</td></tr></table>
-<p style="margin-top:.6rem"><strong>Finalizacion:</strong> Inauguracion Senda octubre 2026. Todas las actuaciones completadas junio 2027.</p>
+  <h2>
+    <span>Cronograma de ejecución</span>
+    <span class="amount">Jun 2026 — Jun 2027</span>
+  </h2>
+  <table>
+    <tr><th>Fase</th><th>Período</th><th>Actuaciones principales</th><th>Inversión</th></tr>
+    <tr><td>1</td><td>Jun–Jul 2026</td><td>Proyecto técnico Senda, licitaciones, permisos</td><td>5.000 €</td></tr>
+    <tr><td>2</td><td>Jul–Ago 2026</td><td>Festival <em>Enróllate en Güemes</em> (1ª edición)</td><td>15.000 €</td></tr>
+    <tr><td>3</td><td>Ago–Nov 2026</td><td>Obras deportivas: pista pádel + vallado atletismo</td><td>21.000 €</td></tr>
+    <tr><td>4</td><td>Sep–Dic 2026</td><td>Esculturas, mobiliario, señalización de la Senda</td><td>55.000 €</td></tr>
+    <tr><td>5</td><td>Oct 2026 – Mar 2027</td><td>14 km del Camino + accesos vecinales</td><td>34.000 €</td></tr>
+    <tr><td>6</td><td>Nov 2026 – May 2027</td><td>Centro de Interpretación Digital en la Ermita</td><td>8.000 €</td></tr>
+    <tr><td>7</td><td>Ene–Jun 2027</td><td>Mobiliario, programación cultural, reserva</td><td>22.000 €</td></tr>
+  </table>
+  <p><strong>Hitos:</strong> Inauguración de la Senda de las Estatuas en <em>octubre de 2026</em>. Apertura del Centro de Interpretación Digital en la Ermita en <em>junio de 2027</em>. Cierre administrativo del proyecto en <em>junio de 2027</em>.</p>
 </div>
 
 </div>
-<div class="footer">Memoria Economica · Junta Vecinal de Guemes · Municipio de Bareyo · Cantabria</div>
-<div class="toast" id="toast"></div>
-<script>
-async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Guemes 2026 — Memoria Economica',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}
-function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
-</script>
+
+<footer class="footer">
+  <strong>Abriendo caminos de amistad</strong> — Memoria económica · Candidatura Pueblo de Cantabria 2026<br>
+  Junta Vecinal de Güemes · Ayuntamiento de Bareyo · Cantabria
+</footer>
+
 </body>
 </html>
