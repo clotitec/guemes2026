@@ -3,93 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Itinerario del Jurado — Guemes 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Itinerario del jurado — Güemes 2026</title>
+<meta name="description" content="Recorrido propuesto para la visita oficial del jurado del Premio Pueblo de Cantabria 2026. 6 paradas, 2h20, recorrido parcial por la Senda de las Estatuas.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
 <style>
-:root{--g6:#1b4332;--g5:#2d6a4f;--g4:#40916c;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--pp:#6366f1;--ppl:#eef2ff;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1)}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.6;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}.nav a svg{width:16px;height:16px}.nav .title{font-size:.82rem;color:var(--x5)}.nav .actions{display:flex;gap:.5rem}.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem}.nav .actions button:hover{background:var(--x2)}
-.hero{background:linear-gradient(135deg,#312e81 0%,var(--pp) 100%);color:var(--w);padding:2.5rem 2rem;text-align:center}
-.hero h1{font-size:1.6rem;font-weight:800}.hero .sub{font-size:.88rem;font-weight:300;opacity:.8;margin-top:.25rem}
-.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem}
-.st{background:var(--w);border-radius:var(--r);padding:.85rem;text-align:center;box-shadow:var(--sh);border:1px solid var(--x1)}.st .v{font-size:1.3rem;font-weight:800;color:var(--pp)}.st .l{font-size:.68rem;color:var(--x5);text-transform:uppercase}
-.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:1.75rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
-.card h2{font-size:1rem;font-weight:700;color:var(--g6);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid var(--go3);text-transform:uppercase;letter-spacing:.04em}
-.card p{color:var(--x6);margin-bottom:.5rem;font-size:.85rem}
-.card ul{margin:.3rem 0 .6rem 1.3rem;color:var(--x6);font-size:.85rem}.card li{margin-bottom:.2rem}
-.stop{background:var(--x0);border-radius:10px;padding:1.25rem 1.5rem;margin:.75rem 0;border-left:4px solid var(--g5);position:relative}
-.stop .num{position:absolute;top:-8px;left:14px;background:var(--g6);color:var(--w);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem}
-.stop h3{font-size:.92rem;font-weight:700;color:var(--x9);margin:.15rem 0}
-.stop .badges{display:flex;gap:.35rem;margin-bottom:.35rem;flex-wrap:wrap}
-.stop .badge{display:inline-block;padding:1px 7px;border-radius:4px;font-size:.7rem;font-weight:600;color:var(--w)}
-.badge-time{background:var(--go4)}.badge-dur{background:var(--g5)}.badge-key{background:var(--pp)}
-.stop p{font-size:.82rem;margin-bottom:.25rem}
-.hl{background:var(--go1);border-left:3px solid var(--go4);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#6b5e4a;margin:.75rem 0}.hl strong{color:var(--g6)}
-.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;opacity:0;transition:all .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}.main{padding:1.25rem 1rem}}
-@media print{.nav{position:static}.card,.stop{box-shadow:none;border:1px solid #ddd}}
+  :root { --bg-deep:#0a1120; --bg-navy:#101a30; --bg-card:#141f38; --corten:#c89450; --corten-br:#f4c77b; --corten-dk:#7a5a30; --text:#e8e6e1; --text-dim:#b8b5af; --text-mut:#8a8680; --line:rgba(244,199,123,0.22); --line-soft:rgba(232,230,225,0.08); --ok:#7bc6f4; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg-deep); color:var(--text); font-family:'Satoshi',system-ui,sans-serif; font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4 { font-family:'Instrument Serif',serif; font-weight:400; line-height:1.15; }
+  em { font-style:italic; color:var(--corten-br); font-weight:500; }
+  strong { color:var(--text); font-weight:500; }
+  a { color:var(--corten-br); text-decoration:none; }
+
+  .nav { position:sticky; top:0; z-index:50; background:rgba(10,17,32,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line-soft); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; }
+  .nav .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-family:'Instrument Serif',serif; font-style:italic; font-size:16px; }
+  .nav .brand small { font-family:'Satoshi',sans-serif; font-style:normal; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--corten-br); font-weight:500; margin-left:10px; }
+  .nav .nav-center { font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-mut); font-weight:500; }
+  .nav .actions { display:flex; gap:8px; }
+  .nav .actions button { background:transparent; border:1px solid var(--line); color:var(--text-dim); padding:7px 14px; border-radius:2px; font-family:'Satoshi',sans-serif; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; }
+  .nav .actions button:hover { background:var(--corten-br); color:var(--bg-deep); border-color:var(--corten-br); }
+
+  .hero { padding:80px 28px 60px; max-width:1000px; margin:0 auto; }
+  .hero .eyebrow { font-size:11px; letter-spacing:0.35em; text-transform:uppercase; color:var(--corten-br); font-weight:500; margin-bottom:18px; }
+  .hero h1 { font-size:clamp(44px,6vw,80px); font-style:italic; font-weight:400; letter-spacing:-0.02em; margin-bottom:16px; }
+  .hero .sub { font-size:17px; color:var(--text-dim); max-width:720px; }
+
+  .main { max-width:1000px; margin:0 auto; padding:0 28px 80px; }
+
+  .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:2px; margin:0 0 36px; background:var(--line-soft); }
+  .st { background:var(--bg-navy); padding:24px 20px; border-top:3px solid var(--corten-dk); }
+  .st .v { font-family:'Instrument Serif',serif; font-style:italic; font-size:32px; color:var(--corten-br); line-height:1; }
+  .st .l { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-mut); margin-top:8px; font-weight:500; }
+
+  .card { background:var(--bg-navy); border:1px solid var(--line-soft); border-radius:2px; padding:40px 36px; margin-bottom:24px; }
+  .card > h2 { font-size:30px; font-style:italic; padding-bottom:18px; margin-bottom:22px; border-bottom:1px solid var(--line); }
+
+  .callout { border-left:2px solid var(--corten-br); padding:14px 20px; margin:14px 0 28px; font-size:14px; color:var(--text-dim); background:rgba(200,148,80,0.05); }
+  .callout strong { color:var(--corten-br); font-weight:500; }
+
+  .stop { background:var(--bg-card); border-left:3px solid var(--corten-br); padding:28px 32px; margin-bottom:16px; position:relative; }
+  .stop .num { position:absolute; top:24px; right:28px; font-family:'Instrument Serif',serif; font-style:italic; font-size:52px; line-height:1; color:var(--corten-dk); font-weight:400; opacity:0.7; }
+  .stop h3 { font-size:22px; font-style:italic; color:var(--text); margin-bottom:10px; padding-right:60px; }
+  .stop .badges { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 16px; }
+  .stop .badge { font-family:'Satoshi',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; padding:5px 11px; border-radius:2px; }
+  .stop .badge-time { background:transparent; border:1px solid var(--corten-dk); color:var(--corten-br); }
+  .stop .badge-dur { background:var(--corten-br); color:var(--bg-deep); font-weight:600; }
+  .stop .badge-key { background:var(--ok); color:var(--bg-deep); font-weight:600; }
+  .stop .badge-note { background:transparent; border:1px solid var(--line-soft); color:var(--text-mut); }
+  .stop p { font-size:14.5px; color:var(--text-dim); margin-bottom:10px; }
+  .stop p:last-child { margin-bottom:0; }
+  .stop strong { color:var(--text); font-weight:500; }
+  .stop em { color:var(--corten-br); font-style:italic; font-weight:500; }
+
+  .card ul { margin-left:20px; margin-bottom:14px; }
+  .card li { color:var(--text-dim); margin-bottom:8px; font-size:14.5px; }
+
+  .footer { text-align:center; padding:60px 28px 40px; border-top:1px solid var(--line-soft); color:var(--text-mut); font-size:11px; letter-spacing:0.15em; text-transform:uppercase; }
+  .footer strong { color:var(--corten-br); font-weight:500; }
+
+  @media print {
+    @page { margin:14mm; size:A4; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+    .nav { display:none; } .hero { padding:0 0 30px; } .main { padding:0; }
+    .card, .stop { break-inside:avoid; }
+    .card { padding:26px 24px; }
+  }
+  @media (max-width:720px) {
+    .nav .nav-center { display:none; }
+    .hero { padding:50px 20px 40px; } .main { padding:0 18px 60px; }
+    .card { padding:26px 22px; } .stop { padding:22px 24px; }
+    .stop .num { font-size:38px; top:18px; right:18px; }
+    .stop h3 { padding-right:50px; font-size:19px; }
+  }
 </style>
 </head>
 <body>
-<div class="nav"><a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Guemes 2026</a><span class="title">Itinerario del Jurado</span><div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div></div>
 
-<div class="hero"><h1>Itinerario para la Visita del Jurado</h1><div class="sub">Senda de las Estatuas de Guemes</div></div>
+<div class="nav">
+  <a href="/" class="brand">Güemes <small>Itinerario del jurado</small></a>
+  <div class="nav-center">Candidatura Pueblo de Cantabria 2026</div>
+  <div class="actions">
+    <button onclick="window.print()">↓ Imprimir</button>
+    <button onclick="history.back()">← Volver</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">Visita oficial · Recorrido propuesto</div>
+  <h1>Itinerario del jurado.</h1>
+  <p class="sub">Seis paradas cronometradas por el pueblo y la Senda de las Estatuas. Aproximadamente <em>2 horas 20 minutos</em>. Adaptable al tiempo disponible del jurado. Todas las paradas están accesibles a pie desde el núcleo urbano; se sugiere vehículo para los dos extremos de la Senda.</p>
+</section>
 
 <div class="main">
+
 <div class="stats">
-<div class="st"><div class="v">6</div><div class="l">Paradas</div></div>
-<div class="st"><div class="v">~2h30</div><div class="l">Duracion</div></div>
-<div class="st"><div class="v">~4 km</div><div class="l">Recorrido</div></div>
-<div class="st"><div class="v">Baja</div><div class="l">Dificultad</div></div>
+  <div class="st"><div class="v">6</div><div class="l">paradas</div></div>
+  <div class="st"><div class="v">~2h20</div><div class="l">duración</div></div>
+  <div class="st"><div class="v">~4 km</div><div class="l">recorrido</div></div>
+  <div class="st"><div class="v">Baja</div><div class="l">dificultad</div></div>
 </div>
 
 <div class="card">
-<h2>Recorrido propuesto</h2>
-<div class="hl"><strong>Nota:</strong> Itinerario flexible, adaptable al tiempo del jurado. Recorrido parcial con acceso en vehiculo entre zonas distantes. Si disponen de mas tiempo, se puede completar la senda circular (6,9 km, 1h45 adicional).</div>
+  <h2>Recorrido</h2>
+  <div class="callout">
+    <strong>Recorrido flexible.</strong> Itinerario base de 2h20 con posibilidad de ampliar a 4h si el jurado desea completar la Senda circular completa de 6,9 km. Paradas 1 (Iglesia) y 3 (Albergue) tienen espacios cubiertos para cualquier meteorología.
+  </div>
 
-<div class="stop"><div class="num">1</div><h3>Recepcion — Iglesia de San Vicente Martir</h3>
-<div class="badges"><span class="badge badge-time">00:00</span><span class="badge badge-dur">20 min</span></div>
-<p>Punto de encuentro. Bienvenida por Presidente Junta Vecinal y Alcalde.</p>
-<p><strong>Que ver:</strong> Iglesia parroquial (s. XVI-XVII), escultura Zona 1 (Guemes de Cantabria), panel inicio de ruta, mobiliario urbano. Breve presentacion del proyecto y entrega del dossier.</p></div>
+  <div class="stop">
+    <div class="num">01</div>
+    <h3>Recepción — Iglesia de San Vicente Mártir</h3>
+    <div class="badges">
+      <span class="badge badge-time">00:00</span>
+      <span class="badge badge-dur">20 min</span>
+    </div>
+    <p><strong>Punto de encuentro.</strong> Bienvenida por la presidenta de la Junta Vecinal (<em>Begoña de la Fuente Crespo</em>) y el alcalde de Bareyo. Entrega del dossier completo al jurado.</p>
+    <p><strong>Qué ver:</strong> iglesia parroquial documentada desde 1084, retablo mayor de 1677 con las primeras columnas salomónicas de Cantabria por Andrés de Monasterio Bárcena. En la plazoleta adyacente: <em>Zona 1 de la Senda — Escultura Güemes de España</em> + panel interpretativo bilingüe + mobiliario urbano.</p>
+    <p><strong>Hito:</strong> breve presentación del proyecto "Abriendo caminos de amistad" y contexto de los 942 años de historia del pueblo.</p>
+  </div>
 
-<div class="stop"><div class="num">2</div><h3>Palacio de Guemes</h3>
-<div class="badges"><span class="badge badge-time">00:20</span><span class="badge badge-dur">15 min</span><span class="badge badge-key">Vehiculo o a pie (2,8 km)</span></div>
-<p><strong>Que ver:</strong> Palacio regionalista (1915-1920), escultura Zona 2 (Guemes de Argentina / Martin Miguel de Guemes), historia familia Guemes Campero. Vista panoramica del valle.</p></div>
+  <div class="stop">
+    <div class="num">02</div>
+    <h3>El Quejigal — Ermita de San Julián</h3>
+    <div class="badges">
+      <span class="badge badge-time">00:20</span>
+      <span class="badge badge-dur">25 min</span>
+      <span class="badge badge-note">A pie · 500 m</span>
+    </div>
+    <p><strong>Qué ver:</strong> Ermita de San Julián y Nª Sª de la Consolación (siglos XII-XIII), antiguo hospital de peregrinos del Camino de Santiago hasta 1800. Trece canecillos en la fachada, incluido el característico de la bolsa y el bordón peregrino.</p>
+    <p>En el sobrante adyacente de El Quejigal: <em>Zona 4 de la Senda — Escultura Güemes de EE.UU.</em> (Guemes Island, Washington).</p>
+    <p><strong>Hito clave:</strong> presentación del <strong>Centro de Interpretación Digital del Peregrino</strong> que se instalará en el interior de la Ermita — tótem multiidioma (ES · EN · FR · DE · IT), cámara de seguridad, contador de visitas y dashboard para la Junta Vecinal. Intervención exclusivamente en contenidos; sin obra estructural sobre el edificio histórico.</p>
+  </div>
 
-<div class="stop"><div class="num">3</div><h3>Ermita de San Julian</h3>
-<div class="badges"><span class="badge badge-time">00:35</span><span class="badge badge-dur">20 min</span><span class="badge badge-key">A pie (~900 m)</span></div>
-<p><strong>Que ver:</strong> Ermita medieval (s. XII-XIII), antiguo hospital de peregrinos, escultura Zona 3 (Guemes de EEUU). Explicacion del proyecto de Centro de Interpretacion. Restauracion patrimonio.</p></div>
+  <div class="stop">
+    <div class="num">03</div>
+    <h3>Albergue La Cabaña del Abuelo Peuto</h3>
+    <div class="badges">
+      <span class="badge badge-time">00:45</span>
+      <span class="badge badge-dur">30 min</span>
+      <span class="badge badge-key">Momento clave</span>
+      <span class="badge badge-note">Vehículo · 1,2 km</span>
+    </div>
+    <p><strong>La parada más emotiva.</strong> Encuentro con el <em>Padre Ernesto Bustio</em>, cura del pueblo y fundador del albergue en 1999. Sus palabras transmiten la esencia de Güemes: hospitalidad, comunidad, solidaridad.</p>
+    <p><strong>Qué ver:</strong> albergue (más de 50.000 peregrinos acogidos, más de 100 países representados), huertos ecológicos, espacios comunitarios, biblioteca. Explicación del modelo: cero subvenciones públicas, donativo voluntario, 50 voluntarios internacionales al año, cena comunitaria vegetariana diaria.</p>
+    <p><strong>Hito narrativo:</strong> en este albergue, en 2009, Bob (peregrino de Guemes Island) se presentó ante el Padre Ernesto. De aquel encuentro nació el proyecto "Abriendo caminos de amistad" y todo lo que se propone en esta candidatura.</p>
+  </div>
 
-<div class="stop"><div class="num">4</div><h3>Albergue La Cabana del Abuelo Peuto</h3>
-<div class="badges"><span class="badge badge-time">00:55</span><span class="badge badge-dur">30 min</span><span class="badge badge-key">MOMENTO CLAVE</span></div>
-<p><strong>Que ver:</strong> Escultura Zona 4 (Guemes de Canada), el albergue, encuentro con Padre Ernesto Bustio. Experiencia del peregrino, huertos ecologicos, espacios comunitarios.</p>
-<p><strong>Importante:</strong> Esta es la parada mas emotiva. El Padre Ernesto transmite la esencia de Guemes: hospitalidad, comunidad, solidaridad.</p></div>
+  <div class="stop">
+    <div class="num">04</div>
+    <h3>El Portalillo — Las 4 maquetas de 2009</h3>
+    <div class="badges">
+      <span class="badge badge-time">01:15</span>
+      <span class="badge badge-dur">15 min</span>
+      <span class="badge badge-note">A pie · 300 m</span>
+    </div>
+    <p><strong>Qué ver:</strong> las <em>4 maquetas en acero corten</em> ya instaladas que inspiran la candidatura — globo terráqueo (España), gaucho a caballo (Argentina), fachada de iglesia (México), barco de vela (EE.UU.).</p>
+    <p>Explicación del viaje de 2009-2018 con presencia en el paseo de fotografías: visita de la expedición cántabra a General Güemes (Salta), Güémez (Tamaulipas) y Guemes Island (Washington), con recibimiento en cada lugar y cobertura de prensa local.</p>
+    <p><strong>Mensaje:</strong> la Senda no es una invención para la candidatura. Es la escalada monumental de un proyecto que ya existe sobre el terreno desde 2018.</p>
+  </div>
 
-<div class="stop"><div class="num">5</div><h3>Mirador / Punto panoramico</h3>
-<div class="badges"><span class="badge badge-time">01:25</span><span class="badge badge-dur">15 min</span></div>
-<p><strong>Que ver:</strong> Vista panoramica del valle de Guemes y la costa. Contexto paisajistico de toda la senda. Foto de grupo. Explicacion de la conexion costa-interior y el potencial turistico.</p></div>
+  <div class="stop">
+    <div class="num">05</div>
+    <h3>Zonas 2 y 3 — Plazoletas de Argentina y México</h3>
+    <div class="badges">
+      <span class="badge badge-time">01:30</span>
+      <span class="badge badge-dur">25 min</span>
+      <span class="badge badge-note">Vehículo + a pie</span>
+    </div>
+    <p><strong>Qué ver:</strong> recorrido breve por las otras dos plazoletas de la Senda.</p>
+    <ul>
+      <li><strong>Plazoleta de entrada por Galizano</strong> — <em>Zona 2, Güemes de Argentina</em>. Homenaje al héroe nacional argentino Martín Miguel de Güemes. Primera imagen del pueblo para quien llega desde el sur.</li>
+      <li><strong>Parque dirección Meruelo</strong> — <em>Zona 3, Güemes de México</em>. Homenaje al virrey Juan Francisco de Güemes y al municipio de Güémez (Tamaulipas) fundado en 1749. Conexión natural con el ramal del Camino hacia Galizano.</li>
+    </ul>
+    <p><strong>Contexto:</strong> explicación del diseño de las 4 esculturas y del material (acero corten: rústico, duradero, evoca la herrería tradicional cántabra y a la vez el arte contemporáneo).</p>
+  </div>
 
-<div class="stop"><div class="num">6</div><h3>Cierre — Punto de partida</h3>
-<div class="badges"><span class="badge badge-time">01:40</span><span class="badge badge-dur">20-30 min</span></div>
-<p>Regreso al punto de inicio. Palabras de cierre. Turno de preguntas con el jurado. Refrigerio ligero con productos locales. Entrega de documentacion adicional.</p></div>
+  <div class="stop">
+    <div class="num">06</div>
+    <h3>Cierre — Plazoleta de la Iglesia</h3>
+    <div class="badges">
+      <span class="badge badge-time">01:55</span>
+      <span class="badge badge-dur">25 min</span>
+    </div>
+    <p><strong>Regreso al punto de partida</strong> junto a la Iglesia de San Vicente. Palabras de cierre por parte de la presidenta de la Junta Vecinal.</p>
+    <p><strong>Refrigerio ligero con productos locales</strong> — quesos de pasiego, anchoas de Santoña, sobaos, sidra cántabra. Posibilidad de encuentro informal con vecinos voluntarios (los que se organizan desde abril 2026 para el mantenimiento del pueblo).</p>
+    <p><strong>Turno de preguntas</strong> con el jurado. Entrega opcional del <em>libro-dossier impreso con las 4 fichas de los pueblos hermanos</em> (Güémez, General Güemes, Guemes Island) y el QR que lleva al sitio web con toda la información en 5 idiomas.</p>
+  </div>
 </div>
 
 <div class="card">
-<h2>Recomendaciones</h2>
-<ul>
-<li><strong>Mejor hora:</strong> Manana (10:00-12:30) para mejor luz y fotografias.</li>
-<li><strong>Calzado:</strong> Comodo, la ruta es llana pero de camino rural.</li>
-<li><strong>Clima:</strong> Si llueve, las paradas 1 (iglesia) y 4 (albergue) tienen espacios cubiertos.</li>
-<li><strong>Dossiers:</strong> Tener preparados dossiers impresos para cada miembro del jurado.</li>
-<li><strong>Vehiculo:</strong> Disponer de vehiculo para el tramo 1-2 (2,8 km) si el jurado prefiere no caminar.</li>
-<li><strong>Agua:</strong> Llevar agua, especialmente en verano.</li>
-</ul>
+  <h2>Recomendaciones prácticas</h2>
+  <ul>
+    <li><strong>Mejor hora:</strong> mañana (10:00–12:30). Mejor luz para fotografías y mejor disponibilidad del Padre Ernesto antes de las llegadas de peregrinos.</li>
+    <li><strong>Calzado:</strong> cómodo, aunque toda la ruta es llana, son caminos rurales y plazoletas en obra durante la ejecución.</li>
+    <li><strong>Clima:</strong> si llueve, las paradas 1 (iglesia), 2 (ermita) y 3 (albergue) tienen espacios cubiertos. La explicación del Centro Digital se puede hacer dentro de la propia Ermita.</li>
+    <li><strong>Documentos:</strong> tener preparados dossiers impresos para cada miembro del jurado + memoria económica + dossier histórico + itinerario (este documento) + tarjeta con QR al sitio.</li>
+    <li><strong>Vehículo:</strong> disponer de un coche o furgoneta para los tramos 2→3 y 4→5 (desplazamientos cortos entre zonas).</li>
+    <li><strong>Vecinos:</strong> convocar voluntariamente a 10-15 vecinos para el refrigerio de cierre. Es un elemento narrativo fuerte — demuestra la implicación del pueblo.</li>
+    <li><strong>Ampliación:</strong> si el jurado dispone de tiempo extra, se puede hacer la Senda circular completa de 6,9 km (1h45 adicional a pie), o una visita al Palacio de Güemes (1915–1920).</li>
+  </ul>
 </div>
+
 </div>
-<div class="footer">Itinerario del Jurado · Junta Vecinal de Guemes · Municipio de Bareyo · Cantabria</div>
-<div class="toast" id="toast"></div>
-<script>async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Guemes 2026 — Itinerario Jurado',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}</script>
+
+<footer class="footer">
+  <strong>Abriendo caminos de amistad</strong> — Itinerario del jurado · Candidatura Pueblo de Cantabria 2026<br>
+  Junta Vecinal de Güemes · Ayuntamiento de Bareyo · Cantabria
+</footer>
+
 </body>
 </html>

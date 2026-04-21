@@ -3,235 +3,378 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Memoria de Actuacion — Guemes 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Memoria de actuación — Güemes 2026</title>
+<meta name="description" content="Senda de las Estatuas + Abriendo caminos de amistad · Documento central de la candidatura Güemes Pueblo de Cantabria 2026">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
 <style>
-:root{--g9:#0d1f12;--g8:#14532d;--g7:#1a3c34;--g6:#1b4332;--g5:#2d6a4f;--g4:#40916c;--g3:#52b788;--g2:#95d5b2;--g1:#d8f3dc;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x3:#d1d5db;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);--shl:0 10px 15px -3px rgba(0,0,0,.1)}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.6;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}
-.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
-.nav a svg{width:16px;height:16px}
-.nav .title{font-size:.82rem;color:var(--x5);font-weight:500}
-.nav .actions{display:flex;gap:.5rem}
-.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem;transition:all .15s}
-.nav .actions button:hover{background:var(--x2);color:var(--x9)}
-.hero{background:linear-gradient(160deg,var(--g9) 0%,var(--g7) 35%,var(--g5) 100%);color:var(--w);padding:3rem 2rem 2.5rem;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--go4),transparent)}
-.hero-inner{max-width:900px;margin:0 auto}
-.hero .pre{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--go3);margin-bottom:.75rem}
-.hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:.4rem}
-.hero h1 span{color:var(--go4)}
-.hero .sub{font-size:.95rem;font-weight:300;color:var(--g2);margin-bottom:1.5rem}
-.hero-stats{display:flex;flex-wrap:wrap;gap:.5rem}
-.hs{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.45rem .8rem;display:flex;align-items:center;gap:.45rem;backdrop-filter:blur(4px)}
-.hs .v{font-size:1.1rem;font-weight:800;color:var(--w)}
-.hs .l{font-size:.65rem;color:var(--g2);text-transform:uppercase;letter-spacing:.04em;font-weight:500;line-height:1.2}
-.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:2rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
-.card h2{font-size:1.05rem;font-weight:700;color:var(--g6);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--go3);text-transform:uppercase;letter-spacing:.04em}
-.card h3{font-size:.92rem;font-weight:700;color:var(--g5);margin:1.25rem 0 .5rem}
-.card p{color:var(--x6);margin-bottom:.6rem;font-size:.88rem}
-.card ul,.card ol{margin:.4rem 0 .8rem 1.4rem;color:var(--x6);font-size:.88rem}
-.card li{margin-bottom:.3rem}
-.hl{background:var(--go1);border-left:3px solid var(--go4);padding:.8rem 1rem;border-radius:0 8px 8px 0;font-size:.85rem;color:#6b5e4a;margin:1rem 0}
-.hl strong{color:var(--g6)}
-.hlg{background:var(--g0);border-left:3px solid var(--g5);padding:.8rem 1rem;border-radius:0 8px 8px 0;font-size:.85rem;color:#2d5040;margin:1rem 0}
-.zone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1rem 0}
-.zone{background:var(--x0);border-radius:8px;padding:1rem;border-left:3px solid var(--g5);position:relative}
-.zone .num{position:absolute;top:-6px;left:10px;background:var(--g6);color:var(--w);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800}
-.zone h4{font-size:.85rem;font-weight:700;color:var(--x9);margin-bottom:.1rem;padding-top:.15rem}
-.zone .zd{font-size:.75rem;color:var(--x5);line-height:1.4}
-.zone .zs{margin-top:.35rem;font-size:.7rem;font-weight:600;color:var(--go4);text-transform:uppercase;letter-spacing:.03em}
-.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1rem 0}
-.dg-item{background:var(--g0);border-radius:8px;padding:.75rem;text-align:center}
-.dg-item .v{font-size:1.2rem;font-weight:800;color:var(--g6)}
-.dg-item .l{font-size:.68rem;color:var(--x5);text-transform:uppercase;letter-spacing:.04em}
-table{width:100%;border-collapse:collapse;margin:.75rem 0;font-size:.85rem}
-th{background:var(--g6);color:var(--w);padding:.5rem .7rem;text-align:left;font-weight:600;font-size:.78rem}
-td{padding:.45rem .7rem;border-bottom:1px solid var(--x2);color:var(--x6)}
-td:last-child,th:last-child{text-align:right}
-tr:nth-child(even){background:var(--x0)}
-.total td{font-weight:700;color:var(--g6);border-top:2px solid var(--g6);background:var(--g0)}
-.elev{height:40px;background:var(--g0);position:relative;overflow:hidden;border-radius:0 0 var(--r) var(--r);margin:-2rem -2rem 0;margin-top:1rem}
-.elev svg{position:absolute;bottom:0;width:100%;height:100%}
-.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;font-weight:500;box-shadow:var(--shl);opacity:0;transition:all .3s;z-index:1000}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-@media(max-width:768px){.hero{padding:2rem 1.25rem}.main{padding:1.25rem 1rem}.zone-grid{grid-template-columns:1fr}.card{padding:1.25rem}}
-@media print{.nav{position:static}.hero{padding:1.5rem}.card{box-shadow:none;border:1px solid #ddd}}
+  :root {
+    --bg-deep: #0a1120;
+    --bg-navy: #101a30;
+    --bg-card: #141f38;
+    --corten: #c89450;
+    --corten-br: #f4c77b;
+    --corten-dk: #7a5a30;
+    --text: #e8e6e1;
+    --text-dim: #b8b5af;
+    --text-mut: #8a8680;
+    --line: rgba(244, 199, 123, 0.22);
+    --line-soft: rgba(232, 230, 225, 0.08);
+    --ok: #7bc6f4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-deep); color: var(--text);
+    font-family: 'Satoshi', system-ui, sans-serif;
+    font-weight: 300; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.15; }
+  em { font-style: italic; color: var(--corten-br); font-weight: 500; }
+  strong { color: var(--text); font-weight: 500; }
+  a { color: var(--corten-br); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,17,32,0.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: 'Instrument Serif', serif; font-style: italic; font-size: 16px; }
+  .nav .brand small { font-family: 'Satoshi', sans-serif; font-style: normal; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--corten-br); font-weight: 500; margin-left: 10px; }
+  .nav .nav-center { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-mut); font-weight: 500; }
+  .nav .actions { display: flex; gap: 8px; }
+  .nav .actions button { background: transparent; border: 1px solid var(--line); color: var(--text-dim); padding: 7px 14px; border-radius: 2px; font-family: 'Satoshi', sans-serif; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .nav .actions button:hover { background: var(--corten-br); color: var(--bg-deep); border-color: var(--corten-br); }
+
+  .hero {
+    padding: 80px 28px 60px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .hero .eyebrow { font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--corten-br); font-weight: 500; margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(44px, 6vw, 80px); font-style: italic; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .hero .sub { font-size: 17px; color: var(--text-dim); max-width: 720px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 2px; margin-top: 40px; background: var(--line-soft); }
+  .hs { background: var(--bg-navy); padding: 20px 16px; border-top: 3px solid var(--corten-dk); }
+  .hs .v { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 28px; color: var(--corten-br); line-height: 1; }
+  .hs .l { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mut); margin-top: 6px; font-weight: 500; }
+
+  .main { max-width: 1000px; margin: 0 auto; padding: 0 28px 80px; }
+
+  .card { background: var(--bg-navy); border: 1px solid var(--line-soft); border-radius: 2px; padding: 40px 36px; margin-bottom: 24px; }
+  .card > h2 { font-size: 30px; font-style: italic; padding-bottom: 18px; margin-bottom: 22px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 12px; }
+  .card > h2 .num { font-family: 'Satoshi', sans-serif; font-style: normal; font-weight: 500; font-size: 12px; letter-spacing: 0.3em; color: var(--corten); text-transform: uppercase; white-space: nowrap; }
+  h3 { font-size: 19px; color: var(--text); font-style: italic; margin: 26px 0 10px; }
+  h4 { font-size: 15px; color: var(--text); font-family: 'Satoshi', sans-serif; font-weight: 500; font-style: normal; letter-spacing: 0.02em; margin-bottom: 4px; }
+
+  .card p { color: var(--text-dim); margin-bottom: 12px; font-size: 14.5px; }
+  .card ul { margin-left: 20px; margin-bottom: 14px; }
+  .card li { color: var(--text-dim); margin-bottom: 8px; font-size: 14.5px; }
+
+  .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2px; margin: 14px 0; background: var(--line-soft); }
+  .dg-item { background: var(--bg-card); padding: 16px 18px; }
+  .dg-item .v { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: var(--text); line-height: 1; }
+  .dg-item .l { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mut); margin-top: 6px; font-weight: 500; }
+
+  .zone-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin: 16px 0; background: var(--line-soft); }
+  @media (max-width: 700px) { .zone-grid { grid-template-columns: 1fr; } }
+  .zone { background: var(--bg-card); padding: 22px 24px; border-top: 3px solid var(--corten-dk); }
+  .zone .num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 32px; color: var(--corten-br); line-height: 1; display: block; margin-bottom: 8px; }
+  .zone h4 { font-size: 17px; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+  .zone .zd { font-size: 13px; color: var(--text-mut); line-height: 1.5; }
+  .zone .zs { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); font-size: 11px; color: var(--corten-br); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
+  th { background: var(--bg-card); color: var(--corten-br); padding: 10px 14px; text-align: left; font-weight: 500; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-family: 'Satoshi', sans-serif; border-bottom: 1px solid var(--line); }
+  th:last-child, td:last-child { text-align: right; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--line-soft); color: var(--text-dim); }
+  tr:last-child td { border-bottom: none; }
+  tr.subtotal td { font-weight: 500; color: var(--text); background: rgba(200, 148, 80, 0.08); border-top: 1px solid var(--line); }
+  tr.total td { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 17px; color: var(--corten-br); background: var(--bg-card); border: 1px solid var(--corten-dk); padding: 14px; }
+
+  .callout { border-left: 2px solid var(--corten-br); padding: 14px 20px; margin: 20px 0; font-size: 14px; color: var(--text-dim); background: rgba(200, 148, 80, 0.05); }
+  .callout strong { color: var(--corten-br); font-weight: 500; }
+  .callout.blue { border-left-color: var(--ok); background: rgba(123, 198, 244, 0.06); }
+  .callout.blue strong { color: var(--ok); }
+
+  .pullquote {
+    max-width: 760px; margin: 30px auto;
+    padding: 26px 30px 26px 44px;
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 22px; line-height: 1.45; color: var(--text);
+    border-left: 2px solid var(--corten-br);
+    position: relative;
+  }
+  .pullquote cite { display: block; margin-top: 14px; font-family: 'Satoshi', sans-serif; font-style: normal; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--corten-br); font-weight: 500; }
+
+  .footer { text-align: center; padding: 60px 28px 40px; border-top: 1px solid var(--line-soft); color: var(--text-mut); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .footer strong { color: var(--corten-br); font-weight: 500; }
+
+  @media print {
+    @page { margin: 14mm; size: A4; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    .nav { display: none; }
+    .hero { padding: 0 0 30px; }
+    .main { padding: 0; }
+    .card { break-inside: avoid; margin-bottom: 16px; padding: 26px 24px; }
+    .zone-grid .zone { break-inside: avoid; }
+  }
+  @media (max-width: 720px) {
+    .nav .nav-center { display: none; }
+    .hero { padding: 50px 20px 40px; }
+    .main { padding: 0 18px 60px; }
+    .card { padding: 26px 22px; }
+    .card > h2 { flex-direction: column; gap: 4px; font-size: 22px; align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
+
 <div class="nav">
-<a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Guemes 2026</a>
-<span class="title">Memoria de Actuacion</span>
-<div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div>
+  <a href="/" class="brand">Güemes <small>Memoria de actuación</small></a>
+  <div class="nav-center">Candidatura Pueblo de Cantabria 2026</div>
+  <div class="actions">
+    <button onclick="window.print()">↓ Imprimir</button>
+    <button onclick="history.back()">← Volver</button>
+  </div>
 </div>
 
-<div class="hero">
-<div class="hero-inner">
-<div class="pre">Documento central de la candidatura</div>
-<h1>Senda de las Estatuas<span>.</span></h1>
-<div class="sub">Memoria de Actuacion — Premio Pueblo de Cantabria 2026</div>
-<div class="hero-stats">
-<div class="hs"><span class="v">6,9</span><span class="l">Km ruta</span></div>
-<div class="hs"><span class="v">4</span><span class="l">Zonas</span></div>
-<div class="hs"><span class="v">4</span><span class="l">Esculturas</span></div>
-<div class="hs"><span class="v">~1h45</span><span class="l">A pie</span></div>
-<div class="hs"><span class="v">60K</span><span class="l">EUR</span></div>
-</div>
-</div>
-</div>
+<section class="hero">
+  <div class="eyebrow">Documento central · Memoria de actuación</div>
+  <h1>Senda de las Estatuas<br>de Güemes.</h1>
+  <p class="sub">Recorrido circular de 6,9 km con 4 esculturas en acero corten — una por cada Güemes del mundo. Parte del programa <em>"Abriendo caminos de amistad"</em>, proyecto real iniciado en 2009 con maquetas ya instaladas en El Portalillo.</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="v">6,9</div><div class="l">km ruta</div></div>
+    <div class="hs"><div class="v">4</div><div class="l">esculturas</div></div>
+    <div class="hs"><div class="v">~1h45</div><div class="l">a pie</div></div>
+    <div class="hs"><div class="v">14</div><div class="l">km Camino en Bareyo</div></div>
+    <div class="hs"><div class="v">160 K €</div><div class="l">presupuesto</div></div>
+  </div>
+</section>
 
 <div class="main">
 
 <div class="card">
-<h2>1. Datos generales</h2>
-<div class="data-grid">
-<div class="dg-item"><div class="v">Guemes</div><div class="l">Pueblo</div></div>
-<div class="dg-item"><div class="v">Bareyo</div><div class="l">Municipio</div></div>
-<div class="dg-item"><div class="v">Cantabria</div><div class="l">Comunidad</div></div>
-<div class="dg-item"><div class="v">301</div><div class="l">Habitantes (INE 2024)</div></div>
-</div>
-<p><strong>Entidad solicitante:</strong> Junta Vecinal de Guemes</p>
-<p><strong>Requisito &lt;1.000 habitantes:</strong> Cumplido (301 hab.)</p>
-<p><strong>Actuacion principal:</strong> Senda de las Estatuas de Guemes — recorrido circular de 6,9 km con 4 zonas de actuacion patrimonial y escultorica.</p>
-</div>
-
-<div class="card">
-<h2>2. Justificacion</h2>
-<p>Guemes es un pueblo de 301 habitantes con activos patrimoniales y humanos excepcionales que permanecen invisibles para la mayoria de visitantes de la comarca:</p>
-<ul>
-<li><strong>942 anos de historia documentada</strong> (primera mencion en 1084)</li>
-<li><strong>Camino de Santiago del Norte</strong> (UNESCO 2015, etapa 12 Guemes-Santander)</li>
-<li><strong>Albergue La Cabana del Abuelo Peuto:</strong> +50.000 peregrinos de +100 paises, sin subvenciones, ~50 voluntarios/ano. Mejor valorado del Camino Norte.</li>
-<li><strong>Padre Ernesto Bustio</strong> (1937-): fundador del albergue, referente de hospitalidad</li>
-<li><strong>Patrimonio:</strong> Iglesia s. XVI-XVII, Ermita s. XII-XIII (hospital peregrinos), Palacio 1915</li>
-<li><strong>Personajes ilustres:</strong> Virrey de Mexico (1681), heroe nacional argentino (1785-1821)</li>
-</ul>
-<div class="hl"><strong>El reto:</strong> 250.000 personas visitan cada ano el Faro de Ajo (a 5 km) sin saber que Guemes existe. Esta actuacion transforma al pueblo en un destino accesible conectado con la costa a traves de arte, patrimonio y tecnologia.</div>
+  <h2><span class="num">01</span><span>Datos generales</span></h2>
+  <div class="data-grid">
+    <div class="dg-item"><div class="v">Güemes</div><div class="l">Pueblo</div></div>
+    <div class="dg-item"><div class="v">Bareyo</div><div class="l">Municipio</div></div>
+    <div class="dg-item"><div class="v">Cantabria</div><div class="l">Comunidad</div></div>
+    <div class="dg-item"><div class="v">301</div><div class="l">habitantes INE 2024</div></div>
+  </div>
+  <p><strong>Entidad solicitante:</strong> Junta Vecinal de Güemes · <strong>Presidenta:</strong> Begoña de la Fuente Crespo</p>
+  <p><strong>Requisito &lt; 1.000 habitantes:</strong> cumplido (301 hab.)</p>
+  <p><strong>Nombre del proyecto:</strong> <em>"Abriendo caminos de amistad"</em> — Senda de las Estatuas de Güemes y puesta en valor de los 14 km del Camino de Santiago que atraviesan el municipio de Bareyo.</p>
 </div>
 
 <div class="card">
-<h2>3. Descripcion de la actuacion</h2>
-<p>La <strong>Senda de las Estatuas de Guemes</strong> es un recorrido circular de 6,9 km por la Ruta 4 de Bareyo que conecta los 4 hitos patrimoniales del pueblo mediante <strong>4 plazoletas tematicas</strong>.</p>
-<p>Cada plazoleta incluye:</p>
-<ul>
-<li><strong>1 escultura de acero corten</strong> representando uno de los 4 Guemes del mundo</li>
-<li><strong>Mobiliario urbano:</strong> 2 bancos de madera + 1 mesa merendero + 1 papelera</li>
-<li><strong>Panel interpretativo</strong> con historia del lugar y codigo QR</li>
-<li><strong>Codigo QR</strong> enlazando a contenido digital (audioguia, video, retos de gamificacion)</li>
-</ul>
-<div class="hlg"><strong>Concepto esculturas — Los 4 Guemes del mundo:</strong> Las esculturas representan los 4 puntos cardinales y los 4 lugares del mundo que llevan el nombre de Guemes. Iniciativa promovida por el Padre Ernesto Bustio. Guemes no es solo un pueblo: es una idea global de hospitalidad.</div>
+  <h2><span class="num">02</span><span>Justificación</span></h2>
+  <p>Güemes, pueblo de 301 habitantes en el municipio de Bareyo, reúne una combinación excepcional de patrimonio, hospitalidad peregrina y proyección internacional que permanece invisible para la mayoría de los visitantes de la comarca.</p>
+
+  <h3>Activos únicos del pueblo</h3>
+  <ul>
+    <li><strong>942 años de historia documentada</strong>: primera mención en el año <em>1084</em> (Cartulario de Santa María de Puerto).</li>
+    <li><strong>Camino de Santiago del Norte</strong>: <strong>14 km</strong> del Camino atraviesan el municipio de Bareyo (Etapa 12 Güemes–Santander, Patrimonio de la Humanidad UNESCO 2015).</li>
+    <li><strong>Albergue La Cabaña del Abuelo Peuto</strong>: +50.000 peregrinos de +100 países, sin subvenciones públicas, ~50 voluntarios internacionales al año. <em>Mejor valorado del Camino del Norte.</em></li>
+    <li><strong>Padre Ernesto Bustio</strong> (1937): cura del pueblo, fundador del albergue en 1999, referente internacional de hospitalidad.</li>
+    <li><strong>Los 4 Güemes del mundo</strong>: proyecto real iniciado en 2009 — 4 pueblos en 3 continentes llevan este nombre (España, México, Argentina, EE.UU.) y mantienen hermanamiento activo.</li>
+    <li><strong>Canteros y artífices históricos</strong>: durante 5 siglos, Güemes exportó maestros de obra que levantaron catedrales en Santiago, Oviedo, Segovia, Pamplona y Ciudad Rodrigo.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>El reto:</strong> 250.000 personas visitan cada año el Faro de Ajo (a 5 km de Güemes) sin saber que el pueblo existe. Esta actuación transforma a Güemes en un destino visible, conectado con la costa a través de arte, patrimonio y hospitalidad digital.
+  </div>
 </div>
 
 <div class="card">
-<h2>4. Zonas de actuacion</h2>
-<div class="zone-grid">
-<div class="zone"><div class="num">1</div><h4>Iglesia de San Vicente Martir</h4><div class="zd">s. XVI-XVII · Km 0,0 · Punto de inicio · Fundacion monacal s. VIII</div><div class="zs">Escultura: Guemes de Cantabria</div></div>
-<div class="zone"><div class="num">2</div><h4>Palacio de Guemes</h4><div class="zd">1915-1920 · Km 2,8 · Regionalista · Familia Guemes Campero</div><div class="zs">Escultura: Guemes de Argentina</div></div>
-<div class="zone"><div class="num">3</div><h4>Ermita de San Julian</h4><div class="zd">s. XII-XIII · Km 3,7 · Hospital peregrinos medieval</div><div class="zs">Escultura: Guemes de EEUU</div></div>
-<div class="zone"><div class="num">4</div><h4>Albergue Abuelo Peuto</h4><div class="zd">1999 · Km 5,6 · Padre Ernesto · +50K peregrinos</div><div class="zs">Escultura: Guemes de Canada</div></div>
-</div>
-<div class="elev"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path d="M0,35 Q50,30 100,28 Q200,20 250,22 Q350,15 400,18 Q500,10 550,12 Q650,8 700,15 Q800,22 850,20 Q950,28 1000,35 L1000,40 L0,40 Z" fill="rgba(45,106,79,0.12)"/><path d="M0,35 Q50,30 100,28 Q200,20 250,22 Q350,15 400,18 Q500,10 550,12 Q650,8 700,15 Q800,22 850,20 Q950,28 1000,35" fill="none" stroke="rgba(45,106,79,0.3)" stroke-width="1.5"/><circle cx="0" cy="35" r="3" fill="#2d6a4f"/><circle cx="350" cy="15" r="3" fill="#2d6a4f"/><circle cx="550" cy="12" r="3" fill="#2d6a4f"/><circle cx="800" cy="22" r="3" fill="#2d6a4f"/></svg></div>
+  <h2><span class="num">03</span><span>Actuación principal — La Senda</span></h2>
+  <p>La <strong>Senda de las Estatuas de Güemes</strong> es un recorrido circular de 6,9 km (Ruta 4 de Bareyo) que une los 4 hitos patrimoniales del pueblo mediante <strong>4 plazoletas temáticas</strong>. Cada plazoleta incluye una escultura en acero corten que representa uno de los 4 Güemes del mundo, mobiliario urbano, panel interpretativo bilingüe y código QR multiidioma.</p>
+
+  <h3>Elementos de cada plazoleta</h3>
+  <ul>
+    <li>1 escultura de acero corten (diseño local, ejecución en taller cántabro)</li>
+    <li>2 bancos de madera tratada + 1 mesa merendero + 1 papelera rural</li>
+    <li>Panel interpretativo bilingüe (ES + EN) con coordenadas, historia y vínculo con el pueblo hermano</li>
+    <li>Código QR acero inoxidable enlazando a contenido digital en <em>ES · EN · FR · DE · IT</em></li>
+    <li>Urbanización de la plazoleta: desbroce, pavimento, accesos, ajardinamiento con especies autóctonas</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Concepto aprobado:</strong> "Abriendo caminos de amistad". Las 4 maquetas ya están instaladas en El Portalillo de Güemes desde el viaje de 2009. La candidatura las escala a esculturas monumentales distribuidas a lo largo de la ruta circular.
+  </div>
 </div>
 
 <div class="card">
-<h2>5. Patrimonio</h2>
-<h3>Iglesia de San Vicente Martir (s. XVI-XVII)</h3>
-<p>Templo parroquial de origen monacal (s. VIII). Arquitectura clasicista con elementos goticos tardios. Retablo mayor barroco. Centro espiritual del pueblo durante mas de mil anos.</p>
-<h3>Palacio de Guemes (1915-1920)</h3>
-<p>Edificio regionalista vinculado a la familia Guemes Campero. Testimonio de la arquitectura indiana y de la prosperidad de las familias trasmeranas. Conexion directa con el Virrey de Mexico y el heroe argentino.</p>
-<h3>Ermita de San Julian (s. XII-XIII)</h3>
-<p>Antiguo hospital de peregrinos del Camino de Santiago. Mas de 800 anos de hospitalidad documentada. Proyecto futuro: Centro de Interpretacion del Camino de Santiago en Guemes.</p>
-<h3>Albergue La Cabana del Abuelo Peuto (1999)</h3>
-<p>Fundado por el Padre Ernesto Bustio. Mas de 50.000 peregrinos acogidos de mas de 100 paises. Sin subvenciones publicas. ~50 voluntarios internacionales al ano. Cena comunitaria vegetariana cada noche. Charlas culturales. Modelo de turismo solidario reconocido internacionalmente.</p>
+  <h2><span class="num">04</span><span>Las 4 zonas de la Senda</span></h2>
+  <p>Ubicaciones aprobadas por el alcalde y por la Junta Vecinal (reunión vecinal del 19 de abril de 2026):</p>
+  <div class="zone-grid">
+    <div class="zone">
+      <span class="num">1</span>
+      <h4>Centro del pueblo — junto a la Iglesia de San Vicente</h4>
+      <div class="zd">Coordenadas 43.4557° N, 3.6369° O. Plazoleta principal de acceso al núcleo urbano. Referencia geográfica del pueblo.</div>
+      <div class="zs">Escultura: Güemes de España</div>
+    </div>
+    <div class="zone">
+      <span class="num">2</span>
+      <h4>Entrada del pueblo por Galizano</h4>
+      <div class="zd">Plazoleta grande a la entrada sur. Primer punto de bienvenida al llegar desde Galizano por la CA-443.</div>
+      <div class="zs">Escultura: Güemes de Argentina</div>
+    </div>
+    <div class="zone">
+      <span class="num">3</span>
+      <h4>Parque dirección Meruelo</h4>
+      <div class="zd">Plazoleta en dirección al valle de Meruelo. Conexión natural con el paso del Camino de Santiago hacia Galizano.</div>
+      <div class="zs">Escultura: Güemes de México (Güémez, Tamaulipas)</div>
+    </div>
+    <div class="zone">
+      <span class="num">4</span>
+      <h4>El Quejigal — junto a la Ermita de San Julián</h4>
+      <div class="zd">Sobrante cercano a la Ermita, junto al futuro Centro de Interpretación Digital del Peregrino.</div>
+      <div class="zs">Escultura: Güemes de EE.UU. (Guemes Island, Washington)</div>
+    </div>
+  </div>
 </div>
 
 <div class="card">
-<h2>6. Personajes ilustres</h2>
-<div class="zone-grid">
-<div class="zone" style="border-color:var(--go4)"><h4>Padre Ernesto Bustio</h4><div class="zd">1937 - presente · Fundador del albergue. Referente de hospitalidad en el Camino de Santiago del Norte.</div></div>
-<div class="zone" style="border-color:var(--go4)"><h4>Juan Fco. de Guemes y Horcasitas</h4><div class="zd">1681 · 1er Conde de Revillagigedo. Virrey de Nueva Espana (Mexico). Natural de Guemes.</div></div>
-<div class="zone" style="border-color:var(--go4)"><h4>Martin Miguel de Guemes</h4><div class="zd">1785-1821 · Heroe nacional argentino. Descendiente de la familia Guemes de Cantabria. Fiesta nacional 17 junio.</div></div>
-<div class="zone" style="border-color:var(--go4)"><h4>Canteros de Trasmiera</h4><div class="zd">s. XVI-XVII · Familia Guemes Campero. Maestros de obra que construyeron patrimonio en toda Cantabria.</div></div>
-</div>
+  <h2><span class="num">05</span><span>Los 4 Güemes del mundo</span></h2>
+  <p>El apellido Güemes tiene su origen toponímico en este mismo valle. Tres lugares del planeta llevan hoy este nombre por vínculo histórico con la familia cántabra de los Güemes. La candidatura los conecta por primera vez en una ruta monumental.</p>
+
+  <table>
+    <tr><th>País</th><th>Lugar</th><th>Desde</th><th>Población</th><th>Distancia</th></tr>
+    <tr><td>🇪🇸 España</td><td>Güemes, Bareyo (Cantabria)</td><td>1084</td><td>301 hab.</td><td>—</td></tr>
+    <tr><td>🇦🇷 Argentina</td><td>General Güemes, Salta</td><td>1888</td><td>56.948 hab.</td><td>10.400 km</td></tr>
+    <tr><td>🇲🇽 México</td><td>Güémez, Tamaulipas</td><td>1749</td><td>1.731 hab.</td><td>8.750 km</td></tr>
+    <tr><td>🇺🇸 EE.UU.</td><td>Guemes Island, Washington</td><td>1791</td><td>≈600 hab.</td><td>8.100 km</td></tr>
+  </table>
+
+  <h3>El viaje que dio origen al proyecto</h3>
+  <p>En <em>2009</em>, un peregrino estadounidense llamado <strong>Bob</strong> llegó al Albergue La Cabaña del Abuelo Peuto. Contó que procedía de una isla llamada Güemes, en el estado de Washington. La coincidencia inesperada llevó al cura Ernesto Bustio a investigar — y descubrió otros dos Güemes más, en Argentina y México.</p>
+  <p>De aquel hallazgo nació un viaje real, organizado con el apoyo de la <strong>Consejería de Cultura del Gobierno de Cantabria</strong>, que llevó una expedición cántabra a los tres pueblos hermanos. A la vuelta, en El Portalillo de Güemes se instalaron las 4 maquetas en acero corten bajo el título <em>"Abriendo caminos de amistad"</em>.</p>
+
+  <div class="pullquote">
+    Bienvenidos de Güemes a Güemes.
+    <cite>— Cartel que recibió a la expedición cántabra en Guemes Island, 2018</cite>
+  </div>
 </div>
 
 <div class="card">
-<h2>7. Camino de Santiago</h2>
-<p>Guemes se situa en la <strong>Etapa 12 del Camino del Norte</strong> (Guemes-Santander), inscrito como Patrimonio de la Humanidad por la UNESCO en 2015.</p>
-<div class="data-grid">
-<div class="dg-item"><div class="v">UNESCO</div><div class="l">2015</div></div>
-<div class="dg-item"><div class="v">Etapa 12</div><div class="l">Guemes-Santander</div></div>
-<div class="dg-item"><div class="v">5.000</div><div class="l">Firmas internacionales (2014-15)</div></div>
-<div class="dg-item"><div class="v">+100</div><div class="l">Paises representados</div></div>
-</div>
-<p>En 2014-2015, la comunidad recogio mas de 5.000 firmas internacionales para mantener el trazado oficial del Camino por Guemes, demostrando el apoyo global al pueblo y su albergue.</p>
+  <h2><span class="num">06</span><span>Patrimonio de Güemes</span></h2>
+
+  <h3>Iglesia de San Vicente Mártir <span style="font-size:13px;color:var(--text-mut);font-style:normal;">(s. XI–XVII)</span></h3>
+  <p>Documentada desde 1084. Edificio de cabecera poligonal y una nave con tres tramos, bóveda de crucería. El retablo mayor (1677) por Andrés de Monasterio Bárcena incorpora las <strong>primeras columnas salomónicas de Cantabria</strong>. Centro espiritual del pueblo durante más de mil años.</p>
+
+  <h3>Ermita de San Julián y Nª Sª de la Consolación <span style="font-size:13px;color:var(--text-mut);font-style:normal;">(s. XII–XIII)</span></h3>
+  <p>Antiguo hospital de peregrinos del Camino de Santiago. Acogió a viajeros desde el siglo XIV hasta su cierre administrativo en 1800 (Real Cédula de 1798). Su función de hospitalidad es hoy continuada por el Albergue La Cabaña del Abuelo Peuto (1999) — el sucesor directo de aquel hospital medieval.</p>
+
+  <div class="callout blue">
+    <strong>Nuevo uso propuesto:</strong> la Ermita acogerá el <em>Centro de Interpretación Digital del Peregrino</em> (tótem multiidioma, cámara de seguridad, contador de visitas, dashboard para la Junta Vecinal). Intervención exclusivamente con contenido y dispositivos — <em>sin obra estructural</em> sobre el edificio.
+  </div>
+
+  <h3>Palacio de Güemes <span style="font-size:13px;color:var(--text-mut);font-style:normal;">(1915–1920)</span></h3>
+  <p>Casa regionalista de estilo Rucabado. Testimonio de la arquitectura indiana y de la prosperidad de las familias trasmeranas del apellido Güemes Campero. Conexión visual con los 4 Güemes del mundo.</p>
+
+  <h3>Albergue La Cabaña del Abuelo Peuto <span style="font-size:13px;color:var(--text-mut);font-style:normal;">(1999)</span></h3>
+  <p>Fundado por el Padre Ernesto Bustio a sus expensas. Más de <strong>50.000 peregrinos</strong> acogidos de <strong>más de 100 países</strong>. Sin subvenciones públicas. ~50 voluntarios internacionales al año. Cena comunitaria vegetariana cada noche, charlas culturales, biblioteca. Modelo de turismo solidario reconocido internacionalmente.</p>
 </div>
 
 <div class="card">
-<h2>8. Impacto esperado</h2>
-<div class="data-grid">
-<div class="dg-item"><div class="v">250K</div><div class="l">Visitantes Faro Ajo/ano</div></div>
-<div class="dg-item"><div class="v">5.000</div><div class="l">Nuevos visitantes objetivo (2%)</div></div>
-<div class="dg-item"><div class="v">+100</div><div class="l">Paises con difusion organica</div></div>
-<div class="dg-item"><div class="v">301</div><div class="l">Vecinos beneficiados</div></div>
-</div>
-<ul>
-<li><strong>Turismo:</strong> Conexion costa-interior. Los 250.000 visitantes del Faro de Ajo son el publico objetivo.</li>
-<li><strong>Difusion internacional:</strong> Peregrinos de +100 paises comparten en redes sin coste publicitario.</li>
-<li><strong>Valor cultural:</strong> Puesta en valor de 942 anos de historia y patrimonio.</li>
-<li><strong>Lucha contra la despoblacion:</strong> Visibilidad, actividad economica y cohesion social.</li>
-<li><strong>Comunidad:</strong> Eventos, talleres, encuentros. Un pueblo que se activa.</li>
-</ul>
+  <h2><span class="num">07</span><span>Personajes ilustres</span></h2>
+  <p>Güemes ha dado al mundo canteros, virreyes y referentes contemporáneos de hospitalidad peregrina. La Senda honra esta tradición de exportación de talento.</p>
+
+  <div class="zone-grid">
+    <div class="zone"><h4>Padre Ernesto Bustio Crespo</h4><div class="zd">1937 — presente. Cura de Güemes, fundador del albergue (1999). Figura central del proyecto "Abriendo caminos de amistad" y de las 4 maquetas del Portalillo.</div></div>
+    <div class="zone"><h4>Juan Francisco de Güemes y Horcasitas</h4><div class="zd">1681–1766. Virrey de Nueva España (1746–1755), 1er conde de Revillagigedo. Da nombre al municipio de Güémez (Tamaulipas, México) fundado en 1749.</div></div>
+    <div class="zone"><h4>Martín Miguel de Güemes</h4><div class="zd">1785–1821. Héroe nacional argentino. Su padre Gabriel de Güemes Montero era natural de Cantabria. Da nombre a la ciudad de General Güemes (Salta).</div></div>
+    <div class="zone"><h4>Los artífices de Güemes</h4><div class="zd">s. XV–XX. Decenas de canteros, escultores y fundidores (los Güemes-Bracamonte, Monasterio, Viadero, Villanueva, Cagigal) levantaron las catedrales de Segovia, Oviedo, Pamplona y Santiago de Compostela.</div></div>
+  </div>
+
+  <div class="callout">
+    <strong>Fuente histórica:</strong> Informe Histórico firmado por Luis de Escallada González, <em>Centro de Estudios Montañeses · Sociedad Cántabra de Escritores</em>, junio de 2010 (disponible en <a href="/archivos/informe-historico.pdf">/archivos/informe-historico.pdf</a>).
+  </div>
 </div>
 
 <div class="card">
-<h2>9. Presupuesto resumen</h2>
-<table>
-<tr><th>Bloque</th><th>Concepto</th><th>Importe</th></tr>
-<tr><td>A</td><td>Senda de las Estatuas (esculturas, mobiliario, senalizacion, obra civil, proyecto)</td><td>60.000 &euro;</td></tr>
-<tr><td>B</td><td>Obras menores de preservacion del pueblo</td><td>45.000 &euro;</td></tr>
-<tr><td>C</td><td>Programa cultural "Enróllate en Güemes"</td><td>15.000 &euro;</td></tr>
-<tr><td>D</td><td>Actuaciones complementarias (a programar por Junta Vecinal)</td><td>40.000 &euro;</td></tr>
-<tr class="total"><td colspan="2">TOTAL</td><td>160.000 &euro;</td></tr>
-</table>
+  <h2><span class="num">08</span><span>Camino de Santiago · 14 km en Bareyo</span></h2>
+  <p>El Camino del Norte atraviesa el municipio de Bareyo de este a oeste por un total de <strong>14 km</strong>. La etapa 12 oficial (Güemes–Santander) está inscrita como Patrimonio de la Humanidad por la UNESCO desde 2015.</p>
+  <div class="data-grid">
+    <div class="dg-item"><div class="v">14 km</div><div class="l">del Camino en Bareyo</div></div>
+    <div class="dg-item"><div class="v">UNESCO</div><div class="l">2015</div></div>
+    <div class="dg-item"><div class="v">+50.000</div><div class="l">peregrinos acogidos</div></div>
+    <div class="dg-item"><div class="v">5.000</div><div class="l">firmas para preservar el trazado (2014–2015)</div></div>
+  </div>
+  <p>En 2014–2015, la comunidad internacional recogió más de 5.000 firmas para mantener el trazado oficial del Camino por Güemes. Este apoyo global demuestra la importancia del pueblo como nodo del Camino Norte, más allá de su tamaño.</p>
+  <p>La candidatura incluye la puesta en valor de estos 14 km con señalización homogénea, limpieza de ramales, hitos interpretativos y conexión con los 4 hitos de la Senda de las Estatuas.</p>
 </div>
 
 <div class="card">
-<h2>10. Cronograma</h2>
-<table>
-<tr><th>Fase</th><th>Periodo</th><th>Actuaciones</th><th>Importe</th></tr>
-<tr><td>1</td><td>Jun-Sep 2026</td><td>Proyecto tecnico, licitacion, inicio obra civil</td><td>20.000 &euro;</td></tr>
-<tr><td>2</td><td>Jul-Ago 2026</td><td>Primera edicion "Enróllate en Güemes"</td><td>15.000 &euro;</td></tr>
-<tr><td>3</td><td>Sep-Nov 2026</td><td>Instalacion esculturas, mobiliario y senalizacion</td><td>40.000 &euro;</td></tr>
-<tr><td>4</td><td>Oct-Dic 2026</td><td>Obras de preservacion</td><td>45.000 &euro;</td></tr>
-<tr><td>5</td><td>Ene-Jun 2027</td><td>Actuaciones complementarias</td><td>40.000 &euro;</td></tr>
-</table>
-<p style="margin-top:.75rem"><strong>Finalizacion prevista:</strong> Inauguracion Senda de las Estatuas en octubre 2026. Finalizacion total junio 2027.</p>
+  <h2><span class="num">09</span><span>Plan de actuación · 160.000 €</span></h2>
+  <p>Resumen de los 4 bloques. Desglose detallado en la <a href="/docs/memoria-economica">Memoria económica</a>.</p>
+  <table>
+    <tr><th>Bloque</th><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>A</td><td>Senda de las Estatuas (4 esculturas, mobiliario, señalización, obra civil, proyecto técnico)</td><td>60.000 €</td></tr>
+    <tr><td>B</td><td>Preservación del pueblo + señalización de los 14 km del Camino de Santiago en Bareyo</td><td>45.000 €</td></tr>
+    <tr><td>C</td><td><em>"Enróllate en Güemes"</em> — festival de arte rural, gamificación y eventos</td><td>15.000 €</td></tr>
+    <tr><td>D</td><td>Pista de pádel, atletismo, Ermita San Julián como Centro de Interpretación Digital</td><td>40.000 €</td></tr>
+    <tr class="total"><td colspan="2">TOTAL</td><td>160.000 €</td></tr>
+  </table>
 </div>
 
 <div class="card">
-<h2>11. Programa complementario</h2>
-<p>La candidatura incluye el programa cultural <strong>"Enróllate en Güemes"</strong>: festival de arte rural sobre bolas de ensilado con expansion a todo el municipio de Bareyo, gamificacion digital y eventos festivos. Presupuesto: 15.000 EUR. Detalle en documento especifico.</p>
-<p><a href="./guemes-en-bolas.html" style="color:var(--g5);font-weight:600;">Ver propuesta completa &rarr;</a></p>
+  <h2><span class="num">10</span><span>Cronograma de ejecución</span></h2>
+  <table>
+    <tr><th>Fase</th><th>Período</th><th>Actuaciones principales</th><th>Inversión</th></tr>
+    <tr><td>1</td><td>Jun–Jul 2026</td><td>Proyecto técnico Senda, licitaciones, permisos</td><td>5.000 €</td></tr>
+    <tr><td>2</td><td>Jul–Ago 2026</td><td>Festival Enróllate en Güemes (1ª edición)</td><td>15.000 €</td></tr>
+    <tr><td>3</td><td>Ago–Nov 2026</td><td>Obras deportivas: pista pádel + vallado atletismo</td><td>21.000 €</td></tr>
+    <tr><td>4</td><td>Sep–Dic 2026</td><td>Esculturas, mobiliario, señalización de la Senda</td><td>55.000 €</td></tr>
+    <tr><td>5</td><td>Oct 2026 – Mar 2027</td><td>14 km del Camino + accesos vecinales</td><td>34.000 €</td></tr>
+    <tr><td>6</td><td>Nov 2026 – May 2027</td><td>Centro de Interpretación Digital en la Ermita</td><td>8.000 €</td></tr>
+    <tr><td>7</td><td>Ene–Jun 2027</td><td>Mobiliario, programación cultural, reserva</td><td>22.000 €</td></tr>
+  </table>
+  <p><strong>Hitos:</strong> Inauguración de la Senda en <em>octubre de 2026</em>. Apertura del Centro de Interpretación Digital en <em>junio de 2027</em>. Cierre administrativo del proyecto en <em>junio de 2027</em>.</p>
 </div>
 
 <div class="card">
-<h2>12. Conclusion</h2>
-<div class="hl"><strong>Guemes tiene todo para ganar:</strong> 942 anos de historia, el mejor albergue del Camino Norte, un heroe nacional argentino entre sus descendientes, 250.000 visitantes al ano en el Faro vecino, y una comunidad de 301 vecinos que llevan decadas acogiendo al mundo. Solo falta que el mundo descubra Guemes. La Senda de las Estatuas es el camino.</div>
+  <h2><span class="num">11</span><span>Impacto esperado</span></h2>
+  <div class="data-grid">
+    <div class="dg-item"><div class="v">250 K</div><div class="l">visitantes Faro Ajo / año</div></div>
+    <div class="dg-item"><div class="v">5.000</div><div class="l">nuevos visitantes objetivo (2%)</div></div>
+    <div class="dg-item"><div class="v">+100</div><div class="l">países con difusión orgánica</div></div>
+    <div class="dg-item"><div class="v">301</div><div class="l">vecinos beneficiados</div></div>
+  </div>
+  <ul>
+    <li><strong>Turismo:</strong> conexión costa–interior. Los 250.000 visitantes del Faro de Ajo (5 km) son el público objetivo natural.</li>
+    <li><strong>Difusión internacional:</strong> los peregrinos de +100 países que duermen en el albergue comparten en redes sin coste publicitario.</li>
+    <li><strong>Patrimonio vivo:</strong> 942 años de historia documentada, ahora visibles e interpretados.</li>
+    <li><strong>Servicio 24/7 al peregrino:</strong> el Centro de Interpretación Digital en la Ermita funciona sin horario de apertura.</li>
+    <li><strong>Lucha contra la despoblación:</strong> visibilidad, actividad económica, cohesión social.</li>
+    <li><strong>Cohesión vecinal:</strong> en la reunión del 19 abril 2026 los vecinos se organizaron voluntariamente para limpiar el pueblo los fines de semana. La candidatura nace desde abajo.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2><span class="num">12</span><span>Conclusión</span></h2>
+  <div class="callout">
+    <strong>Güemes no se inventa una historia para el premio.</strong> Güemes cuenta una historia que <em>ya lleva 900 años ocurriendo</em> — canteros que levantaron catedrales, hospital medieval que acoge peregrinos desde el s. XIV, cuatro pueblos del mundo que llevan su nombre, y un encuentro casual en 2009 que unió tres continentes bajo el lema <em>"Abriendo caminos de amistad"</em>. Sólo pide los recursos para preservarlo, ampliarlo y abrirlo al mundo con una Senda de esculturas, un Centro de Interpretación Digital y un festival anual de arte rural.
+  </div>
+  <p style="text-align:center; margin-top: 30px;"><em>Si somos 301, seremos 301 cuidando el pueblo.</em> <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mut);">— Vecinos de Güemes, abril 2026</span></p>
 </div>
 
 </div>
 
-<div class="footer">Memoria de Actuacion · Junta Vecinal de Guemes · Municipio de Bareyo · Cantabria</div>
-<div class="toast" id="toast"></div>
-<script>
-async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Guemes 2026 — Memoria de Actuacion',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}
-function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
-</script>
+<footer class="footer">
+  <strong>Abriendo caminos de amistad</strong> — Memoria de actuación · Candidatura Pueblo de Cantabria 2026<br>
+  Junta Vecinal de Güemes · Ayuntamiento de Bareyo · Cantabria
+</footer>
+
 </body>
 </html>

@@ -3,141 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dossier Historico-Cultural — Guemes 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Dossier histórico-cultural — Güemes 2026</title>
+<meta name="description" content="900 años de Güemes, de 1084 a hoy. Canteros que hicieron catedrales, virreyes, héroes, peregrinos y los 4 Güemes del mundo.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
 <style>
-:root{--g6:#1b4332;--g5:#2d6a4f;--g4:#40916c;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06)}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.7;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}.nav a svg{width:16px;height:16px}.nav .title{font-size:.82rem;color:var(--x5);font-weight:500}.nav .actions{display:flex;gap:.5rem}.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem;transition:all .15s}.nav .actions button:hover{background:var(--x2)}
-.hero{background:linear-gradient(160deg,#060d08 0%,#0d1f12 35%,var(--g6) 100%);color:var(--w);padding:3.5rem 2rem;text-align:center}
-.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:300;letter-spacing:.12em;text-transform:uppercase}.hero .line{width:100px;height:2px;background:var(--go4);margin:1rem auto}.hero h2{font-size:1.1rem;font-weight:300;color:var(--go4);letter-spacing:.06em}.hero .sub{font-size:.88rem;color:var(--g4);margin-top:.75rem;font-style:italic}.hero .year{font-size:2.5rem;font-weight:100;color:var(--go4);margin-top:1.25rem;letter-spacing:.2em}
-.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.toc{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:1.5rem 2rem;margin-bottom:1.5rem;border:1px solid var(--x1)}
-.toc h2{font-size:.85rem;font-weight:700;color:var(--g6);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.06em;padding-bottom:.35rem;border-bottom:2px solid var(--go3)}
-.toc ol{margin-left:1.3rem;columns:2;column-gap:2rem}.toc li{padding:.2rem 0;font-size:.82rem;color:var(--x6)}.toc li a{color:var(--g5);text-decoration:none}.toc li a:hover{text-decoration:underline}
-.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:2rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
-.card h2{font-size:1.05rem;font-weight:700;color:var(--g6);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid var(--go3);text-transform:uppercase;letter-spacing:.04em}
-.card h3{font-size:.9rem;font-weight:700;color:var(--g5);margin:1rem 0 .4rem}
-.card p{color:var(--x6);margin-bottom:.6rem;font-size:.87rem;text-align:justify}
-.card ul,.card ol{margin:.4rem 0 .8rem 1.4rem;color:var(--x6);font-size:.87rem}.card li{margin-bottom:.3rem}
-.hl{background:var(--go1);border-left:3px solid var(--go4);padding:.75rem 1rem;border-radius:0 8px 8px 0;font-size:.84rem;color:#6b5e4a;margin:.75rem 0;font-style:italic}
-.hlg{background:var(--g0);border-left:3px solid var(--g5);padding:.75rem 1rem;border-radius:0 8px 8px 0;font-size:.84rem;color:#2d5040;margin:.75rem 0}
-.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin:1rem 0}
-.dg{background:var(--g0);border-radius:8px;padding:.7rem;text-align:center}.dg .v{font-size:1.1rem;font-weight:800;color:var(--g6)}.dg .l{font-size:.65rem;color:var(--x5);text-transform:uppercase;letter-spacing:.03em}
-.person{background:var(--x0);border-radius:8px;padding:1rem;border-left:3px solid var(--go4);margin:.6rem 0}
-.person h4{font-size:.88rem;font-weight:700;color:var(--x9)}.person .dates{font-size:.72rem;color:var(--go4);font-weight:600}.person p{font-size:.82rem;margin-top:.25rem}
-.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;opacity:0;transition:all .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-@media(max-width:768px){.main{padding:1.25rem 1rem}.toc ol{columns:1}}
-@media print{.nav{position:static}.card{box-shadow:none;border:1px solid #ddd}.hero{padding:2rem}}
+  :root { --bg-deep:#0a1120; --bg-navy:#101a30; --bg-card:#141f38; --corten:#c89450; --corten-br:#f4c77b; --corten-dk:#7a5a30; --text:#e8e6e1; --text-dim:#b8b5af; --text-mut:#8a8680; --line:rgba(244,199,123,0.22); --line-soft:rgba(232,230,225,0.08); --ok:#7bc6f4; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg-deep); color:var(--text); font-family:'Satoshi',system-ui,sans-serif; font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4 { font-family:'Instrument Serif',serif; font-weight:400; line-height:1.15; }
+  em { font-style:italic; color:var(--corten-br); font-weight:500; }
+  strong { color:var(--text); font-weight:500; }
+  a { color:var(--corten-br); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+
+  .nav { position:sticky; top:0; z-index:50; background:rgba(10,17,32,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line-soft); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; }
+  .nav .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-family:'Instrument Serif',serif; font-style:italic; font-size:16px; }
+  .nav .brand small { font-family:'Satoshi',sans-serif; font-style:normal; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--corten-br); font-weight:500; margin-left:10px; }
+  .nav .nav-center { font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-mut); font-weight:500; }
+  .nav .actions { display:flex; gap:8px; }
+  .nav .actions button { background:transparent; border:1px solid var(--line); color:var(--text-dim); padding:7px 14px; border-radius:2px; font-family:'Satoshi',sans-serif; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; }
+  .nav .actions button:hover { background:var(--corten-br); color:var(--bg-deep); border-color:var(--corten-br); }
+
+  .hero { padding:80px 28px 60px; max-width:1000px; margin:0 auto; }
+  .hero .eyebrow { font-size:11px; letter-spacing:0.35em; text-transform:uppercase; color:var(--corten-br); font-weight:500; margin-bottom:18px; }
+  .hero h1 { font-size:clamp(44px,6vw,80px); font-style:italic; font-weight:400; letter-spacing:-0.02em; margin-bottom:16px; }
+  .hero .sub { font-size:17px; color:var(--text-dim); max-width:720px; }
+
+  .main { max-width:1000px; margin:0 auto; padding:0 28px 80px; }
+
+  .toc { background:var(--bg-navy); border:1px solid var(--line-soft); padding:26px 32px; margin-bottom:36px; }
+  .toc h3 { font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--corten-br); font-weight:500; font-family:'Satoshi',sans-serif; font-style:normal; margin-bottom:14px; }
+  .toc ol { list-style:none; columns:2; column-gap:30px; }
+  @media (max-width:700px) { .toc ol { columns:1; } }
+  .toc li { margin:7px 0; font-size:13.5px; }
+  .toc li a { color:var(--text-dim); }
+  .toc li a:hover { color:var(--corten-br); }
+  .toc li .n { font-family:'Instrument Serif',serif; font-style:italic; color:var(--corten); margin-right:10px; font-size:15px; }
+
+  .card { background:var(--bg-navy); border:1px solid var(--line-soft); border-radius:2px; padding:40px 36px; margin-bottom:24px; }
+  .card > h2 { font-size:30px; font-style:italic; padding-bottom:18px; margin-bottom:22px; border-bottom:1px solid var(--line); display:flex; align-items:baseline; gap:12px; }
+  .card > h2 .num { font-family:'Satoshi',sans-serif; font-style:normal; font-weight:500; font-size:12px; letter-spacing:0.3em; color:var(--corten); text-transform:uppercase; white-space:nowrap; }
+  h3 { font-size:19px; color:var(--text); font-style:italic; margin:26px 0 10px; }
+  .card p { color:var(--text-dim); margin-bottom:12px; font-size:14.5px; }
+  .card ul { margin-left:20px; margin-bottom:14px; }
+  .card li { color:var(--text-dim); margin-bottom:8px; font-size:14.5px; }
+
+  .person { background:var(--bg-card); border-left:3px solid var(--corten-br); padding:18px 22px; margin:16px 0; border-radius:0 2px 2px 0; }
+  .person h4 { font-size:18px; font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--text); margin-bottom:4px; }
+  .person .dates { font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--corten); margin-bottom:8px; font-weight:500; }
+  .person p { font-size:14px; color:var(--text-dim); margin:0; }
+
+  .data-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:2px; margin:14px 0; background:var(--line-soft); }
+  .dg { background:var(--bg-card); padding:16px 18px; }
+  .dg .v { font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; color:var(--text); line-height:1; }
+  .dg .l { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-mut); margin-top:6px; font-weight:500; }
+
+  .callout { border-left:2px solid var(--corten-br); padding:14px 20px; margin:20px 0; font-size:14px; color:var(--text-dim); background:rgba(200,148,80,0.05); }
+  .callout strong { color:var(--corten-br); font-weight:500; }
+  .callout.blue { border-left-color:var(--ok); background:rgba(123,198,244,0.06); }
+  .callout.blue strong { color:var(--ok); }
+
+  .pullquote { max-width:760px; margin:30px auto; padding:26px 30px 26px 44px; font-family:'Instrument Serif',serif; font-style:italic; font-size:22px; line-height:1.45; color:var(--text); border-left:2px solid var(--corten-br); }
+  .pullquote cite { display:block; margin-top:14px; font-family:'Satoshi',sans-serif; font-style:normal; font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--corten-br); font-weight:500; }
+
+  .artifice-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:2px; margin:16px 0; background:var(--line-soft); }
+  .artifice { background:var(--bg-card); padding:22px 20px; }
+  .artifice .year { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--corten); font-weight:500; }
+  .artifice .name { font-family:'Instrument Serif',serif; font-style:italic; font-size:17px; color:var(--text); margin:6px 0 8px; line-height:1.2; }
+  .artifice .deed { font-size:12.5px; color:var(--text-dim); line-height:1.5; }
+
+  .footer { text-align:center; padding:60px 28px 40px; border-top:1px solid var(--line-soft); color:var(--text-mut); font-size:11px; letter-spacing:0.15em; text-transform:uppercase; }
+  .footer strong { color:var(--corten-br); font-weight:500; }
+
+  @media print {
+    @page { margin:14mm; size:A4; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+    .nav { display:none; } .hero { padding:0 0 30px; } .main { padding:0; }
+    .card { break-inside:avoid; margin-bottom:16px; padding:26px 24px; }
+    .artifice { break-inside:avoid; }
+  }
+  @media (max-width:720px) {
+    .nav .nav-center { display:none; }
+    .hero { padding:50px 20px 40px; } .main { padding:0 18px 60px; }
+    .card { padding:26px 22px; } .card > h2 { flex-direction:column; gap:4px; font-size:22px; align-items:flex-start; }
+  }
 </style>
 </head>
 <body>
-<div class="nav"><a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Guemes 2026</a><span class="title">Dossier Historico-Cultural</span><div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div></div>
 
-<div class="hero"><h1>Guemes</h1><div class="line"></div><h2>Dossier Historico-Cultural</h2><div class="sub">942 anos de historia documentada</div><div class="year">1084 — 2026</div></div>
+<div class="nav">
+  <a href="/" class="brand">Güemes <small>Dossier histórico</small></a>
+  <div class="nav-center">Candidatura Pueblo de Cantabria 2026</div>
+  <div class="actions">
+    <button onclick="window.print()">↓ Imprimir</button>
+    <button onclick="history.back()">← Volver</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">Dossier histórico-cultural</div>
+  <h1>Nueve siglos de Güemes.</h1>
+  <p class="sub">De la primera mención documental en <em>1084</em> al proyecto contemporáneo <em>"Abriendo caminos de amistad"</em>. Un pueblo pequeño con una huella enorme — canteros, virreyes, peregrinos y cuatro lugares del mundo que llevan su nombre.</p>
+</section>
 
 <div class="main">
 
-<div class="toc"><h2>Indice</h2><ol>
-<li><a href="#s1">Origenes (1084 - s. XV)</a></li>
-<li><a href="#s2">Siglos XVI-XVII: canteros e iglesia</a></li>
-<li><a href="#s3">Ermita de San Julian</a></li>
-<li><a href="#s4">Virreyes: Juan Fco. de Guemes</a></li>
-<li><a href="#s5">Martin Miguel de Guemes</a></li>
-<li><a href="#s6">Siglos XIX-XX</a></li>
-<li><a href="#s7">Camino de Santiago</a></li>
-<li><a href="#s8">Padre Ernesto Bustio</a></li>
-<li><a href="#s9">El Albergue</a></li>
-<li><a href="#s10">Patrimonio actual</a></li>
-<li><a href="#s11">Guemes hoy</a></li>
-</ol></div>
-
-<div class="card" id="s1"><h2>1. Origenes (1084 - s. XV)</h2>
-<p>La primera mencion documental de Guemes data de <strong>1084</strong>, en un documento del Cartulario de Santa Maria del Puerto. Sin embargo, la presencia humana en el valle es anterior, con vestigios de asentamiento monacal desde el <strong>siglo VIII</strong>.</p>
-<p>Guemes formaba parte de la <strong>Merindad de Trasmiera</strong>, una de las grandes divisiones administrativas medievales de Cantabria. Su ubicacion en un valle protegido, cercano a la costa pero resguardado, lo convirtio en un enclave estrategico para la ganaderia, la agricultura y el paso de peregrinos.</p>
-<div class="hl">"En el valle de Guemes, junto al camino que va a Santiago, hay una iglesia dedicada a San Vicente..." — Referencia documental s. XII</div>
+<div class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><span class="n">01</span><a href="#s1">Orígenes (1084–s. XV)</a></li>
+    <li><span class="n">02</span><a href="#s2">Los artífices de Güemes</a></li>
+    <li><span class="n">03</span><a href="#s3">Iglesia de San Vicente Mártir</a></li>
+    <li><span class="n">04</span><a href="#s4">Ermita de San Julián y Hospital de peregrinos</a></li>
+    <li><span class="n">05</span><a href="#s5">Los Güemes del mundo</a></li>
+    <li><span class="n">06</span><a href="#s6">El Palacio de Güemes</a></li>
+    <li><span class="n">07</span><a href="#s7">El Camino de Santiago</a></li>
+    <li><span class="n">08</span><a href="#s8">Padre Ernesto Bustio y el Albergue</a></li>
+    <li><span class="n">09</span><a href="#s9">Abriendo caminos de amistad (2009)</a></li>
+    <li><span class="n">10</span><a href="#s10">Güemes hoy</a></li>
+    <li><span class="n">11</span><a href="#s11">La candidatura 2026</a></li>
+  </ol>
 </div>
 
-<div class="card" id="s2"><h2>2. Siglos XVI-XVII: canteros e iglesia</h2>
-<p>Los <strong>Canteros de Trasmiera</strong> fueron maestros de obra que desde el siglo XV construyeron catedrales, palacios y fortalezas por toda Espana y America. La familia <strong>Guemes Campero</strong> fue una de las mas prominentes de esta tradicion.</p>
-<p>La <strong>Iglesia de San Vicente Martir</strong>, construida entre los siglos XVI y XVII, es testimonio directo de esta maestria. Templo de planta rectangular con elementos clasicistas y goticos tardios, retablo mayor barroco y torre campanario que domina el valle.</p>
+<div class="card" id="s1">
+  <h2><span class="num">01</span><span>Orígenes (1084 – siglo XV)</span></h2>
+  <p>La primera cita documental de Güemes aparece en el año <em>1084</em>, en la <strong>Escritura CII del Cartulario de Santa María de Puerto</strong>: María González dona al monasterio de San Vicente de Güemes la mitad de sus casas en el pueblo. El documento menciona también la ermita de los Santos Justo y Pastor, probable antecedente de la actual Ermita de San Julián.</p>
+  <p>Güemes formaba parte de la <strong>Muy Ilustre y Siempre Leal Merindad de Trasmiera</strong>, una de las grandes divisiones administrativas medievales de Cantabria, integrando la Junta de las Siete Villas junto con Ajo, Arnuero, Bareyo, Castillo, Isla, Meruelo, Noja y Soano.</p>
+  <p>En el <strong>Becerro de las Behetrías</strong>, escrito por orden del rey Pedro I "el Cruel" a mediados del siglo XIV, Güemes figura como lugar de behetría con Pedro González de Agüero por señor.</p>
 </div>
 
-<div class="card" id="s3"><h2>3. Ermita de San Julian (s. XII-XIII)</h2>
-<p>La Ermita de San Julian fue construida entre los siglos XII y XIII como <strong>hospital de peregrinos</strong> en el Camino de Santiago del Norte. Durante mas de 800 anos ha sido un punto de acogida para caminantes.</p>
-<p>El edificio conserva elementos romanicos originales y ha sido testigo de la evolucion de la hospitalidad jacobea desde la Edad Media hasta nuestros dias, cuando el Albergue del Padre Ernesto continua esa tradicion milenaria.</p>
-<div class="hlg"><strong>Proyecto futuro:</strong> La candidatura contempla su restauracion parcial y su transformacion en Centro de Interpretacion del Camino de Santiago en Guemes. Presupuesto asignado: 12.000 EUR (Bloque B) + 10.000 EUR (Bloque D).</div>
+<div class="card" id="s2">
+  <h2><span class="num">02</span><span>Los artífices de Güemes — cinco siglos exportando oficios</span></h2>
+  <p>Desde el siglo XV hasta el XX, los habitantes de Trasmiera se dispersaron por todo el Imperio Hispano ejerciendo como arquitectos de cantería, canteros, fundidores de campanas, escultores y doradores. Construyeron catedrales, puentes, iglesias y palacios que son hoy maravillas del patrimonio español.</p>
+  <p>El <strong>Catastro del Marqués de la Ensenada (1753)</strong> registra la composición laboral de Güemes: 115 vecinos entre los cuales había <em>22 maestros canteros</em>, un escultor, un dorador, un maestro fundidor de campanas, 5 carpinteros y 4 sastres — una densidad de oficios artesanales excepcional para un pueblo de este tamaño.</p>
+
+  <div class="artifice-grid">
+    <div class="artifice"><div class="year">1526 · Salamanca</div><div class="name">Pedro de Güemes</div><div class="deed">Construye dos lados del claustro de la <strong>Catedral de Ciudad Rodrigo</strong>, donde quedó esculpido su retrato.</div></div>
+    <div class="artifice"><div class="year">1576 · Santiago de Compostela</div><div class="name">Gonzalo de la Bárcena</div><div class="deed">Obras en el monasterio de San Payo en Santiago. Fuentes y acueductos en Oviedo (Los Pilares), Valladolid, Aviles y La Coruña.</div></div>
+    <div class="artifice"><div class="year">1584 · Pamplona</div><div class="name">Pedro de Villanueva</div><div class="deed">Funde la campana <em>María</em> para la <strong>Catedral de Pamplona</strong>: 13.000 kilos, la mayor del Imperio Hispano en su tiempo.</div></div>
+    <div class="artifice"><div class="year">1617 · Güemes</div><div class="name">Gonzalo de Güemes Bracamonte</div><div class="deed">Redacta las trazas para la nueva iglesia parroquial de Güemes tras el derrumbe de la antigua. También trabajó en Monforte, Oviedo y las murallas de Aviles.</div></div>
+    <div class="artifice"><div class="year">1660–1688 · Segovia</div><div class="name">Francisco de Viadero</div><div class="deed">Ejerce como <strong>Maestro Mayor de la Catedral de Segovia</strong> durante 28 años. Muere allí, donde está enterrado.</div></div>
+    <div class="artifice"><div class="year">1660 · Oviedo</div><div class="name">Ignacio del Cagigal</div><div class="deed">Nombrado <strong>Maestro Mayor de la Catedral de Oviedo</strong>. Construye la capilla de Santa Bárbara, el Ayuntamiento viejo y parte del convento de San Pelayo.</div></div>
+    <div class="artifice"><div class="year">1677 · Güemes</div><div class="name">Andrés de Monasterio Bárcena</div><div class="deed">Realiza el retablo mayor de la iglesia parroquial, con las <strong>primeras columnas salomónicas de Cantabria</strong>.</div></div>
+    <div class="artifice"><div class="year">1741–1770 · Álava</div><div class="name">Bernardo de Monasterio Pellón</div><div class="deed">Esculturas para la Colegial de Santa María de Vitoria y para iglesias de Álava.</div></div>
+  </div>
+
+  <div class="callout"><strong>Fuente:</strong> Informe histórico firmado por Luis de Escallada González (Centro de Estudios Montañeses · Sociedad Cántabra de Escritores, 15 junio 2010). Texto completo en <a href="/archivos/informe-historico.pdf">/archivos/informe-historico.pdf</a>.</div>
 </div>
 
-<div class="card" id="s4"><h2>4. Virreyes: Juan Francisco de Guemes</h2>
-<div class="person"><h4>Juan Francisco de Guemes y Horcasitas</h4><div class="dates">1681 · Natural de Guemes</div><p>Primer Conde de Revillagigedo. Virrey de Nueva Espana (Mexico) de 1746 a 1755. Gobernador de La Habana. Uno de los administradores coloniales mas importantes del siglo XVIII. Su nombre llego a America y fundo una de las dinastias mas influyentes del virreinato.</p></div>
-<p>La conexion entre Guemes de Cantabria y America es directa y documentada. Los descendientes de esta familia extendieron el nombre de Guemes por todo el continente americano, dando lugar a los multiples "Guemes" que existen hoy en el mundo.</p>
+<div class="card" id="s3">
+  <h2><span class="num">03</span><span>Iglesia de San Vicente Mártir (siglos XI–XVII)</span></h2>
+  <p>Documentada desde <em>1084</em> como monasterio de San Vicente, la parroquial actual se construyó tras el derrumbe del templo anterior en 1617. Es edificio de cabecera poligonal y una sola nave de tres tramos con coro alto a los pies. El primer tramo se cubre con bóveda de crucería de cinco claves con nervios cruceros; los otros dos con bóveda de crucería simple.</p>
+  <p>El <strong>retablo mayor se adjudicó el 16 de abril de 1677</strong> a Andrés de Monasterio Bárcena, famoso escultor de Güemes. Es el primero de Cantabria que utiliza las columnas salomónicas. Incluye las esculturas de San Vicente, San Pedro y San Pablo, y las de Cristo Crucificado, Nuestra Señora y San Juan.</p>
+  <p>Existen dos retablos colaterales: uno de estilo rococó construido en 1721 por Domingo de Monasterio Cueto (hijo de Andrés); otro de pequeñas dimensiones en estilo churrigueresco, de principios del siglo XVIII.</p>
+  <p>La iglesia fue fundación y patronato de la poderosa Casa de Güemes hasta el primer tercio del siglo XIX.</p>
 </div>
 
-<div class="card" id="s5"><h2>5. Martin Miguel de Guemes (1785-1821)</h2>
-<div class="person"><h4>Martin Miguel de Guemes</h4><div class="dates">1785-1821 · Heroe nacional argentino</div><p>General de la Guerra de Independencia argentina. Defensor de la frontera norte contra las invasiones realistas. Considerado heroe nacional, con fiesta oficial el 17 de junio. Descendiente directo de la familia Guemes de Cantabria.</p></div>
-<div class="data-grid">
-<div class="dg"><div class="v">1785</div><div class="l">Nacimiento (Salta)</div></div>
-<div class="dg"><div class="v">1821</div><div class="l">Muerte en combate</div></div>
-<div class="dg"><div class="v">17 jun</div><div class="l">Fiesta nacional Argentina</div></div>
-<div class="dg"><div class="v">Cantabria</div><div class="l">Origen familiar</div></div>
-</div>
-<p>La conexion entre este heroe argentino y el pueblo cantabro es uno de los activos mas singulares de Guemes y la inspiracion para las esculturas de la Senda: los <strong>4 Guemes del mundo</strong> unidos por un mismo nombre y una misma raiz.</p>
+<div class="card" id="s4">
+  <h2><span class="num">04</span><span>Ermita de San Julián y el Hospital de peregrinos</span></h2>
+  <p>La <strong>Ermita de San Julián y Nuestra Señora de la Consolación</strong> fue posiblemente construida en el siglo XIV o principios del XV. Está formada por dos naves paralelas separadas por arcos de medio punto, conservando restos de bóvedas primitivas, ménsulas, arranques de nervios y pilares góticos fasciculados.</p>
+  <p>Su fachada exhibe un arco de medio punto con grandes dovelas, sobre el que corre una cornisa decorada con <strong>trece canecillos</strong>: una pirámide, un rollo, dos bolas, un pene, una cabeza humana, un animal, una punta de diamante, y uno que representa una bolsa y un bordón (pertrecho de peregrinos).</p>
+  <p>Funcionó como <strong>hospital de peregrinos del Camino de Santiago desde el siglo XIV hasta su cierre en 1800</strong>, a consecuencia de la Real Cédula de 1798 sobre enajenación de bienes raíces pertenecientes a hospitales. Sus bienes se vendieron al vecino Santiago de Pellón por 2.160 reales.</p>
+  <p>La memoria de aquel hospital milenario quedó dormida durante casi dos siglos — hasta que en 1999 el cura del pueblo, Ernesto Bustio, fundó a sus expensas el Albergue La Cabaña del Abuelo Peuto, el sucesor contemporáneo de aquel hospital medieval.</p>
+
+  <div class="callout blue"><strong>Proyecto 2026–2027:</strong> la candidatura contempla la instalación en el interior de la Ermita de un <em>Centro de Interpretación Digital del Peregrino</em> (tótem multiidioma, cámara de seguridad, contador de visitas, dashboard para la Junta Vecinal). La intervención es exclusivamente en contenidos y dispositivos, <strong>sin obra estructural</strong> sobre el edificio histórico.</div>
 </div>
 
-<div class="card" id="s6"><h2>6. Siglos XIX-XX</h2>
-<p>Como muchos pueblos de la Cantabria rural, Guemes vivio un proceso de transformacion economica durante los siglos XIX y XX. La agricultura y ganaderia tradicionales siguieron siendo la base de la economia local, mientras la emigracion a America (indianos) y a las ciudades industriales redujo progresivamente la poblacion.</p>
-<p>Sin embargo, Guemes mantuvo su identidad comunitaria y su patrimonio arquitectonico, incluyendo el Palacio de Guemes (1915-1920), construido en estilo regionalista por la familia Guemes Campero como testimonio de la prosperidad indiana.</p>
+<div class="card" id="s5">
+  <h2><span class="num">05</span><span>Los Güemes del mundo</span></h2>
+  <p>El apellido Güemes tiene origen toponímico en este pueblo. Desde aquí se extendió durante el Imperio Hispano hasta convertirse en el nombre de <strong>tres pueblos y una isla en tres continentes</strong>. Los personajes históricos que dan nombre a esos lugares son descendientes de la familia Güemes, de raíz cántabra.</p>
+
+  <div class="person">
+    <h4>Juan Francisco de Güemes y Horcasitas</h4>
+    <div class="dates">1681 Reinosa – 1766 Madrid</div>
+    <p>Primer Conde de Revillagigedo. <em>Virrey de Nueva España (México)</em> entre 1746 y 1755. Bajo su mandato, el coronel José de Escandón fundó 11 poblaciones en el Nuevo Santander (actual Tamaulipas), entre ellas <strong>Güémez</strong>, el 1 de enero de 1749, que lleva el nombre del virrey. Promovió la colonización del kingdom of Alta California. Nacido en Reinosa — los Güemes como apellido familiar tenían su origen toponímico en este pueblo.</p>
+  </div>
+
+  <div class="person">
+    <h4>Juan Vicente de Güemes Pacheco de Padilla</h4>
+    <div class="dates">1738–1799 · 2º Conde de Revillagigedo</div>
+    <p>Hijo del anterior. También <em>virrey de Nueva España</em>. En <strong>1791</strong>, durante la expedición de Francisco de Eliza al Pacífico Norte, el explorador José María Narváez bautizó en su honor la isla <strong>Guemes Island</strong>, al norte del actual estado de Washington (EE.UU.), dentro del archipiélago de San Juan.</p>
+  </div>
+
+  <div class="person">
+    <h4>Martín Miguel de Güemes</h4>
+    <div class="dates">1785 Salta (Argentina) – 1821</div>
+    <p><em>Héroe nacional argentino</em>. General de la Guerra de Independencia. Único general patriota caído en territorio argentino en la guerra contra los realistas. Lideró la Guerra Gaucha (1814–1821) repeliendo seis invasiones realistas del norte argentino. Primer gobernador de la provincia de Salta (1815–1821). Su padre, Gabriel de Güemes Montero, procedía de Cantabria. El 17 de junio, Argentina celebra el <em>Día Nacional de la Libertad Latinoamericana</em> en su memoria. La ciudad de <strong>General Güemes</strong> (Salta), fundada el 23 de julio de 1888, lleva su nombre — hoy 56.948 habitantes.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Matiz importante:</strong> los virreyes Güemes nacieron en otros puntos de Cantabria (Reinosa) o fuera de ella, pero su <em>apellido</em> procede toponímicamente del pueblo de Güemes (Bareyo). La familia Güemes de Cantabria es el origen común de este linaje que se extendió por tres continentes. Esa es la base defendible de la narrativa de los "4 Güemes del mundo".
+  </div>
 </div>
 
-<div class="card" id="s7"><h2>7. Camino de Santiago</h2>
-<p>El <strong>Camino de Santiago del Norte</strong> fue inscrito como Patrimonio de la Humanidad por la UNESCO en 2015. Guemes se situa en la <strong>Etapa 12 (Guemes-Santander)</strong>, una de las mas transitadas del Camino Norte.</p>
-<div class="data-grid">
-<div class="dg"><div class="v">UNESCO</div><div class="l">Patrimonio 2015</div></div>
-<div class="dg"><div class="v">Etapa 12</div><div class="l">Guemes-Santander</div></div>
-<div class="dg"><div class="v">5.000</div><div class="l">Firmas 2014-15</div></div>
-</div>
-<p>En 2014-2015, cuando se planteo desviar el trazado oficial, la comunidad internacional recogio <strong>mas de 5.000 firmas</strong> para mantener el Camino por Guemes. Esta movilizacion demostro el arraigo global del pueblo en la comunidad jacobea.</p>
+<div class="card" id="s6">
+  <h2><span class="num">06</span><span>El Palacio de Güemes (1915–1920)</span></h2>
+  <p>En el sitio de <strong>La Moraza</strong> se encuentra una casa de estilo regionalista, al estilo de las casonas montañesas diseñadas por <strong>Leonardo Rucabado</strong> en los años 1915–1920. Hoy llamada <em>El Palacio</em>, exhibe las armas de Mazas.</p>
+  <p>Es testimonio de la arquitectura indiana y de la prosperidad alcanzada por los descendientes de la familia Güemes-Campero que habían emigrado a América durante el siglo XIX.</p>
+  <p>En el conjunto urbano de Güemes se conservan también casas de los siglos XVI-XVIII con portaladas de sillería, arcos carpaneles, miradores y galerías, especialmente en los barrios de Gargollo, Villanueva, El Cagigal y La Bárcena.</p>
 </div>
 
-<div class="card" id="s8"><h2>8. Padre Ernesto Bustio</h2>
-<div class="person"><h4>Padre Ernesto Bustio Crespo</h4><div class="dates">1937 - presente · Fundador del Albergue de Guemes</div><p>Sacerdote cantabro que en 1999 fundo el Albergue La Cabana del Abuelo Peuto en Guemes. Sin subvenciones publicas ni financiacion externa, ha acogido a mas de 50.000 peregrinos de mas de 100 paises. Su filosofia de hospitalidad incondicional ha convertido al albergue en el mejor valorado del Camino del Norte y en un referente internacional de turismo solidario.</p></div>
-<p>El Padre Ernesto es tambien el promotor de la idea de los <strong>4 Guemes del mundo</strong>: la vision de que este pequeno pueblo cantabro tiene una presencia global a traves de los lugares que llevan su nombre en Argentina, EEUU y Canada.</p>
+<div class="card" id="s7">
+  <h2><span class="num">07</span><span>El Camino de Santiago del Norte</span></h2>
+  <p>El Camino costero a Compostela, el primero de los Caminos conocidos, fue hollado por peregrinos desde el descubrimiento de la tumba del Apóstol en el año <strong>813</strong>, en tiempos del rey Alfonso II de Asturias.</p>
+  <p>Güemes es un <strong>punto importante</strong> de este paso jacobeo desde tiempo inmemorial. Varios ramales del Camino del Norte confluían aquí: uno procedente de Santoña por Noja–Soano–Isla–Arnuero–Meruelo pasaba la ría de Ajo por el medieval puente de Selorga, subía a la iglesia románica de Santa María de Bareyo, y seguía por el barrio de Villanueva de Güemes con destino al Hospital de San Julián.</p>
+  <p>La salida desde Güemes se hacía por Galizano para tomar la lancha que cruzaba la bahía de Santander.</p>
+  <p>El Camino del Norte fue inscrito como <strong>Patrimonio de la Humanidad por la UNESCO en 2015</strong>. Los <strong>14 km</strong> del Camino que atraviesan el municipio de Bareyo (de los cuales una parte significativa discurre por Güemes) forman parte de la Etapa 12 oficial (Güemes–Santander).</p>
+
+  <div class="data-grid">
+    <div class="dg"><div class="v">14 km</div><div class="l">del Camino en Bareyo</div></div>
+    <div class="dg"><div class="v">UNESCO</div><div class="l">2015</div></div>
+    <div class="dg"><div class="v">Etapa 12</div><div class="l">Güemes – Santander</div></div>
+    <div class="dg"><div class="v">5.000</div><div class="l">firmas 2014–2015</div></div>
+  </div>
+
+  <p>En 2014–2015, cuando se planteó desviar el trazado oficial, la comunidad internacional recogió más de 5.000 firmas para mantener el Camino por Güemes. Esta movilización demostró el arraigo global del pueblo en la comunidad jacobea.</p>
 </div>
 
-<div class="card" id="s9"><h2>9. El Albergue</h2>
-<div class="data-grid">
-<div class="dg"><div class="v">+50.000</div><div class="l">Peregrinos acogidos</div></div>
-<div class="dg"><div class="v">+100</div><div class="l">Paises</div></div>
-<div class="dg"><div class="v">~50</div><div class="l">Voluntarios/ano</div></div>
-<div class="dg"><div class="v">0 &euro;</div><div class="l">Subvenciones publicas</div></div>
-</div>
-<p><strong>La Cabana del Abuelo Peuto</strong> ofrece cada noche: alojamiento, cena comunitaria vegetariana, charla cultural del Padre Ernesto, y desayuno. Todo por donativo voluntario. Los voluntarios internacionales (~50 al ano) gestionan el albergue y los huertos ecologicos.</p>
-<p>Es el albergue <strong>mejor valorado del Camino del Norte</strong> en todas las plataformas. Muchos peregrinos lo senalan como el punto mas memorable de todo su Camino. Algunos se quedan mas de un dia, algo insolito en la cultura peregrina.</p>
+<div class="card" id="s8">
+  <h2><span class="num">08</span><span>Padre Ernesto Bustio y el Albergue</span></h2>
+
+  <div class="person">
+    <h4>Padre Ernesto Bustio Crespo</h4>
+    <div class="dates">1937 – presente · Cura de Güemes</div>
+    <p>Sacerdote cántabro que en 1999 fundó a sus expensas el <strong>Albergue La Cabaña del Abuelo Peuto</strong>. Considerado hoy el mejor valorado del Camino del Norte. Su filosofía de hospitalidad incondicional ha convertido al albergue en un referente internacional de turismo solidario.</p>
+  </div>
+
+  <h3>El Albergue</h3>
+  <div class="data-grid">
+    <div class="dg"><div class="v">+50.000</div><div class="l">peregrinos acogidos</div></div>
+    <div class="dg"><div class="v">+100</div><div class="l">países</div></div>
+    <div class="dg"><div class="v">~50</div><div class="l">voluntarios/año</div></div>
+    <div class="dg"><div class="v">0 €</div><div class="l">subvenciones públicas</div></div>
+  </div>
+
+  <p>La Cabaña del Abuelo Peuto ofrece cada noche: alojamiento, cena comunitaria vegetariana, charla cultural del Padre Ernesto y desayuno — todo por donativo voluntario. Los voluntarios internacionales (≈50 al año) gestionan el albergue y los huertos ecológicos.</p>
+  <p>Es el albergue <strong>mejor valorado del Camino del Norte</strong> en todas las plataformas. Muchos peregrinos lo señalan como el punto más memorable de todo su Camino. Algunos se quedan más de un día, algo insólito en la cultura peregrina.</p>
+
+  <div class="pullquote">
+    Cincuenta mil peregrinos. Cien países. Ninguna subvención.
+    <cite>— Albergue de Güemes, 26 años después</cite>
+  </div>
 </div>
 
-<div class="card" id="s10"><h2>10. Patrimonio actual</h2>
-<ul>
-<li><strong>Iglesia de San Vicente Martir</strong> (s. XVI-XVII) — Templo parroquial, retablo barroco, torre campanario</li>
-<li><strong>Palacio de Guemes</strong> (1915-1920) — Arquitectura regionalista/indiana</li>
-<li><strong>Ermita de San Julian</strong> (s. XII-XIII) — Hospital peregrinos, futuro Centro Interpretacion</li>
-<li><strong>Albergue La Cabana del Abuelo Peuto</strong> (1999) — Referente internacional hospitalidad</li>
-<li><strong>Camino de Santiago del Norte</strong> — UNESCO 2015, Etapa 12</li>
-<li><strong>Paisaje rural</strong> — Valle protegido, prados, ruta circular 6,9 km</li>
-<li><strong>Patrimonio inmaterial</strong> — Tradicion de hospitalidad (+800 anos), comunidad viva</li>
-</ul>
+<div class="card" id="s9">
+  <h2><span class="num">09</span><span>Abriendo caminos de amistad (2009 – presente)</span></h2>
+  <p>En el año <strong>2009</strong>, un peregrino estadounidense llamado <strong>Bob</strong> llegó al Albergue La Cabaña del Abuelo Peuto. Durante su estancia, Bob le explicó al Padre Ernesto que procedía de una isla llamada Güemes, en el estado de Washington.</p>
+  <p>La sorpresa ante la existencia de otro Güemes al otro lado del Atlántico llevó a Ernesto a investigar. Descubrió que no era un caso aislado: también había un <em>Güemes</em> en Argentina y un <em>Güémez</em> en México.</p>
+  <p>La coincidencia despertó un deseo de encuentro. Se contactó con ayuntamientos, parroquias e instituciones. Se organizó un viaje que empezó por Argentina, siguió por México y terminó en la isla estadounidense. La <strong>Consejería de Cultura del Gobierno de Cantabria</strong> donó libros como obsequio para los encuentros — carta de presentación cultural y diplomática.</p>
+
+  <h3>El viaje</h3>
+  <ul>
+    <li><strong>Argentina · General Güemes (Salta).</strong> Encuentro con la alcaldesa de la ciudad, entrega de libros del Gobierno de Cantabria, liturgia compartida en la iglesia. Cobertura en prensa local (diario <em>El Tribuno</em>) con titular: "Travesía para llegar al origen del apellido Güemes".</li>
+    <li><strong>México · Güémez (Tamaulipas).</strong> Reunión con directivos de la Casa de Cantabria en Ciudad de México. Intercambio de libros en el municipio. Visita a la iglesia de San Francisco de Asís del siglo XVIII, con un parecido arquitectónico sorprendente con la de Güemes-Cantabria.</li>
+    <li><strong>Estados Unidos · Guemes Island (Washington).</strong> La expedición cántabra fue recibida con un cartel: <em>"Bienvenidos de Güemes a Güemes"</em>. Conversaciones con la pastora de la iglesia protestante. Encuentro con la comunidad.</li>
+  </ul>
+
+  <h3>Las maquetas en El Portalillo</h3>
+  <p>A la vuelta, la experiencia fue compartida con el pueblo y con el Ayuntamiento de Bareyo. De aquel entusiasmo común surgió una propuesta impulsada por <strong>Begoña de la Fuente Crespo</strong> (presidenta de la Junta Vecinal) y <strong>Miguel Lavín</strong> (presidente de la Cooperativa Nuestra Señora de Consolación): dedicar terrenos propiedad de la Junta Vecinal a rendir homenaje a los cuatro Güemes del mundo.</p>
+  <p>El albergue propuso la creación de <strong>cuatro maquetas en acero corten</strong>, cada una inspirada en fotografías y elementos arquitectónicos o paisajísticos representativos de cada territorio visitado. Están instaladas hoy en el <strong>Portalillo de Güemes</strong> bajo el título <em>"Abriendo caminos de amistad"</em>:</p>
+  <ul>
+    <li><strong>Cantabria</strong>: globo terráqueo metálico con cuatro líneas que conectan los continentes</li>
+    <li><strong>Argentina</strong>: gaucho a caballo (Martín Miguel de Güemes) con silueta</li>
+    <li><strong>México</strong>: fachada de iglesia de una sola nave (evoca la de Güémez)</li>
+    <li><strong>Estados Unidos</strong>: barco de vela con texto "Guemes Island"</li>
+  </ul>
+  <p>La candidatura al Premio Pueblo de Cantabria 2026 propone el siguiente paso: convertir esas maquetas en una <strong>Senda monumental de cuatro esculturas</strong> distribuidas por el pueblo, con paneles interpretativos multiidioma y el Centro de Interpretación Digital en la Ermita de San Julián.</p>
 </div>
 
-<div class="card" id="s11"><h2>11. Guemes hoy</h2>
-<p>Guemes es hoy un pueblo de <strong>301 habitantes</strong> con un patrimonio historico, humano y cultural que supera con creces lo esperable para su tamano. Sin embargo, permanece invisible para la mayoria de visitantes de la comarca.</p>
-<p>A 5 km, el Faro de Ajo recibe <strong>250.000 visitantes al ano</strong> que no saben que Guemes existe. Esta candidatura al Premio Pueblo de Cantabria 2026 es la oportunidad de cambiar eso: hacer visible lo extraordinario, conectar la costa con el interior y dar al pueblo la proyeccion que merece.</p>
-<div class="hl"><strong>942 anos de historia. +50.000 peregrinos de +100 paises. Un heroe nacional argentino. El mejor albergue del Camino Norte. Y 301 vecinos que llevan decadas acogiendo al mundo en silencio.</strong> Es hora de que el mundo descubra Guemes.</div>
+<div class="card" id="s10">
+  <h2><span class="num">10</span><span>Güemes hoy</span></h2>
+  <div class="data-grid">
+    <div class="dg"><div class="v">301</div><div class="l">habitantes INE 2024</div></div>
+    <div class="dg"><div class="v">942</div><div class="l">años documentados</div></div>
+    <div class="dg"><div class="v">+50.000</div><div class="l">peregrinos acogidos</div></div>
+    <div class="dg"><div class="v">4</div><div class="l">Güemes en el mundo</div></div>
+  </div>
+
+  <p>Güemes es hoy un pueblo de 301 habitantes con un patrimonio histórico, humano y cultural que supera con creces lo esperable para su tamaño. La ganadería, la vida vecinal y la hospitalidad peregrina son sus ejes.</p>
+  <p>Se organiza en los barrios de <strong>Cagigal, Cueto, Gargollo, La Bárcena, Naveda, Palacio y Villanueva</strong>. Las escuelas, cercanas a la iglesia parroquial, son de finales del siglo XIX. La red de molinos documentados (once molinos entre 1617 y 1733) conserva algunas ruinas.</p>
+  <p>A 5 km, el <strong>Faro de Ajo</strong> recibe 250.000 visitantes al año que no saben que Güemes existe. Esta candidatura es la oportunidad de cambiar eso.</p>
+</div>
+
+<div class="card" id="s11">
+  <h2><span class="num">11</span><span>La candidatura 2026</span></h2>
+  <div class="callout">
+    <strong>Güemes no se inventa una historia para el premio.</strong> Güemes cuenta una historia que <em>ya lleva 900 años ocurriendo</em> — canteros que levantaron catedrales, hospital medieval que acoge peregrinos desde el s. XIV, cuatro pueblos del mundo que llevan su nombre, y un encuentro casual en 2009 que unió tres continentes bajo el lema <em>"Abriendo caminos de amistad"</em>. Sólo pide los recursos para preservarlo, ampliarlo y abrirlo al mundo con una Senda de esculturas, un Centro de Interpretación Digital y un festival anual de arte rural.
+  </div>
+  <p style="text-align:center; margin-top: 30px;"><em>Si somos 301, seremos 301 cuidando el pueblo.</em> <span style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mut);">— Vecinos de Güemes, abril 2026</span></p>
 </div>
 
 </div>
-<div class="footer">Dossier Historico-Cultural · Junta Vecinal de Guemes · Municipio de Bareyo · Cantabria</div>
-<div class="toast" id="toast"></div>
-<script>async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Guemes 2026 — Dossier Historico',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}</script>
+
+<footer class="footer">
+  <strong>Abriendo caminos de amistad</strong> — Dossier histórico-cultural · Candidatura Pueblo de Cantabria 2026<br>
+  Junta Vecinal de Güemes · Ayuntamiento de Bareyo · Cantabria
+</footer>
+
 </body>
 </html>
