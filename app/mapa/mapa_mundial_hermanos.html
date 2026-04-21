@@ -790,7 +790,7 @@
   function focusPin(key) {
     showPanelWorld(key);
     const coords = PUEBLOS[key].coords;
-    map.flyTo(coords, key === 'espana' ? 4 : 5, { duration: 1.6, easeLinearity: 0.3 });
+    map.flyTo(coords, key === 'espana' ? 10 : 9, { duration: 2.0, easeLinearity: 0.3 });
   }
 
   function focusLocal(key) {
