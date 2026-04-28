@@ -8,6 +8,27 @@
     <link rel="stylesheet" href="guemes-design.css">
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
     <link rel="stylesheet" href="theme.css">
+
+    <!-- ImportMap para Photo Sphere Viewer (DEBE estar en el HTML antes que los modulos) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three":                                          "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+            "@photo-sphere-viewer/core":                      "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.13.3/index.module.js",
+            "@photo-sphere-viewer/virtual-tour-plugin":       "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.13.3/index.module.js",
+            "@photo-sphere-viewer/map-plugin":                "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/map-plugin@5.13.3/index.module.js",
+            "@photo-sphere-viewer/markers-plugin":            "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.13.3/index.module.js",
+            "@photo-sphere-viewer/gallery-plugin":            "https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/gallery-plugin@5.13.3/index.module.js"
+        }
+    }
+    </script>
+
+    <!-- CSS de Photo Sphere Viewer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.13.3/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/virtual-tour-plugin@5.13.3/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/map-plugin@5.13.3/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.13.3/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/gallery-plugin@5.13.3/index.css">
     <style>
         body { padding: 0; margin: 0; background: var(--fondo); }
         .mapa-topbar {
@@ -350,8 +371,7 @@
             <button class="mapa-btn" id="btn-mapa">Mapa</button>
             <button class="mapa-btn" id="btn-3d">Vista aérea 3D</button>
             <button class="mapa-btn" id="btn-reset">Centrar ruta</button>
-            <button class="mapa-btn" id="btn-galeria">Galería aérea</button>
-            <button class="mapa-btn mapa-btn-tour" id="btn-tour-360">Visita aérea 360° · 30 vistas</button>
+            <button class="mapa-btn mapa-btn-tour" id="btn-tour-360">Visor aéreo 360° · 30 vistas</button>
             <button class="mapa-btn" id="btn-toggle-panos">Mostrar puntos 360°</button>
         </div>
         <div class="elevation-profile">
@@ -458,21 +478,6 @@
         </div>
     </aside>
 
-</div>
-
-<!-- MODAL GALERÍA AÉREA -->
-<div class="aerial-modal" id="aerialModal">
-    <div class="aerial-header">
-        <h3>Visor aéreo · Vistas de dron sobre Güemes <span class="count" id="aerialCount">1 / 21</span></h3>
-        <button class="aerial-close" id="aerialClose" title="Cerrar (Esc)">✕</button>
-    </div>
-    <div class="aerial-stage">
-        <button class="aerial-nav prev" id="aerialPrev" title="Anterior">‹</button>
-        <img id="aerialCurrent" src="" alt="Vista aérea de Güemes">
-        <button class="aerial-nav next" id="aerialNext" title="Siguiente">›</button>
-    </div>
-    <div class="aerial-caption" id="aerialCaption">Senda de las Estatuas de Güemes — vista aérea</div>
-    <div class="aerial-thumbs" id="aerialThumbs"></div>
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -936,15 +941,6 @@ let statueMarkers = [];
 let monMarkers = [];
 let activeId = null;
 
-// Lista de fotos aéreas (aerea_02 … aerea_23, salta 13)
-const AERIAL_PHOTOS = [
-    'aerea_02.jpg','aerea_03.jpg','aerea_04.jpg','aerea_05.jpg','aerea_06.jpg',
-    'aerea_07.jpg','aerea_08.jpg','aerea_09.jpg','aerea_10.jpg','aerea_11.jpg',
-    'aerea_12.jpg','aerea_14.jpg','aerea_15.jpg','aerea_16.jpg','aerea_17.jpg',
-    'aerea_18.jpg','aerea_19.jpg','aerea_20.jpg','aerea_21.jpg','aerea_22.jpg',
-    'aerea_23.jpg'
-];
-
 map.on('load', async () => {
     try {
         gpxData = await loadGPX('ruta_guemes.gpx');
@@ -1032,7 +1028,7 @@ function popupEstatua(z) {
 
 function popupMonumento(m) {
     const matterportBtn = m.tour
-        ? `<a href="${m.tour}" target="_blank" rel="noopener" class="btn-matterport">Tour Matterport →</a>`
+        ? `<button type="button" class="btn-matterport" data-matterport="${m.tour}" data-mptitle="${m.title}">Ver el interior</button>`
         : '';
     return `
       <div class="zone-popup">
@@ -1046,6 +1042,29 @@ function popupMonumento(m) {
           <div class="pop-coords">${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}</div>
         </div>
       </div>`;
+}
+
+// Delegacion: abrir Matterport en modal embebido
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-matterport');
+    if (!btn) return;
+    e.preventDefault();
+    openMatterport(btn.dataset.matterport, btn.dataset.mptitle || '');
+});
+
+function openMatterport(url, title) {
+    const modal = document.getElementById('matterportModal');
+    const iframe = document.getElementById('matterportIframe');
+    document.getElementById('matterportTitle').textContent = title;
+    iframe.src = url;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeMatterport() {
+    const modal = document.getElementById('matterportModal');
+    document.getElementById('matterportIframe').src = '';
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
 }
 
 // Delegación de clicks: el botón 360 está dentro de popups que se crean dinámicamente
@@ -1249,59 +1268,7 @@ function drawElevationProfile() {
 }
 
 // ============================================================
-// GALERÍA AÉREA
-// ============================================================
-const aerialModal = document.getElementById('aerialModal');
-const aerialImg = document.getElementById('aerialCurrent');
-const aerialCount = document.getElementById('aerialCount');
-const aerialCaption = document.getElementById('aerialCaption');
-const aerialThumbs = document.getElementById('aerialThumbs');
-let aerialIdx = 0;
-
-function openAerial(idx = 0) {
-    aerialIdx = idx;
-    renderAerial();
-    aerialModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-function closeAerial() {
-    aerialModal.classList.remove('open');
-    document.body.style.overflow = '';
-}
-function nextAerial() { aerialIdx = (aerialIdx + 1) % AERIAL_PHOTOS.length; renderAerial(); }
-function prevAerial() { aerialIdx = (aerialIdx - 1 + AERIAL_PHOTOS.length) % AERIAL_PHOTOS.length; renderAerial(); }
-function renderAerial() {
-    const file = AERIAL_PHOTOS[aerialIdx];
-    aerialImg.src = '../imagenes/aereas/' + file;
-    aerialCount.textContent = (aerialIdx + 1) + ' / ' + AERIAL_PHOTOS.length;
-    aerialCaption.textContent = 'Vista aérea ' + file.replace('aerea_', '').replace('.jpg', '') + ' · Dron sobre Güemes';
-    document.querySelectorAll('.aerial-thumb').forEach((t, i) => t.classList.toggle('active', i === aerialIdx));
-    // scroll thumb into view
-    const activeThumb = document.querySelector('.aerial-thumb.active');
-    if (activeThumb) activeThumb.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-}
-
-// Construir thumbs
-AERIAL_PHOTOS.forEach((file, i) => {
-    const t = document.createElement('div');
-    t.className = 'aerial-thumb';
-    t.innerHTML = '<img src="../imagenes/aereas/' + file + '" alt="Miniatura ' + (i+1) + '" loading="lazy">';
-    t.addEventListener('click', () => { aerialIdx = i; renderAerial(); });
-    aerialThumbs.appendChild(t);
-});
-
-// Listeners
-document.getElementById('btn-galeria').addEventListener('click', () => openAerial(0));
-document.getElementById('aerialClose').addEventListener('click', closeAerial);
-document.getElementById('aerialPrev').addEventListener('click', prevAerial);
-document.getElementById('aerialNext').addEventListener('click', nextAerial);
-aerialModal.addEventListener('click', (e) => { if (e.target === aerialModal) closeAerial(); });
-document.addEventListener('keydown', (e) => {
-    if (!aerialModal.classList.contains('open')) return;
-    if (e.key === 'Escape') closeAerial();
-    else if (e.key === 'ArrowRight') nextAerial();
-    else if (e.key === 'ArrowLeft') prevAerial();
-});
+// (Galeria aerea plana eliminada — el "Visor aereo" ahora abre el tour 360)
 
 // ============================================================
 // MARKERS DE LOS 30 PANORAMAS SOBRE EL MAPA
@@ -1361,39 +1328,8 @@ let psvVirtualTour = null;
 let psvMap = null;
 
 async function loadPSV() {
-    if (psvLoaded) return;
-    // ESM dinámico — solo se descarga la primera vez que el usuario abre un 360
-    const importMap = {
-        imports: {
-            'three':                 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js',
-            '@photo-sphere-viewer/core':                  `${PSV_CDN}/core@${PSV_VERSION}/index.module.js`,
-            '@photo-sphere-viewer/virtual-tour-plugin':   `${PSV_CDN}/virtual-tour-plugin@${PSV_VERSION}/index.module.js`,
-            '@photo-sphere-viewer/map-plugin':            `${PSV_CDN}/map-plugin@${PSV_VERSION}/index.module.js`,
-            '@photo-sphere-viewer/markers-plugin':        `${PSV_CDN}/markers-plugin@${PSV_VERSION}/index.module.js`,
-            '@photo-sphere-viewer/gallery-plugin':        `${PSV_CDN}/gallery-plugin@${PSV_VERSION}/index.module.js`
-        }
-    };
-    // Inyectar import map si no existe
-    if (!document.querySelector('script[type="importmap"]')) {
-        const im = document.createElement('script');
-        im.type = 'importmap';
-        im.textContent = JSON.stringify(importMap);
-        document.head.appendChild(im);
-    }
-    // CSS de los plugins
-    const cssUrls = [
-        `${PSV_CDN}/core@${PSV_VERSION}/index.css`,
-        `${PSV_CDN}/virtual-tour-plugin@${PSV_VERSION}/index.css`,
-        `${PSV_CDN}/map-plugin@${PSV_VERSION}/index.css`,
-        `${PSV_CDN}/markers-plugin@${PSV_VERSION}/index.css`,
-        `${PSV_CDN}/gallery-plugin@${PSV_VERSION}/index.css`
-    ];
-    cssUrls.forEach(href => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = href;
-        document.head.appendChild(link);
-    });
+    // El importmap y el CSS estan ya en el <head> estatico (la spec exige que
+    // el importmap se cargue antes que cualquier modulo). Aqui solo marcamos.
     psvLoaded = true;
 }
 
@@ -1496,10 +1432,11 @@ function findPoiByKey(key) {
 }
 
 document.getElementById('tour360Close').addEventListener('click', closeTour360);
+document.getElementById('matterportClose').addEventListener('click', closeMatterport);
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.getElementById('tour360Modal').classList.contains('open')) {
-        closeTour360();
-    }
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('tour360Modal').classList.contains('open')) closeTour360();
+    if (document.getElementById('matterportModal').classList.contains('open')) closeMatterport();
 });
 
 </script>
@@ -1516,6 +1453,20 @@ document.addEventListener('keydown', (e) => {
         <button id="tour360Close" class="tour360-close" type="button" aria-label="Cerrar visita">✕</button>
     </div>
     <div id="tour360Viewer" class="tour360-viewer"></div>
+</div>
+
+<!-- ============================================================
+     MODAL MATTERPORT (interior de iglesia/ermita)
+     ============================================================ -->
+<div id="matterportModal" class="tour360-modal" aria-hidden="true">
+    <div class="tour360-header">
+        <div>
+            <div class="tour360-eyebrow">Interior · Tour 3D</div>
+            <h3 id="matterportTitle">Ver el interior</h3>
+        </div>
+        <button id="matterportClose" class="tour360-close" type="button" aria-label="Cerrar">✕</button>
+    </div>
+    <iframe id="matterportIframe" class="tour360-viewer" src="" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen" allowfullscreen></iframe>
 </div>
 
 </body>
