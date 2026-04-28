@@ -1,0 +1,334 @@
+/* ============================================================
+   GÜEMES 2026 — Theme override para el mapa de la Senda
+   Remapea la paleta azul/dorada del CSS importado al
+   branding corten + navy + cream usado en el resto del sitio.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://api.fontshare.com/v2/css?f%5B%5D=satoshi@300,400,500,700,900&display=swap');
+
+:root,
+html, body {
+  /* -------- Paleta corten (autoridad del branding) -------- */
+  --bg-deep:    #0a1120;
+  --bg-navy:    #101a30;
+  --bg-card:    #141f38;
+  --corten:     #c89450;
+  --corten-br:  #f4c77b;
+  --corten-dk:  #7a5a30;
+  --text:       #e8e6e1;
+  --text-dim:   #b8b5af;
+  --text-mut:   #8a8680;
+  --line:       rgba(244, 199, 123, 0.22);
+  --line-soft:  rgba(232, 230, 225, 0.10);
+
+  /* -------- Remap de las variables del CSS importado -------- */
+  --azul-profundo:  var(--bg-deep);
+  --azul-principal: var(--bg-navy);
+  --azul-medio:     var(--corten-br);
+  --azul-claro:     var(--corten);
+  --azul-papel:     var(--bg-card);
+  --azul-linea:     var(--line-soft);
+
+  --dorado:         var(--corten-br);
+  --dorado-oscuro:  var(--corten-dk);
+  --dorado-crema:   var(--bg-card);
+  --dorado-linea:   var(--line);
+
+  --fondo:          var(--bg-deep);
+  --fondo-blanco:   var(--bg-navy);
+  --fondo-sutil:    var(--bg-card);
+
+  --texto:          var(--text);
+  --texto-suave:    var(--text-dim);
+  --texto-muted:    var(--text-mut);
+  --texto-tenue:    var(--text-mut);
+
+  /* -------- Tipografías -------- */
+  --font-sans:  'Satoshi', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+}
+
+body {
+  background: var(--bg-deep) !important;
+  color: var(--text) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Topbar ===== */
+.mapa-topbar {
+  background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-navy) 100%) !important;
+  border-bottom: 1px solid var(--line) !important;
+  color: var(--text) !important;
+}
+.mapa-topbar h1 {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  letter-spacing: -0.005em !important;
+  color: var(--text) !important;
+}
+.mapa-topbar h1 .accent { color: var(--corten-br) !important; }
+.mapa-topbar .subt {
+  color: var(--text-dim) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  margin-top: 0.4rem !important;
+}
+.mapa-topbar a.back {
+  background: transparent !important;
+  border: 1px solid var(--line) !important;
+  color: var(--text-dim) !important;
+  border-radius: 2px !important;
+  font-family: var(--font-sans);
+  font-size: 11px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  padding: 8px 16px !important;
+  transition: all 0.2s;
+}
+.mapa-topbar a.back:hover {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+  border-color: var(--corten-br) !important;
+}
+
+/* ===== Botones de control del mapa ===== */
+.mapa-btn {
+  background: rgba(10, 17, 32, 0.85) !important;
+  border: 1px solid var(--line) !important;
+  color: var(--text) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-sans) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  border-radius: 2px !important;
+  padding: 9px 16px !important;
+  box-shadow: none !important;
+}
+.mapa-btn:hover {
+  background: var(--bg-navy) !important;
+  border-color: var(--corten-br) !important;
+  color: var(--corten-br) !important;
+}
+.mapa-btn.active {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+  border-color: var(--corten-br) !important;
+}
+
+/* ===== Markers ===== */
+.marker-zone {
+  background: var(--corten-br) !important;
+  border: 3px solid var(--bg-deep) !important;
+  color: var(--bg-deep) !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+  box-shadow: 0 4px 14px rgba(244, 199, 123, 0.45) !important;
+}
+.marker-zone.marker-active {
+  background: var(--bg-deep) !important;
+  color: var(--corten-br) !important;
+  border-color: var(--corten-br) !important;
+  box-shadow: 0 4px 18px rgba(244, 199, 123, 0.6) !important;
+}
+.marker-mon {
+  background: var(--bg-navy) !important;
+  border: 2px solid var(--corten-br) !important;
+  color: var(--corten-br) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+.marker-mon:hover {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+}
+
+/* ===== Popups ===== */
+.maplibregl-popup-content {
+  background: var(--bg-navy) !important;
+  border-radius: 2px !important;
+  border-top: 3px solid var(--corten-br) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+  color: var(--text) !important;
+}
+.maplibregl-popup-tip {
+  border-top-color: var(--bg-navy) !important;
+  border-bottom-color: var(--bg-navy) !important;
+}
+.maplibregl-popup-close-button {
+  color: var(--text-dim) !important;
+  font-size: 18px !important;
+  padding: 4px 8px !important;
+}
+.zone-popup { font-family: var(--font-sans) !important; }
+.zone-popup .pop-km {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+  font-family: var(--font-sans);
+  font-weight: 600 !important;
+}
+.zone-popup h4 {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  color: var(--text) !important;
+  font-size: 1.2rem !important;
+  font-weight: 400 !important;
+}
+.zone-popup p { color: var(--text-dim) !important; }
+.zone-popup .pop-coords {
+  color: var(--corten-br) !important;
+  border-top: 1px solid var(--line-soft) !important;
+}
+
+/* ===== Sidebar ===== */
+.mapa-sidebar {
+  background: var(--bg-navy) !important;
+  border-left: 1px solid var(--line-soft) !important;
+  color: var(--text) !important;
+}
+.stat-mini {
+  background: var(--bg-card) !important;
+  border-top: 2px solid var(--corten-br) !important;
+  border-radius: 2px !important;
+}
+.stat-mini .val {
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+  color: var(--corten-br) !important;
+  font-weight: 400 !important;
+}
+.stat-mini .lbl { color: var(--text-mut) !important; }
+
+.sidebar-h {
+  color: var(--corten-br) !important;
+  border-bottom: 1px solid var(--line) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.25em !important;
+}
+
+.zone-item {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--line-soft) !important;
+  border-radius: 2px !important;
+  color: var(--text) !important;
+}
+.zone-item:hover {
+  background: var(--bg-deep) !important;
+  border-color: var(--corten-br) !important;
+}
+.zone-item.active {
+  background: var(--bg-deep) !important;
+  border-color: var(--corten-br) !important;
+}
+.zone-item.active .zn-title { color: var(--corten-br) !important; }
+.zone-item.active .zn-desc  { color: var(--text-dim) !important; }
+.zone-item.active .zn-num   { background: var(--corten-br) !important; color: var(--bg-deep) !important; }
+
+.zn-num {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+}
+.mon-item .zn-num {
+  background: var(--bg-deep) !important;
+  color: var(--corten-br) !important;
+  border: 1px solid var(--corten-br);
+  font-family: var(--font-sans) !important;
+  font-style: normal !important;
+}
+.mon-item .zn-desc { color: var(--text-mut) !important; }
+.zn-title { color: var(--text) !important; font-weight: 500 !important; }
+.zn-desc  { color: var(--text-mut) !important; }
+
+/* ===== Perfil altimétrico ===== */
+.elevation-profile {
+  background: var(--bg-deep) !important;
+  border-top: 1px solid var(--line-soft) !important;
+  color: var(--text-dim) !important;
+}
+.elevation-profile .ep-header { color: var(--text-mut) !important; letter-spacing: 0.18em !important; }
+.elevation-profile .ep-header strong { color: var(--corten-br) !important; }
+.elevation-profile svg path,
+.elevation-profile svg polyline { stroke: var(--corten-br) !important; }
+.elevation-profile svg .ep-fill { fill: rgba(244, 199, 123, 0.12) !important; }
+.ep-tooltip {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+  font-weight: 600 !important;
+}
+.ep-cursor { stroke: var(--corten-br) !important; }
+
+/* ===== Leyendas ===== */
+.legend, .route-legend {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--line-soft) !important;
+  color: var(--text-dim) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+/* Swatch para que las dos rutas se distingan visualmente */
+.route-legend .sw-full   { background: linear-gradient(90deg, #f4c77b, #c89450) !important; }
+.route-legend .sw-jurado { background: linear-gradient(90deg, #7bc6f4, #3a8bbf) !important; }
+
+/* ===== Loading ===== */
+.loading-overlay {
+  background: var(--bg-deep) !important;
+  color: var(--text) !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+}
+.spinner {
+  border-color: rgba(244, 199, 123, 0.2) !important;
+  border-top-color: var(--corten-br) !important;
+}
+
+/* ===== Galería aérea ===== */
+.aerial-modal { background: rgba(10, 17, 32, 0.97) !important; }
+.aerial-header { border-bottom-color: var(--line-soft) !important; }
+.aerial-header h3 {
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+  color: var(--text) !important;
+}
+.aerial-header h3 .count { color: var(--corten-br) !important; }
+.aerial-close {
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+.aerial-close:hover { background: var(--corten-br) !important; color: var(--bg-deep) !important; border-color: var(--corten-br) !important; }
+.aerial-nav {
+  background: rgba(244, 199, 123, 0.1) !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+}
+.aerial-nav:hover { background: var(--corten-br) !important; color: var(--bg-deep) !important; border-color: var(--corten-br) !important; }
+.aerial-caption { color: var(--text-mut) !important; letter-spacing: 0.15em !important; text-transform: uppercase; font-size: 11px !important; }
+.aerial-thumbs { background: rgba(0, 0, 0, 0.5) !important; border-top-color: var(--line-soft) !important; }
+.aerial-thumb.active { border-color: var(--corten-br) !important; }
+
+/* ===== MapLibre controls ===== */
+.maplibregl-ctrl-group {
+  background: var(--bg-navy) !important;
+  border: 1px solid var(--line-soft) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+}
+.maplibregl-ctrl button {
+  background-color: var(--bg-navy) !important;
+}
+.maplibregl-ctrl button:hover { background-color: var(--bg-card) !important; }
+.maplibregl-ctrl button span { filter: invert(1) brightness(0.95); }
+.maplibregl-ctrl-attrib {
+  background: rgba(10, 17, 32, 0.7) !important;
+  color: var(--text-mut) !important;
+}
+.maplibregl-ctrl-attrib a { color: var(--corten-br) !important; }
