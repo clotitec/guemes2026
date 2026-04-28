@@ -1305,7 +1305,7 @@ document.addEventListener('keydown', (e) => {
 // ============================================================
 // MARKERS DE LOS 30 PANORAMAS SOBRE EL MAPA
 // ============================================================
-let panoMarkersVisible = true;
+let panoMarkersVisible = false;
 const panoMarkers = [];
 
 function buildPanoMarkers() {
@@ -1313,6 +1313,7 @@ function buildPanoMarkers() {
         if (!scene.gps) return;
         const el = document.createElement('div');
         el.className = 'marker-pano';
+        el.style.display = 'none';
         el.title = scene.name;
         el.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1339,10 +1340,13 @@ document.getElementById('btn-tour-360').addEventListener('click', () => {
     openTour360(TOUR_SCENES[0].id);
 });
 
-// Construir markers cuando el GPX termine de cargar (despues de loadGPX)
-map.on('load', () => {
-    setTimeout(buildPanoMarkers, 100);
-});
+// Construir markers de los panoramas — robusto frente a load ya disparado
+function ensurePanoMarkersBuilt() {
+    if (panoMarkers.length > 0) return;
+    buildPanoMarkers();
+}
+if (map.loaded()) ensurePanoMarkersBuilt();
+else map.on('load', ensurePanoMarkersBuilt);
 
 // ============================================================
 // TOUR 360° — Photo Sphere Viewer (carga perezosa)

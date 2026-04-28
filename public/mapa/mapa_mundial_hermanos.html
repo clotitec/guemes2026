@@ -340,7 +340,7 @@
 
   <div class="controls-top">
     <button class="ctrl-btn" id="btn-replay" onclick="startNarrative(true)" data-i18n="replay">↻ Volver a empezar</button>
-    <button class="ctrl-btn" id="btn-gallery" onclick="openGallery()" data-i18n="gallery">Visor aéreo</button>
+    <a class="ctrl-btn" href="senda/" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block;" data-i18n="aerial360">Visor aéreo 360°</a>
     <button class="ctrl-btn" id="btn-lang" onclick="toggleLang()">EN</button>
   </div>
 
@@ -354,25 +354,6 @@
       <div class="meta" id="p-meta"></div>
       <div class="story" id="p-story"></div>
       <div class="info-actions" id="p-actions"></div>
-    </div>
-  </div>
-
-  <!-- Aerial Gallery -->
-  <div class="gallery-backdrop" id="gallery-modal">
-    <div class="gallery-header">
-      <div class="gallery-title" data-i18n="galleryTitle">Visor aéreo — Güemes desde el cielo</div>
-      <div class="gallery-header-right">
-        <span class="gallery-counter" id="gallery-counter"></span>
-        <button class="modal-close" onclick="closeGallery()" style="position:relative;top:auto;right:auto;">✕</button>
-      </div>
-    </div>
-    <div class="gallery-grid" id="gallery-grid"></div>
-
-    <div class="gallery-viewer" id="gallery-viewer">
-      <button class="gallery-nav prev" onclick="navigatePhoto(-1)">‹</button>
-      <img id="gallery-photo" src="" alt="">
-      <button class="gallery-nav next" onclick="navigatePhoto(1)">›</button>
-      <button class="modal-close" onclick="closeViewer()">✕</button>
     </div>
   </div>
 
@@ -399,14 +380,10 @@
       title: 'Abriendo <em>caminos</em> de amistad',
       sub: 'Candidatura Pueblo de Cantabria 2026',
       replay: '↻ Volver a empezar',
-      gallery: 'Visor aéreo',
-      galleryTitle: 'Visor aéreo — Güemes desde el cielo',
-      galleryLabel: 'Vista',
-      galleryCount: 'vistas',
+      aerial360: 'Visor aéreo 360°',
       lang: 'EN',
       viewLocal: 'Ver el pueblo',
       viewWorld: 'Volver al mundo',
-      aerial: 'Visor aéreo',
       streetView: 'Caminar por la ruta',
       from: 'Desde',
       population: 'Población',
@@ -419,14 +396,10 @@
       title: 'Opening <em>paths</em> of friendship',
       sub: 'Candidacy · Village of Cantabria 2026',
       replay: '↻ Replay',
-      gallery: 'Aerial viewer',
-      galleryTitle: 'Aerial viewer — Güemes from above',
-      galleryLabel: 'View',
-      galleryCount: 'views',
+      aerial360: '360° Aerial viewer',
       lang: 'ES',
       viewLocal: 'See the village',
       viewWorld: 'Back to the world',
-      aerial: 'Aerial viewer',
       streetView: 'Walk the route',
       from: 'Since',
       population: 'Population',
@@ -756,7 +729,7 @@
     content.actions = [];
     if (key === 'espana') {
       content.actions.push({ label: t.viewLocal, onclick: "switchMode('local')" });
-      content.actions.push({ label: t.aerial, onclick: "openGallery()" });
+      content.actions.push({ label: t.aerial360, onclick: "window.open('senda/', '_blank')" });
       content.actions.push({ label: t.streetView, onclick: "openStreetView('iglesia')" });
     }
     renderPanel(content);
@@ -777,6 +750,7 @@
     if (key === 'albergue') {
       content.actions.push({ label: t.streetView, onclick: "openStreetView('albergue')" });
     }
+    content.actions.push({ label: t.aerial360, onclick: "window.open('senda/', '_blank')" });
     content.actions.push({ label: t.viewWorld, onclick: "switchMode('world')" });
     renderPanel(content);
   }
@@ -843,71 +817,6 @@
   function closeStreetView() {
     document.getElementById('sv-modal').classList.remove('open');
     document.getElementById('sv-iframe').src = '';
-  }
-
-  // ==========================================
-  // AERIAL GALLERY
-  // ==========================================
-  const AERIAL = [
-    'imagenes/aereas/aerea_01.jpg', 'imagenes/aereas/aerea_02.jpg',
-    'imagenes/aereas/aerea_03.jpg', 'imagenes/aereas/aerea_04.jpg',
-    'imagenes/aereas/aerea_05.jpg', 'imagenes/aereas/aerea_06.jpg',
-    'imagenes/aereas/aerea_07.jpg', 'imagenes/aereas/aerea_08.jpg',
-    'imagenes/aereas/aerea_09.jpg', 'imagenes/aereas/aerea_10.jpg',
-    'imagenes/aereas/aerea_11.jpg', 'imagenes/aereas/aerea_12.jpg',
-    'imagenes/aereas/aerea_13.jpg', 'imagenes/aereas/aerea_14.jpg',
-    'imagenes/aereas/aerea_15.jpg', 'imagenes/aereas/aerea_16.jpg',
-    'imagenes/aereas/aerea_17.jpg', 'imagenes/aereas/aerea_18.jpg',
-    'imagenes/aereas/aerea_19.jpg', 'imagenes/aereas/aerea_20.jpg',
-    'imagenes/aereas/aerea_21.jpg', 'imagenes/aereas/aerea_22.jpg',
-    'imagenes/aereas/aerea_23.jpg',
-  ];
-  let currentPhoto = 0;
-
-  function openGallery() {
-    const t = I18N[currentLang];
-    const grid = document.getElementById('gallery-grid');
-    grid.innerHTML = AERIAL.map((src, i) => {
-      const num = String(i + 1).padStart(2, '0');
-      return '<div class="gallery-thumb" style="background-image:url(' + src + ')" onclick="openPhoto(' + i + ')"><div class="gallery-thumb-label">' + t.galleryLabel + ' ' + num + '</div></div>';
-    }).join('');
-    document.getElementById('gallery-counter').textContent = AERIAL.length + ' ' + t.galleryCount;
-    document.getElementById('gallery-modal').classList.add('open');
-    document.getElementById('gallery-viewer').classList.remove('open');
-  }
-
-  function closeGallery() {
-    document.getElementById('gallery-modal').classList.remove('open');
-    document.getElementById('gallery-viewer').classList.remove('open');
-  }
-
-  function openPhoto(idx) {
-    currentPhoto = idx;
-    const photo = document.getElementById('gallery-photo');
-    // trigger fade animation by resetting src
-    photo.src = '';
-    setTimeout(() => { photo.src = AERIAL[idx]; }, 10);
-    document.getElementById('gallery-viewer').classList.add('open');
-    updatePhotoCounter();
-  }
-
-  function closeViewer() {
-    document.getElementById('gallery-viewer').classList.remove('open');
-    const t = I18N[currentLang];
-    document.getElementById('gallery-counter').textContent = AERIAL.length + ' ' + t.galleryCount;
-  }
-
-  function navigatePhoto(dir) {
-    currentPhoto = (currentPhoto + dir + AERIAL.length) % AERIAL.length;
-    const photo = document.getElementById('gallery-photo');
-    photo.src = '';
-    setTimeout(() => { photo.src = AERIAL[currentPhoto]; }, 10);
-    updatePhotoCounter();
-  }
-
-  function updatePhotoCounter() {
-    const t = I18N[currentLang];
-    document.getElementById('gallery-counter').textContent = (currentPhoto + 1) + ' / ' + AERIAL.length;
   }
 
   // ==========================================
@@ -1008,15 +917,7 @@
 
   // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeStreetView();
-      if (document.getElementById('gallery-viewer').classList.contains('open')) closeViewer();
-      else closeGallery();
-    }
-    if (document.getElementById('gallery-viewer').classList.contains('open')) {
-      if (e.key === 'ArrowLeft') navigatePhoto(-1);
-      if (e.key === 'ArrowRight') navigatePhoto(1);
-    }
+    if (e.key === 'Escape') closeStreetView();
   });
 
 </script>
