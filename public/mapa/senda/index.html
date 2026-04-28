@@ -349,7 +349,9 @@
             <button class="mapa-btn" id="btn-mapa">Mapa</button>
             <button class="mapa-btn" id="btn-3d">Vista aérea 3D</button>
             <button class="mapa-btn" id="btn-reset">Centrar ruta</button>
-            <button class="mapa-btn" id="btn-galeria" style="background:var(--dorado); color:white; border-color:var(--dorado);">📷 Galería aérea (21 fotos)</button>
+            <button class="mapa-btn" id="btn-galeria">Galería aérea</button>
+            <button class="mapa-btn mapa-btn-tour" id="btn-tour-360">Visita aérea 360° · 30 vistas</button>
+            <button class="mapa-btn" id="btn-toggle-panos">Mostrar puntos 360°</button>
         </div>
         <div class="elevation-profile">
             <div class="ep-header">
@@ -567,16 +569,268 @@ const GUEMES_CENTER = [-3.632, 43.4515];
 //   gps       : opcional [lng, lat] — si no, se hereda del POI
 //   sphereCorrection: opcional, para corregir orientación de pano
 const TOUR_SCENES = [
-    // EJEMPLO (descomentar y rellenar cuando lleguen las fotos):
-    // {
-    //   id: 'iglesia',
-    //   poi: 'mon:iglesia',
-    //   panorama: '360/iglesia-san-vicente.jpg',
-    //   name: 'Iglesia de San Vicente Mártir',
-    //   caption: 'Plaza de acceso · inicio de la Senda',
-    //   links: [{ nodeId: 'portalillo', position: { yaw: '180deg', pitch: 0 } }],
-    //   gps: [-3.6366, 43.4556]
-    // },
+    {
+      id: "aerea_1",
+      panorama: "360/aereas/aerea_1.jpg",
+      name: "Vista aérea 01",
+      caption: "Senda de las Estatuas · 01/30",
+      gps: [-3.63704166666667, 43.4553888888889],
+      sphereCorrection: { pan: "178.5deg" },
+      links: [{ nodeId: "aerea_2" }]
+    },
+    {
+      id: "aerea_2",
+      panorama: "360/aereas/aerea_2.jpg",
+      name: "Vista aérea 02",
+      caption: "Senda de las Estatuas · 02/30",
+      gps: [-3.63773888888889, 43.4556722222222],
+      sphereCorrection: { pan: "168.9deg" },
+      links: [{ nodeId: "aerea_1" }, { nodeId: "aerea_3" }]
+    },
+    {
+      id: "aerea_3",
+      panorama: "360/aereas/aerea_3.jpg",
+      name: "Vista aérea 03",
+      caption: "Senda de las Estatuas · 03/30",
+      gps: [-3.63972222222222, 43.4552861111111],
+      sphereCorrection: { pan: "181.7deg" },
+      links: [{ nodeId: "aerea_2" }, { nodeId: "aerea_4" }]
+    },
+    {
+      id: "aerea_4",
+      panorama: "360/aereas/aerea_4.jpg",
+      name: "Vista aérea 04",
+      caption: "Senda de las Estatuas · 04/30",
+      gps: [-3.64163611111111, 43.4546833333333],
+      sphereCorrection: { pan: "196.1deg" },
+      links: [{ nodeId: "aerea_3" }, { nodeId: "aerea_5" }]
+    },
+    {
+      id: "aerea_5",
+      panorama: "360/aereas/aerea_5.jpg",
+      name: "Vista aérea 05",
+      caption: "Senda de las Estatuas · 05/30",
+      gps: [-3.64396111111111, 43.4527138888889],
+      sphereCorrection: { pan: "184.0deg" },
+      links: [{ nodeId: "aerea_4" }, { nodeId: "aerea_6" }]
+    },
+    {
+      id: "aerea_6",
+      panorama: "360/aereas/aerea_6.jpg",
+      name: "Vista aérea 06",
+      caption: "Senda de las Estatuas · 06/30",
+      gps: [-3.64494722222222, 43.4507055555556],
+      sphereCorrection: { pan: "201.8deg" },
+      links: [{ nodeId: "aerea_5" }, { nodeId: "aerea_7" }]
+    },
+    {
+      id: "aerea_7",
+      panorama: "360/aereas/aerea_7.jpg",
+      name: "Vista aérea 07",
+      caption: "Senda de las Estatuas · 07/30",
+      gps: [-3.64543333333333, 43.4472361111111],
+      sphereCorrection: { pan: "63.4deg" },
+      links: [{ nodeId: "aerea_6" }, { nodeId: "aerea_8" }]
+    },
+    {
+      id: "aerea_8",
+      panorama: "360/aereas/aerea_8.jpg",
+      name: "Vista aérea 08",
+      caption: "Senda de las Estatuas · 08/30",
+      gps: [-3.64566388888889, 43.4489027777778],
+      sphereCorrection: { pan: "183.6deg" },
+      links: [{ nodeId: "aerea_7" }, { nodeId: "aerea_9" }]
+    },
+    {
+      id: "aerea_9",
+      panorama: "360/aereas/aerea_9.jpg",
+      name: "Vista aérea 09",
+      caption: "Senda de las Estatuas · 09/30",
+      gps: [-3.64606944444444, 43.4459027777778],
+      sphereCorrection: { pan: "184.0deg" },
+      links: [{ nodeId: "aerea_8" }, { nodeId: "aerea_10" }]
+    },
+    {
+      id: "aerea_10",
+      panorama: "360/aereas/aerea_10.jpg",
+      name: "Vista aérea 10",
+      caption: "Senda de las Estatuas · 10/30",
+      gps: [-3.6446, 43.4477666666667],
+      sphereCorrection: { pan: "192.1deg" },
+      links: [{ nodeId: "aerea_9" }, { nodeId: "aerea_11" }]
+    },
+    {
+      id: "aerea_11",
+      panorama: "360/aereas/aerea_11.jpg",
+      name: "Vista aérea 11",
+      caption: "Senda de las Estatuas · 11/30",
+      gps: [-3.64286111111111, 43.4485694444444],
+      sphereCorrection: { pan: "185.2deg" },
+      links: [{ nodeId: "aerea_10" }, { nodeId: "aerea_12" }]
+    },
+    {
+      id: "aerea_12",
+      panorama: "360/aereas/aerea_12.jpg",
+      name: "Vista aérea 12",
+      caption: "Senda de las Estatuas · 12/30",
+      gps: [-3.64038888888889, 43.4489805555556],
+      sphereCorrection: { pan: "192.3deg" },
+      links: [{ nodeId: "aerea_11" }, { nodeId: "aerea_13" }]
+    },
+    {
+      id: "aerea_13",
+      panorama: "360/aereas/aerea_13.jpg",
+      name: "Vista aérea 13",
+      caption: "Senda de las Estatuas · 13/30",
+      gps: [-3.63773055555556, 43.4492361111111],
+      sphereCorrection: { pan: "185.7deg" },
+      links: [{ nodeId: "aerea_12" }, { nodeId: "aerea_14" }]
+    },
+    {
+      id: "aerea_14",
+      panorama: "360/aereas/aerea_14.jpg",
+      name: "Vista aérea 14",
+      caption: "Senda de las Estatuas · 14/30",
+      gps: [-3.635175, 43.4491694444444],
+      sphereCorrection: { pan: "176.7deg" },
+      links: [{ nodeId: "aerea_13" }, { nodeId: "aerea_15" }]
+    },
+    {
+      id: "aerea_15",
+      panorama: "360/aereas/aerea_15.jpg",
+      name: "Vista aérea 15",
+      caption: "Senda de las Estatuas · 15/30",
+      gps: [-3.63180833333333, 43.4488305555556],
+      sphereCorrection: { pan: "195.5deg" },
+      links: [{ nodeId: "aerea_14" }, { nodeId: "aerea_16" }]
+    },
+    {
+      id: "aerea_16",
+      panorama: "360/aereas/aerea_16.jpg",
+      name: "Vista aérea 16",
+      caption: "Senda de las Estatuas · 16/30",
+      gps: [-3.62751944444444, 43.4474916666667],
+      sphereCorrection: { pan: "186.1deg" },
+      links: [{ nodeId: "aerea_15" }, { nodeId: "aerea_17" }]
+    },
+    {
+      id: "aerea_17",
+      panorama: "360/aereas/aerea_17.jpg",
+      name: "Vista aérea 17",
+      caption: "Senda de las Estatuas · 17/30",
+      gps: [-3.6263, 43.4475694444444],
+      sphereCorrection: { pan: "188.5deg" },
+      links: [{ nodeId: "aerea_16" }, { nodeId: "aerea_18" }]
+    },
+    {
+      id: "aerea_18",
+      panorama: "360/aereas/aerea_18.jpg",
+      name: "Vista aérea 18",
+      caption: "Senda de las Estatuas · 18/30",
+      gps: [-3.624725, 43.4495861111111],
+      sphereCorrection: { pan: "187.9deg" },
+      links: [{ nodeId: "aerea_17" }, { nodeId: "aerea_19" }]
+    },
+    {
+      id: "aerea_19",
+      panorama: "360/aereas/aerea_19.jpg",
+      name: "Vista aérea 19",
+      caption: "Senda de las Estatuas · 19/30",
+      gps: [-3.62376388888889, 43.45095],
+      sphereCorrection: { pan: "179.9deg" },
+      links: [{ nodeId: "aerea_18" }, { nodeId: "aerea_20" }]
+    },
+    {
+      id: "aerea_20",
+      panorama: "360/aereas/aerea_20.jpg",
+      name: "Vista aérea 20",
+      caption: "Senda de las Estatuas · 20/30",
+      gps: [-3.62347222222222, 43.4526861111111],
+      sphereCorrection: { pan: "189.2deg" },
+      links: [{ nodeId: "aerea_19" }, { nodeId: "aerea_21" }]
+    },
+    {
+      id: "aerea_21",
+      panorama: "360/aereas/aerea_21.jpg",
+      name: "Vista aérea 21",
+      caption: "Senda de las Estatuas · 21/30",
+      gps: [-3.62322777777778, 43.4543166666667],
+      sphereCorrection: { pan: "186.9deg" },
+      links: [{ nodeId: "aerea_20" }, { nodeId: "aerea_22" }]
+    },
+    {
+      id: "aerea_22",
+      panorama: "360/aereas/aerea_22.jpg",
+      name: "Vista aérea 22",
+      caption: "Senda de las Estatuas · 22/30",
+      gps: [-3.62239722222222, 43.4557333333333],
+      links: [{ nodeId: "aerea_21" }, { nodeId: "aerea_23" }]
+    },
+    {
+      id: "aerea_23",
+      panorama: "360/aereas/aerea_23.jpg",
+      name: "Vista aérea 23",
+      caption: "Senda de las Estatuas · 23/30",
+      gps: [-3.62043055555556, 43.4557861111111],
+      links: [{ nodeId: "aerea_22" }, { nodeId: "aerea_24" }]
+    },
+    {
+      id: "aerea_24",
+      panorama: "360/aereas/aerea_24.jpg",
+      name: "Vista aérea 24",
+      caption: "Senda de las Estatuas · 24/30",
+      gps: [-3.61781111111111, 43.4580833333333],
+      links: [{ nodeId: "aerea_23" }, { nodeId: "aerea_25" }]
+    },
+    {
+      id: "aerea_25",
+      panorama: "360/aereas/aerea_25.jpg",
+      name: "Vista aérea 25",
+      caption: "Senda de las Estatuas · 25/30",
+      gps: [-3.62061111111111, 43.4592861111111],
+      links: [{ nodeId: "aerea_24" }, { nodeId: "aerea_26" }]
+    },
+    {
+      id: "aerea_26",
+      panorama: "360/aereas/aerea_26.jpg",
+      name: "Vista aérea 26",
+      caption: "Senda de las Estatuas · 26/30",
+      gps: [-3.62325555555556, 43.4600638888889],
+      links: [{ nodeId: "aerea_25" }, { nodeId: "aerea_28" }]
+    },
+    {
+      id: "aerea_28",
+      panorama: "360/aereas/aerea_28.jpg",
+      name: "Vista aérea 27",
+      caption: "Senda de las Estatuas · 27/30",
+      gps: [-3.62545277777778, 43.46005],
+      links: [{ nodeId: "aerea_26" }, { nodeId: "aerea_29" }]
+    },
+    {
+      id: "aerea_29",
+      panorama: "360/aereas/aerea_29.jpg",
+      name: "Vista aérea 28",
+      caption: "Senda de las Estatuas · 28/30",
+      gps: [-3.62653055555556, 43.4593805555556],
+      links: [{ nodeId: "aerea_28" }, { nodeId: "aerea_30" }]
+    },
+    {
+      id: "aerea_30",
+      panorama: "360/aereas/aerea_30.jpg",
+      name: "Vista aérea 29",
+      caption: "Senda de las Estatuas · 29/30",
+      gps: [-3.62838611111111, 43.4590027777778],
+      links: [{ nodeId: "aerea_29" }, { nodeId: "aerea_34" }]
+    },
+    {
+      id: "aerea_34",
+      panorama: "360/aereas/aerea_34.jpg",
+      name: "Vista aérea 30",
+      caption: "Senda de las Estatuas · 30/30",
+      gps: [-3.62984166666667, 43.4582888888889],
+      sphereCorrection: { pan: "183.8deg" },
+      links: [{ nodeId: "aerea_30" }]
+    },
 ];
 
 // Índice rápido por POI: { 'mon:iglesia': scene, 'statue:es': scene, ... }
@@ -1046,6 +1300,48 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAerial();
     else if (e.key === 'ArrowRight') nextAerial();
     else if (e.key === 'ArrowLeft') prevAerial();
+});
+
+// ============================================================
+// MARKERS DE LOS 30 PANORAMAS SOBRE EL MAPA
+// ============================================================
+let panoMarkersVisible = true;
+const panoMarkers = [];
+
+function buildPanoMarkers() {
+    TOUR_SCENES.forEach(scene => {
+        if (!scene.gps) return;
+        const el = document.createElement('div');
+        el.className = 'marker-pano';
+        el.title = scene.name;
+        el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openTour360(scene.id);
+        });
+        const m = new maplibregl.Marker({ element: el, anchor: 'center' })
+            .setLngLat(scene.gps)
+            .addTo(map);
+        panoMarkers.push(m);
+    });
+}
+
+document.getElementById('btn-toggle-panos').addEventListener('click', (e) => {
+    panoMarkersVisible = !panoMarkersVisible;
+    panoMarkers.forEach(m => {
+        m.getElement().style.display = panoMarkersVisible ? '' : 'none';
+    });
+    e.target.textContent = panoMarkersVisible ? 'Ocultar puntos 360°' : 'Mostrar puntos 360°';
+    e.target.classList.toggle('active', panoMarkersVisible);
+});
+
+document.getElementById('btn-tour-360').addEventListener('click', () => {
+    if (!HAS_TOUR) return;
+    openTour360(TOUR_SCENES[0].id);
+});
+
+// Construir markers cuando el GPX termine de cargar (despues de loadGPX)
+map.on('load', () => {
+    setTimeout(buildPanoMarkers, 100);
 });
 
 // ============================================================

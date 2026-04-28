@@ -334,6 +334,55 @@ body {
 .maplibregl-ctrl-attrib a { color: var(--corten-br) !important; }
 
 /* ============================================================
+   BOTÓN TOUR 360° destacado (en barra de controles del mapa)
+   ============================================================ */
+.mapa-btn-tour {
+  background: var(--corten-br) !important;
+  color: var(--bg-deep) !important;
+  border-color: var(--corten-br) !important;
+  font-weight: 700 !important;
+  position: relative;
+  padding-left: 32px !important;
+}
+.mapa-btn-tour::before {
+  content: '360°';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 9px;
+  letter-spacing: 0;
+  background: var(--bg-deep);
+  color: var(--corten-br);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.mapa-btn-tour:hover {
+  background: var(--text) !important;
+  color: var(--bg-deep) !important;
+  border-color: var(--text) !important;
+}
+
+/* ============================================================
+   MARKER de cada panorama 360 sobre el mapa
+   ============================================================ */
+.marker-pano {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--corten-br);
+  border: 2px solid var(--bg-deep);
+  cursor: pointer;
+  box-shadow: 0 0 0 2px rgba(244, 199, 123, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.marker-pano:hover {
+  transform: scale(1.6);
+  box-shadow: 0 0 0 4px rgba(244, 199, 123, 0.5), 0 4px 14px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
    BOTÓN 360° (dentro de popups) y BOTÓN MATTERPORT
    ============================================================ */
 .btn-360 {
