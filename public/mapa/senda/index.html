@@ -543,11 +543,47 @@ const MONUMENTOS = [
         lat: 43.447881398323915, lng: -3.6454065481141544,
         title: 'Albergue La Cabaña del Abuelo Peuto',
         subtitle: 'Fundado en 1999',
-        desc: 'Albergue de peregrinos del Padre Ernesto Bustio. Más de 50.000 peregrinos acogidos de más de 100 países. Funciona sin subvenciones públicas.'
+        desc: 'Albergue de peregrinos del Padre Ernesto Bustio. Más de 150.000 peregrinos acogidos de más de 80 países. Funciona sin subvenciones públicas.'
     }
 ];
 
 const GUEMES_CENTER = [-3.632, 43.4515];
+
+// ============================================================
+// TOUR 360° — CONFIGURACIÓN
+// ============================================================
+// Cada escena se enlaza a un POI por su id ("statue:es", "mon:iglesia"...).
+// Cuando llegues con las equirectangulares, rellena este array y los popups
+// de los POIs correspondientes mostrarán automáticamente el botón "Ver 360°".
+//
+// Estructura de cada escena:
+//   id        : identificador único (ej. 'iglesia', 'plazoleta-es')
+//   poi       : opcional — string "statue:<id>" o "mon:<id>" para vincular al POI del mapa
+//   panorama  : ruta a la equirectangular dentro de 360/  (jpg, ~6000-8000 px ancho)
+//   name      : título visible en el visor
+//   caption   : línea pequeña debajo
+//   links     : array de ids de escenas vecinas — generan flechas dentro del 360
+//                  formato: { nodeId: 'iglesia', position: { yaw: '90deg', pitch: 0 } }
+//   gps       : opcional [lng, lat] — si no, se hereda del POI
+//   sphereCorrection: opcional, para corregir orientación de pano
+const TOUR_SCENES = [
+    // EJEMPLO (descomentar y rellenar cuando lleguen las fotos):
+    // {
+    //   id: 'iglesia',
+    //   poi: 'mon:iglesia',
+    //   panorama: '360/iglesia-san-vicente.jpg',
+    //   name: 'Iglesia de San Vicente Mártir',
+    //   caption: 'Plaza de acceso · inicio de la Senda',
+    //   links: [{ nodeId: 'portalillo', position: { yaw: '180deg', pitch: 0 } }],
+    //   gps: [-3.6366, 43.4556]
+    // },
+];
+
+// Índice rápido por POI: { 'mon:iglesia': scene, 'statue:es': scene, ... }
+const TOUR_BY_POI = Object.fromEntries(
+    TOUR_SCENES.filter(s => s.poi).map(s => [s.poi, s])
+);
+const HAS_TOUR = TOUR_SCENES.length > 0;
 
 // ============================================================
 // ESTILOS DE MAPA (raster sources)
@@ -716,6 +752,14 @@ map.on('load', async () => {
 // ============================================================
 // POPUPS
 // ============================================================
+function tour360Btn(poiKey) {
+    const scene = TOUR_BY_POI[poiKey];
+    if (!scene) return '';
+    return `<button class="btn-360" data-scene="${scene.id}" type="button">
+              <span class="dot-360">360°</span> Entrar en visita inmersiva
+            </button>`;
+}
+
 function popupEstatua(z) {
     return `
       <div class="zone-popup">
@@ -723,29 +767,39 @@ function popupEstatua(z) {
         <div class="pop-body">
           <span class="pop-km">Estatua · ${z.pais}</span>
           <h4>${z.title}</h4>
-          <p style="color:var(--dorado-oscuro); font-weight:600; font-size:0.78rem; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.05em;">${z.subtitle}</p>
+          <p style="color:var(--corten-br); font-weight:600; font-size:0.78rem; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.05em;">${z.subtitle}</p>
           <p>${z.desc}</p>
+          ${tour360Btn('statue:' + z.id)}
           <div class="pop-coords">${z.lat.toFixed(5)}, ${z.lng.toFixed(5)}</div>
         </div>
       </div>`;
 }
 
 function popupMonumento(m) {
-    const tourBtn = m.tour
-        ? `<a href="${m.tour}" target="_blank" rel="noopener" style="display:inline-block; margin-top:0.5rem; padding:0.4rem 0.85rem; background:var(--azul-profundo); color:white; text-decoration:none; border-radius:999px; font-size:0.75rem; font-weight:600; letter-spacing:0.03em;">Tour Matterport 360° →</a>`
+    const matterportBtn = m.tour
+        ? `<a href="${m.tour}" target="_blank" rel="noopener" class="btn-matterport">Tour Matterport →</a>`
         : '';
     return `
       <div class="zone-popup">
         <div class="pop-body" style="padding:1rem 1.1rem;">
-          <span class="pop-km" style="background:var(--azul-profundo);">Monumento</span>
+          <span class="pop-km" style="background:var(--bg-deep); color:var(--corten-br);">Monumento</span>
           <h4>${m.title}</h4>
-          <p style="color:var(--azul-medio); font-weight:600; font-size:0.78rem; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.05em;">${m.subtitle}</p>
+          <p style="color:var(--corten); font-weight:600; font-size:0.78rem; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.05em;">${m.subtitle}</p>
           <p>${m.desc}</p>
-          ${tourBtn}
+          ${tour360Btn('mon:' + m.id)}
+          ${matterportBtn}
           <div class="pop-coords">${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}</div>
         </div>
       </div>`;
 }
+
+// Delegación de clicks: el botón 360 está dentro de popups que se crean dinámicamente
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-360');
+    if (!btn) return;
+    e.preventDefault();
+    openTour360(btn.dataset.scene);
+});
 
 // ============================================================
 // ACTIVE SELECTION
@@ -994,6 +1048,174 @@ document.addEventListener('keydown', (e) => {
     else if (e.key === 'ArrowLeft') prevAerial();
 });
 
+// ============================================================
+// TOUR 360° — Photo Sphere Viewer (carga perezosa)
+// ============================================================
+const PSV_VERSION = '5.13.3';
+const PSV_CDN = `https://cdn.jsdelivr.net/npm/@photo-sphere-viewer`;
+
+let psvLoaded = false;
+let psvViewer = null;
+let psvVirtualTour = null;
+let psvMap = null;
+
+async function loadPSV() {
+    if (psvLoaded) return;
+    // ESM dinámico — solo se descarga la primera vez que el usuario abre un 360
+    const importMap = {
+        imports: {
+            'three':                 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js',
+            '@photo-sphere-viewer/core':                  `${PSV_CDN}/core@${PSV_VERSION}/index.module.js`,
+            '@photo-sphere-viewer/virtual-tour-plugin':   `${PSV_CDN}/virtual-tour-plugin@${PSV_VERSION}/index.module.js`,
+            '@photo-sphere-viewer/map-plugin':            `${PSV_CDN}/map-plugin@${PSV_VERSION}/index.module.js`,
+            '@photo-sphere-viewer/markers-plugin':        `${PSV_CDN}/markers-plugin@${PSV_VERSION}/index.module.js`,
+            '@photo-sphere-viewer/gallery-plugin':        `${PSV_CDN}/gallery-plugin@${PSV_VERSION}/index.module.js`
+        }
+    };
+    // Inyectar import map si no existe
+    if (!document.querySelector('script[type="importmap"]')) {
+        const im = document.createElement('script');
+        im.type = 'importmap';
+        im.textContent = JSON.stringify(importMap);
+        document.head.appendChild(im);
+    }
+    // CSS de los plugins
+    const cssUrls = [
+        `${PSV_CDN}/core@${PSV_VERSION}/index.css`,
+        `${PSV_CDN}/virtual-tour-plugin@${PSV_VERSION}/index.css`,
+        `${PSV_CDN}/map-plugin@${PSV_VERSION}/index.css`,
+        `${PSV_CDN}/markers-plugin@${PSV_VERSION}/index.css`,
+        `${PSV_CDN}/gallery-plugin@${PSV_VERSION}/index.css`
+    ];
+    cssUrls.forEach(href => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+    });
+    psvLoaded = true;
+}
+
+async function openTour360(startSceneId) {
+    if (!HAS_TOUR) {
+        alert('Las fotografías 360° estarán disponibles próximamente.');
+        return;
+    }
+    document.getElementById('tour360Modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    await loadPSV();
+
+    // Importes dinámicos
+    const [{ Viewer }, { VirtualTourPlugin }, { MapPlugin }, { MarkersPlugin }, { GalleryPlugin }] = await Promise.all([
+        import('@photo-sphere-viewer/core'),
+        import('@photo-sphere-viewer/virtual-tour-plugin'),
+        import('@photo-sphere-viewer/map-plugin'),
+        import('@photo-sphere-viewer/markers-plugin'),
+        import('@photo-sphere-viewer/gallery-plugin')
+    ]);
+
+    // Construir nodos del tour
+    const nodes = TOUR_SCENES.map(s => {
+        const poiData = s.poi ? findPoiByKey(s.poi) : null;
+        const gps = s.gps || (poiData ? [poiData.lng, poiData.lat] : null);
+        return {
+            id: s.id,
+            panorama: s.panorama,
+            name: s.name || (poiData ? poiData.title : s.id),
+            caption: s.caption || (poiData ? poiData.subtitle : ''),
+            links: s.links || [],
+            gps: gps,
+            sphereCorrection: s.sphereCorrection,
+            map: poiData ? { x: gps[0], y: gps[1] } : undefined
+        };
+    });
+
+    if (psvViewer) psvViewer.destroy();
+
+    psvViewer = new Viewer({
+        container: 'tour360Viewer',
+        loadingTxt: 'Cargando…',
+        navbar: ['zoom', 'move', 'caption', 'fullscreen'],
+        plugins: [
+            [MarkersPlugin, {}],
+            [GalleryPlugin, { visibleOnLoad: false }],
+            [MapPlugin, {
+                imageUrl: null,                       // si das un mapa custom (PNG), ponlo aquí
+                center: { x: GUEMES_CENTER[0], y: GUEMES_CENTER[1] },
+                rotation: '0deg',
+                size: '220px',
+                position: 'bottom right',
+                spotStyle: {
+                    image: null,
+                    color: '#f4c77b',
+                    size: 18,
+                    hoverColor: '#ffffff'
+                }
+            }],
+            [VirtualTourPlugin, {
+                positionMode: 'gps',
+                renderMode: '3d',
+                startNodeId: startSceneId,
+                nodes: nodes,
+                arrowStyle: {
+                    color: '#f4c77b',
+                    hoverColor: '#ffffff',
+                    outlineColor: '#0a1120'
+                }
+            }]
+        ]
+    });
+
+    psvVirtualTour = psvViewer.getPlugin(VirtualTourPlugin);
+
+    // Sincronizar con el mapa principal: cuando cambia la escena, mover marker
+    psvVirtualTour.addEventListener('node-changed', ({ node }) => {
+        if (!node || !node.poi) return;
+        const [kind, id] = (TOUR_BY_POI[node.poi] || {}).poi?.split(':') || [];
+        if (kind && id) setActive(kind, id);
+    });
+}
+
+function closeTour360() {
+    document.getElementById('tour360Modal').classList.remove('open');
+    document.body.style.overflow = '';
+    if (psvViewer) {
+        psvViewer.destroy();
+        psvViewer = null;
+        psvVirtualTour = null;
+    }
+}
+
+function findPoiByKey(key) {
+    const [kind, id] = key.split(':');
+    if (kind === 'statue') return ESTATUAS.find(z => z.id === id);
+    if (kind === 'mon')    return MONUMENTOS.find(m => m.id === id);
+    return null;
+}
+
+document.getElementById('tour360Close').addEventListener('click', closeTour360);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('tour360Modal').classList.contains('open')) {
+        closeTour360();
+    }
+});
+
 </script>
+
+<!-- ============================================================
+     MODAL TOUR 360°
+     ============================================================ -->
+<div id="tour360Modal" class="tour360-modal" aria-hidden="true">
+    <div class="tour360-header">
+        <div>
+            <div class="tour360-eyebrow">Visita inmersiva</div>
+            <h3>Senda de las Estatuas · 360°</h3>
+        </div>
+        <button id="tour360Close" class="tour360-close" type="button" aria-label="Cerrar visita">✕</button>
+    </div>
+    <div id="tour360Viewer" class="tour360-viewer"></div>
+</div>
+
 </body>
 </html>
