@@ -1,0 +1,467 @@
+/* ==========================================================================
+   GÜEMES 2026 — Sistema de diseño "Dossier azul"
+   Candidatura Premio Pueblo de Cantabria 2026
+   --------------------------------------------------------------------------
+   Uso: <link rel="stylesheet" href="../_design/guemes-design.css">
+   Tipografía principal: Segoe UI (sans) + Georgia (serif para portadas)
+   ========================================================================== */
+
+:root {
+    /* Paleta institucional — azul marino dossier + dorado heráldico */
+    --azul-profundo:   #1e3a5f;   /* Títulos, headers de tabla, cover */
+    --azul-principal:  #274b78;   /* Acento principal, nav activa */
+    --azul-medio:      #3b6a9e;   /* Subtítulos H3, links */
+    --azul-claro:      #6b94c1;   /* Elementos secundarios */
+    --azul-papel:      #eef2f8;   /* Highlight boxes, fondos suaves */
+    --azul-linea:      #c8d4e4;   /* Bordes, separadores */
+
+    --dorado:          #d4a853;   /* Borders-bottom, acentos heráldicos */
+    --dorado-oscuro:   #a8822f;   /* Hover, activo */
+    --dorado-crema:    #fdf8ed;   /* Fondo notas/tips */
+    --dorado-linea:    #e8d9b0;   /* Borde de notas */
+
+    --fondo:           #f7f5f2;   /* Body */
+    --fondo-blanco:    #ffffff;   /* Cards, secciones */
+    --fondo-sutil:     #faf8f5;   /* Zebra striping */
+
+    --texto:           #2d2a26;   /* Cuerpo principal */
+    --texto-suave:     #4a4540;   /* Secundario */
+    --texto-muted:     #6b7280;   /* Subtítulos, captions */
+    --texto-tenue:     #a09a92;   /* Footer-doc */
+
+    --verde-ok:        #2d6a4f;   /* Validación, completado */
+    --rojo-alerta:     #c53030;   /* Deadline, error */
+    --ambar-aviso:     #975a16;   /* Pendiente, revisar */
+
+    /* Tipografía */
+    --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-mono: 'SF Mono', Consolas, Monaco, monospace;
+
+    /* Radios y sombras */
+    --radius-sm: 6px;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(30, 58, 95, 0.08);
+    --shadow: 0 2px 8px rgba(30, 58, 95, 0.08);
+    --shadow-lg: 0 10px 25px -5px rgba(30, 58, 95, 0.12);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Reset y base                                                               */
+/* -------------------------------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-sans);
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.7;
+    padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Modo "documento editorial" con serif (aplicar clase .body-serif al body) */
+body.body-serif { font-family: var(--font-serif); line-height: 1.8; }
+
+h1, h2, h3, h4, h5, h6 { color: var(--azul-profundo); line-height: 1.3; }
+
+a { color: var(--azul-medio); text-decoration: none; transition: color .15s; }
+a:hover { color: var(--azul-profundo); text-decoration: underline; }
+
+p { margin-bottom: 0.75rem; color: var(--texto-suave); }
+
+/* -------------------------------------------------------------------------- */
+/* Layout: contenedor y portada (cover)                                       */
+/* -------------------------------------------------------------------------- */
+.container { max-width: 860px; margin: 0 auto; padding: 0 1rem; }
+.container--wide { max-width: 1100px; }
+
+.cover {
+    background: linear-gradient(135deg, #1e3a5f 0%, #274b78 45%, #3b6a9e 100%);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+}
+.cover .pretitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #b7c9e0;
+    margin-bottom: 1rem;
+}
+.cover h1 {
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+.cover h1 .accent { color: var(--dorado); font-weight: 600; }
+.cover .line {
+    width: 100px; height: 2px; background: var(--dorado);
+    margin: 1.5rem auto;
+}
+.cover h2 {
+    font-size: 1.25rem; font-weight: 300;
+    color: #b7c9e0;
+    letter-spacing: 0.05em;
+}
+.cover .year {
+    font-size: 3.5rem; font-weight: 100;
+    color: var(--dorado);
+    letter-spacing: 0.3em;
+    margin-top: 2rem;
+}
+.cover .meta {
+    margin-top: 3rem; font-size: 0.85rem;
+    color: #89a3c4; line-height: 2;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Sección (card principal)                                                   */
+/* -------------------------------------------------------------------------- */
+.section {
+    background: var(--fondo-blanco);
+    border-radius: var(--radius);
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.section h2 {
+    font-size: 1.2rem;
+    color: var(--azul-profundo);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--dorado);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.section h3 {
+    font-size: 1rem;
+    color: var(--azul-medio);
+    margin: 1.25rem 0 0.5rem;
+}
+.section p { color: var(--texto-suave); margin-bottom: 0.75rem; }
+.section ul, .section ol { margin: 0.5rem 0 1rem 1.5rem; color: var(--texto-suave); }
+.section ul li, .section ol li { margin-bottom: 0.3rem; }
+
+/* -------------------------------------------------------------------------- */
+/* Tabla de contenidos (TOC)                                                  */
+/* -------------------------------------------------------------------------- */
+.toc {
+    background: var(--fondo-blanco);
+    border-radius: var(--radius);
+    padding: 2rem 2.5rem;
+    margin: 2rem auto;
+    max-width: 860px;
+    box-shadow: var(--shadow);
+}
+.toc h2 {
+    font-size: 1.3rem;
+    color: var(--azul-profundo);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid var(--dorado);
+    padding-bottom: 0.5rem;
+}
+.toc ol, .toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { padding: 0.4rem 0; color: var(--texto-suave); font-size: 0.95rem; }
+.toc li a { color: var(--azul-profundo); display: block; padding: 0.25rem 0; }
+.toc li a:hover { color: var(--dorado-oscuro); text-decoration: none; }
+
+/* -------------------------------------------------------------------------- */
+/* Tablas                                                                     */
+/* -------------------------------------------------------------------------- */
+.section table,
+table.guemes {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+}
+.section table th,
+table.guemes th {
+    background: var(--azul-profundo);
+    color: white;
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.section table td,
+table.guemes td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid var(--azul-linea);
+    color: var(--texto-suave);
+}
+.section table tr:nth-child(even),
+table.guemes tr:nth-child(even) { background: var(--fondo-sutil); }
+
+.subtotal td {
+    font-weight: 600;
+    color: var(--azul-medio);
+    background: var(--azul-papel) !important;
+}
+.total td {
+    font-weight: 700;
+    color: var(--azul-profundo);
+    border-top: 3px solid var(--azul-profundo);
+    font-size: 1rem;
+    background: var(--azul-papel) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Boxes de destaque                                                          */
+/* -------------------------------------------------------------------------- */
+.note, .tip {
+    background: var(--dorado-crema);
+    border-left: 3px solid var(--dorado);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.88rem;
+    color: #6b5e4a;
+}
+
+.highlight, .highlight-box {
+    background: var(--azul-papel);
+    border-left: 3px solid var(--azul-principal);
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.highlight strong, .highlight-box strong { color: var(--azul-profundo); }
+
+.callout-dorado {
+    background: linear-gradient(135deg, #fdf8ed 0%, #f5eacf 100%);
+    border: 1px solid var(--dorado-linea);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Instrucciones (cabecera tipo aviso)                                        */
+/* -------------------------------------------------------------------------- */
+.instrucciones {
+    background: var(--dorado-crema);
+    border: 1px solid var(--dorado-linea);
+    border-radius: var(--radius-sm);
+    padding: 1.25rem 1.5rem;
+    margin: 0 auto 2rem;
+    max-width: 860px;
+    font-size: 0.9rem;
+    color: #6b5e4a;
+}
+.instrucciones h3 {
+    color: var(--dorado-oscuro);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cabecera global de documento                                               */
+/* -------------------------------------------------------------------------- */
+.doc-header {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 2rem;
+}
+.doc-header h1 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--azul-profundo);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.3rem;
+}
+.doc-header .subtitle {
+    color: var(--texto-muted);
+    font-size: 0.95rem;
+    font-style: italic;
+}
+.doc-header .deadline {
+    display: inline-block;
+    background: #fee2e2;
+    color: var(--rojo-alerta);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-top: 0.75rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Badges y etiquetas                                                         */
+/* -------------------------------------------------------------------------- */
+.badge {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.badge-azul { background: var(--azul-papel); color: var(--azul-profundo); }
+.badge-dorado { background: var(--dorado-crema); color: var(--dorado-oscuro); }
+.badge-ok { background: #def7ec; color: var(--verde-ok); }
+.badge-alerta { background: #fee2e2; color: var(--rojo-alerta); }
+.badge-aviso { background: #fef3c7; color: var(--ambar-aviso); }
+
+/* Prioridades (checklist) */
+.priority { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+.priority.obligatorio { background: #fee2e2; color: var(--rojo-alerta); }
+.priority.recomendado { background: #fef3c7; color: var(--ambar-aviso); }
+
+/* -------------------------------------------------------------------------- */
+/* Grid de data cards                                                         */
+/* -------------------------------------------------------------------------- */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0;
+}
+.data-card {
+    background: var(--fondo-sutil);
+    border: 1px solid var(--azul-linea);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+}
+.data-card .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--azul-profundo);
+    font-family: var(--font-serif);
+}
+.data-card .label {
+    font-size: 0.75rem;
+    color: var(--texto-muted);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Barras de progreso y puntuación                                            */
+/* -------------------------------------------------------------------------- */
+.progress-bar {
+    background: var(--azul-linea);
+    border-radius: 8px;
+    height: 12px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+.progress-fill {
+    background: linear-gradient(90deg, var(--azul-principal), var(--azul-medio));
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+}
+.progress-text {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+}
+
+.bar-row { display: flex; align-items: center; margin: 0.5rem 0; gap: 0.5rem; }
+.bar-label { width: 180px; font-size: 0.85rem; color: var(--texto-suave); text-align: right; padding-right: 0.5rem; flex-shrink: 0; }
+.bar-track { flex: 1; background: var(--azul-linea); border-radius: 6px; height: 26px; position: relative; overflow: hidden; }
+.bar-fill { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.5rem; color: white; font-size: 0.8rem; font-weight: 600; border-radius: 6px; }
+.bar-fill.t1 { background: linear-gradient(90deg, var(--azul-profundo), var(--azul-medio)); }
+.bar-fill.t2 { background: linear-gradient(90deg, var(--dorado-oscuro), var(--dorado)); }
+
+/* -------------------------------------------------------------------------- */
+/* Checklist                                                                  */
+/* -------------------------------------------------------------------------- */
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--azul-linea);
+}
+.check-item:last-child { border-bottom: none; }
+.check-item input[type="checkbox"] {
+    width: 20px; height: 20px; margin-top: 2px;
+    accent-color: var(--azul-principal);
+    cursor: pointer; flex-shrink: 0;
+}
+.check-item label { flex: 1; cursor: pointer; }
+.check-item label strong { color: var(--texto); }
+.check-item label .detail { display: block; color: var(--texto-muted); font-size: 0.85rem; margin-top: 0.25rem; }
+
+/* -------------------------------------------------------------------------- */
+/* Footer                                                                     */
+/* -------------------------------------------------------------------------- */
+.footer-doc {
+    text-align: center;
+    padding: 2rem;
+    color: var(--texto-tenue);
+    font-size: 0.8rem;
+    font-style: italic;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Utilidades                                                                 */
+/* -------------------------------------------------------------------------- */
+.text-center { text-align: center; }
+.text-azul { color: var(--azul-profundo); }
+.text-dorado { color: var(--dorado-oscuro); }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-2 { margin-top: 1rem; }
+
+hr.ornament {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dorado) 50%, transparent);
+    margin: 2rem auto;
+    max-width: 200px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Impresión                                                                  */
+/* -------------------------------------------------------------------------- */
+@media print {
+    body { background: white !important; padding: 0; }
+    .section, .toc, .cover { box-shadow: none !important; }
+    .section { border: 1px solid #ddd; }
+    .cover { min-height: 100vh; }
+    .page-break { page-break-before: always; }
+    a { color: inherit; text-decoration: none; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive                                                                 */
+/* -------------------------------------------------------------------------- */
+@media (max-width: 720px) {
+    body { padding: 1rem; }
+    .cover { padding: 3rem 1.25rem; min-height: 60vh; }
+    .cover h1 { font-size: 1.9rem; }
+    .cover .year { font-size: 2.5rem; }
+    .section { padding: 1.5rem 1.25rem; }
+    .section table th, .section table td { padding: 0.4rem 0.5rem; font-size: 0.85rem; }
+    .bar-label { width: 110px; }
+}

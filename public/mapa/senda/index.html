@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa interactivo — Senda de las Estatuas de Güemes</title>
+    <link rel="stylesheet" href="guemes-design.css">
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+    <style>
+        body { padding: 0; margin: 0; background: var(--fondo); }
+        .mapa-topbar {
+            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-principal) 100%);
+            color: white; padding: 1.25rem 1.75rem;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+        }
+        .mapa-topbar h1 {
+            font-family: var(--font-serif); font-weight: 400;
+            font-size: 1.3rem; letter-spacing: 0.05em;
+        }
+        .mapa-topbar h1 .accent { color: var(--dorado); }
+        .mapa-topbar .subt { font-size: 0.82rem; color: #b7c9e0; margin-top: 0.15rem; letter-spacing: 0.04em; }
+        .mapa-topbar a.back {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 0.5rem 1.1rem; border-radius: 999px;
+            font-size: 0.82rem; text-decoration: none;
+            letter-spacing: 0.03em;
+        }
+        .mapa-topbar a.back:hover { background: rgba(255,255,255,0.2); }
+
+        .mapa-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 0;
+            height: calc(100vh - 78px);
+        }
+        @media (max-width: 900px) {
+            .mapa-layout { grid-template-columns: 1fr; grid-template-rows: 55vh auto; height: auto; }
+        }
+
+        .mapa-main { position: relative; display: flex; flex-direction: column; }
+        #map { flex: 1; min-height: 400px; }
+
+        .mapa-controles {
+            position: absolute; top: 1rem; left: 1rem; z-index: 10;
+            display: flex; gap: 0.5rem; flex-wrap: wrap;
+        }
+        .mapa-btn {
+            background: white; border: 1px solid var(--azul-linea);
+            border-radius: 999px; padding: 0.5rem 1rem;
+            font-size: 0.8rem; font-weight: 600; cursor: pointer;
+            color: var(--azul-profundo); letter-spacing: 0.02em;
+            box-shadow: 0 2px 8px rgba(30,58,95,0.12);
+            font-family: inherit;
+            transition: all .15s;
+        }
+        .mapa-btn:hover { background: var(--azul-papel); }
+        .mapa-btn.active { background: var(--azul-profundo); color: white; border-color: var(--azul-profundo); }
+
+        /* Marker estatua (principal, numerado) */
+        .marker-zone {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--dorado);
+            border: 3px solid white;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Georgia', serif;
+            font-weight: 700; font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(168,130,47,0.5);
+            transition: transform .15s;
+        }
+        .marker-zone:hover { transform: scale(1.15); }
+        .marker-zone.marker-active { background: var(--azul-profundo); transform: scale(1.2); box-shadow: 0 4px 14px rgba(30,58,95,0.6); }
+
+        /* Marker monumento (secundario, icono pequeño) */
+        .marker-mon {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: white;
+            border: 2px solid var(--azul-profundo);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--azul-profundo);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(30,58,95,0.25);
+            transition: transform .15s;
+        }
+        .marker-mon:hover { transform: scale(1.15); background: var(--azul-papel); }
+        .marker-mon svg { width: 16px; height: 16px; }
+
+        /* Popup */
+        .maplibregl-popup-content {
+            padding: 0 !important;
+            border-radius: 12px !important;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(30,58,95,0.25) !important;
+            border-top: 3px solid var(--dorado);
+            min-width: 260px;
+        }
+        .zone-popup { font-family: var(--font-sans); }
+        .zone-popup img {
+            width: 100%; height: 140px; object-fit: cover; display: block;
+        }
+        .zone-popup .pop-body { padding: 0.85rem 1rem 1rem; }
+        .zone-popup .pop-km {
+            display: inline-block; font-size: 0.7rem;
+            background: var(--dorado); color: white;
+            padding: 2px 8px; border-radius: 999px;
+            font-weight: 600; letter-spacing: 0.04em;
+        }
+        .zone-popup h4 {
+            font-family: var(--font-serif);
+            color: var(--azul-profundo);
+            font-size: 1.05rem;
+            margin: 0.35rem 0 0.35rem;
+            line-height: 1.3;
+        }
+        .zone-popup p { font-size: 0.82rem; color: var(--texto-suave); line-height: 1.5; margin: 0; }
+        .zone-popup .pop-coords {
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--azul-medio);
+            margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--azul-linea);
+        }
+
+        /* Sidebar */
+        .mapa-sidebar {
+            background: white;
+            border-left: 1px solid var(--azul-linea);
+            overflow-y: auto;
+            padding: 1.25rem 1.25rem 1rem;
+        }
+        .sidebar-stats {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 0.6rem; margin-bottom: 1.25rem;
+        }
+        .stat-mini {
+            background: var(--azul-papel);
+            border-radius: 10px; padding: 0.75rem;
+            text-align: center;
+            border-top: 2px solid var(--azul-principal);
+        }
+        .stat-mini .val { font-family: 'Georgia', serif; font-weight: 700; font-size: 1.25rem; color: var(--azul-profundo); line-height: 1; }
+        .stat-mini .lbl { font-size: 0.68rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.2rem; }
+
+        .sidebar-h {
+            font-size: 0.78rem;
+            color: var(--azul-profundo);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin: 1.25rem 0 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid var(--dorado);
+        }
+
+        .zone-item {
+            display: flex; gap: 0.75rem;
+            padding: 0.6rem; margin-bottom: 0.4rem;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid var(--azul-linea);
+            background: white;
+            transition: all .15s;
+        }
+        .zone-item:hover { background: var(--azul-papel); border-color: var(--azul-principal); }
+        .zone-item.active { background: var(--azul-profundo); border-color: var(--azul-profundo); }
+        .zone-item.active .zn-title, .zone-item.active .zn-desc { color: white; }
+        .zone-item.active .zn-num { background: var(--dorado); color: white; }
+
+        .zn-num {
+            width: 28px; height: 28px; flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--dorado); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Georgia', serif; font-weight: 700; font-size: 0.88rem;
+        }
+        .mon-item .zn-num {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+        .mon-item .zn-desc { color: var(--azul-medio); }
+        .zn-info { flex: 1; min-width: 0; }
+        .zn-title { font-weight: 600; color: var(--azul-profundo); font-size: 0.88rem; line-height: 1.3; }
+        .zn-desc { font-size: 0.75rem; color: var(--texto-muted); margin-top: 0.1rem; }
+
+        /* Elevation profile */
+        .elevation-profile {
+            background: white;
+            border-top: 1px solid var(--azul-linea);
+            padding: 0.75rem 1rem 0.5rem;
+            height: 150px;
+            position: relative;
+        }
+        .elevation-profile .ep-header {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.72rem; color: var(--texto-muted);
+            text-transform: uppercase; letter-spacing: 0.08em;
+            margin-bottom: 0.25rem;
+        }
+        .elevation-profile .ep-header strong { color: var(--azul-profundo); }
+        .elevation-profile svg { width: 100%; height: 100px; display: block; }
+        .ep-tooltip {
+            position: absolute; top: 8px; right: 1rem;
+            background: var(--azul-profundo); color: white;
+            padding: 0.3rem 0.75rem; border-radius: 999px;
+            font-size: 0.75rem; font-family: var(--font-mono);
+            display: none;
+        }
+        .ep-cursor { stroke: var(--dorado); stroke-width: 2; }
+
+        .legend {
+            font-size: 0.8rem; color: var(--texto-suave);
+            background: var(--dorado-crema);
+            border: 1px solid var(--dorado-linea);
+            border-radius: 8px;
+            padding: 0.6rem 0.85rem;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        .loading-overlay {
+            position: absolute; inset: 0;
+            background: var(--azul-profundo);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 0.75rem;
+            z-index: 500;
+            font-family: var(--font-serif);
+        }
+        .loading-overlay.hidden { display: none; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 3px solid rgba(212,168,83,0.3);
+            border-top-color: var(--dorado);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Galería aérea (modal fullscreen) */
+        .aerial-modal {
+            position: fixed; inset: 0;
+            background: rgba(15, 30, 50, 0.97);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        .aerial-modal.open { display: flex; }
+        .aerial-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 1.5rem;
+            color: white;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .aerial-header h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.1rem; letter-spacing: 0.04em; }
+        .aerial-header h3 .count { color: var(--dorado); margin-left: 0.5rem; font-size: 0.9rem; }
+        .aerial-close {
+            background: none; border: 1px solid rgba(255,255,255,0.3);
+            color: white; width: 40px; height: 40px; border-radius: 50%;
+            font-size: 1.2rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .aerial-close:hover { background: rgba(255,255,255,0.1); border-color: var(--dorado); }
+        .aerial-stage {
+            flex: 1;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            padding: 1rem;
+            overflow: hidden;
+        }
+        .aerial-stage img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .aerial-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white; cursor: pointer;
+            font-size: 1.5rem; font-family: Georgia, serif;
+            backdrop-filter: blur(8px);
+        }
+        .aerial-nav:hover { background: var(--dorado); border-color: var(--dorado); }
+        .aerial-nav.prev { left: 1.5rem; }
+        .aerial-nav.next { right: 1.5rem; }
+        .aerial-caption {
+            color: #b7c9e0;
+            text-align: center;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+            letter-spacing: 0.03em;
+        }
+        .aerial-thumbs {
+            display: flex; gap: 0.35rem;
+            padding: 0.75rem 1rem;
+            overflow-x: auto;
+            background: rgba(0,0,0,0.4);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .aerial-thumb {
+            flex-shrink: 0;
+            width: 80px; height: 55px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity .15s, transform .15s;
+            border: 2px solid transparent;
+        }
+        .aerial-thumb:hover { opacity: 0.85; transform: translateY(-2px); }
+        .aerial-thumb.active { opacity: 1; border-color: var(--dorado); }
+        .aerial-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Route legend */
+        .route-legend {
+            background: white;
+            border-radius: 8px;
+            padding: 0.6rem 0.85rem;
+            margin-top: 0.5rem;
+            font-size: 0.78rem;
+            color: var(--texto-suave);
+            line-height: 1.4;
+            box-shadow: 0 1px 3px rgba(30,58,95,0.08);
+        }
+        .route-legend .sw { display: inline-block; width: 18px; height: 4px; border-radius: 2px; margin-right: 0.4rem; vertical-align: middle; }
+        .route-legend .sw-full { background: linear-gradient(90deg, #1e3a5f, #3b6a9e); }
+        .route-legend .sw-jurado { background: linear-gradient(90deg, #d4a853, #a8822f); }
+    </style>
+</head>
+<body>
+
+<div class="mapa-topbar">
+    <div>
+        <h1>Senda de las Estatuas <span class="accent">·</span> Mapa interactivo</h1>
+        <div class="subt">Güemes · Cantabria · Ruta circular de 6,9 km con 4 zonas de actuación</div>
+    </div>
+    <a href="/" class="back">← Volver al inicio</a>
+</div>
+
+<div class="mapa-layout">
+
+    <div class="mapa-main">
+        <div id="map"></div>
+        <div class="mapa-controles">
+            <button class="mapa-btn active" id="btn-satelite">Satélite</button>
+            <button class="mapa-btn" id="btn-mapa">Mapa</button>
+            <button class="mapa-btn" id="btn-3d">Vista aérea 3D</button>
+            <button class="mapa-btn" id="btn-reset">Centrar ruta</button>
+            <button class="mapa-btn" id="btn-galeria" style="background:var(--dorado); color:white; border-color:var(--dorado);">📷 Galería aérea (21 fotos)</button>
+        </div>
+        <div class="elevation-profile">
+            <div class="ep-header">
+                <span>Perfil altimétrico</span>
+                <span><strong>80 m</strong> desnivel · <strong>6,9 km</strong></span>
+            </div>
+            <svg id="elevation-svg" viewBox="0 0 1000 100" preserveAspectRatio="none"></svg>
+            <div class="ep-tooltip" id="ep-tooltip"></div>
+        </div>
+        <div class="loading-overlay" id="loading">
+            <div class="spinner"></div>
+            <div>Cargando mapa y ruta GPX...</div>
+        </div>
+    </div>
+
+    <aside class="mapa-sidebar">
+        <div class="sidebar-stats">
+            <div class="stat-mini"><div class="val">6,9</div><div class="lbl">Kilómetros</div></div>
+            <div class="stat-mini"><div class="val">4</div><div class="lbl">Zonas</div></div>
+            <div class="stat-mini"><div class="val">80 m</div><div class="lbl">Desnivel</div></div>
+            <div class="stat-mini"><div class="val">1h 45'</div><div class="lbl">Duración</div></div>
+        </div>
+
+        <div class="sidebar-h">Las 4 Estatuas · Los 4 Güemes del mundo</div>
+        <div class="zone-item" data-statue="es">
+            <div class="zn-num">1</div>
+            <div class="zn-info">
+                <div class="zn-title">Estatua de España</div>
+                <div class="zn-desc">Los orígenes · junto a la Iglesia de San Vicente</div>
+            </div>
+        </div>
+        <div class="zone-item" data-statue="ar">
+            <div class="zn-num">2</div>
+            <div class="zn-info">
+                <div class="zn-title">Estatua de Argentina</div>
+                <div class="zn-desc">Héroe argentino Martín Miguel de Güemes</div>
+            </div>
+        </div>
+        <div class="zone-item" data-statue="us">
+            <div class="zn-num">3</div>
+            <div class="zn-info">
+                <div class="zn-title">Estatua de Estados Unidos</div>
+                <div class="zn-desc">Emigración cántabra a Norteamérica</div>
+            </div>
+        </div>
+        <div class="zone-item" data-statue="mx">
+            <div class="zn-num">4</div>
+            <div class="zn-info">
+                <div class="zn-title">Estatua de México</div>
+                <div class="zn-desc">Virrey Juan Francisco de Güemes (1746-1755)</div>
+            </div>
+        </div>
+
+        <div class="sidebar-h">Monumentos patrimoniales</div>
+        <div class="zone-item mon-item" data-mon="iglesia">
+            <div class="zn-num" style="background:var(--azul-profundo);">✚</div>
+            <div class="zn-info">
+                <div class="zn-title">Iglesia de San Vicente Mártir</div>
+                <div class="zn-desc">s. XVI-XVII · tour Matterport disponible</div>
+            </div>
+        </div>
+        <div class="zone-item mon-item" data-mon="palacio">
+            <div class="zn-num" style="background:var(--azul-profundo);">⌂</div>
+            <div class="zn-info">
+                <div class="zn-title">Palacio de Güemes</div>
+                <div class="zn-desc">Regionalista · 1915-1920</div>
+            </div>
+        </div>
+        <div class="zone-item mon-item" data-mon="ermita">
+            <div class="zn-num" style="background:var(--azul-profundo);">✚</div>
+            <div class="zn-info">
+                <div class="zn-title">Ermita de San Julián</div>
+                <div class="zn-desc">s. XII-XIII · hospital de peregrinos · tour 360°</div>
+            </div>
+        </div>
+        <div class="zone-item mon-item" data-mon="albergue">
+            <div class="zn-num" style="background:var(--azul-profundo);">⌂</div>
+            <div class="zn-info">
+                <div class="zn-title">Albergue La Cabaña del Abuelo Peuto</div>
+                <div class="zn-desc">Padre Ernesto · 50.000 peregrinos de 100 países</div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <strong>Círculos dorados</strong> = 4 estatuas de la senda. <strong>Círculos azules</strong> = monumentos patrimoniales. Haz clic en cualquiera para centrarlo y ver más info.
+        </div>
+
+        <div class="sidebar-h">Rutas disponibles</div>
+        <div class="route-legend">
+            <div><span class="sw sw-full"></span><strong>Ruta completa · 6,9 km</strong><br><small style="color:var(--texto-muted);">Circular · 1h 45' · desnivel 80 m</small></div>
+            <div style="margin-top:0.5rem;"><span class="sw sw-jurado"></span><strong>Ruta del jurado · Wikiloc</strong><br><small style="color:var(--texto-muted);">Iglesia → Ermita → Albergue — propuesta visita oficial</small></div>
+        </div>
+        <div style="display:flex; gap:0.4rem; margin-top:0.5rem;">
+            <button class="mapa-btn route-toggle active" data-route="both" style="flex:1; font-size:0.72rem; padding:0.4rem 0.5rem;">Ambas</button>
+            <button class="mapa-btn route-toggle" data-route="full" style="flex:1; font-size:0.72rem; padding:0.4rem 0.5rem;">Completa</button>
+            <button class="mapa-btn route-toggle" data-route="jurado" style="flex:1; font-size:0.72rem; padding:0.4rem 0.5rem;">Jurado</button>
+        </div>
+
+        <div class="sidebar-h">Patrimonio 3D</div>
+        <div style="display:flex; gap:0.5rem; flex-direction:column;">
+            <a href="app/index.html" style="display:block; padding:0.75rem 1rem; background:var(--azul-profundo); color:white; text-decoration:none; border-radius:10px; font-size:0.85rem; font-weight:600;">Tour Matterport Iglesia + Ermita →</a>
+            <a href="06_Memoria_Actuacion/MEMORIA_ACTUACION.html" target="_blank" style="display:block; padding:0.75rem 1rem; background:var(--dorado); color:white; text-decoration:none; border-radius:10px; font-size:0.85rem; font-weight:600;">Leer Memoria de Actuación →</a>
+        </div>
+    </aside>
+
+</div>
+
+<!-- MODAL GALERÍA AÉREA -->
+<div class="aerial-modal" id="aerialModal">
+    <div class="aerial-header">
+        <h3>Visor aéreo · Vistas de dron sobre Güemes <span class="count" id="aerialCount">1 / 21</span></h3>
+        <button class="aerial-close" id="aerialClose" title="Cerrar (Esc)">✕</button>
+    </div>
+    <div class="aerial-stage">
+        <button class="aerial-nav prev" id="aerialPrev" title="Anterior">‹</button>
+        <img id="aerialCurrent" src="" alt="Vista aérea de Güemes">
+        <button class="aerial-nav next" id="aerialNext" title="Siguiente">›</button>
+    </div>
+    <div class="aerial-caption" id="aerialCaption">Senda de las Estatuas de Güemes — vista aérea</div>
+    <div class="aerial-thumbs" id="aerialThumbs"></div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+// ============================================================
+// DATOS DE ZONAS
+// ============================================================
+// Las 4 estatuas (foco del proyecto) — un Güemes del mundo por estatua
+const ESTATUAS = [
+    {
+        id: 'es', num: 1, pais: 'España',
+        lat: 43.4555256689898, lng: -3.6369315727179554,
+        title: 'Estatua · España',
+        subtitle: 'Los orígenes',
+        desc: 'El Güemes de Cantabria, raíz de todos los demás. La estatua dialoga con la Iglesia de San Vicente y simboliza la fundación, el monasterio y las raíces del pueblo.',
+        photo: 'fotos/estatua_espana.jpeg'
+    },
+    {
+        id: 'ar', num: 2, pais: 'Argentina',
+        lat: 43.453953217618476, lng: -3.647242133990902,
+        title: 'Estatua · Argentina',
+        subtitle: 'Héroe nacional argentino',
+        desc: 'Martín Miguel de Güemes (1785-1821), general y gobernador de Salta, descendiente de la familia Güemes Campero. Héroe de la independencia argentina. El 17 de junio es feriado nacional en Argentina en su honor.',
+        photo: 'fotos/estatua_argentina.jpeg'
+    },
+    {
+        id: 'us', num: 3, pais: 'Estados Unidos',
+        lat: 43.44780292229915, lng: -3.628267248068999,
+        title: 'Estatua · Estados Unidos',
+        subtitle: 'La emigración cántabra',
+        desc: 'Güemes como puerta de Europa hacia América del Norte: la emigración cántabra y la diáspora peregrina contemporánea que acoge el albergue del Padre Ernesto.',
+        photo: 'fotos/estatua_eeuu.jpeg'
+    },
+    {
+        id: 'mx', num: 4, pais: 'México',
+        lat: 43.45201594472225, lng: -3.6165373723876413,
+        title: 'Estatua · México',
+        subtitle: 'Virrey de Nueva España',
+        desc: 'Juan Francisco de Güemes y Horcasitas (1681-1766), virrey de Nueva España (México) entre 1746 y 1755, primer conde de Revillagigedo. Nacido en estas tierras.',
+        photo: 'fotos/estatua_mexico.jpeg'
+    }
+];
+
+// Los 4 monumentos patrimoniales (contexto histórico)
+const MONUMENTOS = [
+    {
+        id: 'iglesia', icon: '✚',
+        lat: 43.455581591430416, lng: -3.6366503097985916,
+        title: 'Iglesia de San Vicente Mártir',
+        subtitle: 'Siglos XVI-XVII',
+        desc: 'Iglesia parroquial, núcleo espiritual del pueblo desde la fundación del monasterio en el siglo VIII. Punto de inicio de la Senda.',
+        tour: 'https://my.matterport.com/show/?m=ayHJDVioJ3J'
+    },
+    {
+        id: 'palacio', icon: '⌂',
+        lat: 43.45290644050643, lng: -3.617961925276171,
+        title: 'Palacio de Güemes',
+        subtitle: 'Regionalista, 1915-1920',
+        desc: 'Casa solariega con escudo de los Mazas. Vinculada a la familia Güemes, origen del virrey de México y del héroe argentino.'
+    },
+    {
+        id: 'ermita', icon: '✚',
+        lat: 43.44832984203608, lng: -3.6293548741708466,
+        title: 'Ermita de San Julián',
+        subtitle: 'Siglos XII-XIII',
+        desc: 'Origen románico con nave gótica. Fue hospital de peregrinos del Camino de Santiago desde la Edad Media hasta el siglo XIX. En recuperación como Centro de Interpretación del Camino.',
+        tour: 'https://my.matterport.com/show/?m=jRKb9SMvGgV'
+    },
+    {
+        id: 'albergue', icon: '⌂',
+        lat: 43.447881398323915, lng: -3.6454065481141544,
+        title: 'Albergue La Cabaña del Abuelo Peuto',
+        subtitle: 'Fundado en 1999',
+        desc: 'Albergue de peregrinos del Padre Ernesto Bustio. Más de 50.000 peregrinos acogidos de más de 100 países. Funciona sin subvenciones públicas.'
+    }
+];
+
+const GUEMES_CENTER = [-3.632, 43.4515];
+
+// ============================================================
+// ESTILOS DE MAPA (raster sources)
+// ============================================================
+const STYLE_SATELITE = {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+        'esri-sat': {
+            type: 'raster',
+            tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+            tileSize: 256,
+            attribution: '© Esri, Maxar, Earthstar Geographics'
+        }
+    },
+    layers: [
+        { id: 'esri-sat-layer', type: 'raster', source: 'esri-sat' }
+    ]
+};
+
+const STYLE_MAPA = {
+    version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+    sources: {
+        'osm': {
+            type: 'raster',
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tileSize: 256,
+            attribution: '© OpenStreetMap contributors'
+        }
+    },
+    layers: [
+        { id: 'osm-layer', type: 'raster', source: 'osm' }
+    ]
+};
+
+// ============================================================
+// INIT MAP
+// ============================================================
+const map = new maplibregl.Map({
+    container: 'map',
+    style: STYLE_SATELITE,
+    center: GUEMES_CENTER,
+    zoom: 15,
+    pitch: 0,
+    bearing: 0,
+    attributionControl: false
+});
+map.addControl(new maplibregl.NavigationControl({ showCompass: true, visualizePitch: true }), 'top-right');
+map.addControl(new maplibregl.AttributionControl({ compact: true }));
+map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
+
+// ============================================================
+// GPX LOADER
+// ============================================================
+async function loadGPX(url) {
+    const xml = await (await fetch(url)).text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xml, 'text/xml');
+    const points = doc.querySelectorAll('trkpt');
+    const coords = [];
+    const elevations = [];
+    const distances = [];
+    let dist = 0;
+    let prev = null;
+    points.forEach(p => {
+        const lat = parseFloat(p.getAttribute('lat'));
+        const lon = parseFloat(p.getAttribute('lon'));
+        const eleEl = p.querySelector('ele');
+        const ele = eleEl ? parseFloat(eleEl.textContent) : 0;
+        if (prev) dist += haversine(prev[1], prev[0], lat, lon);
+        coords.push([lon, lat]);
+        elevations.push(ele);
+        distances.push(dist);
+        prev = [lon, lat];
+    });
+    return { coords, elevations, distances };
+}
+
+function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371000;
+    const toRad = x => x * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+// ============================================================
+// MAP READY
+// ============================================================
+let gpxData = null;        // ruta completa (perfil altimetrico principal)
+let gpxJurado = null;      // ruta propuesta para el jurado
+let statueMarkers = [];
+let monMarkers = [];
+let activeId = null;
+
+// Lista de fotos aéreas (aerea_02 … aerea_23, salta 13)
+const AERIAL_PHOTOS = [
+    'aerea_02.jpg','aerea_03.jpg','aerea_04.jpg','aerea_05.jpg','aerea_06.jpg',
+    'aerea_07.jpg','aerea_08.jpg','aerea_09.jpg','aerea_10.jpg','aerea_11.jpg',
+    'aerea_12.jpg','aerea_14.jpg','aerea_15.jpg','aerea_16.jpg','aerea_17.jpg',
+    'aerea_18.jpg','aerea_19.jpg','aerea_20.jpg','aerea_21.jpg','aerea_22.jpg',
+    'aerea_23.jpg'
+];
+
+map.on('load', async () => {
+    try {
+        gpxData = await loadGPX('ruta_guemes.gpx');
+        try { gpxJurado = await loadGPX('ruta_jurado.gpx'); } catch(e) { console.warn('GPX jurado no disponible', e); }
+    } catch(e) {
+        console.error('Error cargando GPX', e);
+        document.getElementById('loading').innerHTML = '<div style="text-align:center;">No se pudo cargar la ruta GPX.<br><small style="opacity:0.7;">' + e.message + '</small></div>';
+        return;
+    }
+
+    // Fit bounds combinando ambas rutas
+    const bounds = new maplibregl.LngLatBounds();
+    gpxData.coords.forEach(c => bounds.extend(c));
+    if (gpxJurado) gpxJurado.coords.forEach(c => bounds.extend(c));
+    map.fitBounds(bounds, { padding: 60, duration: 0 });
+
+    addRouteLayers();
+
+    // Monumentos primero (debajo)
+    MONUMENTOS.forEach(m => {
+        const el = document.createElement('div');
+        el.className = 'marker-mon';
+        el.title = m.title;
+        el.innerHTML = m.id === 'iglesia' || m.id === 'ermita'
+            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M6 8h12M9 22V12h6v10"/></svg>'
+            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg>';
+
+        const popup = new maplibregl.Popup({ offset: 18, closeButton: true, maxWidth: '300px' })
+            .setHTML(popupMonumento(m));
+        const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+            .setLngLat([m.lng, m.lat])
+            .setPopup(popup)
+            .addTo(map);
+        el.addEventListener('click', () => setActive('mon', m.id));
+        monMarkers.push({ data: m, el, marker, popup });
+    });
+
+    // Estatuas encima (protagonistas)
+    ESTATUAS.forEach(z => {
+        const el = document.createElement('div');
+        el.className = 'marker-zone';
+        el.textContent = z.num;
+        const popup = new maplibregl.Popup({ offset: 28, closeButton: true, maxWidth: '320px' })
+            .setHTML(popupEstatua(z));
+        const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+            .setLngLat([z.lng, z.lat])
+            .setPopup(popup)
+            .addTo(map);
+        el.addEventListener('click', () => setActive('statue', z.id));
+        statueMarkers.push({ data: z, el, marker, popup });
+    });
+
+    // Elevation profile
+    drawElevationProfile();
+
+    // Hide loading
+    document.getElementById('loading').classList.add('hidden');
+});
+
+// ============================================================
+// POPUPS
+// ============================================================
+function popupEstatua(z) {
+    return `
+      <div class="zone-popup">
+        <img src="${z.photo}" alt="${z.title}" onerror="this.style.display='none'">
+        <div class="pop-body">
+          <span class="pop-km">Estatua · ${z.pais}</span>
+          <h4>${z.title}</h4>
+          <p style="color:var(--dorado-oscuro); font-weight:600; font-size:0.78rem; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.05em;">${z.subtitle}</p>
+          <p>${z.desc}</p>
+          <div class="pop-coords">${z.lat.toFixed(5)}, ${z.lng.toFixed(5)}</div>
+        </div>
+      </div>`;
+}
+
+function popupMonumento(m) {
+    const tourBtn = m.tour
+        ? `<a href="${m.tour}" target="_blank" rel="noopener" style="display:inline-block; margin-top:0.5rem; padding:0.4rem 0.85rem; background:var(--azul-profundo); color:white; text-decoration:none; border-radius:999px; font-size:0.75rem; font-weight:600; letter-spacing:0.03em;">Tour Matterport 360° →</a>`
+        : '';
+    return `
+      <div class="zone-popup">
+        <div class="pop-body" style="padding:1rem 1.1rem;">
+          <span class="pop-km" style="background:var(--azul-profundo);">Monumento</span>
+          <h4>${m.title}</h4>
+          <p style="color:var(--azul-medio); font-weight:600; font-size:0.78rem; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.05em;">${m.subtitle}</p>
+          <p>${m.desc}</p>
+          ${tourBtn}
+          <div class="pop-coords">${m.lat.toFixed(5)}, ${m.lng.toFixed(5)}</div>
+        </div>
+      </div>`;
+}
+
+// ============================================================
+// ACTIVE SELECTION
+// ============================================================
+function setActive(kind, id) {
+    activeId = kind + ':' + id;
+    document.querySelectorAll('.zone-item').forEach(el => el.classList.remove('active'));
+    statueMarkers.forEach(m => m.el.classList.remove('marker-active'));
+
+    if (kind === 'statue') {
+        const sel = document.querySelector('.zone-item[data-statue="' + id + '"]');
+        if (sel) sel.classList.add('active');
+        const m = statueMarkers.find(x => x.data.id === id);
+        if (m) {
+            m.el.classList.add('marker-active');
+            map.flyTo({ center: [m.data.lng, m.data.lat], zoom: 17, duration: 1200 });
+            setTimeout(() => m.marker.togglePopup(), 600);
+        }
+    } else {
+        const sel = document.querySelector('.zone-item[data-mon="' + id + '"]');
+        if (sel) sel.classList.add('active');
+        const m = monMarkers.find(x => x.data.id === id);
+        if (m) {
+            map.flyTo({ center: [m.data.lng, m.data.lat], zoom: 17, duration: 1200 });
+            setTimeout(() => m.marker.togglePopup(), 600);
+        }
+    }
+}
+
+document.querySelectorAll('.zone-item[data-statue]').forEach(item => {
+    item.addEventListener('click', () => setActive('statue', item.dataset.statue));
+});
+document.querySelectorAll('.zone-item[data-mon]').forEach(item => {
+    item.addEventListener('click', () => setActive('mon', item.dataset.mon));
+});
+
+// ============================================================
+// CONTROLES
+// ============================================================
+document.getElementById('btn-satelite').addEventListener('click', () => switchStyle(STYLE_SATELITE, 'btn-satelite'));
+document.getElementById('btn-mapa').addEventListener('click', () => switchStyle(STYLE_MAPA, 'btn-mapa'));
+document.getElementById('btn-3d').addEventListener('click', (e) => {
+    const isActive = e.target.classList.toggle('active');
+    map.easeTo({ pitch: isActive ? 60 : 0, bearing: isActive ? -25 : 0, duration: 1000 });
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!gpxData) return;
+    const bounds = new maplibregl.LngLatBounds();
+    gpxData.coords.forEach(c => bounds.extend(c));
+    map.fitBounds(bounds, { padding: 60, pitch: 0, bearing: 0, duration: 1000 });
+});
+
+function switchStyle(style, btnId) {
+    document.querySelectorAll('#btn-satelite, #btn-mapa').forEach(b => b.classList.remove('active'));
+    document.getElementById(btnId).classList.add('active');
+    map.setStyle(style);
+    map.once('style.load', () => {
+        if (gpxData) addRouteLayers();
+    });
+}
+
+function addRouteLayers() {
+    // Ruta completa (azul)
+    map.addSource('ruta', {
+        type: 'geojson',
+        data: { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: gpxData.coords } }
+    });
+    map.addLayer({ id: 'ruta-glow', type: 'line', source: 'ruta', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#3b6a9e', 'line-width': 10, 'line-opacity': 0.3, 'line-blur': 2 } });
+    map.addLayer({ id: 'ruta-line', type: 'line', source: 'ruta', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 3, 'line-opacity': 0.9 } });
+    map.addLayer({ id: 'ruta-dash', type: 'line', source: 'ruta', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#1e3a5f', 'line-width': 1.5, 'line-dasharray': [2, 3] } });
+
+    // Ruta del jurado (dorada — más destacada)
+    if (gpxJurado) {
+        map.addSource('ruta-jurado', {
+            type: 'geojson',
+            data: { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: gpxJurado.coords } }
+        });
+        map.addLayer({ id: 'jurado-glow', type: 'line', source: 'ruta-jurado', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#d4a853', 'line-width': 14, 'line-opacity': 0.45, 'line-blur': 3 } });
+        map.addLayer({ id: 'jurado-line', type: 'line', source: 'ruta-jurado', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#d4a853', 'line-width': 4, 'line-opacity': 1 } });
+        map.addLayer({ id: 'jurado-center', type: 'line', source: 'ruta-jurado', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 1, 'line-dasharray': [3, 2], 'line-opacity': 0.9 } });
+    }
+}
+
+function setRouteVisibility(mode) {
+    // mode: 'both' | 'full' | 'jurado'
+    const show = (id, visible) => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
+    };
+    const fullVisible = (mode === 'both' || mode === 'full');
+    const juradoVisible = (mode === 'both' || mode === 'jurado');
+    ['ruta-glow', 'ruta-line', 'ruta-dash'].forEach(id => show(id, fullVisible));
+    ['jurado-glow', 'jurado-line', 'jurado-center'].forEach(id => show(id, juradoVisible));
+}
+
+document.querySelectorAll('.route-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.route-toggle').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        setRouteVisibility(btn.dataset.route);
+    });
+});
+
+// ============================================================
+// ELEVATION PROFILE (SVG)
+// ============================================================
+function drawElevationProfile() {
+    const svg = document.getElementById('elevation-svg');
+    const tooltip = document.getElementById('ep-tooltip');
+    if (!gpxData) return;
+
+    const W = 1000, H = 100;
+    const padTop = 5, padBottom = 5;
+    const minEle = Math.min(...gpxData.elevations);
+    const maxEle = Math.max(...gpxData.elevations);
+    const totalDist = gpxData.distances[gpxData.distances.length - 1];
+
+    // Build area path
+    let areaPath = 'M 0,' + H;
+    let linePath = '';
+    const points = [];
+    for (let i = 0; i < gpxData.coords.length; i++) {
+        const x = (gpxData.distances[i] / totalDist) * W;
+        const yRange = H - padTop - padBottom;
+        const y = padTop + yRange - ((gpxData.elevations[i] - minEle) / (maxEle - minEle)) * yRange;
+        points.push({ x, y, idx: i });
+        areaPath += ' L ' + x + ',' + y;
+        if (i === 0) linePath += 'M ' + x + ',' + y;
+        else linePath += ' L ' + x + ',' + y;
+    }
+    areaPath += ' L ' + W + ',' + H + ' Z';
+
+    // Gradient
+    const defs = `<defs>
+        <linearGradient id="epgrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#274b78" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#274b78" stop-opacity="0.05"/>
+        </linearGradient>
+      </defs>`;
+
+    // Marcar en el perfil el punto del GPX más cercano a cada estatua (aproximación)
+    let zoneMarkers = '';
+    ESTATUAS.forEach(z => {
+        // Encuentra el trkpt más cercano a la estatua
+        let bestIdx = 0, bestD = Infinity;
+        for (let i = 0; i < gpxData.coords.length; i++) {
+            const dLat = gpxData.coords[i][1] - z.lat;
+            const dLng = gpxData.coords[i][0] - z.lng;
+            const d = dLat*dLat + dLng*dLng;
+            if (d < bestD) { bestD = d; bestIdx = i; }
+        }
+        const x = (gpxData.distances[bestIdx] / totalDist) * W;
+        zoneMarkers += `<line x1="${x}" y1="0" x2="${x}" y2="${H}" stroke="#d4a853" stroke-width="1" stroke-dasharray="2 3" opacity="0.7"/>
+          <circle cx="${x}" cy="12" r="10" fill="#d4a853" stroke="white" stroke-width="2"/>
+          <text x="${x}" y="16" text-anchor="middle" font-family="Georgia" font-size="11" font-weight="700" fill="white">${z.num}</text>`;
+    });
+
+    svg.innerHTML = defs +
+        `<path d="${areaPath}" fill="url(#epgrad)"/>` +
+        `<path d="${linePath}" stroke="#1e3a5f" stroke-width="1.5" fill="none"/>` +
+        zoneMarkers +
+        `<line class="ep-cursor" id="ep-cursor" x1="-10" y1="0" x2="-10" y2="${H}" style="display:none;"/>`;
+
+    // Interaction
+    const rect = () => svg.getBoundingClientRect();
+    svg.addEventListener('mousemove', (e) => {
+        const r = rect();
+        const px = (e.clientX - r.left) / r.width;
+        const x = px * W;
+        // find nearest point
+        let nearest = 0, minD = Infinity;
+        for (let i = 0; i < points.length; i++) {
+            const d = Math.abs(points[i].x - x);
+            if (d < minD) { minD = d; nearest = i; }
+        }
+        const p = points[nearest];
+        const cursor = document.getElementById('ep-cursor');
+        if (cursor) {
+            cursor.setAttribute('x1', p.x);
+            cursor.setAttribute('x2', p.x);
+            cursor.style.display = '';
+        }
+        const kmVal = (gpxData.distances[p.idx] / 1000).toFixed(2);
+        const eleVal = gpxData.elevations[p.idx].toFixed(0);
+        tooltip.style.display = 'block';
+        tooltip.textContent = `${kmVal} km · ${eleVal} m`;
+    });
+    svg.addEventListener('mouseleave', () => {
+        const cursor = document.getElementById('ep-cursor');
+        if (cursor) cursor.style.display = 'none';
+        tooltip.style.display = 'none';
+    });
+}
+
+// ============================================================
+// GALERÍA AÉREA
+// ============================================================
+const aerialModal = document.getElementById('aerialModal');
+const aerialImg = document.getElementById('aerialCurrent');
+const aerialCount = document.getElementById('aerialCount');
+const aerialCaption = document.getElementById('aerialCaption');
+const aerialThumbs = document.getElementById('aerialThumbs');
+let aerialIdx = 0;
+
+function openAerial(idx = 0) {
+    aerialIdx = idx;
+    renderAerial();
+    aerialModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeAerial() {
+    aerialModal.classList.remove('open');
+    document.body.style.overflow = '';
+}
+function nextAerial() { aerialIdx = (aerialIdx + 1) % AERIAL_PHOTOS.length; renderAerial(); }
+function prevAerial() { aerialIdx = (aerialIdx - 1 + AERIAL_PHOTOS.length) % AERIAL_PHOTOS.length; renderAerial(); }
+function renderAerial() {
+    const file = AERIAL_PHOTOS[aerialIdx];
+    aerialImg.src = '../imagenes/aereas/' + file;
+    aerialCount.textContent = (aerialIdx + 1) + ' / ' + AERIAL_PHOTOS.length;
+    aerialCaption.textContent = 'Vista aérea ' + file.replace('aerea_', '').replace('.jpg', '') + ' · Dron sobre Güemes';
+    document.querySelectorAll('.aerial-thumb').forEach((t, i) => t.classList.toggle('active', i === aerialIdx));
+    // scroll thumb into view
+    const activeThumb = document.querySelector('.aerial-thumb.active');
+    if (activeThumb) activeThumb.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+}
+
+// Construir thumbs
+AERIAL_PHOTOS.forEach((file, i) => {
+    const t = document.createElement('div');
+    t.className = 'aerial-thumb';
+    t.innerHTML = '<img src="../imagenes/aereas/' + file + '" alt="Miniatura ' + (i+1) + '" loading="lazy">';
+    t.addEventListener('click', () => { aerialIdx = i; renderAerial(); });
+    aerialThumbs.appendChild(t);
+});
+
+// Listeners
+document.getElementById('btn-galeria').addEventListener('click', () => openAerial(0));
+document.getElementById('aerialClose').addEventListener('click', closeAerial);
+document.getElementById('aerialPrev').addEventListener('click', prevAerial);
+document.getElementById('aerialNext').addEventListener('click', nextAerial);
+aerialModal.addEventListener('click', (e) => { if (e.target === aerialModal) closeAerial(); });
+document.addEventListener('keydown', (e) => {
+    if (!aerialModal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeAerial();
+    else if (e.key === 'ArrowRight') nextAerial();
+    else if (e.key === 'ArrowLeft') prevAerial();
+});
+
+</script>
+</body>
+</html>
