@@ -67,6 +67,18 @@
     transition: color 0.2s;
   }
   nav .links a:hover { color: var(--corten-br); }
+  nav .links a.nav-ext {
+    color: var(--corten-br);
+    border: 1px solid rgba(244, 199, 123, 0.35);
+    padding: 6px 12px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  nav .links a.nav-ext:hover {
+    background: var(--corten-br);
+    color: var(--bg-deep);
+    border-color: var(--corten-br);
+  }
   @media (max-width: 900px) { nav .links { display: none; } }
 
   /* ----- Sections ----- */
@@ -452,6 +464,8 @@
     <a href="#senda">La Senda</a>
     <a href="#plan">Plan</a>
     <a href="#documentos">Documentos</a>
+    <a href="mapa/mapa_mundial_hermanos.html" class="nav-ext">Mapa</a>
+    <a href="mapa/senda/" class="nav-ext">Senda 360°</a>
     <a href="#contacto">Contacto</a>
   </div>
 </nav>
