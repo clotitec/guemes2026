@@ -531,26 +531,30 @@
     estatua_espana: {
       coords: [43.4557, -3.6369],
       type: 'estatua',
-      es: { tag: 'Estatua · España', titulo: 'Güemes de España', sub: 'Junto a la Iglesia de San Vicente — centro del pueblo' },
-      en: { tag: 'Sculpture · Spain', titulo: 'Güemes of Spain', sub: 'Next to the Church of San Vicente — village centre' },
+      img: '../imagenes/renders/espana-dia.jpg',
+      es: { tag: 'Estatua · España', titulo: 'Güemes de España', sub: 'Junto a la Iglesia de San Vicente — centro del pueblo. Render día/noche disponible.' },
+      en: { tag: 'Sculpture · Spain', titulo: 'Güemes of Spain', sub: 'Next to the Church of San Vicente — village centre. Day/night render available.' },
     },
     estatua_argentina: {
       coords: [43.4540, -3.6400],
       type: 'estatua',
-      es: { tag: 'Estatua · Argentina', titulo: 'Güemes de Argentina', sub: 'Plazoleta grande de entrada por Galizano' },
-      en: { tag: 'Sculpture · Argentina', titulo: 'Güemes of Argentina', sub: 'Large plaza at the Galizano entrance' },
+      img: '../imagenes/renders/argentina-dia.jpg',
+      es: { tag: 'Estatua · Argentina', titulo: 'Güemes de Argentina', sub: 'Plazoleta grande de entrada por Galizano. Árbol emblemático: Ceibo.' },
+      en: { tag: 'Sculpture · Argentina', titulo: 'Güemes of Argentina', sub: 'Large plaza at the Galizano entrance. Emblematic tree: Ceibo.' },
     },
     estatua_mexico: {
       coords: [43.4565, -3.6340],
       type: 'estatua',
-      es: { tag: 'Estatua · México', titulo: 'Güemes de México', sub: 'Parque dirección Meruelo' },
-      en: { tag: 'Sculpture · México', titulo: 'Güemes of México', sub: 'Park towards Meruelo' },
+      img: '../imagenes/renders/mexico-dia.jpg',
+      es: { tag: 'Estatua · México', titulo: 'Güemes de México', sub: 'Parque dirección Meruelo. Árbol emblemático: ciprés calvo (Taxodium).' },
+      en: { tag: 'Sculpture · México', titulo: 'Güemes of México', sub: 'Park towards Meruelo. Emblematic tree: bald cypress (Taxodium).' },
     },
     estatua_eeuu: {
       coords: [43.4553, -3.6378],
       type: 'estatua',
-      es: { tag: 'Estatua · EE.UU.', titulo: 'Güemes de EE.UU.', sub: 'El Quejigal, cerca de la Ermita de San Julián' },
-      en: { tag: 'Sculpture · USA', titulo: 'Güemes of the USA', sub: 'El Quejigal, near the Hermitage of San Julián' },
+      img: '../imagenes/renders/eeuu-dia.jpg',
+      es: { tag: 'Estatua · EE.UU.', titulo: 'Güemes de EE.UU.', sub: 'El Quejigal, cerca de la Ermita de San Julián. Árbol emblemático: abeto Douglas.' },
+      en: { tag: 'Sculpture · USA', titulo: 'Güemes of the USA', sub: 'El Quejigal, near the Hermitage of San Julián. Emblematic tree: Douglas-fir.' },
     },
     iglesia: {
       coords: [43.4555278, -3.6363889],
@@ -765,7 +769,7 @@
     const t = I18N[currentLang];
     const content = { ...p[currentLang] };
     content.historia = p[currentLang].sub;
-    content.img = null;
+    content.img = p.img || null;
 
     content.actions = [];
     if (key === 'iglesia' || key === 'estatua_espana') {

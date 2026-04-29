@@ -287,6 +287,74 @@
   .sculpt-card .img {
     aspect-ratio: 4/3; background-size: cover; background-position: center;
     border-bottom: 1px solid var(--line-soft);
+    position: relative; isolation: isolate;
+  }
+  /* Day → Night cross-fade on hover */
+  .sculpt-card .img.with-night::after {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background-image: var(--night-img); background-size: cover; background-position: center;
+    opacity: 0; transition: opacity 0.6s ease;
+  }
+  .sculpt-card:hover .img.with-night::after { opacity: 1; }
+  .sculpt-card .img-tag {
+    position: absolute; right: 12px; bottom: 12px; z-index: 2;
+    font-family: 'Satoshi', sans-serif; font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--corten-br); font-weight: 500;
+    background: rgba(10,17,32,0.78); backdrop-filter: blur(4px);
+    padding: 5px 10px; border-radius: 2px;
+    border: 1px solid rgba(244, 199, 123, 0.3);
+    pointer-events: none;
+  }
+  .sculpt-card:hover .img-tag::before { content: '🌙 '; }
+  .sculpt-card .img-tag::before { content: '☀️ '; }
+
+  /* ========== ANTES Y DESPUÉS · render block ========== */
+  .render-showcase {
+    margin-top: 60px;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) { .render-showcase { grid-template-columns: 1fr; } }
+  .render-card {
+    position: relative; aspect-ratio: 16/10;
+    border: 1px solid var(--line-soft);
+    overflow: hidden; isolation: isolate;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .render-card:hover { border-color: var(--corten); transform: translateY(-3px); }
+  .render-card .day, .render-card .night {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: opacity 0.7s ease;
+  }
+  .render-card .night { opacity: 0; }
+  .render-card:hover .night { opacity: 1; }
+  .render-card .render-label {
+    position: absolute; left: 16px; top: 14px; z-index: 2;
+    font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px;
+    color: var(--text);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+  }
+  .render-card .render-label small {
+    display: block; font-family: 'Satoshi', sans-serif; font-style: normal;
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--corten-br); margin-bottom: 4px; font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  .render-card .render-mode {
+    position: absolute; right: 14px; bottom: 14px; z-index: 2;
+    font-family: 'Satoshi', sans-serif; font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--text);
+    background: rgba(10,17,32,0.7); padding: 5px 10px; border-radius: 2px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(244,199,123,0.25);
+  }
+  .render-card:hover .render-mode::before { content: '🌙 '; }
+  .render-card .render-mode::before { content: '☀️ '; }
+  .render-hint {
+    text-align: center; margin-top: 20px;
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--text-mut); font-weight: 500;
   }
   .sculpt-card .body { padding: 22px 24px; }
   .sculpt-card .flag { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--corten-br); }
@@ -744,9 +812,40 @@
     <h2 class="section-title reveal">Cuatro esculturas. Un recorrido. Un mismo nombre.</h2>
     <p class="lead reveal delay-1">La actuación principal de la candidatura es la <strong>Senda de las Estatuas de Güemes</strong>: un recorrido circular de 6,9 km que conecta los cuatro puntos del pueblo donde se instalarán las esculturas monumentales en acero corten, cada una dedicada a uno de los Güemes del mundo. Cada escultura llevará banco, mesa, panel interpretativo y código QR multiidioma.</p>
 
+    <!-- Render showcase: día/noche cross-fade -->
+    <div class="render-showcase reveal delay-2">
+      <div class="render-card">
+        <div class="day"   style="background-image: url('imagenes/renders/espana-dia.jpg');"></div>
+        <div class="night" style="background-image: url('imagenes/renders/espana-noche.jpg');"></div>
+        <div class="render-label"><small>🇪🇸 España</small>Plazoleta del Portalillo</div>
+        <div class="render-mode">Día / Noche</div>
+      </div>
+      <div class="render-card">
+        <div class="day"   style="background-image: url('imagenes/renders/argentina-dia.jpg');"></div>
+        <div class="night" style="background-image: url('imagenes/renders/argentina-noche.jpg');"></div>
+        <div class="render-label"><small>🇦🇷 Argentina</small>Plazoleta de Galizano</div>
+        <div class="render-mode">Día / Noche</div>
+      </div>
+      <div class="render-card">
+        <div class="day"   style="background-image: url('imagenes/renders/mexico-dia.jpg');"></div>
+        <div class="night" style="background-image: url('imagenes/renders/mexico-noche.jpg');"></div>
+        <div class="render-label"><small>🇲🇽 México</small>Parque dirección Meruelo</div>
+        <div class="render-mode">Día / Noche</div>
+      </div>
+      <div class="render-card">
+        <div class="day"   style="background-image: url('imagenes/renders/eeuu-dia.jpg');"></div>
+        <div class="night" style="background-image: url('imagenes/renders/eeuu-noche.jpg');"></div>
+        <div class="render-label"><small>🇺🇸 EE.UU.</small>El Quejigal · Ermita</div>
+        <div class="render-mode">Día / Noche</div>
+      </div>
+    </div>
+    <div class="render-hint reveal">Pasa el cursor sobre cada plazoleta para ver el aspecto nocturno</div>
+
     <div class="sculpt-grid">
       <div class="sculpt-card reveal">
-        <div class="img" style="background-image: url('mapa/imagenes/ESPANA.jpeg');"></div>
+        <div class="img with-night" style="background-image: url('imagenes/renders/espana-dia.jpg'); --night-img: url('imagenes/renders/espana-noche.jpg');">
+          <div class="img-tag">Día / Noche</div>
+        </div>
         <div class="body">
           <div class="flag">🇪🇸 España</div>
           <div class="name">Güemes de España</div>
@@ -758,7 +857,9 @@
         </div>
       </div>
       <div class="sculpt-card reveal delay-1">
-        <div class="img" style="background-image: url('mapa/imagenes/ARGENTINA.jpeg');"></div>
+        <div class="img with-night" style="background-image: url('imagenes/renders/argentina-dia.jpg'); --night-img: url('imagenes/renders/argentina-noche.jpg');">
+          <div class="img-tag">Día / Noche</div>
+        </div>
         <div class="body">
           <div class="flag">🇦🇷 Argentina</div>
           <div class="name">Güemes de Argentina</div>
@@ -770,7 +871,9 @@
         </div>
       </div>
       <div class="sculpt-card reveal delay-2">
-        <div class="img" style="background-image: url('mapa/imagenes/MEXICO.jpeg');"></div>
+        <div class="img with-night" style="background-image: url('imagenes/renders/mexico-dia.jpg'); --night-img: url('imagenes/renders/mexico-noche.jpg');">
+          <div class="img-tag">Día / Noche</div>
+        </div>
         <div class="body">
           <div class="flag">🇲🇽 México</div>
           <div class="name">Güemes de México</div>
@@ -782,7 +885,9 @@
         </div>
       </div>
       <div class="sculpt-card reveal delay-3">
-        <div class="img" style="background-image: url('mapa/imagenes/EEUU.jpeg');"></div>
+        <div class="img with-night" style="background-image: url('imagenes/renders/eeuu-dia.jpg'); --night-img: url('imagenes/renders/eeuu-noche.jpg');">
+          <div class="img-tag">Día / Noche</div>
+        </div>
         <div class="body">
           <div class="flag">🇺🇸 Estados Unidos</div>
           <div class="name">Güemes de EE.UU.</div>
