@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paneles interpretativos — Senda de las Estatuas de Güemes</title>
-<meta name="description" content="Los 4 paneles interpretativos bilingües de las esculturas de la Senda de las Estatuas. Candidatura Güemes 2026.">
+<meta name="description" content="Los 4 paneles interpretativos trilingües (ES · EN · FR) de las esculturas de la Senda de las Estatuas. Candidatura Güemes 2026.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,7 @@
     --text-mut: #8a8680;
     --line: rgba(244, 199, 123, 0.28);
     --line-soft: rgba(232, 230, 225, 0.1);
+    --ok: #7bc6f4;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,7 +64,7 @@
     background: var(--corten-br); color: var(--bg-deep);
   }
 
-  /* ================= PANEL (A3 portrait: 297x420mm = 842x1191px @72dpi) ================= */
+  /* ================= PANEL (A3 portrait) ================= */
   .panel {
     width: 840px; height: 1188px;
     margin: 0 auto 40px;
@@ -71,7 +72,7 @@
     color: var(--text);
     position: relative;
     box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    padding: 60px 70px 50px;
+    padding: 50px 60px 40px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -87,10 +88,10 @@
 
   .panel-header {
     display: flex; justify-content: space-between; align-items: baseline;
-    padding-bottom: 20px; border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 16px; border-bottom: 1px solid var(--line-soft);
   }
   .panel-header .project {
-    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
     color: var(--corten-br); font-weight: 500;
   }
   .panel-header .number {
@@ -98,87 +99,136 @@
     font-size: 22px; color: var(--corten-dk); font-weight: 400;
   }
 
-  .panel-main { padding: 40px 0 30px; flex: 1; display: flex; flex-direction: column; }
+  /* ===== title + map row ===== */
+  .panel-title-row {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 30px;
+    align-items: start;
+    padding: 28px 0 22px;
+    border-bottom: 1px solid var(--line-soft);
+  }
 
   .panel-flag {
     font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--corten); margin-bottom: 14px; font-weight: 500;
+    color: var(--corten); margin-bottom: 12px; font-weight: 500;
   }
   .panel-title {
     font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
-    font-size: 94px; line-height: 0.95; letter-spacing: -0.02em;
+    font-size: 76px; line-height: 0.95; letter-spacing: -0.02em;
     color: var(--text);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   .panel-title small {
-    display: block; font-size: 34px; font-style: italic;
-    color: var(--corten-br); margin-top: 6px;
+    display: block; font-size: 26px; font-style: italic;
+    color: var(--corten-br); margin-top: 4px;
     line-height: 1;
   }
   .panel-coords {
-    font-family: 'Satoshi', monospace; font-size: 13px;
-    color: var(--text-mut); letter-spacing: 0.05em;
-    margin-bottom: 40px;
+    font-family: 'Satoshi', monospace; font-size: 12px;
+    color: var(--text-mut); letter-spacing: 0.04em;
+    margin-top: 8px;
   }
 
-  .panel-body {
-    font-size: 18px; line-height: 1.55;
-    color: var(--text-dim); font-weight: 300;
-    max-width: 640px;
+  /* ===== mini world map ===== */
+  .panel-map {
+    background: var(--bg-navy);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 10px 10px 8px;
   }
-  .panel-body p { margin-bottom: 16px; }
-  .panel-body p em {
-    color: var(--corten-br); font-style: italic; font-weight: 500;
+  .panel-map .map-title {
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--corten-br); font-weight: 500; margin-bottom: 6px;
+    text-align: center;
   }
+  .panel-map svg { width: 100%; height: auto; display: block; }
+  .panel-map .map-legend {
+    display: flex; justify-content: space-between; gap: 6px;
+    font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-mut); margin-top: 6px;
+  }
+  .panel-map .map-legend .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    vertical-align: middle; margin-right: 4px;
+  }
+  .panel-map .map-legend .dot.from { background: var(--corten-br); }
+  .panel-map .map-legend .dot.to { background: var(--ok); }
+
+  /* ===== body content ===== */
+  .panel-bodies {
+    flex: 1; padding-top: 18px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+
+  .panel-body { font-size: 15.5px; line-height: 1.5; color: var(--text-dim); font-weight: 300; }
+  .panel-body p { margin-bottom: 9px; }
+  .panel-body p:last-child { margin-bottom: 0; }
+  .panel-body p em { color: var(--corten-br); font-style: italic; font-weight: 500; }
   .panel-body p strong { color: var(--text); font-weight: 500; }
 
+  .panel-body.en { font-size: 13.5px; line-height: 1.45; color: var(--text-mut); }
+  .panel-body.en p em { color: var(--corten); }
+  .panel-body.en p strong { color: var(--text-dim); }
+
+  .panel-body.fr { font-size: 13px; line-height: 1.45; color: var(--text-mut); font-style: italic; }
+  .panel-body.fr p em { color: var(--corten); font-style: normal; font-weight: 500; }
+  .panel-body.fr p strong { color: var(--text-dim); font-style: normal; font-weight: 500; }
+
   .panel-lang-divider {
-    margin: 28px 0; display: flex; align-items: center; gap: 14px;
-    color: var(--text-mut);
+    display: flex; align-items: center; gap: 12px;
+    color: var(--text-mut); margin-top: 4px;
   }
   .panel-lang-divider::before, .panel-lang-divider::after {
-    content: ''; flex: 1; height: 1px;
-    background: var(--line-soft);
+    content: ''; flex: 1; height: 1px; background: var(--line-soft);
   }
   .panel-lang-divider span {
-    font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+    font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
     font-weight: 500;
   }
 
-  .panel-body-en {
-    font-size: 15px; line-height: 1.5; color: var(--text-mut); font-weight: 300;
-    max-width: 640px;
-  }
-  .panel-body-en p { margin-bottom: 12px; }
-  .panel-body-en p em { color: var(--corten); font-style: italic; }
-  .panel-body-en p strong { color: var(--text-dim); font-weight: 500; }
-
+  /* ===== footer ===== */
   .panel-footer {
-    display: grid; grid-template-columns: 1fr auto; gap: 40px;
-    align-items: end; padding-top: 30px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    padding-top: 18px; margin-top: 16px;
     border-top: 1px solid var(--line-soft);
   }
 
-  .panel-qr-block { text-align: center; }
+  .panel-qr-block { display: flex; align-items: center; gap: 14px; }
   .panel-qr {
-    width: 140px; height: 140px;
-    background: var(--text); border: 8px solid var(--text);
-    border-radius: 4px; margin: 0 auto 10px;
+    width: 78px; height: 78px;
+    background: var(--text); border: 5px solid var(--text);
+    border-radius: 3px;
     background-image: url('../qr/qr-guemes-2026-bw-1000.png');
     background-size: cover;
+    opacity: 0.55;
+    position: relative;
+  }
+  .panel-qr::after {
+    content: 'DEMO';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-12deg);
+    font-family: 'Satoshi', sans-serif;
+    font-size: 11px; letter-spacing: 0.18em; font-weight: 700;
+    color: #c0392b;
+    background: rgba(255,255,255,0.85);
+    padding: 2px 6px;
+    border: 1px solid #c0392b;
+    border-radius: 2px;
   }
   .panel-qr-label {
     font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--corten-br); font-weight: 500; line-height: 1.4;
+    color: var(--corten-br); font-weight: 500; line-height: 1.5;
   }
-  .panel-qr-label strong { display: block; color: var(--text); font-weight: 500; font-size: 10px; margin-bottom: 4px; letter-spacing: 0.25em; }
+  .panel-qr-label strong { display: block; color: var(--text); font-weight: 500; font-size: 10px; margin-bottom: 3px; letter-spacing: 0.25em; }
+  .panel-qr-label .note { color: var(--text-mut); font-style: italic; letter-spacing: 0.08em; text-transform: none; font-size: 9.5px; margin-top: 3px; }
 
   .panel-colophon {
-    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--text-mut); line-height: 1.6;
+    text-align: center;
+    font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-mut); line-height: 1.7;
   }
   .panel-colophon strong { color: var(--corten-br); font-weight: 500; }
-  .panel-colophon br { display: inline; }
 
   /* ================= PRINT ================= */
   @media print {
@@ -201,13 +251,20 @@
 <div class="page-toolbar screen-only">
   <small>Preview · Para aprobación</small>
   <h1>Paneles interpretativos — <em style="color:var(--corten-br);font-style:italic;">Senda de las Estatuas</em></h1>
-  <p>Cada una de las 4 esculturas de la Senda llevará un panel informativo vertical en acero corten con este contenido. Bilingüe ES+EN de base, código QR para ES · EN · FR · DE · IT. Formato A3 portrait listo para imprimir en papel o grabar a láser sobre corten. Pensado para legibilidad a 1,5 m de distancia, bajo lluvia y sol.</p>
+  <p>Cada una de las 4 esculturas llevará un panel informativo vertical en acero corten con este contenido. Trilingüe ES · EN · FR a modo demostrativo, con código QR para acceder a la versión completa multilingüe online (ES · EN · FR · DE · IT). Cada panel incluye un mapa de ubicación que conecta Güemes con su pueblo hermano. QR mostrado de forma demostrativa — no operativo en esta maqueta. Formato A3 portrait listo para imprimir o grabar a láser sobre corten.</p>
   <div class="toolbar-actions">
     <button onclick="window.print()">↓ Imprimir / PDF</button>
     <a href="../index.html">← Volver al sitio</a>
     <a href="https://guemes-pueblo-cantabria-2026.vercel.app/">URL pública</a>
   </div>
 </div>
+
+<!-- ============================================================
+     SVG WORLD MAP TEMPLATE (equirectangular 360x180 viewBox)
+     Reused per panel with different destination markers.
+     Continent paths are stylised silhouettes — schematic but
+     recognisable; NOT a topographic reference.
+     ============================================================ -->
 
 <!-- ================= PANEL 01 · ESPAÑA ================= -->
 <section class="panel">
@@ -216,35 +273,68 @@
     <div class="number">01 / 04</div>
   </header>
 
-  <main class="panel-main">
-    <div class="panel-flag">España · El origen</div>
-    <h2 class="panel-title">Güemes<small>Bareyo, Cantabria</small></h2>
-    <div class="panel-coords">43.4557° N, 3.6369° O · 315 habitantes · Cuna del apellido desde 1084</div>
+  <div class="panel-title-row">
+    <div>
+      <div class="panel-flag">España · El origen</div>
+      <h2 class="panel-title">Güemes<small>Bareyo, Cantabria</small></h2>
+      <div class="panel-coords">43.4557° N, 3.6369° O · 315 hab. · Cuna del apellido desde 1084</div>
+    </div>
+    <div class="panel-map">
+      <div class="map-title">Ubicación</div>
+      <svg viewBox="0 0 360 180" preserveAspectRatio="xMidYMid meet" aria-label="Mapa mundial: Güemes">
+        <rect x="0" y="0" width="360" height="180" fill="#0a1120"/>
+        <g fill="rgba(244,199,123,0.16)" stroke="rgba(244,199,123,0.42)" stroke-width="0.6" stroke-linejoin="round">
+          <path d="M30,28 L75,22 L110,28 L128,38 L130,58 L122,75 L100,88 L70,90 L48,82 L28,62 L25,42 Z"/>
+          <path d="M105,90 L130,90 L145,108 L142,135 L122,148 L108,135 L100,115 Z"/>
+          <path d="M165,32 L200,28 L218,40 L210,52 L188,55 L170,48 Z"/>
+          <path d="M170,55 L210,52 L222,82 L220,118 L200,142 L182,128 L168,98 Z"/>
+          <path d="M210,32 L268,22 L320,28 L345,48 L340,72 L295,80 L248,72 L218,55 Z"/>
+          <path d="M290,108 L332,108 L342,124 L322,132 L296,128 Z"/>
+        </g>
+        <!-- Origin marker (Güemes Spain) -->
+        <circle cx="176.4" cy="46.5" r="4.5" fill="#f4c77b" stroke="#0a1120" stroke-width="1"/>
+        <circle cx="176.4" cy="46.5" r="9" fill="none" stroke="#f4c77b" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <div class="map-legend">
+        <span><span class="dot from"></span>Güemes (origen)</span>
+      </div>
+    </div>
+  </div>
 
+  <div class="panel-bodies">
     <div class="panel-body">
       <p><strong>Cuna del apellido.</strong> Güemes aparece por primera vez en un documento del año <em>1084</em>. Durante nueve siglos, los canteros, escultores y fundidores de campanas de este pueblo levantaron catedrales desde Santiago de Compostela hasta Pamplona.</p>
-      <p>Su hospital medieval de San Julián acogió a los peregrinos del Camino de Santiago desde el siglo XIV. Hoy lo continúa el <em>Albergue La Cabaña del Abuelo Peuto</em> — el mejor valorado del Camino del Norte, con más de <strong>150.000 peregrinos</strong> acogidos de <strong>más de 80 países</strong>.</p>
+      <p>Su hospital medieval de San Julián acogió a los peregrinos del Camino de Santiago desde el siglo XIV. Hoy lo continúa el <em>Albergue La Cabaña del Abuelo Peuto</em> — el mejor valorado del Camino del Norte, con más de <strong>150.000 peregrinos</strong> de <strong>más de 80 países</strong>.</p>
       <p>El apellido Güemes, de origen toponímico en este mismo valle, viajó con el Imperio Hispano y dejó tres pueblos hermanos en el mundo. Esta senda los honra.</p>
     </div>
 
     <div class="panel-lang-divider"><span>English</span></div>
-
-    <div class="panel-body-en">
+    <div class="panel-body en">
       <p><strong>Cradle of the name.</strong> Güemes was first documented in <em>1084</em>. For nine centuries, its stonemasons, sculptors and bell-founders built cathedrals from Santiago de Compostela to Pamplona.</p>
       <p>Its medieval pilgrims' hospital of San Julián welcomed travellers from the 14th century — today continued by <em>Albergue La Cabaña del Abuelo Peuto</em>, the best-rated hostel on the Camino del Norte, with over <strong>150,000 pilgrims</strong> from more than <strong>80 countries</strong>.</p>
       <p>The surname Güemes, toponymic in origin from this valley, travelled with the Spanish Empire — three sister towns around the world carry this name today. This path honours them.</p>
     </div>
-  </main>
+
+    <div class="panel-lang-divider"><span>Français</span></div>
+    <div class="panel-body fr">
+      <p><strong>Berceau du nom.</strong> Güemes apparaît pour la première fois dans un document de l'année <em>1084</em>. Pendant neuf siècles, les tailleurs de pierre, sculpteurs et fondeurs de cloches de ce village ont élevé des cathédrales de Saint-Jacques-de-Compostelle à Pampelune.</p>
+      <p>Son hôpital médiéval de San Julián a accueilli les pèlerins du Chemin de Saint-Jacques dès le XIVᵉ siècle. Aujourd'hui, l'<em>Auberge La Cabaña del Abuelo Peuto</em> en perpétue la tradition — la mieux notée du Camino del Norte, avec plus de <strong>150 000 pèlerins</strong> venus de plus de <strong>80 pays</strong>.</p>
+      <p>Le nom Güemes, d'origine toponymique dans cette vallée même, a voyagé avec l'Empire hispanique et a laissé trois villages frères à travers le monde. Ce sentier leur rend hommage.</p>
+    </div>
+  </div>
 
   <footer class="panel-footer">
-    <div class="panel-colophon">
-      <strong>Abriendo caminos de amistad</strong><br>
-      Candidatura Pueblo de Cantabria 2026<br>
-      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
-    </div>
     <div class="panel-qr-block">
       <div class="panel-qr"></div>
-      <div class="panel-qr-label"><strong>Escanea para más</strong>ES · EN · FR · DE · IT</div>
+      <div class="panel-qr-label">
+        <strong>Escanea para más</strong>
+        ES · EN · FR · DE · IT
+        <div class="note">QR demostrativo — no operativo</div>
+      </div>
+    </div>
+    <div class="panel-colophon">
+      <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
+      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
     </div>
   </footer>
 </section>
@@ -256,11 +346,40 @@
     <div class="number">02 / 04</div>
   </header>
 
-  <main class="panel-main">
-    <div class="panel-flag">Argentina · 10.400 km al oeste</div>
-    <h2 class="panel-title">Güemes<small>de Argentina</small></h2>
-    <div class="panel-coords">-24.6667°, -65.05° · General Güemes, provincia de Salta · 56.948 habitantes</div>
+  <div class="panel-title-row">
+    <div>
+      <div class="panel-flag">Argentina · 10.400 km al oeste</div>
+      <h2 class="panel-title">Güemes<small>de Argentina</small></h2>
+      <div class="panel-coords">24.6667° S, 65.05° O · General Güemes, Salta · 56.948 hab.</div>
+    </div>
+    <div class="panel-map">
+      <div class="map-title">Conexión</div>
+      <svg viewBox="0 0 360 180" preserveAspectRatio="xMidYMid meet" aria-label="Mapa: Güemes a Argentina">
+        <rect x="0" y="0" width="360" height="180" fill="#0a1120"/>
+        <g fill="rgba(244,199,123,0.16)" stroke="rgba(244,199,123,0.42)" stroke-width="0.6" stroke-linejoin="round">
+          <path d="M30,28 L75,22 L110,28 L128,38 L130,58 L122,75 L100,88 L70,90 L48,82 L28,62 L25,42 Z"/>
+          <path d="M105,90 L130,90 L145,108 L142,135 L122,148 L108,135 L100,115 Z"/>
+          <path d="M165,32 L200,28 L218,40 L210,52 L188,55 L170,48 Z"/>
+          <path d="M170,55 L210,52 L222,82 L220,118 L200,142 L182,128 L168,98 Z"/>
+          <path d="M210,32 L268,22 L320,28 L345,48 L340,72 L295,80 L248,72 L218,55 Z"/>
+          <path d="M290,108 L332,108 L342,124 L322,132 L296,128 Z"/>
+        </g>
+        <!-- Connecting arc -->
+        <path d="M 176.4,46.5 Q 145,15 115,114.7" stroke="#f4c77b" stroke-width="1" stroke-dasharray="3,3" fill="none" opacity="0.7"/>
+        <!-- Origin -->
+        <circle cx="176.4" cy="46.5" r="4" fill="#f4c77b" stroke="#0a1120" stroke-width="1"/>
+        <!-- Destination -->
+        <circle cx="115" cy="114.7" r="4" fill="#7bc6f4" stroke="#0a1120" stroke-width="1"/>
+        <circle cx="115" cy="114.7" r="9" fill="none" stroke="#7bc6f4" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <div class="map-legend">
+        <span><span class="dot from"></span>Güemes</span>
+        <span><span class="dot to"></span>Argentina</span>
+      </div>
+    </div>
+  </div>
 
+  <div class="panel-bodies">
     <div class="panel-body">
       <p>A más de diez mil kilómetros al oeste, en la provincia argentina de Salta, se encuentra la ciudad de <em>General Güemes</em>. Fundada el <em>23 de julio de 1888</em>, lleva el nombre de <strong>Martín Miguel de Güemes</strong> (1785–1821), héroe nacional argentino, cuyo padre Gabriel de Güemes Montero era natural de Cantabria.</p>
       <p>Hoy viven allí cerca de <strong>57.000 personas</strong>, ciento noventa veces la población de Güemes. Cada 17 de junio, Argentina celebra en su memoria el Día Nacional de la Libertad Latinoamericana.</p>
@@ -268,23 +387,32 @@
     </div>
 
     <div class="panel-lang-divider"><span>English</span></div>
-
-    <div class="panel-body-en">
+    <div class="panel-body en">
       <p>More than ten thousand kilometres to the west, in the Argentine province of Salta, lies the city of <em>General Güemes</em>. Founded on <em>23 July 1888</em>, it bears the name of <strong>Martín Miguel de Güemes</strong> (1785–1821), Argentine national hero, whose father Gabriel de Güemes Montero came from Cantabria.</p>
       <p>Today nearly <strong>57,000 people</strong> live there — 190 times the population of Güemes. Every 17 June, Argentina commemorates him on the National Day of Latin American Freedom.</p>
-      <p>In 2009, an expedition from the Güemes hostel visited the city. The local press headline read: <em>"Journey to find the origin of the Güemes surname"</em>.</p>
+      <p>In 2009 an expedition from the Güemes hostel visited the city. The local press headline read: <em>"Journey to find the origin of the Güemes surname"</em>.</p>
     </div>
-  </main>
+
+    <div class="panel-lang-divider"><span>Français</span></div>
+    <div class="panel-body fr">
+      <p>À plus de dix mille kilomètres à l'ouest, dans la province argentine de Salta, se trouve la ville de <em>General Güemes</em>. Fondée le <em>23 juillet 1888</em>, elle porte le nom de <strong>Martín Miguel de Güemes</strong> (1785–1821), héros national argentin, dont le père Gabriel de Güemes Montero était originaire de Cantabrie.</p>
+      <p>Près de <strong>57 000 personnes</strong> y vivent aujourd'hui — cent quatre-vingt-dix fois la population de Güemes. Chaque 17 juin, l'Argentine célèbre en sa mémoire la Journée nationale de la Liberté latino-américaine.</p>
+      <p>En 2009, une expédition de l'auberge de Güemes a visité la ville. La presse locale titrait : <em>« Une traversée pour retrouver l'origine du nom Güemes »</em>.</p>
+    </div>
+  </div>
 
   <footer class="panel-footer">
-    <div class="panel-colophon">
-      <strong>Abriendo caminos de amistad</strong><br>
-      Candidatura Pueblo de Cantabria 2026<br>
-      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
-    </div>
     <div class="panel-qr-block">
       <div class="panel-qr"></div>
-      <div class="panel-qr-label"><strong>Escanea para más</strong>ES · EN · FR · DE · IT</div>
+      <div class="panel-qr-label">
+        <strong>Escanea para más</strong>
+        ES · EN · FR · DE · IT
+        <div class="note">QR demostrativo — no operativo</div>
+      </div>
+    </div>
+    <div class="panel-colophon">
+      <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
+      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
     </div>
   </footer>
 </section>
@@ -296,11 +424,38 @@
     <div class="number">03 / 04</div>
   </header>
 
-  <main class="panel-main">
-    <div class="panel-flag">México · 8.750 km al oeste</div>
-    <h2 class="panel-title">Güémez<small>de México</small></h2>
-    <div class="panel-coords">23.9186°, -99.0067° · Güémez, estado de Tamaulipas · 1.731 habitantes</div>
+  <div class="panel-title-row">
+    <div>
+      <div class="panel-flag">México · 8.750 km al oeste</div>
+      <h2 class="panel-title">Güémez<small>de México</small></h2>
+      <div class="panel-coords">23.9186° N, 99.0067° O · Güémez, Tamaulipas · 1.731 hab.</div>
+    </div>
+    <div class="panel-map">
+      <div class="map-title">Conexión</div>
+      <svg viewBox="0 0 360 180" preserveAspectRatio="xMidYMid meet" aria-label="Mapa: Güemes a México">
+        <rect x="0" y="0" width="360" height="180" fill="#0a1120"/>
+        <g fill="rgba(244,199,123,0.16)" stroke="rgba(244,199,123,0.42)" stroke-width="0.6" stroke-linejoin="round">
+          <path d="M30,28 L75,22 L110,28 L128,38 L130,58 L122,75 L100,88 L70,90 L48,82 L28,62 L25,42 Z"/>
+          <path d="M105,90 L130,90 L145,108 L142,135 L122,148 L108,135 L100,115 Z"/>
+          <path d="M165,32 L200,28 L218,40 L210,52 L188,55 L170,48 Z"/>
+          <path d="M170,55 L210,52 L222,82 L220,118 L200,142 L182,128 L168,98 Z"/>
+          <path d="M210,32 L268,22 L320,28 L345,48 L340,72 L295,80 L248,72 L218,55 Z"/>
+          <path d="M290,108 L332,108 L342,124 L322,132 L296,128 Z"/>
+        </g>
+        <!-- Connecting arc -->
+        <path d="M 176.4,46.5 Q 128,12 81,66" stroke="#f4c77b" stroke-width="1" stroke-dasharray="3,3" fill="none" opacity="0.7"/>
+        <circle cx="176.4" cy="46.5" r="4" fill="#f4c77b" stroke="#0a1120" stroke-width="1"/>
+        <circle cx="81" cy="66" r="4" fill="#7bc6f4" stroke="#0a1120" stroke-width="1"/>
+        <circle cx="81" cy="66" r="9" fill="none" stroke="#7bc6f4" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <div class="map-legend">
+        <span><span class="dot from"></span>Güemes</span>
+        <span><span class="dot to"></span>México</span>
+      </div>
+    </div>
+  </div>
 
+  <div class="panel-bodies">
     <div class="panel-body">
       <p>En el estado mexicano de Tamaulipas, a ocho mil kilómetros de aquí, está el municipio de <em>Güémez</em>. Fundado el <em>1 de enero de 1749</em> por José de Escandón y Helguera, primer conde de Sierra Gorda, lleva el nombre del virrey de Nueva España <strong>Juan Francisco de Güemes y Horcasitas</strong>, primer conde de Revillagigedo.</p>
       <p>Su iglesia de San Francisco de Asís, del siglo XVIII, guarda un parecido arquitectónico sorprendente con la iglesia de San Vicente Mártir de Güemes de Cantabria. Hoy viven allí <strong>1.731 personas</strong>.</p>
@@ -308,23 +463,32 @@
     </div>
 
     <div class="panel-lang-divider"><span>English</span></div>
-
-    <div class="panel-body-en">
-      <p>In the Mexican state of Tamaulipas, eight thousand kilometres away, is the municipality of <em>Güémez</em>. Founded on <em>1 January 1749</em> by José de Escandón y Helguera, first count of Sierra Gorda, it bears the name of the Viceroy of New Spain <strong>Juan Francisco de Güemes y Horcasitas</strong>, first count of Revillagigedo.</p>
+    <div class="panel-body en">
+      <p>In the Mexican state of Tamaulipas, eight thousand kilometres away, lies the municipality of <em>Güémez</em>. Founded on <em>1 January 1749</em> by José de Escandón y Helguera, first count of Sierra Gorda, it bears the name of the Viceroy of New Spain <strong>Juan Francisco de Güemes y Horcasitas</strong>, first count of Revillagigedo.</p>
       <p>Its 18th-century church of San Francisco de Asís shows a striking architectural resemblance to the church of San Vicente Mártir of Güemes in Cantabria. <strong>1,731 people</strong> live there today.</p>
       <p>In 2016 the Güémez town council inaugurated a civic plaza expressly dedicated to viceroy Güemes, testimony to the bond with the Cantabrian cradle of the name.</p>
     </div>
-  </main>
+
+    <div class="panel-lang-divider"><span>Français</span></div>
+    <div class="panel-body fr">
+      <p>Dans l'État mexicain de Tamaulipas, à huit mille kilomètres d'ici, se trouve la municipalité de <em>Güémez</em>. Fondée le <em>1ᵉʳ janvier 1749</em> par José de Escandón y Helguera, premier comte de Sierra Gorda, elle porte le nom du vice-roi de Nouvelle-Espagne <strong>Juan Francisco de Güemes y Horcasitas</strong>, premier comte de Revillagigedo.</p>
+      <p>Son église de San Francisco de Asís, du XVIIIᵉ siècle, présente une ressemblance architecturale frappante avec l'église de San Vicente Mártir de Güemes en Cantabrie. <strong>1 731 personnes</strong> y vivent aujourd'hui.</p>
+      <p>En 2016, la municipalité de Güémez a inauguré une place civique expressément dédiée au vice-roi Güemes, témoignant du lien avec le berceau cantabre du nom.</p>
+    </div>
+  </div>
 
   <footer class="panel-footer">
-    <div class="panel-colophon">
-      <strong>Abriendo caminos de amistad</strong><br>
-      Candidatura Pueblo de Cantabria 2026<br>
-      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
-    </div>
     <div class="panel-qr-block">
       <div class="panel-qr"></div>
-      <div class="panel-qr-label"><strong>Escanea para más</strong>ES · EN · FR · DE · IT</div>
+      <div class="panel-qr-label">
+        <strong>Escanea para más</strong>
+        ES · EN · FR · DE · IT
+        <div class="note">QR demostrativo — no operativo</div>
+      </div>
+    </div>
+    <div class="panel-colophon">
+      <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
+      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
     </div>
   </footer>
 </section>
@@ -336,33 +500,68 @@
     <div class="number">04 / 04</div>
   </header>
 
-  <main class="panel-main">
-    <div class="panel-flag">Estados Unidos · 8.100 km al noroeste</div>
-    <h2 class="panel-title">Guemes Island<small>de Estados Unidos</small></h2>
-    <div class="panel-coords">48.5478°, -122.6244° · Condado de Skagit, estado de Washington · ≈600 habitantes</div>
+  <div class="panel-title-row">
+    <div>
+      <div class="panel-flag">Estados Unidos · 8.100 km al noroeste</div>
+      <h2 class="panel-title">Guemes Island<small>de Estados Unidos</small></h2>
+      <div class="panel-coords">48.5478° N, 122.6244° O · Skagit, Washington · ≈600 hab.</div>
+    </div>
+    <div class="panel-map">
+      <div class="map-title">Conexión</div>
+      <svg viewBox="0 0 360 180" preserveAspectRatio="xMidYMid meet" aria-label="Mapa: Güemes a Guemes Island">
+        <rect x="0" y="0" width="360" height="180" fill="#0a1120"/>
+        <g fill="rgba(244,199,123,0.16)" stroke="rgba(244,199,123,0.42)" stroke-width="0.6" stroke-linejoin="round">
+          <path d="M30,28 L75,22 L110,28 L128,38 L130,58 L122,75 L100,88 L70,90 L48,82 L28,62 L25,42 Z"/>
+          <path d="M105,90 L130,90 L145,108 L142,135 L122,148 L108,135 L100,115 Z"/>
+          <path d="M165,32 L200,28 L218,40 L210,52 L188,55 L170,48 Z"/>
+          <path d="M170,55 L210,52 L222,82 L220,118 L200,142 L182,128 L168,98 Z"/>
+          <path d="M210,32 L268,22 L320,28 L345,48 L340,72 L295,80 L248,72 L218,55 Z"/>
+          <path d="M290,108 L332,108 L342,124 L322,132 L296,128 Z"/>
+        </g>
+        <!-- Connecting arc -->
+        <path d="M 176.4,46.5 Q 117,8 57.4,41.5" stroke="#f4c77b" stroke-width="1" stroke-dasharray="3,3" fill="none" opacity="0.7"/>
+        <circle cx="176.4" cy="46.5" r="4" fill="#f4c77b" stroke="#0a1120" stroke-width="1"/>
+        <circle cx="57.4" cy="41.5" r="4" fill="#7bc6f4" stroke="#0a1120" stroke-width="1"/>
+        <circle cx="57.4" cy="41.5" r="9" fill="none" stroke="#7bc6f4" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <div class="map-legend">
+        <span><span class="dot from"></span>Güemes</span>
+        <span><span class="dot to"></span>EE.UU.</span>
+      </div>
+    </div>
+  </div>
 
+  <div class="panel-bodies">
     <div class="panel-body">
       <p>Frente a la costa del Pacífico norteamericano, <em>Guemes Island</em> fue bautizada en <em>1791</em> por el explorador español José María Narváez, durante la expedición de Francisco de Eliza. El nombre honra a <strong>Juan Vicente de Güemes</strong>, segundo conde de Revillagigedo y también virrey de Nueva España — hijo del virrey que da nombre a Güémez de México.</p>
       <p>En el año <em>2009</em>, un peregrino de esta isla llamado Bob llegó al Albergue La Cabaña del Abuelo Peuto. De aquel encuentro nació este proyecto: <em>"Abriendo caminos de amistad"</em>. Una expedición cántabra visitó la isla en 2018 y fue recibida con un cartel: <strong>"Bienvenidos de Güemes a Güemes"</strong>.</p>
     </div>
 
     <div class="panel-lang-divider"><span>English</span></div>
-
-    <div class="panel-body-en">
+    <div class="panel-body en">
       <p>Off the North American Pacific coast, <em>Guemes Island</em> was named in <em>1791</em> by Spanish explorer José María Narváez during the expedition led by Francisco de Eliza. The name honours <strong>Juan Vicente de Güemes</strong>, second count of Revillagigedo and also viceroy of New Spain — son of the viceroy who gave his name to Güémez in México.</p>
       <p>In <em>2009</em>, a pilgrim from this island named Bob arrived at Albergue La Cabaña del Abuelo Peuto. From that encounter this project was born: <em>"Opening paths of friendship"</em>. A Cantabrian expedition visited the island in 2018 and was greeted with a banner: <strong>"Welcome from Güemes to Güemes"</strong>.</p>
     </div>
-  </main>
+
+    <div class="panel-lang-divider"><span>Français</span></div>
+    <div class="panel-body fr">
+      <p>Face à la côte pacifique nord-américaine, <em>Guemes Island</em> fut baptisée en <em>1791</em> par l'explorateur espagnol José María Narváez, lors de l'expédition de Francisco de Eliza. Le nom honore <strong>Juan Vicente de Güemes</strong>, second comte de Revillagigedo et également vice-roi de Nouvelle-Espagne — fils du vice-roi qui donne son nom à Güémez du Mexique.</p>
+      <p>En <em>2009</em>, un pèlerin de cette île prénommé Bob arriva à l'Auberge La Cabaña del Abuelo Peuto. De cette rencontre naquit ce projet : <em>« Ouvrir des chemins d'amitié »</em>. Une expédition cantabre a visité l'île en 2018 et fut accueillie par une banderole : <strong>« Bienvenue de Güemes à Güemes »</strong>.</p>
+    </div>
+  </div>
 
   <footer class="panel-footer">
-    <div class="panel-colophon">
-      <strong>Abriendo caminos de amistad</strong><br>
-      Candidatura Pueblo de Cantabria 2026<br>
-      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
-    </div>
     <div class="panel-qr-block">
       <div class="panel-qr"></div>
-      <div class="panel-qr-label"><strong>Escanea para más</strong>ES · EN · FR · DE · IT</div>
+      <div class="panel-qr-label">
+        <strong>Escanea para más</strong>
+        ES · EN · FR · DE · IT
+        <div class="note">QR demostrativo — no operativo</div>
+      </div>
+    </div>
+    <div class="panel-colophon">
+      <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
+      Junta Vecinal de Güemes · Ayuntamiento de Bareyo
     </div>
   </footer>
 </section>
