@@ -214,6 +214,48 @@
     color: var(--text-mut);
   }
 
+  /* Antes y después comparison */
+  .ba-section { margin: 18px 0 8px; }
+  .ba-section h3 {
+    font-size: 16px; color: var(--corten-br); font-style: italic;
+    margin: 18px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .ba-pair {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4px; margin-bottom: 16px;
+    border: 1px solid var(--line-soft);
+    background: var(--line-soft);
+  }
+  @media (max-width: 600px) { .ba-pair { grid-template-columns: 1fr; } }
+  .ba-pair > .ba-tile {
+    position: relative; aspect-ratio: 4/3;
+    overflow: hidden; background: var(--bg-card);
+  }
+  .ba-pair img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.4s ease, filter 0.3s;
+    filter: brightness(0.95);
+  }
+  .ba-pair a:hover img { transform: scale(1.04); filter: brightness(1.05); }
+  .ba-tile .ba-label {
+    position: absolute; left: 12px; top: 12px; z-index: 2;
+    font-family: 'Satoshi', sans-serif; font-size: 9px; letter-spacing: 0.3em;
+    text-transform: uppercase; font-weight: 500;
+    background: rgba(10,17,32,0.85); padding: 5px 10px; border-radius: 2px;
+    backdrop-filter: blur(4px);
+  }
+  .ba-tile.antes .ba-label { color: var(--text-mut); border: 1px solid rgba(232,230,225,0.18); }
+  .ba-tile.despues .ba-label { color: var(--corten-br); border: 1px solid rgba(244,199,123,0.35); }
+  .ba-cap {
+    grid-column: 1 / -1;
+    background: var(--bg-card); padding: 10px 14px;
+    font-size: 12.5px; color: var(--text-dim);
+    border-top: 1px solid var(--line-soft);
+  }
+  .ba-cap strong { color: var(--text); font-weight: 500; }
+  .ba-cap em { color: var(--corten-br); font-style: italic; }
+
   /* Photo gallery */
   .gallery-section { margin: 18px 0 8px; }
   .gallery-section h3 {
@@ -406,6 +448,80 @@
 
   <div class="callout blue">
     <strong>Cómo navegar:</strong> arrastra con el ratón para girar la cámara 360°, usa la rueda para acercar/alejar, y haz clic en las flechas del suelo para avanzar al siguiente punto de la ruta. La experiencia completa en pantalla grande está disponible en la web pública.
+  </div>
+</div>
+
+<!-- ============ ANTES Y DESPUES ============ -->
+<div class="card">
+  <h2>
+    <span>Antes y después · Estado actual y propuesta</span>
+    <span class="amount">4 plazoletas</span>
+  </h2>
+
+  <p>Comparación directa entre el <em>estado actual</em> de los emplazamientos previstos y la <em>propuesta de actuación</em> con la escultura monumental, mobiliario, iluminación, panel interpretativo y árbol emblemático del país hermano. La candidatura transforma cuatro espacios cotidianos del pueblo en un recorrido patrimonial coherente.</p>
+
+  <div class="ba-section">
+    <h3>España · Junto a la Iglesia de San Vicente</h3>
+    <div class="ba-pair">
+      <a class="ba-tile antes" href="../imagenes/aerea-04.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/aerea-04.jpg" alt="Antes · entorno de la iglesia" loading="lazy">
+        <div class="ba-label">Antes</div>
+      </a>
+      <a class="ba-tile despues" href="../imagenes/renders/espana-dia.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/renders/thumbs/espana-dia.jpg" alt="Después · render día España" loading="lazy">
+        <div class="ba-label">Después · Día</div>
+      </a>
+      <div class="ba-cap"><strong>Plazoleta del Portalillo</strong> · centro del pueblo, en diálogo con el atrio y la torre de la <em>Iglesia de San Vicente Mártir</em>. Árbol: <em>Roble común</em>.</div>
+    </div>
+  </div>
+
+  <div class="ba-section">
+    <h3>Argentina · Plazoleta de entrada por Galizano</h3>
+    <div class="ba-pair">
+      <a class="ba-tile antes" href="../imagenes/zona-actuacion.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/zona-actuacion.jpg" alt="Antes · zona de actuación" loading="lazy">
+        <div class="ba-label">Antes</div>
+      </a>
+      <a class="ba-tile despues" href="../imagenes/renders/argentina-dia.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/renders/thumbs/argentina-dia.jpg" alt="Después · render día Argentina" loading="lazy">
+        <div class="ba-label">Después · Día</div>
+      </a>
+      <div class="ba-cap"><strong>Plazoleta de Galizano</strong> · primera puerta del pueblo viniendo desde la costa. Árbol: <em>Ceibo</em> (árbol nacional argentino).</div>
+    </div>
+  </div>
+
+  <div class="ba-section">
+    <h3>México · Parque dirección Meruelo</h3>
+    <div class="ba-pair">
+      <a class="ba-tile antes" href="../imagenes/aerea-07.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/aerea-07.jpg" alt="Antes · plazoleta dirección Meruelo" loading="lazy">
+        <div class="ba-label">Antes</div>
+      </a>
+      <a class="ba-tile despues" href="../imagenes/renders/mexico-dia.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/renders/thumbs/mexico-dia.jpg" alt="Después · render día México" loading="lazy">
+        <div class="ba-label">Después · Día</div>
+      </a>
+      <div class="ba-cap"><strong>Parque dirección Meruelo</strong> · acceso noreste del pueblo. Árbol: <em>Ciprés calvo</em> (Taxodium, mismo género que el ahuehuete mexicano).</div>
+    </div>
+  </div>
+
+  <div class="ba-section">
+    <h3>EE.UU. · El Quejigal · junto a la Ermita de San Julián</h3>
+    <div class="ba-pair">
+      <a class="ba-tile antes" href="../imagenes/aerea-05.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/aerea-05.jpg" alt="Antes · entorno de la ermita" loading="lazy">
+        <div class="ba-label">Antes</div>
+      </a>
+      <a class="ba-tile despues" href="../imagenes/renders/eeuu-dia.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/renders/thumbs/eeuu-dia.jpg" alt="Después · render día EE.UU." loading="lazy">
+        <div class="ba-label">Después · Día</div>
+      </a>
+      <div class="ba-cap"><strong>El Quejigal · Ermita de San Julián</strong> · cierre del recorrido junto a la ermita medieval. Árbol: <em>Abeto Douglas</em> (árbol estatal de Washington).</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Lectura visual:</strong> el contraste antes/después resume el espíritu de la candidatura: <em>poner en valor lo que ya está</em> (paisaje, patrimonio, comunidad) sin alterar la escala del pueblo. Las cuatro intervenciones suman, no imponen.
   </div>
 </div>
 
