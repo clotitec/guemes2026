@@ -373,6 +373,7 @@
             <button class="mapa-btn" id="btn-reset">Centrar ruta</button>
             <button class="mapa-btn mapa-btn-tour" id="btn-tour-360">Visor aéreo 360° · 30 vistas</button>
             <button class="mapa-btn" id="btn-toggle-panos">Mostrar puntos 360°</button>
+            <button class="mapa-btn" id="btn-toggle-streetview">Street View Google</button>
         </div>
         <div class="elevation-profile">
             <div class="ep-header">
@@ -1303,6 +1304,77 @@ document.getElementById('btn-toggle-panos').addEventListener('click', (e) => {
     e.target.classList.toggle('active', panoMarkersVisible);
 });
 
+// ============================================================
+// MARKERS DE GOOGLE STREET VIEW (730+ puntos clicables)
+// ============================================================
+let streetViewMarkers = [];
+let streetViewVisible = false;
+let streetViewLoaded = false;
+
+async function loadStreetViewMarkers() {
+    if (streetViewLoaded) return;
+    streetViewLoaded = true;
+    try {
+        const [a, b] = await Promise.all([
+            fetch('../streetview/guemes.json').then(r => r.json()).catch(() => ({photos:[]})),
+            fetch('../streetview/wemes.json').then(r => r.json()).catch(() => ({photos:[]})),
+        ]);
+        const all = [...(a.photos || []), ...(b.photos || [])];
+        const seen = new Set();
+        const points = all.filter(p => p.id && !seen.has(p.id) && (seen.add(p.id), true));
+
+        points.forEach(p => {
+            if (typeof p.lat !== 'number' || typeof p.lng !== 'number') return;
+            const el = document.createElement('div');
+            el.className = 'marker-streetview';
+            el.style.display = streetViewVisible ? '' : 'none';
+            el.title = 'Street View · Güemes';
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openStreetView(p.id, p.lat, p.lng, p.heading || 0);
+            });
+            const m = new maplibregl.Marker({ element: el, anchor: 'center' })
+                .setLngLat([p.lng, p.lat])
+                .addTo(map);
+            streetViewMarkers.push(m);
+        });
+    } catch (err) {
+        console.warn('No se pudieron cargar puntos Street View:', err);
+    }
+}
+
+function openStreetView(pano, lat, lng, heading) {
+    const src = 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s' + pano +
+        '!2m2!1d' + lat + '!2d' + lng +
+        '!3f' + (heading || 0) + '!4f0!5f0.7820865974627469';
+    document.getElementById('streetviewIframe').src = src;
+    const modal = document.getElementById('streetviewModal');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+}
+
+document.getElementById('streetviewClose').addEventListener('click', () => {
+    const modal = document.getElementById('streetviewModal');
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.getElementById('streetviewIframe').src = '';
+});
+
+document.getElementById('btn-toggle-streetview').addEventListener('click', async (e) => {
+    if (!streetViewLoaded) {
+        e.target.textContent = 'Cargando…';
+        e.target.disabled = true;
+        await loadStreetViewMarkers();
+        e.target.disabled = false;
+    }
+    streetViewVisible = !streetViewVisible;
+    streetViewMarkers.forEach(m => {
+        m.getElement().style.display = streetViewVisible ? '' : 'none';
+    });
+    e.target.textContent = streetViewVisible ? 'Ocultar Street View' : 'Street View Google';
+    e.target.classList.toggle('active', streetViewVisible);
+});
+
 document.getElementById('btn-tour-360').addEventListener('click', () => {
     if (!HAS_TOUR) return;
     openTour360(TOUR_SCENES[0].id);
@@ -1467,6 +1539,20 @@ document.addEventListener('keydown', (e) => {
         <button id="matterportClose" class="tour360-close" type="button" aria-label="Cerrar">✕</button>
     </div>
     <iframe id="matterportIframe" class="tour360-viewer" src="" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen" allowfullscreen></iframe>
+</div>
+
+<!-- ============================================================
+     MODAL STREET VIEW GOOGLE · panorámicas embebidas
+     ============================================================ -->
+<div id="streetviewModal" class="tour360-modal" aria-hidden="true">
+    <div class="tour360-header">
+        <div>
+            <div class="tour360-eyebrow">Google Street View</div>
+            <h3 id="streetviewTitle">Vista 360° del pueblo</h3>
+        </div>
+        <button id="streetviewClose" class="tour360-close" type="button" aria-label="Cerrar">✕</button>
+    </div>
+    <iframe id="streetviewIframe" class="tour360-viewer" src="" frameborder="0" allow="fullscreen" allowfullscreen referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
 </div>
 
 </body>

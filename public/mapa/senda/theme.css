@@ -382,6 +382,23 @@ body {
   box-shadow: 0 0 0 4px rgba(244, 199, 123, 0.5), 0 4px 14px rgba(0,0,0,0.5);
 }
 
+/* Street View Google · puntos clicables */
+.marker-streetview {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #7bc6f4;
+  border: 1.5px solid #ffffff;
+  cursor: pointer;
+  opacity: 0.78;
+  box-shadow: 0 0 0 1px rgba(123, 198, 244, 0.35);
+  transition: transform 0.15s, opacity 0.15s, box-shadow 0.15s;
+}
+.marker-streetview:hover {
+  transform: scale(1.8);
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(123, 198, 244, 0.45), 0 4px 14px rgba(0,0,0,0.5);
+}
+
 /* ============================================================
    BOTÓN 360° (dentro de popups) y BOTÓN MATTERPORT
    ============================================================ */
