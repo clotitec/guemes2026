@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Instrucciones para la administración · Candidatura Güemes 2026</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm 22mm 18mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 10.5pt; line-height: 1.5; color: #1a1a1a;
+  }
+  .cover {
+    page-break-after: always;
+    text-align: center;
+    padding: 90px 30px 0;
+    background: linear-gradient(180deg, #f9efd5 0%, #fff 100%);
+    height: 100vh;
+  }
+  .cover .eyebrow { font-size: 10pt; letter-spacing: 0.4em; text-transform: uppercase; color: #8a6a30; margin-bottom: 18px; font-weight: 600; }
+  .cover h1 { font-family: 'Georgia', serif; font-style: italic; font-size: 38pt; line-height: 1.05; margin-bottom: 18px; color: #1a1a1a; }
+  .cover .sub { font-size: 13pt; color: #444; max-width: 480px; margin: 0 auto 28px; line-height: 1.5; }
+  .cover .deadline {
+    background: #fff5e6; border: 2px solid #d4a142;
+    padding: 18px 24px; max-width: 380px; margin: 26px auto;
+    font-size: 12pt;
+  }
+  .cover .deadline strong { color: #b9500c; font-size: 14pt; display: block; margin-bottom: 4px; }
+
+  h2 {
+    font-size: 18pt; font-weight: 700; margin: 28px 0 14px;
+    border-bottom: 2px solid #d4a142; padding-bottom: 6px;
+    color: #1a1a1a;
+  }
+  h3 { font-size: 13pt; font-weight: 700; margin: 18px 0 8px; color: #2a3a52; }
+  h4 { font-size: 11pt; font-weight: 700; margin: 12px 0 6px; color: #444; }
+  p { margin-bottom: 10px; }
+  ul, ol { margin: 6px 0 12px 22px; }
+  li { margin-bottom: 5px; }
+
+  .step {
+    background: #fafafa;
+    border-left: 4px solid #d4a142;
+    padding: 14px 18px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+  .step .step-num {
+    display: inline-block; background: #1a3a5c; color: #fff;
+    width: 26px; height: 26px; border-radius: 50%;
+    text-align: center; font-weight: 700; line-height: 26px;
+    margin-right: 8px; font-size: 11pt;
+  }
+  .step h3 { display: inline; margin: 0; }
+
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 9.5pt; margin: 10px 0 16px;
+    page-break-inside: avoid;
+  }
+  th { background: #1a3a5c; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #ddd; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f7f7; }
+  td.req { font-weight: 700; color: #b9500c; }
+  td.opt { color: #888; }
+  td.firma { text-align: center; }
+
+  .check { color: #1e7e3a; font-weight: 700; }
+  .alert {
+    background: #fff8e6;
+    border: 1px solid #d4a142;
+    padding: 10px 14px; border-radius: 4px;
+    margin: 12px 0; font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  .alert strong { color: #b9500c; }
+
+  .danger {
+    background: #fde9e7;
+    border: 1px solid #c0392b;
+    padding: 10px 14px; border-radius: 4px;
+    margin: 12px 0; font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  .danger strong { color: #c0392b; }
+
+  .info {
+    background: #e9f3fb;
+    border: 1px solid #2a6da3;
+    padding: 10px 14px; border-radius: 4px;
+    margin: 12px 0; font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  .info strong { color: #1a4a8a; }
+
+  code {
+    background: #f0f0f0; padding: 1px 5px; border-radius: 2px;
+    font-family: 'Consolas', monospace; font-size: 9.5pt;
+  }
+
+  .opt-card {
+    border: 1px solid #ccc; padding: 14px 18px; margin: 10px 0;
+    border-radius: 4px; page-break-inside: avoid;
+  }
+  .opt-card h4 { color: #1a3a5c; }
+  .opt-card .pros { color: #1e7e3a; }
+  .opt-card .cons { color: #b9500c; }
+  .opt-card .verdict {
+    margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ccc;
+    font-style: italic; font-size: 9.5pt;
+  }
+  .opt-card.recommend { border: 2px solid #1e7e3a; background: #f4faf5; }
+  .opt-card.recommend::before {
+    content: '⭐ Recomendado'; color: #1e7e3a; font-weight: 700; font-size: 10pt;
+    display: block; margin-bottom: 6px;
+  }
+
+  .footer-info {
+    margin-top: 30px; padding-top: 14px;
+    border-top: 1px solid #ccc;
+    font-size: 9pt; color: #666;
+  }
+
+  @media print { body { font-size: 10pt; } .cover { height: auto; min-height: 100vh; } }
+</style>
+</head>
+<body>
+
+<!-- =================== COVER =================== -->
+<section class="cover">
+  <div class="eyebrow">Guía operativa para administración · ATYS</div>
+  <h1>Cómo presentar la<br>candidatura<br>de Güemes</h1>
+  <div class="sub">
+    Premio Pueblo de Cantabria 2026 · Convocatoria 2026 · Orden OBR/2/2017<br>
+    Junta Vecinal de Güemes (Bareyo, Cantabria)
+  </div>
+
+  <div class="deadline">
+    <strong>Plazo límite</strong>
+    4 de mayo de 2026<br>
+    <small style="color:#666;font-size:10pt;">Presentación telemática</small>
+  </div>
+
+  <p style="font-size:10pt;color:#666;margin-top:30px;">
+    Este documento contiene el paso a paso para subir todos los archivos a la plataforma de la Consejería,<br>
+    el orden de los documentos firmados y opciones técnicas para generar el dossier en PDF desde la web.
+  </p>
+
+  <p style="font-size:9pt;color:#888;margin-top:60px;">
+    Documento generado: 29 de abril de 2026<br>
+    Web pública: <code>guemes-pueblo-cantabria-2026.vercel.app</code>
+  </p>
+</section>
+
+<!-- =================== ÍNDICE =================== -->
+<h2>Índice</h2>
+<ol style="font-size:11pt;">
+  <li>Resumen rápido — qué hay que hacer</li>
+  <li>Estructura de la carpeta de entrega</li>
+  <li>Paso a paso de subida a la plataforma</li>
+  <li>Documentos que necesitan firma electrónica</li>
+  <li>Opciones para generar el PDF de la web pública</li>
+  <li>Calendario y plazos críticos</li>
+  <li>Contactos y resolución de problemas</li>
+</ol>
+
+<!-- =================== 1. RESUMEN =================== -->
+<h2>1. Resumen rápido — Qué hay que hacer</h2>
+
+<p>La candidatura se presenta de forma <strong>telemática</strong> en la sede electrónica del Gobierno de Cantabria.
+Esta carpeta de entrega contiene <strong>todos los archivos finales</strong> ordenados por su tipo de uso.
+Solo hay que subir cada documento al apartado correspondiente y firmar los que requieran firma electrónica.</p>
+
+<table>
+  <tr><th>Tipo de documento</th><th style="text-align:center;width:90px;">Obligatorio</th><th style="text-align:center;width:80px;">Firma</th><th>Carpeta de entrega</th></tr>
+  <tr><td>Solicitud Convc 2026</td><td class="req" style="text-align:center;">SÍ</td><td class="firma">Sí</td><td><code>01_OBLIGATORIOS_FIRMA</code></td></tr>
+  <tr><td>Memoria económica</td><td class="req" style="text-align:center;">SÍ</td><td class="firma">Sí</td><td><code>01_OBLIGATORIOS_FIRMA</code></td></tr>
+  <tr><td>Declaración Responsable Secretario</td><td class="req" style="text-align:center;">SÍ</td><td class="firma">Sí</td><td><code>01_OBLIGATORIOS_FIRMA</code></td></tr>
+  <tr><td>Documentación gráfica</td><td class="req" style="text-align:center;">SÍ</td><td class="firma">No</td><td><code>02_OBLIGATORIOS_SIN_FIRMA</code></td></tr>
+  <tr><td>Certificación Junta Vecinal</td><td class="opt" style="text-align:center;">No (recomendado)</td><td class="firma">Sí</td><td><code>03_OPCIONALES_FIRMA</code></td></tr>
+  <tr><td>Memoria de actuación</td><td class="opt" style="text-align:center;">No</td><td class="firma">No</td><td><code>04_DOCUMENTOS_BASE_PRETENSION</code></td></tr>
+  <tr><td>Dossier histórico, paneles, etc.</td><td class="opt" style="text-align:center;">No</td><td class="firma">No</td><td><code>04_DOCUMENTOS_BASE_PRETENSION</code></td></tr>
+</table>
+
+<div class="info">
+  <strong>Truco operativo:</strong> sube primero los <em>4 documentos obligatorios</em>. Una vez aceptados por el sistema, añade los opcionales. Si la plataforma se cae o limita tamaños, los obligatorios ya estarán seguros.
+</div>
+
+<!-- =================== 2. ESTRUCTURA =================== -->
+<h2>2. Estructura de la carpeta de entrega</h2>
+
+<p>La carpeta <code>ENTREGA_CANDIDATURA/</code> está organizada por <em>tipo de uso</em>, no por orden de subida.
+Cada subcarpeta tiene un <code>README.txt</code> con el detalle:</p>
+
+<pre style="background:#f5f5f5;padding:14px;font-size:9pt;line-height:1.4;border-left:3px solid #d4a142;overflow-x:auto;">
+ENTREGA_CANDIDATURA/
+├── 00_LEEME_PRIMERO/                  ← Este documento + checklist
+├── 01_OBLIGATORIOS_FIRMA/             ← 4 obligatorios con firma
+│   ├── 01_solicitud_convocatoria.pdf
+│   ├── 02_memoria_economica.pdf
+│   ├── 03_declaracion_responsable_secretario.pdf
+│   └── README.txt
+├── 02_OBLIGATORIOS_SIN_FIRMA/         ← 1 obligatorio sin firma
+│   ├── 01_documentacion_grafica.pdf
+│   └── README.txt
+├── 03_OPCIONALES_FIRMA/               ← Certificación de la Junta (ATYS envía)
+│   ├── 01_certificacion_junta_vecinal.pdf
+│   └── README.txt
+├── 04_DOCUMENTOS_BASE_PRETENSION/     ← Material de apoyo opcional
+│   ├── memoria_actuacion.pdf
+│   ├── dossier_historico.pdf
+│   ├── informe_historico_escallada.pdf
+│   ├── historia_viaje_cuatro_guemes.pdf
+│   ├── biografia_ernesto_bustio.pdf
+│   ├── itinerario_jurado.pdf
+│   ├── paneles_senda_estatuas.pdf
+│   └── README.txt
+├── 05_MATERIAL_GRAFICO/               ← Fotos, renders, aéreas (referencia)
+│   ├── renders_plazoletas/
+│   ├── fotos_pueblo/
+│   ├── iglesia/
+│   ├── ermita/
+│   └── aereas/
+├── 06_RECURSOS_DIGITALES/             ← Enlaces y referencias web
+│   ├── ENLACES_WEB.txt
+│   └── codigo_QR.png
+└── 99_REFERENCIA/                     ← Sólo consulta
+    ├── convocatoria_oficial_BOC.pdf
+    └── ruta_circular.gpx
+</pre>
+
+<!-- =================== 3. PASO A PASO =================== -->
+<h2>3. Paso a paso de subida a la plataforma</h2>
+
+<div class="step">
+  <span class="step-num">1</span><h3>Acceso a la plataforma</h3>
+  <p style="margin-top:10px;">Ir a la sede electrónica del Gobierno de Cantabria y buscar el procedimiento
+  <em>"Premio Pueblo de Cantabria 2026 · Convocatoria 2026 · Orden OBR/2/2017"</em>.
+  Acceder con certificado electrónico o Cl@ve PIN de la persona representante de la Junta Vecinal.</p>
+</div>
+
+<div class="step">
+  <span class="step-num">2</span><h3>Iniciar nueva solicitud</h3>
+  <p style="margin-top:10px;">Crear una nueva solicitud. La plataforma asignará un <em>justificante</em> tipo
+  <code>YYYYMMDDHHMMSSXXXXXX</code> en estado BORRADOR. <strong>Anotar este justificante</strong> — sirve para retomar la solicitud si se cierra la sesión.</p>
+</div>
+
+<div class="step">
+  <span class="step-num">3</span><h3>Rellenar el formulario de solicitud (en pantalla)</h3>
+  <p style="margin-top:10px;">El primer paso es rellenar los datos del solicitante directamente en la web:</p>
+  <ul>
+    <li><strong>Entidad:</strong> Junta Vecinal de Güemes (Bareyo, Cantabria)</li>
+    <li><strong>CIF:</strong> [solicitar a la Junta]</li>
+    <li><strong>Representante:</strong> Begoña de la Fuente Crespo (Presidenta)</li>
+    <li><strong>Domicilio a efectos de notificaciones:</strong> el de la Junta Vecinal</li>
+    <li><strong>Modalidad / categoría:</strong> según convocatoria (Pueblo de Cantabria)</li>
+    <li><strong>Importe solicitado:</strong> 160.000 €</li>
+  </ul>
+</div>
+
+<div class="step">
+  <span class="step-num">4</span><h3>Subir los 4 documentos obligatorios</h3>
+  <p style="margin-top:10px;">En el apartado <em>Documentación Complementaria</em>, subir <strong>uno por uno</strong>
+  cada documento al casillero correspondiente. La plataforma muestra un botón <em>"Adjuntar"</em> para cada tipo:</p>
+
+  <table>
+    <tr><th>Casillero en la plataforma</th><th>Archivo en la carpeta</th><th style="text-align:center;">Firma</th></tr>
+    <tr><td>Solicitud Convc 2026 Orden OBR/2/2017</td><td><code>01_OBLIGATORIOS_FIRMA/01_solicitud_convocatoria.pdf</code></td><td class="firma">Sí</td></tr>
+    <tr><td>Documentación gráfica</td><td><code>02_OBLIGATORIOS_SIN_FIRMA/01_documentacion_grafica.pdf</code></td><td class="firma">No</td></tr>
+    <tr><td>Memoria económica</td><td><code>01_OBLIGATORIOS_FIRMA/02_memoria_economica.pdf</code></td><td class="firma">Sí</td></tr>
+    <tr><td>Declaración Responsable del Secretario o Interventor</td><td><code>01_OBLIGATORIOS_FIRMA/03_declaracion_responsable_secretario.pdf</code></td><td class="firma">Sí</td></tr>
+  </table>
+
+  <div class="alert">
+    <strong>Atención:</strong> los archivos no pueden contener los caracteres <code>\ / ? * : | " &lt; &gt; &amp; # % ! ¿ ¡</code>
+    en su nombre. Los archivos del ZIP ya están renombrados sin estos caracteres.
+  </div>
+</div>
+
+<div class="step">
+  <span class="step-num">5</span><h3>Firmar los documentos obligatorios</h3>
+  <p style="margin-top:10px;">Tres documentos requieren firma electrónica:</p>
+  <ol>
+    <li>Solicitud Convc 2026 — firma la <strong>Presidenta de la Junta Vecinal</strong></li>
+    <li>Memoria económica — firma la <strong>Presidenta</strong></li>
+    <li>Declaración Responsable — firma <strong>Secretario/Interventor</strong> con Vº Bº de la Presidenta</li>
+  </ol>
+  <p>La plataforma valida automáticamente las firmas si los PDF ya vienen firmados con AutoFirma o Adobe Sign.
+  Si no, ofrece firmar in situ con el certificado electrónico.</p>
+</div>
+
+<div class="step">
+  <span class="step-num">6</span><h3>Subir documentación opcional</h3>
+  <p style="margin-top:10px;">Una vez los obligatorios estén aceptados, añadir:</p>
+  <ul>
+    <li><strong>Certificación de la Junta Vecinal</strong> (acta del 13/04/2026) → casillero <em>Certificación</em>. La envía ATYS firmada.</li>
+    <li><strong>Memoria de actuación, dossier histórico, paneles, biografía Ernesto, etc.</strong> → casillero <em>Documentos que sirvan de base a la pretensión</em>.
+    Pueden subirse de uno en uno o agrupados en un único PDF (ya disponible como <code>candidatura-guemes-2026.pdf</code> en <code>04_DOCUMENTOS_BASE_PRETENSION/</code>).</li>
+  </ul>
+</div>
+
+<div class="step">
+  <span class="step-num">7</span><h3>Revisar y firmar la solicitud completa</h3>
+  <p style="margin-top:10px;">Pulsar <em>"Firmar Solicitud"</em>. La plataforma genera un PDF de resumen con todos los documentos adjuntados.
+  Revisar antes de enviar definitivamente. La firma se realiza con certificado electrónico de la Presidenta.</p>
+</div>
+
+<div class="step">
+  <span class="step-num">8</span><h3>Confirmar registro y guardar el justificante</h3>
+  <p style="margin-top:10px;">Tras firmar, la plataforma genera un <strong>número de registro</strong> y un <strong>justificante de presentación</strong>.
+  Descargar ambos documentos y guardarlos en la carpeta <code>00_LEEME_PRIMERO/justificante_presentacion/</code>.
+  Enviar copia por email a <code>info@clotitec.com</code> y a la Presidenta.</p>
+</div>
+
+<div class="danger">
+  <strong>Importante:</strong> hasta que el sistema muestre <em>"Solicitud presentada"</em> y un número de registro,
+  la candidatura <strong>NO está presentada</strong>. El estado BORRADOR no cuenta. Verificar que aparezca el justificante de registro
+  electrónico antes de cerrar el navegador.
+</div>
+
+<!-- =================== 4. FIRMAS =================== -->
+<h2>4. Documentos que necesitan firma electrónica</h2>
+
+<table>
+  <tr><th>Documento</th><th>Quién firma</th><th>Cómo</th></tr>
+  <tr><td>Solicitud Convc 2026</td><td>Presidenta Junta Vecinal<br>(Begoña de la Fuente)</td><td>AutoFirma sobre PDF, o firma in-situ desde la plataforma</td></tr>
+  <tr><td>Memoria económica</td><td>Presidenta</td><td>AutoFirma o firma in-situ</td></tr>
+  <tr><td>Declaración Responsable</td><td>Secretario/Interventor (ATYS)<br>+ Vº Bº Presidenta</td><td>AutoFirma — firma doble en PDF</td></tr>
+  <tr><td>Certificación Junta Vecinal</td><td>Secretario/Interventor (ATYS)</td><td>ATYS lo firma y lo envía firmado por email</td></tr>
+</table>
+
+<div class="alert">
+  <strong>Recomendación:</strong> firmar los PDFs antes de subirlos a la plataforma con <a href="https://firmaelectronica.gob.es/Home/Descargas.html"><code>AutoFirma</code></a> (gratuita, oficial).
+  Es más fiable que la firma in-situ de la plataforma, que en ocasiones falla con archivos grandes.
+</div>
+
+<!-- =================== 5. PDF DE LA WEB =================== -->
+<h2 style="page-break-before:always;">5. Generar el PDF de la web pública</h2>
+
+<p>La candidatura está publicada en una <strong>web pública</strong> con material visual rico (renders día/noche, mapa interactivo, galería, tour 360°)
+que enriquece la documentación. Hay tres opciones para generar un PDF "tipo dossier" a partir de esa web. <strong>Tomar la decisión sobre cuál usar
+es responsabilidad de la persona que coordina la candidatura</strong>.</p>
+
+<div class="opt-card recommend">
+  <h4>Opción A — Subir el PDF compacto ya generado (RECOMENDADA)</h4>
+  <p><strong>Qué es:</strong> en la carpeta <code>04_DOCUMENTOS_BASE_PRETENSION/</code> ya está el archivo
+  <code>candidatura-guemes-2026.pdf</code> (~3 MB) con el contenido principal de la web exportado a PDF.
+  Es el formato consolidado que se usa habitualmente.</p>
+  <p class="pros"><strong>Ventajas:</strong> tamaño moderado, listo para subir, contiene la narrativa principal y los datos clave.</p>
+  <p class="cons"><strong>Limitaciones:</strong> al ser estático, no incluye los elementos interactivos (mapa, tour 360°, día/noche dinámico).
+  Estos se enlazan mediante una página de "Recursos digitales" con la URL pública y código QR.</p>
+  <p class="verdict">Es lo que <strong>siempre se entrega</strong>. Si hay duda, esta es la opción.</p>
+</div>
+
+<div class="opt-card">
+  <h4>Opción B — PDF expandido con galería completa de imágenes</h4>
+  <p><strong>Qué es:</strong> el archivo <code>documentacion-grafica.pdf</code> (~31 MB) ya generado, que incluye <em>todas</em> las imágenes en alta resolución (renders, fotos, antes/después). Se sube como "Documentación gráfica obligatoria".</p>
+  <p class="pros"><strong>Ventajas:</strong> dossier visual potente, ideal para que el jurado lo hojee sin necesidad de internet.</p>
+  <p class="cons"><strong>Limitaciones:</strong> 31 MB puede aproximarse al límite de subida de algunas plataformas administrativas. Verificar el tamaño máximo permitido antes de subir.</p>
+  <p class="verdict">Útil si la plataforma admite ≥ 50 MB. Si no, sustituir por una versión reducida.</p>
+</div>
+
+<div class="opt-card">
+  <h4>Opción C — Imprimir/exportar manualmente desde el navegador</h4>
+  <p><strong>Cómo:</strong> abrir cualquier página de la web (<code>guemes-pueblo-cantabria-2026.vercel.app/docs/...</code>) en Chrome o Edge, pulsar <kbd>Ctrl+P</kbd> y elegir <em>"Guardar como PDF"</em>.
+  Las hojas de estilo de impresión están preparadas para producir un PDF limpio, sin menús ni navegación.</p>
+  <p class="pros"><strong>Ventajas:</strong> permite generar variantes (sólo memoria económica, sólo paneles, etc.) según necesidad.</p>
+  <p class="cons"><strong>Limitaciones:</strong> el resultado depende del navegador; algunos elementos interactivos (iframes de Street View) no salen.</p>
+  <p class="verdict">Útil para dossiers ad-hoc (ej. presentación impresa al jurado en visita).</p>
+</div>
+
+<div class="info">
+  <strong>Recomendación final:</strong>
+  <ol style="margin-top:6px;">
+    <li>Para la <em>presentación oficial</em>: usar el PDF ya generado en <code>04_DOCUMENTOS_BASE_PRETENSION/candidatura-guemes-2026.pdf</code>.</li>
+    <li>Para la <em>documentación gráfica obligatoria</em>: usar <code>02_OBLIGATORIOS_SIN_FIRMA/01_documentacion_grafica.pdf</code>. Si la plataforma rechaza el archivo por tamaño, generar una versión más ligera (solo renders, sin galería completa).</li>
+    <li>Adicionalmente, en el dossier conviene incluir una página final con el <strong>enlace público y código QR</strong> a la web — el jurado puede así explorar el material interactivo cuando lo desee.</li>
+  </ol>
+</div>
+
+<!-- =================== 6. CALENDARIO =================== -->
+<h2>6. Calendario y plazos críticos</h2>
+
+<table>
+  <tr><th>Fecha</th><th>Hito</th><th>Estado</th></tr>
+  <tr><td>13 abril 2026</td><td>Aprobación de la candidatura por la Junta Vecinal</td><td class="check">Hecho</td></tr>
+  <tr><td>19 abril 2026</td><td>Reunión vecinal informativa</td><td class="check">Hecho</td></tr>
+  <tr><td>29 abril 2026</td><td>Cierre de la documentación digital y entrega a ATYS</td><td>En curso</td></tr>
+  <tr><td>30 abril – 3 mayo 2026</td><td>ATYS firma certificación + declaración responsable. Presidenta firma solicitud + memoria.</td><td>Pendiente</td></tr>
+  <tr><td><strong>4 mayo 2026</strong></td><td><strong>PLAZO LÍMITE</strong> de presentación telemática</td><td class="req">⚠ Crítico</td></tr>
+  <tr><td>Mayo–junio 2026</td><td>Subsanaciones (si la Consejería las solicita)</td><td>Posible</td></tr>
+  <tr><td>Verano 2026</td><td>Resolución del jurado</td><td>Esperado</td></tr>
+</table>
+
+<div class="danger">
+  <strong>No esperar al último día.</strong> La plataforma del Gobierno de Cantabria tiene picos de saturación los días previos al cierre.
+  Objetivo realista: <em>presentación firmada antes del 2 de mayo</em>.
+</div>
+
+<!-- =================== 7. CONTACTOS =================== -->
+<h2>7. Contactos y resolución de problemas</h2>
+
+<table>
+  <tr><th>Asunto</th><th>Contacto</th></tr>
+  <tr><td>Coordinación general de la candidatura</td><td>Clotitec — <code>info@clotitec.com</code></td></tr>
+  <tr><td>Junta Vecinal de Güemes</td><td>Begoña de la Fuente Crespo (Presidenta) — vía Ayuntamiento de Bareyo</td></tr>
+  <tr><td>Cooperativa Nª Sª Consolación</td><td>Miguel Lavín</td></tr>
+  <tr><td>Padre Ernesto Bustio (albergue)</td><td><code>ernestobustio@yahoo.es</code></td></tr>
+  <tr><td>Asesoría administrativa-contable</td><td>ATYS</td></tr>
+  <tr><td>Soporte de la plataforma</td><td>012 (Gobierno de Cantabria) · soporte sede electrónica</td></tr>
+</table>
+
+<h3>Si algo falla durante la subida</h3>
+<ul>
+  <li><strong>Archivo rechazado por tamaño:</strong> usar una versión ligera (consultar con coordinación).</li>
+  <li><strong>Firma electrónica no valida:</strong> reintentar con AutoFirma. Si persiste, llamar al 012.</li>
+  <li><strong>Plataforma caída:</strong> esperar 10-15 min y reintentar. Si es el día del plazo, llamar al 012 inmediatamente.</li>
+  <li><strong>Justificante no aparece:</strong> revisar bandeja de notificaciones de la sede electrónica antes de cerrar sesión.</li>
+</ul>
+
+<div class="footer-info">
+  Junta Vecinal de Güemes (Bareyo, Cantabria) · Premio Pueblo de Cantabria 2026 · Convocatoria 2026 · Orden OBR/2/2017<br>
+  Documento generado el 29 de abril de 2026 · Web pública: guemes-pueblo-cantabria-2026.vercel.app · Contacto: info@clotitec.com
+</div>
+
+</body>
+</html>
