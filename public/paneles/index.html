@@ -205,34 +205,27 @@
     border-top: 1px solid var(--line-soft);
   }
 
-  .panel-qr-block { display: flex; align-items: center; gap: 14px; }
-  .panel-qr {
-    width: 78px; height: 78px;
-    background: var(--text); border: 5px solid var(--text);
-    border-radius: 3px;
-    background-image: url('../qr/qr-guemes-2026-bw-1000.png');
-    background-size: cover;
-    opacity: 0.55;
-    position: relative;
-  }
-  .panel-qr::after {
-    content: 'DEMO';
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%) rotate(-12deg);
-    font-family: 'Satoshi', sans-serif;
-    font-size: 11px; letter-spacing: 0.18em; font-weight: 700;
-    color: #c0392b;
-    background: rgba(255,255,255,0.85);
-    padding: 2px 6px;
-    border: 1px solid #c0392b;
+  .panel-url-block {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    padding: 10px 18px;
+    border: 1px solid var(--line);
     border-radius: 2px;
+    background: rgba(244, 199, 123, 0.04);
+    min-width: 240px;
   }
-  .panel-qr-label {
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--corten-br); font-weight: 500; line-height: 1.5;
+  .panel-url-label {
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--corten-br); font-weight: 500;
   }
-  .panel-qr-label strong { display: block; color: var(--text); font-weight: 500; font-size: 10px; margin-bottom: 3px; letter-spacing: 0.25em; }
-  .panel-qr-label .note { color: var(--text-mut); font-style: italic; letter-spacing: 0.08em; text-transform: none; font-size: 9.5px; margin-top: 3px; }
+  .panel-url {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 13px; color: var(--text); font-weight: 400;
+    word-break: break-all; text-align: center; line-height: 1.2;
+  }
+  .panel-url-langs {
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-mut); font-weight: 500;
+  }
 
   .panel-colophon {
     text-align: center;
@@ -262,7 +255,7 @@
 <div class="page-toolbar screen-only">
   <small>Preview · Para aprobación</small>
   <h1>Paneles interpretativos — <em style="color:var(--corten-br);font-style:italic;">Senda de las Estatuas</em></h1>
-  <p>Cada una de las 4 esculturas llevará un panel informativo vertical en acero corten con este contenido. Trilingüe ES · EN · FR a modo demostrativo, con código QR para acceder a la versión completa multilingüe online (ES · EN · FR · DE · IT). Cada panel incluye un mapa de ubicación que conecta Güemes con su pueblo hermano. QR mostrado de forma demostrativa — no operativo en esta maqueta. Formato A3 portrait listo para imprimir o grabar a láser sobre corten.</p>
+  <p>Cada una de las 4 esculturas llevará un panel informativo vertical en acero corten con este contenido. Trilingüe ES · EN · FR a modo demostrativo, con URL pública para acceder a la versión completa multilingüe online (ES · EN · FR · DE · IT). Cada panel incluye un mapa de ubicación que conecta Güemes con su pueblo hermano. Formato A3 portrait listo para imprimir o grabar a láser sobre corten.</p>
   <div class="toolbar-actions">
     <button onclick="window.print()">↓ Imprimir / PDF</button>
     <a href="../index.html">← Volver al sitio</a>
@@ -334,13 +327,10 @@
   </div>
 
   <footer class="panel-footer">
-    <div class="panel-qr-block">
-      <div class="panel-qr"></div>
-      <div class="panel-qr-label">
-        <strong>Escanea para más</strong>
-        ES · EN · FR · DE · IT
-        <div class="note">QR demostrativo — no operativo</div>
-      </div>
+    <div class="panel-url-block">
+      <div class="panel-url-label">Más información online</div>
+      <div class="panel-url">guemes-pueblo-cantabria-2026.vercel.app</div>
+      <div class="panel-url-langs">ES · EN · FR · DE · IT</div>
     </div>
     <div class="panel-colophon">
       <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
@@ -409,13 +399,10 @@
   </div>
 
   <footer class="panel-footer">
-    <div class="panel-qr-block">
-      <div class="panel-qr"></div>
-      <div class="panel-qr-label">
-        <strong>Escanea para más</strong>
-        ES · EN · FR · DE · IT
-        <div class="note">QR demostrativo — no operativo</div>
-      </div>
+    <div class="panel-url-block">
+      <div class="panel-url-label">Más información online</div>
+      <div class="panel-url">guemes-pueblo-cantabria-2026.vercel.app</div>
+      <div class="panel-url-langs">ES · EN · FR · DE · IT</div>
     </div>
     <div class="panel-colophon">
       <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
@@ -484,13 +471,10 @@
   </div>
 
   <footer class="panel-footer">
-    <div class="panel-qr-block">
-      <div class="panel-qr"></div>
-      <div class="panel-qr-label">
-        <strong>Escanea para más</strong>
-        ES · EN · FR · DE · IT
-        <div class="note">QR demostrativo — no operativo</div>
-      </div>
+    <div class="panel-url-block">
+      <div class="panel-url-label">Más información online</div>
+      <div class="panel-url">guemes-pueblo-cantabria-2026.vercel.app</div>
+      <div class="panel-url-langs">ES · EN · FR · DE · IT</div>
     </div>
     <div class="panel-colophon">
       <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
@@ -556,13 +540,10 @@
   </div>
 
   <footer class="panel-footer">
-    <div class="panel-qr-block">
-      <div class="panel-qr"></div>
-      <div class="panel-qr-label">
-        <strong>Escanea para más</strong>
-        ES · EN · FR · DE · IT
-        <div class="note">QR demostrativo — no operativo</div>
-      </div>
+    <div class="panel-url-block">
+      <div class="panel-url-label">Más información online</div>
+      <div class="panel-url">guemes-pueblo-cantabria-2026.vercel.app</div>
+      <div class="panel-url-langs">ES · EN · FR · DE · IT</div>
     </div>
     <div class="panel-colophon">
       <strong>Abriendo caminos de amistad</strong> · Candidatura Pueblo de Cantabria 2026<br>
