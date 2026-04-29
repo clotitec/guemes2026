@@ -23,6 +23,13 @@ desktop.ini
 /*.png
 !/CLAUDE.md
 
+# Carpeta de entrega para Google Drive (generada bajo demanda — no versionar)
+/ENTREGA_CANDIDATURA/
+
+# Carpetas con originales sin procesar (al lado de public/imagenes/ ya optimizadas)
+/fotos renders de las plazoletas dia y noche para web/
+/fotos iglesia y ermita de san julian/
+
 
 # Temp/logs
 *.tmp
