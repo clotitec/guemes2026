@@ -17,6 +17,13 @@ desktop.ini
 # (canonical copies live in public/mapa/imagenes/aereas/)
 /aerea_*.jpg
 
+# Source images at project root (originals; optimized copies in public/imagenes/)
+/*.jpg
+/*.jpeg
+/*.png
+!/CLAUDE.md
+
+
 # Temp/logs
 *.tmp
 *.log

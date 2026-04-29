@@ -214,6 +214,46 @@
     color: var(--text-mut);
   }
 
+  /* Photo gallery */
+  .gallery-section { margin: 18px 0 8px; }
+  .gallery-section h3 {
+    font-size: 16px; color: var(--corten-br); font-style: italic;
+    margin: 18px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin: 8px 0;
+  }
+  @media (max-width: 720px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px) { .gallery-grid { grid-template-columns: 1fr; } }
+  .gallery-item {
+    position: relative; aspect-ratio: 4/3;
+    overflow: hidden; border: 1px solid var(--line-soft);
+    border-radius: 2px;
+    transition: transform 0.25s, border-color 0.25s;
+    cursor: zoom-in;
+  }
+  .gallery-item:hover { transform: translateY(-2px); border-color: var(--corten); }
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; filter: brightness(0.95);
+    transition: filter 0.25s, transform 0.4s;
+  }
+  .gallery-item:hover img { filter: brightness(1.05); transform: scale(1.04); }
+  .gallery-item .gi-cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 7px 10px;
+    font-size: 11px; color: var(--text);
+    background: linear-gradient(180deg, rgba(10,17,32,0) 0%, rgba(10,17,32,0.85) 70%);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+  .gallery-item .gi-cap em { color: var(--corten-br); font-style: italic; }
+  .gallery-item.featured { aspect-ratio: 16/9; grid-column: span 2; }
+  @media (max-width: 720px) { .gallery-item.featured { grid-column: span 2; } }
+  @media (max-width: 460px) { .gallery-item.featured { grid-column: span 1; aspect-ratio: 4/3; } }
+
   .footer {
     text-align: center; padding: 60px 28px 40px;
     border-top: 1px solid var(--line-soft);
@@ -387,14 +427,67 @@
 <div class="card">
   <h2>
     <span>Fotografía del pueblo y su entorno</span>
-    <span class="amount">Material gráfico</span>
+    <span class="amount">14 imágenes</span>
   </h2>
 
-  <p>Selección fotográfica de Güemes y su patrimonio: la Ermita de San Julián (s. XIII), la Iglesia de San Vicente, el albergue del Padre Ernesto, las plazoletas previstas para las esculturas, el paisaje rural, la costa próxima y los hitos del Camino de Santiago a su paso por Bareyo.</p>
+  <p>Selección fotográfica de Güemes, su patrimonio y su entorno: la Ermita de San Julián (s. XIII), la Iglesia de San Vicente, el Albergue La Cabaña del Abuelo Peuto, las plazoletas previstas para las esculturas, el paisaje rural y los hitos del Camino de Santiago. Haz clic sobre cualquier imagen para abrirla en alta resolución.</p>
 
-  <div class="placeholder">— Galería fotográfica · pendiente de incorporar al PDF —</div>
+  <div class="gallery-section">
+    <h3>Patrimonio y vida del pueblo</h3>
+    <div class="gallery-grid">
+      <a class="gallery-item featured" href="../imagenes/panoramica.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/panoramica.jpg" alt="Panorámica de Güemes" loading="lazy">
+        <div class="gi-cap"><em>Panorámica</em> · Güemes desde el alto, con el pueblo y la línea de costa al fondo</div>
+      </a>
+      <a class="gallery-item" href="../imagenes/iglesia-san-vicente.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/iglesia-san-vicente.jpg" alt="Iglesia de San Vicente Mártir" loading="lazy">
+        <div class="gi-cap"><em>Iglesia de San Vicente Mártir</em> · trazas de 1617</div>
+      </a>
+      <a class="gallery-item" href="../imagenes/ermita-san-julian.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/ermita-san-julian.jpg" alt="Ermita de San Julián" loading="lazy">
+        <div class="gi-cap"><em>Ermita de San Julián</em> · siglo XIII · futuro Centro de Interpretación Digital</div>
+      </a>
+      <a class="gallery-item" href="../imagenes/albergue.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/albergue.jpg" alt="Albergue La Cabaña del Abuelo Peuto" loading="lazy">
+        <div class="gi-cap"><em>Albergue La Cabaña del Abuelo Peuto</em> · +150.000 peregrinos, +80 países</div>
+      </a>
+      <a class="gallery-item" href="../imagenes/casas-barrio-ermita.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/casas-barrio-ermita.jpg" alt="Casas del barrio de la Ermita" loading="lazy">
+        <div class="gi-cap"><em>Barrio de la Ermita</em> · arquitectura tradicional cántabra</div>
+      </a>
+      <a class="gallery-item" href="../imagenes/zona-actuacion.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/zona-actuacion.jpg" alt="Zona prevista para las actuaciones" loading="lazy">
+        <div class="gi-cap"><em>Zona de actuación</em> · emplazamiento de la Senda de las Estatuas</div>
+      </a>
+    </div>
+  </div>
 
-  <p>Visor aéreo completo (23 fotografías locales) en el mapa interactivo: <a href="https://guemes-pueblo-cantabria-2026.vercel.app/mapa/mapa_mundial_hermanos.html" target="_blank" rel="noopener">mapa mundial de los 4 Güemes</a></p>
+  <div class="gallery-section">
+    <h3>Hermanamiento internacional</h3>
+    <div class="gallery-grid">
+      <a class="gallery-item featured" href="../imagenes/bienvenida-eeuu.jpg" target="_blank" rel="noopener">
+        <img src="../imagenes/thumbs/bienvenida-eeuu.jpg" alt="Bienvenida desde Guemes Island, EE.UU." loading="lazy">
+        <div class="gi-cap"><em>"Welcome from Güemes to Güemes"</em> · recibimiento de Guemes Island (Washington, EE.UU.) a la expedición cántabra · 2018</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="gallery-section">
+    <h3>Vistas aéreas del pueblo y el entorno</h3>
+    <div class="gallery-grid">
+      <a class="gallery-item" href="../imagenes/aerea-01.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-01.jpg" alt="Vista aérea 01" loading="lazy"><div class="gi-cap">Aérea · núcleo del pueblo</div></a>
+      <a class="gallery-item" href="../imagenes/aerea-02.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-02.jpg" alt="Vista aérea 02" loading="lazy"><div class="gi-cap">Aérea · entorno rural</div></a>
+      <a class="gallery-item" href="../imagenes/aerea-03.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-03.jpg" alt="Vista aérea 03" loading="lazy"><div class="gi-cap">Aérea · ruta circular</div></a>
+      <a class="gallery-item" href="../imagenes/aerea-04.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-04.jpg" alt="Vista aérea 04" loading="lazy"><div class="gi-cap">Aérea · Iglesia y entorno</div></a>
+      <a class="gallery-item" href="../imagenes/aerea-05.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-05.jpg" alt="Vista aérea 05" loading="lazy"><div class="gi-cap">Aérea · Ermita de San Julián</div></a>
+      <a class="gallery-item" href="../imagenes/aerea-06.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-06.jpg" alt="Vista aérea 06" loading="lazy"><div class="gi-cap">Aérea · paisaje y costa</div></a>
+      <a class="gallery-item" href="../imagenes/aerea-07.jpg" target="_blank" rel="noopener"><img src="../imagenes/thumbs/aerea-07.jpg" alt="Vista aérea 07" loading="lazy"><div class="gi-cap">Aérea · plazoletas previstas</div></a>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>Versión interactiva online:</strong> visor aéreo completo y tour virtual 360° sobre la ruta circular en <a href="https://guemes-pueblo-cantabria-2026.vercel.app/mapa/mapa_mundial_hermanos.html" target="_blank" rel="noopener">el mapa mundial de los 4 Güemes</a>.
+  </div>
 </div>
 
 </div>

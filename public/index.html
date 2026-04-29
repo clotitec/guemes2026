@@ -414,6 +414,21 @@
   .bg-dark { background: var(--bg-deep); }
   .bg-soft { background: linear-gradient(180deg, var(--bg-deep), var(--bg-navy)); }
 
+  /* Photo-backed sections: subtle background image with dark gradient overlay */
+  .has-bg-photo { position: relative; isolation: isolate; }
+  .has-bg-photo > .bg-photo {
+    position: absolute; inset: 0; z-index: -1;
+    background-size: cover; background-position: center;
+    filter: brightness(0.45) contrast(1.05) saturate(0.92);
+  }
+  .has-bg-photo > .bg-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10,17,32,0.55) 0%, rgba(10,17,32,0.35) 40%, rgba(10,17,32,0.85) 100%);
+  }
+  .has-bg-photo .container, .has-bg-photo .container-narrow { position: relative; z-index: 1; }
+  .has-bg-photo .stat { background: rgba(20,31,56,0.78); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+
   .section-divider {
     width: 60px; height: 1px; background: var(--corten-br); margin: 0 0 32px;
   }
@@ -472,7 +487,7 @@
 
 <!-- ================= HERO ================= -->
 <section class="hero-section" id="hero">
-  <div class="hero-bg" id="hero-bg" style="background-image: url('mapa/imagenes/aereas/aerea_01.jpg');"></div>
+  <div class="hero-bg" id="hero-bg" style="background-image: url('imagenes/panoramica.jpg');"></div>
   <div class="hero-content">
     <div class="eyebrow reveal in">Bareyo · Cantabria · España</div>
     <h1 class="hero reveal in delay-1">Güemes</h1>
@@ -511,7 +526,8 @@
 </section>
 
 <!-- ================= ORIGEN / TIMELINE ================= -->
-<section class="bg-dark" id="origen">
+<section class="bg-dark has-bg-photo" id="origen">
+  <div class="bg-photo" style="background-image:url('imagenes/iglesia-san-vicente.jpg')"></div>
   <div class="container-narrow">
     <div class="eyebrow reveal">02 · Origen</div>
     <h2 class="section-title reveal">Un hilo de nueve siglos.</h2>
@@ -575,7 +591,8 @@
 </section>
 
 <!-- ================= ARTÍFICES ================= -->
-<section class="bg-soft" id="artifices">
+<section class="bg-soft has-bg-photo" id="artifices">
+  <div class="bg-photo" style="background-image:url('imagenes/ermita-san-julian.jpg')"></div>
   <div class="container">
     <div class="eyebrow reveal">03 · Los artífices</div>
     <h2 class="section-title reveal">Cinco siglos exportando oficios.</h2>
@@ -644,7 +661,8 @@
 </section>
 
 <!-- ================= ABRIENDO CAMINOS DE AMISTAD (2009) ================= -->
-<section class="bg-soft" id="amistad">
+<section class="bg-soft has-bg-photo" id="amistad">
+  <div class="bg-photo" style="background-image:url('imagenes/albergue.jpg')"></div>
   <div class="container-narrow">
     <div class="eyebrow reveal">05 · 2009</div>
     <h2 class="section-title reveal italic">Abriendo caminos de amistad.</h2>
@@ -670,7 +688,8 @@
 </section>
 
 <!-- ================= MAPA MUNDIAL ================= -->
-<section class="bg-dark" id="mundo">
+<section class="bg-dark has-bg-photo" id="mundo">
+  <div class="bg-photo" style="background-image:url('imagenes/bienvenida-eeuu.jpg')"></div>
   <div class="container-wide">
     <div class="eyebrow reveal">06 · Los 4 Güemes del mundo</div>
     <h2 class="section-title reveal">Desde este valle hasta tres continentes.</h2>
@@ -706,7 +725,8 @@
 </section>
 
 <!-- ================= LA SENDA ================= -->
-<section class="bg-soft" id="senda">
+<section class="bg-soft has-bg-photo" id="senda">
+  <div class="bg-photo" style="background-image:url('imagenes/zona-actuacion.jpg')"></div>
   <div class="container">
     <div class="eyebrow reveal">07 · La Senda propuesta</div>
     <h2 class="section-title reveal">Cuatro esculturas. Un recorrido. Un mismo nombre.</h2>
@@ -750,7 +770,8 @@
 </section>
 
 <!-- ================= PLAN DE ACTUACIÓN ================= -->
-<section class="bg-dark" id="plan">
+<section class="bg-dark has-bg-photo" id="plan">
+  <div class="bg-photo" style="background-image:url('imagenes/casas-barrio-ermita.jpg')"></div>
   <div class="container">
     <div class="eyebrow reveal">08 · Plan de actuación</div>
     <h2 class="section-title reveal">160.000 € en cuatro bloques.</h2>
