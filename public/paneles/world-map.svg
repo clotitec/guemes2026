@@ -21,7 +21,7 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/"><metadata
      id="metadata346"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><style>path{fill:rgba(244,199,123,0.18);stroke:rgba(244,199,123,0.48);stroke-width:0.4;stroke-linejoin:round;vector-effect:non-scaling-stroke}</style><defs
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><style>path{fill:rgba(244,199,123,0.42);stroke:rgba(244,199,123,0.85);stroke-width:0.6;stroke-linejoin:round;vector-effect:non-scaling-stroke}</style><defs
      id="defs344"><inkscape:path-effect
        effect="bspline"
        id="path-effect1"
