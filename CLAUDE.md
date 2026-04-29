@@ -4,163 +4,225 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This is **not** a software project. It is a formal candidacy to the **Premio Pueblo de Cantabria 2026**, an institutional award granted by the Gobierno de Cantabria (Orden OBR/2/2017). The applicant is the **Junta Vecinal de Güemes** (parish council of a 301-inhabitant village in Bareyo, Cantabria, Spain).
+This is **not** a software project. It is a formal candidacy to the **Premio Pueblo de Cantabria 2026**, an institutional award granted by the Gobierno de Cantabria (Orden OBR/2/2017). The applicant is the **Junta Vecinal de Güemes** (parish council of a 315-inhabitant village in Bareyo, Cantabria, Spain).
 
 All deliverables are static HTML documents. The repository holds the dossier submitted to the jury plus its source materials and the deployed public website.
 
-**GitHub repo**: `clotitec/guemes2026` (public) — https://github.com/clotitec/guemes2026
-**Vercel target**: auto-deploy from `main` branch
-**Public URL**: https://guemes-pueblo-cantabria-2026.vercel.app/
-**QR code**: generated at `public/qr/` in 3 variants (corten PNG, B&W PNG, scalable SVG)
+- **Local path**: `F:\guemes2026\` (Windows; quote paths in Bash)
+- **GitHub repo**: `clotitec/guemes2026` (public) — https://github.com/clotitec/guemes2026
+- **Vercel target**: auto-deploy from `main` branch on push
+- **Public URL**: https://guemes-pueblo-cantabria-2026.vercel.app/
 
 ### Deployment routing — important
 
-Vercel serves from the `public/` folder automatically. This is a Vercel convention for static sites when Framework Preset = "Other" and the repo has a `public/` directory: Vercel treats `public/` as the serving root regardless of what the Root Directory setting says (which shows `.` but behaves as if it's `public/`).
+Vercel auto-serves the `public/` folder when Framework Preset = "Other" and a `public/` directory exists. The Root Directory setting in Vercel shows `.` but Vercel behaves as if the root is `public/`.
 
-Consequence: **`app/*` is NOT served via the public URL** — only `public/*` is. The `app/` directory is kept as a legacy reference to the earlier deployment that used green+gold institutional palette, but nothing in it is live.
+Consequence: **`app/*` is NOT served via the public URL** — only `public/*` is. The `app/` directory is kept as a legacy reference to the earlier deployment that used a green+gold institutional palette; nothing in it is live.
 
 **Editing rule**: to change what's published, edit `public/*`. Do not waste effort editing `app/*` — those changes never reach production.
 
-Standard URL mapping (cleanUrls on, .html stripped):
+Standard URL mapping (`vercel.json` has `cleanUrls: true`):
 - `/` → `public/index.html`
 - `/mapa/mapa_mundial_hermanos.html` → `public/mapa/mapa_mundial_hermanos.html`
+- `/mapa/senda` → `public/mapa/senda/index.html`
 - `/docs/memoria-economica` → `public/docs/memoria-economica.html`
-- `/paneles/` → `public/paneles/index.html`
+- `/paneles` → `public/paneles/index.html`
 - `/archivos/*.pdf` → `public/archivos/*.pdf`
+- `/imagenes/...` → `public/imagenes/...`
 
 ### Deploy commands
 
 ```bash
-# Standard CLI deploy (auto-picks up latest git HEAD):
-cd "D:/..... continua claude/Guemes_2026"
-vercel --prod --yes --scope clotitecs-projects
+# Default deploy: push to main → Vercel auto-deploys (~30-60 s)
+git push
 
-# Regenerate a PDF from a live page:
+# Regenerate a PDF from a live URL (used to refresh archivos/*.pdf):
 "/c/Program Files/Google/Chrome/Application/chrome.exe" \
   --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
-  --virtual-time-budget=15000 --run-all-compositor-stages-before-draw \
+  --virtual-time-budget=20000 --run-all-compositor-stages-before-draw \
   --window-size=1100,1500 \
-  --print-to-pdf="D:/..../public/archivos/FILENAME.pdf" \
+  --print-to-pdf="F:/guemes2026/public/archivos/FILENAME.pdf" \
   "https://guemes-pueblo-cantabria-2026.vercel.app/PATH"
+
+# Local preview (required for iframe + relative PDF links to work):
+cd public && python -m http.server 8000   # → http://localhost:8000
 ```
 
 ## Critical dates and budget
 
-- **Submission deadline: 4 May 2026** (telematic presentation) — hard deadline, do not miss
-- Junta Vecinal approval meeting: 13 April 2026 (passed — approved)
-- Public info meeting in the village: 19 April 2026 (passed — residents committed to voluntary weekend cleanups)
+- **Submission deadline: 4 May 2026** (telematic presentation) — hard deadline.
+- Junta Vecinal approval meeting: **13 April 2026** (passed — approved).
+- Public info meeting: **19 April 2026** (passed).
 
-Total prize budget: **160.000 €**, distributed in 4 blocks. Every draft of the *memoria económica* must preserve the total and these 4 blocks:
+Total prize budget: **160.000 €**, in 4 blocks. Every draft of the *memoria económica* must preserve the total and these 4 blocks:
 
 | Block | Amount | Concept |
 |---|---|---|
-| A | 60.000 € | Senda de las Estatuas (4 acero corten sculptures + urbanization of plazoletas, mobiliario, señalización, obra civil, proyecto técnico) |
-| B | 45.000 € | Preservation works + the 14 km of Camino de Santiago across the municipality of Bareyo |
+| A | 60.000 € | Senda de las Estatuas (4 acero corten sculptures + plazoletas urbanization, mobiliario, señalización, obra civil, proyecto técnico, plantación de árbol emblemático por plazoleta) |
+| B | 45.000 € | Preservation works + 14 km of Camino de Santiago in Bareyo |
 | C | 15.000 € | "Enróllate en Güemes" — rural arts festival (renamed from "Güemes en Bolas" on 21 Apr 2026 — never use the old name) |
-| D | 40.000 € | Pádel court replacement, athletics fencing, Ermita San Julián as Digital Interpretation Centre |
+| D | 40.000 € | Pádel court replacement, athletics fencing, **Centro de Interpretación Digital del Peregrino** in the Ermita de San Julián |
 
 ## Repository layout
 
-### The three working layers
-
 ```
-public/            ← DEPLOY HERE — single source of truth for the website
-  index.html       The landing (10 scroll-narrative sections + documents hub)
-  mapa/            Interactive world map of the 4 Güemes (+ 23 aerial photos)
-  docs/            11 official candidacy HTMLs
-  archivos/        PDFs and GPX renamed for clean URLs (convocatoria, informe histórico, etc.)
+public/                           ← DEPLOY HERE — single source of truth
+  index.html                      Landing (12 narrative sections incl. ermita 24/7)
+  mapa/
+    mapa_mundial_hermanos.html    World map of the 4 Güemes
+    senda/index.html              Senda map (MapLibre + Photo Sphere Viewer 360)
+    streetview/{guemes,wemes}.json Google Street View pano IDs (~700 points)
+  docs/                           Candidacy HTMLs (memorias, dossier, paneles, etc.)
+  paneles/index.html              4 trilingual ES/EN/FR interpretive panels (A3)
+  archivos/                       Generated PDFs and GPX (clean URLs)
+  imagenes/                       Optimized photos (~1920px JPEG q82-86 + thumbs/)
+    renders/                      8 day/night plazoleta renders
+    iglesia/, ermita/             13 photos of the two temples (incl. AI totem render)
+    antes/                        4 country reference images for antes/después comparison
+  qr/                             3 QR variants (PNG color, PNG B&W, SVG)
 
-app/               ← LEGACY deployment (old Vercel target). Same content as public/docs/
-01_..06_*/         ← OFFICIAL numbered folders. Original versions of the docs
-a mejorar/         ← Source materials + working copies (PDFs, KML, original images, candidatura/ and mapa_hermanos/ drafts)
-```
+ENTREGA_CANDIDATURA/              ← gitignored · regenerated on demand
+                                  Final delivery folder for Google Drive (102 MB).
+                                  Contains all official PDFs ordered by their
+                                  upload destination on the Consejería platform.
 
-**Editing rule**: make changes in `public/`. When substantial changes are validated, reflect them in the relevant numbered folder (`06_Memoria_Actuacion/`, etc.) as the "official" version. The `app/` folder is legacy — do not edit unless asked.
-
-**Do not modify** `01_Convocatoria/` (official call PDF) or `05_Certificaciones/` (external certificates).
-
-**Path caveat**: the local absolute path contains dots and spaces (`D:/..... continua claude/Guemes_2026/`). Always quote paths in Bash commands. A rename attempt of `a mejorar/` failed due to a Windows file lock, so the folder keeps the space — but the deployed website in `public/` uses clean paths.
-
-### Key files at the repo root
-
-- `vercel.json` — Vercel config: `cleanUrls`, cache headers for `/mapa/imagenes/*` (immutable 7 days) and `/archivos/*` (1 day)
-- `.gitignore` — excludes the 21 stray `aerea_*.jpg` duplicates at root, `.claude/settings.local.json`, OS junk
-- `README.md` — public-facing project README (structure + how to deploy)
-- `CLAUDE.md` — this file
-- `ESTADO_PROYECTO.md` — live status tracker (dates, decisions, pending items)
-
-## Commands
-
-### Local preview of the deployable site
-
-```bash
-# Option 1 — double-click public/index.html (simplest, works for most things)
-
-# Option 2 — local HTTP server (required for the iframe and PDF links to work)
-cd public && python3 -m http.server 8000
-# → http://localhost:8000
+app/                              LEGACY (older Vercel target) — do not edit
+01_..06_*/                        OFFICIAL numbered folders (master copies)
+"a mejorar/"                      Source PDFs/KML/originals (folder name has a space)
+"fotos renders.../"               Source PNGs of renders (gitignored)
+"fotos iglesia y ermita.../"      Source JPGs (gitignored)
+*.jpg, *.png at root              Source images (gitignored — optimized copies live in public/imagenes/)
 ```
 
-### Git + GitHub
+**Editing rule**: make changes in `public/`. The numbered folders (`06_Memoria_Actuacion/`, etc.) are the "official" archived versions kept untouched unless major content is finalized. **Do not modify** `01_Convocatoria/` (official call PDF) or `05_Certificaciones/`.
 
-```bash
-# Status and commit
-git status
-git add .
-git commit -m "…"
-git push
-
-# Fix "dubious ownership" warning on this drive (already done globally)
-git config --global --add safe.directory 'D:/..... continua claude/Guemes_2026'
-
-# User is authenticated as `clotitec` via gh CLI with `repo` scope
-gh repo view clotitec/guemes2026
-gh auth status
-```
-
-### Vercel deployment
-
-Auto-deploy on push to `main`. Initial project setup on Vercel dashboard:
-
-- **Root Directory**: `public`
-- **Framework Preset**: Other (static)
-- **Build / Install / Output commands**: all empty
-
-Manual deploy (if Vercel MCP token is valid): use `mcp__claude_ai_Vercel__deploy_to_vercel`. If expired, ask the user to reconnect the Vercel MCP or trigger deploy from the Vercel dashboard.
-
-### Bulk text edits across the candidacy HTMLs
-
-```bash
-# Safe bulk rename pattern — used for "Güemes en Bolas" → "Enróllate en Güemes"
-for f in public/docs/*.html app/*.html 02_Solicitud/*.html 06_Memoria_Actuacion/*.html; do
-  sed -i 's/old text/new text/g' "$f"
-done
-```
+**Path caveat**: paths can contain spaces (`"a mejorar/"`, `"fotos renders.../"`). Always quote them in Bash.
 
 ## Tech stack (and absence of one)
 
 - Pure HTML + inline CSS + vanilla JavaScript. No build, no `package.json`, no framework.
-- Google Fonts CDN — `public/index.html` uses Fraunces + Inter; `public/docs/*` use Inter only.
-- Maps via Leaflet 1.9.4 (CDN) with CartoDB Dark Matter tiles. The world map at `public/mapa/mapa_mundial_hermanos.html` is embedded as an iframe from the landing.
-- Street View embedded via Google Maps embed iframe (public, no API key needed).
+- Google Fonts CDN (Instrument Serif, Satoshi, Inter, Fraunces).
+- World map: **Leaflet 1.9.4** (CartoDB Voyager tiles).
+- Senda map: **MapLibre GL** (Esri satellite + OSM) + **Photo Sphere Viewer 5.13.3** for the 30 aerial 360° panoramas.
+- Street View: Google Maps embed iframe (public format `embed?pb=!4v1!6m8!1m7!1s${pano}!2e10` — **no API key needed**).
+- Image optimization: Python with **PIL/Pillow** (resize to max 1920px, JPEG q82-86, generate 720px thumbs).
 - No tests, no lint, no CI beyond Vercel's auto-deploy.
+
+## Two visual palettes coexist by design
+
+- `public/docs/*` (early-generation docs) and `app/*` — **green + gold**.
+- `public/index.html`, `public/mapa/*`, `public/paneles/*`, and the newer docs (`memoria-economica`, `documentacion-grafica`, `guia-visita-jurado`) — **corten steel + dark navy + cream**, with Instrument Serif italic for headers and Satoshi for body. CSS variables: `--bg-deep #0a1120`, `--bg-navy #101a30`, `--corten #c89450`, `--corten-br #f4c77b`, `--ok #7bc6f4`.
+
+Do not unify the palettes without explicit instruction. The docs are functional; the landing/map/paneles are the "emotional hook".
 
 ## Narrative pillars — must be respected
 
-Every document rests on three pillars. Each claim must be traceable to a source document. **Do not invent, do not embellish.**
+Every document rests on three pillars. Each claim must be traceable to a source. **Do not invent, do not embellish.**
 
-1. **900 years documented** (1084–2026) — sourced from `a mejorar/INFORME HISTORICO.pdf` by Luis de Escallada González (Centro de Estudios Montañeses, 15 June 2010). Also published in `public/archivos/informe-historico.pdf`.
-2. **"Abriendo caminos de amistad"** — the contemporary project. In **2009**, pilgrim **Bob** from Guemes Island (Washington, USA) arrived at the albergue; cura **Ernesto Bustio** organized a trip (Argentina → México → USA) with support from the Consejería de Cultura. Four maquetas de acero corten are already installed in **El Portalillo de Güemes** under this project title. Source: `a mejorar/HISTORIA DEL VIAJE POR LOS CUATRO GÜEMES.pdf` (also at `public/archivos/historia-viaje-cuatro-guemes.pdf`).
-3. **Hospitalidad peregrina continuous since s. XIV** — the medieval *Hospital de San Julián y Nª Sª de la Consolación* (closed 1800 by Real Cédula) is the antecedent of today's *Albergue La Cabaña del Abuelo Peuto* (founded 1999 by Ernesto Bustio, +50.000 peregrinos, +100 countries, best-rated on the Camino del Norte).
+1. **942 years documented (1084–2026)** — sourced from `a mejorar/INFORME HISTORICO.pdf` by Luis de Escallada González (Centro de Estudios Montañeses, 15 June 2010). Republished at `public/archivos/informe-historico.pdf`.
+2. **"Abriendo caminos de amistad"** — the contemporary project. In **2009**, pilgrim **Bob** from Guemes Island (Washington, USA) arrived at the albergue; cura **Ernesto Bustio** organized a trip (Argentina → México → USA) with support from the Consejería de Cultura. Four maquetas de acero corten are already installed in **El Portalillo**. Source: `a mejorar/HISTORIA DEL VIAJE POR LOS CUATRO GÜEMES.pdf`.
+3. **Hospitalidad peregrina continua desde s. XIV** — the medieval *Hospital de San Julián* (closed 1800 by Real Cédula) is the antecedent of today's *Albergue La Cabaña del Abuelo Peuto* (founded 1999 by Ernesto Bustio, +150.000 peregrinos, +80 países).
+
+### Ermita de San Julián — narrative (corrected 29 abril)
+
+The ermita has been **continuously open 24/7, gratuitous, without staff** for decades — fiel a su vocación histórica. The candidacy **does not "open" the ermita**; it adds two layers:
+
+1. **Vigilance** — RGPD-compliant camera + aforo counter to protect accumulated patrimony (cientos de fotos del Padre Ernesto, exvotos).
+2. **Data + ampliated information** — multilingual touch totem (ES · EN · FR · DE · IT) with full digital photo gallery (more than fits physically), online dashboard for the Junta Vecinal.
+
+Never write copy that suggests the ermita "se va a abrir". The wording is *"proteger, medir y dar a conocer un patrimonio que ya funciona"*.
 
 ## Factual nuances easy to get wrong
 
-The "4 Güemes del mundo" narrative has historical subtleties. Several earlier drafts contained errors — current drafts are corrected. Keep these straight:
+The "4 Güemes del mundo" narrative has historical subtleties. Several earlier drafts contained errors — current drafts are corrected:
 
 - **Juan Francisco de Güemes y Horcasitas** (1st Conde de Revillagigedo, virrey of Nueva España) was born in **Reinosa**, not in Güemes-Bareyo.
 - **Martín Miguel de Güemes** (Argentine hero, 1785–1821) — his father Gabriel came from **Abionzo** (Cantabria), not Güemes-Bareyo.
-- The bond between the 4 Güemes (España, México, Argentina, EE.UU.) is **toponymic** (shared surname origin tracing to the village) + **contemporary** (the 2009 trip). It is NOT direct birthplace lineage to Güemes-Bareyo for any of the historical figures. The defensible story is *"cuna del apellido"* + *"abriendo caminos de amistad"*, not *"here was born the virrey"*.
-- Sources cross-verified: Wikipedia ES/EN, Historia Hispánica (Real Academia de la Historia), Biografías y Vidas, PARES (Portal de Archivos Estatales).
+- The bond between the 4 Güemes is **toponymic** (shared surname) + **contemporary** (the 2009 trip). Defensible story: *"cuna del apellido"* + *"abriendo caminos de amistad"*. NOT *"here was born the virrey"*.
+
+### Emblematic trees per plazoleta (climate-validated for Bareyo, Cfb / USDA 9a-9b)
+
+| Country | Tree | Scientific | Notes |
+|---|---|---|---|
+| 🇪🇸 España | Roble común | *Quercus robur* | Autóctono cantábrico — ideal |
+| 🇦🇷 Argentina | **Ceibo** (NOT jacarandá — too cold-sensitive) | *Erythrina crista-galli* | Árbol nacional oficial argentino (1942), resists -7 °C |
+| 🇲🇽 México | **Ciprés calvo** (NOT ahuehuete — slow growth in cool summers) | *Taxodium distichum* | Same genus as ahuehuete, fully hardy in northern Spain |
+| 🇺🇸 EE.UU. | Abeto Douglas | *Pseudotsuga menziesii* | Washington state tree, planted commercially in Cantabria |
+
+## Senda map (`public/mapa/senda/`) — current UI state
+
+The map has been progressively cleaned. **Do not re-add** these without explicit instruction:
+
+- ❌ "Mostrar puntos 360°" toggle button (removed)
+- ❌ "Street View Google" toggle button + 700-pano JSON layer + modal (removed)
+- ❌ Route toggle "Ambas / Completa / Jurado" (only one route exists)
+- ❌ "Ruta del jurado · Wikiloc" sidebar entry (removed)
+- ❌ "Patrimonio 3D / Tour Matterport Iglesia + Ermita" link (removed)
+- ❌ Visible "Matterport" branding anywhere
+
+What's allowed:
+- ✅ Two buttons "Ver interior de la iglesia" / "Ver interior de la ermita" using the existing Matterport iframe modal — but **no visible "Matterport" text** in labels, eyebrows or descriptions.
+- ✅ "Visor aéreo 360° · 30 vistas" button → opens Photo Sphere Viewer.
+- ✅ Single circular route GPX.
+
+## Paneles (`public/paneles/`) — current state
+
+- 4 A3-portrait panels, trilingual (ES · EN · FR demonstrative; full ES · EN · FR · DE · IT online).
+- Each has a schematic SVG world map (viewBox 360x180) with origin marker (Güemes) and destination dot + dashed arc. The realistic Wikipedia world map was tried and reverted — keep schematic.
+- **No QR codes** — replaced with `panel-url-block` showing the public URL.
+
+## Guía visita jurado (`public/docs/guia-visita-jurado.html`)
+
+Final cleaned version has 4 sections only:
+1. Visión general — Landing
+2. Cartografía interactiva — Mapa mundial · Mapa Senda · Tour 360°
+3. Memorias y documentos — Económica · Actuación · Histórico · Itinerario
+4. Material visual y renders — Documentación gráfica completa
+
+**Removed (do not re-add)**: paneles section, documentos complementarios (acta, cartas apoyo, resumen ejecutivo — go via separate channel), transparencia/GitHub.
+
+## Delivery process — `ENTREGA_CANDIDATURA/`
+
+The folder is **gitignored** and rebuilt on demand for Google Drive upload to the administrative team (ATYS) and the Junta Vecinal President (Begoña de la Fuente). Layout:
+
+```
+ENTREGA_CANDIDATURA/
+├── 00_LEEME_PRIMERO/
+│   ├── 00_INSTRUCCIONES_ADMINISTRACION.pdf  (step-by-step for ATYS)
+│   ├── 01_GUIA_VISITA_JURADO.pdf            (deliverable for the jury)
+│   ├── EMAIL_PARA_BEGONA.txt                (draft to send)
+│   ├── VERIFICACION_LINKS.txt
+│   ├── CHECKLIST.txt
+│   └── README.txt
+├── 01_OBLIGATORIOS_FIRMA/                   3 docs (solicitud, memoria económica, declaración responsable)
+├── 02_OBLIGATORIOS_SIN_FIRMA/               documentación gráfica (31 MB)
+├── 03_OPCIONALES_FIRMA/                     ATYS deposita certificación firmada del acta
+├── 04_DOCUMENTOS_BASE_PRETENSION/           memoria actuación, dossier, biografías, paneles, candidatura completa
+├── 05_MATERIAL_GRAFICO/                     renders, iglesia/, ermita/, fotos_pueblo/, aereas/
+├── 06_RECURSOS_DIGITALES/                   ENLACES_WEB.txt + QRs
+└── 99_REFERENCIA/                           convocatoria oficial BOC + GPX
+```
+
+When the user asks to "regenerate the delivery", the steps are: regenerate latest PDFs from live URLs → copy to the right subfolders → refresh README files → verify URLs return 200.
+
+## Image optimization workflow
+
+When raw images land at the project root or in source folders, optimize them before committing:
+
+```python
+from PIL import Image, ImageOps
+img = ImageOps.exif_transpose(Image.open(src).convert("RGB"))
+big = img.resize((1920, int(img.size[1] * 1920 / img.size[0])), Image.LANCZOS)
+big.save(out_full, "JPEG", quality=84, optimize=True, progressive=True)
+thumb = big.resize((720, ...), Image.LANCZOS)
+thumb.save(out_thumb, "JPEG", quality=78, optimize=True, progressive=True)
+```
+
+Originals at root must be excluded via `.gitignore` (`/*.jpg`, `/*.png`). The single source of truth for the website is `public/imagenes/` (optimized).
+
+## Conflict-of-interest posture
+
+The candidacy is being drafted **pro bono** by Clotitec (info@clotitec.com). The candidacy text itself must NOT name Clotitec as a designated provider for any of the 160 k€ budget lines. Describe services generically (*"un proveedor digital especialista, adjudicado por la Junta Vecinal a través de su procedimiento ordinario de contratación"*). If the candidacy wins, Clotitec may compete openly on equal terms.
 
 ## Key stakeholders
 
@@ -170,48 +232,19 @@ The "4 Güemes del mundo" narrative has historical subtleties. Several earlier d
 | Presidente Cooperativa Nª Sª de Consolación | Miguel Lavín | — |
 | Cura / Fundador del albergue | Padre Ernesto Bustio Crespo | ernestobustio@yahoo.es |
 | Ayuntamiento de Bareyo | — | aytobareyo.org |
+| Asesoría administrativa | ATYS | (handles certificate + declaración responsable) |
 | Candidacy lead (pro bono) | Clotitec | info@clotitec.com |
 
-## Conflict-of-interest posture
+## Persistent memory
 
-The candidacy is being drafted **pro bono** by Clotitec (info@clotitec.com). The candidacy text itself must NOT name Clotitec as a designated service provider for any of the 160 k€ budget lines. Describe services generically ("a specialist digital provider, awarded by the Junta Vecinal through its standard procurement"). If the candidacy wins, Clotitec may compete openly on equal terms — no prior commitment.
+A Claude Code auto-memory system exists at `C:\Users\Usuario\.claude\projects\F--guemes2026\memory\` with notes on user preferences, feedback, project evolution, source-document summaries. Read `MEMORY.md` there at session start — it complements this file (CLAUDE.md = project facts; memory = how to collaborate).
 
-## The 4 sculpture locations (coordinates provisional)
+## Source documents worth reading before generating new content
 
-| Sculpture | Location in the village | Approx. GPS |
-|---|---|---|
-| Güemes de España | Centro, junto a Iglesia de San Vicente | 43.4557, -3.6369 |
-| Güemes de Argentina | Plazoleta grande, entrada por Galizano | 43.4540, -3.6400 |
-| Güemes de México | Parque dirección Meruelo | 43.4565, -3.6340 |
-| Güemes de EE.UU. | El Quejigal, cerca de la Ermita San Julián | 43.4553, -3.6378 |
-
-Exact coordinates live in `a mejorar/Estatuas.kml` (a Google My Maps NetworkLink). Coordinates in `public/mapa/mapa_mundial_hermanos.html` (see `LOCAL_POI` object in the JS) should be refined once the KML is resolved.
-
-## Two palettes coexist by design
-
-- `public/docs/*` and `app/*` — **green + gold** (original institutional palette, validated)
-- `public/index.html` and `public/mapa/*` — **corten steel + dark navy + cream** (new premium editorial palette, inspired by the sculpture material)
-
-Do not unify them without explicit user instruction. They serve different purposes: the docs are functional, the landing and map are the "emotional hook" that sells the candidacy.
-
-## Persistent personal memory
-
-A Claude Code auto-memory system is active at `~/.claude/projects/D--------continua-claude-Guemes-2026/memory/` with notes on the user, feedback, project evolution, stakeholder preferences, and source-document summaries. Read `MEMORY.md` there at session start — it complements this `CLAUDE.md` (this one = project facts; memory = how to collaborate).
-
-## Source documents worth reading
-
-When generating any new narrative content, read these first (available both at source locations and at `public/archivos/` with cleaner filenames):
+Available both at source locations and at `public/archivos/` with clean filenames:
 
 - `a mejorar/INFORME HISTORICO.pdf` — 15 pages, academic, the historical backbone
-- `a mejorar/HISTORIA DEL VIAJE POR LOS CUATRO GÜEMES.pdf` — 11 pages with photos, the contemporary story
-- `a mejorar/ERNESTO BUSTIO CRESPO, HISTORIA DEL ALBERGUE Y DEL PERSONAJE.pdf` — context on the central figure
+- `a mejorar/HISTORIA DEL VIAJE POR LOS CUATRO GÜEMES.pdf` — 11 pages with photos
+- `a mejorar/ERNESTO BUSTIO CRESPO, HISTORIA DEL ALBERGUE Y DEL PERSONAJE.pdf`
 - `ESTADO_PROYECTO.md` — live status tracker
-- `CONVOCATORIA 2026 ORDEN OBR-002-20217.pdf` — the official call (governs what the jury expects)
-
-## Current state (as of 21 Apr 2026)
-
-- Bulk rename "Güemes en Bolas" → "Enróllate en Güemes" completed across 14 files (0 remaining occurrences in HTML content; file slug `guemes-en-bolas.html` kept for URL stability).
-- Landing page built at `public/index.html` with 10 narrative sections including a "Documentos oficiales" hub that links to the 11 docs and to the interactive map.
-- World map at `public/mapa/mapa_mundial_hermanos.html` with 4 animated arcs, local village mode, Street View embed, bilingual ES/EN toggle, and a visor aéreo of 23 locally-hosted photos.
-- Git repo initialized, first commit pushed to GitHub `clotitec/guemes2026`. Vercel deployment pending a dashboard import or MCP reconnect.
-- Pending: exact KML coordinates for the 4 sculptures, real QR code linking to the public URL once Vercel assigns it.
+- `CONVOCATORIA 2026 ORDEN OBR-002-20217.pdf` — official call (governs jury expectations)
