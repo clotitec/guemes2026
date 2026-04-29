@@ -142,6 +142,17 @@
     color: var(--corten-br); font-weight: 500; margin-bottom: 6px;
     text-align: center;
   }
+  .panel-map .map-canvas {
+    position: relative; width: 100%; aspect-ratio: 950/620;
+    background: #0a1120; overflow: hidden;
+  }
+  .panel-map .map-canvas img.map-base {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block; object-fit: contain;
+  }
+  .panel-map .map-canvas svg.map-overlay {
+    position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  }
   .panel-map svg { width: 100%; height: auto; display: block; }
   .panel-map .map-legend {
     display: flex; justify-content: space-between; gap: 6px;
@@ -281,13 +292,13 @@
     </div>
     <div class="panel-map">
       <div class="map-title">Ubicación</div>
-      <svg viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Mapa mundial: Güemes">
-        <rect x="0" y="0" width="950" height="620" fill="#0a1120"/>
-        <image href="world-map.svg" x="0" y="0" width="950" height="620"/>
-        <!-- Origin marker (Güemes Spain) -->
-        <circle cx="445" cy="205" r="11" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="445" cy="205" r="22" fill="none" stroke="#f4c77b" stroke-width="2" opacity="0.45"/>
-      </svg>
+      <div class="map-canvas">
+        <img class="map-base" src="world-map.svg" alt="Mapa mundial">
+        <svg class="map-overlay" viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Marcador Güemes">
+          <circle cx="445" cy="205" r="11" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="445" cy="205" r="22" fill="none" stroke="#f4c77b" stroke-width="2" opacity="0.45"/>
+        </svg>
+      </div>
       <div class="map-legend">
         <span><span class="dot from"></span>Güemes (origen)</span>
       </div>
@@ -347,15 +358,15 @@
     </div>
     <div class="panel-map">
       <div class="map-title">Conexión</div>
-      <svg viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Mapa: Güemes a Argentina">
-        <rect x="0" y="0" width="950" height="620" fill="#0a1120"/>
-        <image href="world-map.svg" x="0" y="0" width="950" height="620"/>
-        <!-- Connecting arc Spain → Argentina -->
-        <path d="M 445,205 Q 360,40 282,417" stroke="#f4c77b" stroke-width="2.4" stroke-dasharray="7,7" fill="none" opacity="0.72"/>
-        <circle cx="445" cy="205" r="10" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="282" cy="417" r="10" fill="#7bc6f4" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="282" cy="417" r="20" fill="none" stroke="#7bc6f4" stroke-width="2" opacity="0.45"/>
-      </svg>
+      <div class="map-canvas">
+        <img class="map-base" src="world-map.svg" alt="Mapa mundial">
+        <svg class="map-overlay" viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Conexión Güemes-Argentina">
+          <path d="M 445,205 Q 360,40 282,417" stroke="#f4c77b" stroke-width="2.4" stroke-dasharray="7,7" fill="none" opacity="0.72"/>
+          <circle cx="445" cy="205" r="10" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="282" cy="417" r="10" fill="#7bc6f4" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="282" cy="417" r="20" fill="none" stroke="#7bc6f4" stroke-width="2" opacity="0.45"/>
+        </svg>
+      </div>
       <div class="map-legend">
         <span><span class="dot from"></span>Güemes</span>
         <span><span class="dot to"></span>Argentina</span>
@@ -416,15 +427,15 @@
     </div>
     <div class="panel-map">
       <div class="map-title">Conexión</div>
-      <svg viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Mapa: Güemes a México">
-        <rect x="0" y="0" width="950" height="620" fill="#0a1120"/>
-        <image href="world-map.svg" x="0" y="0" width="950" height="620"/>
-        <!-- Connecting arc Spain → México -->
-        <path d="M 445,205 Q 314,80 183,255" stroke="#f4c77b" stroke-width="2.4" stroke-dasharray="7,7" fill="none" opacity="0.72"/>
-        <circle cx="445" cy="205" r="10" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="183" cy="255" r="10" fill="#7bc6f4" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="183" cy="255" r="20" fill="none" stroke="#7bc6f4" stroke-width="2" opacity="0.45"/>
-      </svg>
+      <div class="map-canvas">
+        <img class="map-base" src="world-map.svg" alt="Mapa mundial">
+        <svg class="map-overlay" viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Conexión Güemes-México">
+          <path d="M 445,205 Q 314,80 183,255" stroke="#f4c77b" stroke-width="2.4" stroke-dasharray="7,7" fill="none" opacity="0.72"/>
+          <circle cx="445" cy="205" r="10" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="183" cy="255" r="10" fill="#7bc6f4" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="183" cy="255" r="20" fill="none" stroke="#7bc6f4" stroke-width="2" opacity="0.45"/>
+        </svg>
+      </div>
       <div class="map-legend">
         <span><span class="dot from"></span>Güemes</span>
         <span><span class="dot to"></span>México</span>
@@ -485,15 +496,15 @@
     </div>
     <div class="panel-map">
       <div class="map-title">Conexión</div>
-      <svg viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Mapa: Güemes a Guemes Island">
-        <rect x="0" y="0" width="950" height="620" fill="#0a1120"/>
-        <image href="world-map.svg" x="0" y="0" width="950" height="620"/>
-        <!-- Connecting arc Spain → USA WA (great-circle goes north) -->
-        <path d="M 445,205 Q 290,40 135,160" stroke="#f4c77b" stroke-width="2.4" stroke-dasharray="7,7" fill="none" opacity="0.72"/>
-        <circle cx="445" cy="205" r="10" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="135" cy="160" r="10" fill="#7bc6f4" stroke="#0a1120" stroke-width="2"/>
-        <circle cx="135" cy="160" r="20" fill="none" stroke="#7bc6f4" stroke-width="2" opacity="0.45"/>
-      </svg>
+      <div class="map-canvas">
+        <img class="map-base" src="world-map.svg" alt="Mapa mundial">
+        <svg class="map-overlay" viewBox="0 0 950 620" preserveAspectRatio="xMidYMid meet" aria-label="Conexión Güemes-EEUU">
+          <path d="M 445,205 Q 290,40 135,160" stroke="#f4c77b" stroke-width="2.4" stroke-dasharray="7,7" fill="none" opacity="0.72"/>
+          <circle cx="445" cy="205" r="10" fill="#f4c77b" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="135" cy="160" r="10" fill="#7bc6f4" stroke="#0a1120" stroke-width="2"/>
+          <circle cx="135" cy="160" r="20" fill="none" stroke="#7bc6f4" stroke-width="2" opacity="0.45"/>
+        </svg>
+      </div>
       <div class="map-legend">
         <span><span class="dot from"></span>Güemes</span>
         <span><span class="dot to"></span>EE.UU.</span>
