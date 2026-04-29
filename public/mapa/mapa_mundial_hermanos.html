@@ -197,6 +197,25 @@
   /* Route line for local view */
   .route-line { fill: none; stroke: var(--corten); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 8; opacity: 0.6; }
 
+  /* Street View dots (local mode) */
+  .sv-dot {
+    fill: #7bc6f4; fill-opacity: 0.55;
+    stroke: #ffffff; stroke-opacity: 0.85; stroke-width: 1;
+    cursor: pointer; transition: fill-opacity 0.15s, stroke-width 0.15s;
+  }
+  .sv-dot:hover { fill-opacity: 1; stroke-width: 2; }
+  .sv-toggle {
+    position: absolute; bottom: 28px; right: 28px; z-index: 30;
+    background: rgba(20,31,56,0.92); color: var(--corten-br);
+    border: 1px solid var(--corten-dk);
+    padding: 9px 16px; font-family: 'Satoshi', sans-serif;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer; backdrop-filter: blur(8px);
+  }
+  .sv-toggle:hover { background: var(--corten-br); color: var(--bg-deep); }
+  .sv-toggle.active { background: var(--corten-br); color: var(--bg-deep); }
+  .sv-toggle .dot-mini { display:inline-block; width:8px; height:8px; border-radius:50%; background:#7bc6f4; margin-right:8px; vertical-align:middle; }
+
   /* Tile overrides */
   .leaflet-tile-pane { filter: sepia(0.12) saturate(0.88) brightness(0.96); }
   .leaflet-container { background: var(--bg-deep); }
@@ -345,6 +364,11 @@
   </div>
 
   <div class="legend" id="legend"></div>
+
+  <!-- Street View toggle (visible only in local mode) -->
+  <button class="sv-toggle active" id="sv-toggle" style="display:none;" onclick="toggleStreetViewLayer()">
+    <span class="dot-mini"></span><span id="sv-toggle-label">Vistas Street View</span>
+  </button>
 
   <div class="info-panel" id="panel">
     <div class="info-img" id="p-img"></div>
@@ -783,6 +807,7 @@
 
     if (newMode === 'world') {
       removeLocalPins();
+      removeStreetViewLayer();
       setTimeout(() => {
         createWorldPins();
         map.flyTo([25, -40], 2.3, { duration: 1.6 });
@@ -792,6 +817,7 @@
       removeWorldPins();
       setTimeout(() => {
         createLocalPins();
+        createStreetViewLayer();
         map.flyTo([43.4540, -3.6380], 16, { duration: 1.8 });
       }, 200);
     }
@@ -807,12 +833,83 @@
     if (!sv) return;
     const t = I18N[currentLang];
     const title = t[sv.titleKey] || '';
-    document.getElementById('sv-title').textContent = title;
-    const src = 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s' + sv.pano +
-      '!2m2!1d' + sv.coords[0] + '!2d' + sv.coords[1] +
-      '!3f' + sv.heading + '!4f' + sv.pitch + '!5f0.7820865974627469';
+    openStreetViewByPano(sv.pano, sv.coords[0], sv.coords[1], sv.heading || 0, sv.pitch || 0, title);
+  }
+
+  function openStreetViewByPano(pano, lat, lng, heading, pitch, title) {
+    document.getElementById('sv-title').textContent = title || '';
+    const h = heading != null ? heading : 0;
+    const p = pitch != null ? pitch : 0;
+    const src = 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s' + pano +
+      '!2m2!1d' + lat + '!2d' + lng +
+      '!3f' + h + '!4f' + p + '!5f0.7820865974627469';
     document.getElementById('sv-iframe').src = src;
     document.getElementById('sv-modal').classList.add('open');
+  }
+
+  // ==========================================
+  // STREET VIEW POINT LAYER (local mode)
+  // ==========================================
+  let svPoints = null;          // cached array
+  let svLayer = null;           // Leaflet LayerGroup
+  let svLayerVisible = true;
+
+  async function loadStreetViewPoints() {
+    if (svPoints) return svPoints;
+    try {
+      const [a, b] = await Promise.all([
+        fetch('streetview/guemes.json').then(r => r.json()).catch(() => ({photos:[]})),
+        fetch('streetview/wemes.json').then(r => r.json()).catch(() => ({photos:[]})),
+      ]);
+      const all = [...(a.photos || []), ...(b.photos || [])];
+      // deduplicate by id, keep one per pano
+      const seen = new Set();
+      svPoints = all.filter(p => p.id && !seen.has(p.id) && (seen.add(p.id), true));
+    } catch (e) {
+      console.warn('No se pudieron cargar puntos Street View:', e);
+      svPoints = [];
+    }
+    return svPoints;
+  }
+
+  async function createStreetViewLayer() {
+    const pts = await loadStreetViewPoints();
+    if (svLayer) { svLayer.remove(); svLayer = null; }
+    svLayer = L.layerGroup();
+    pts.forEach(p => {
+      if (typeof p.lat !== 'number' || typeof p.lng !== 'number') return;
+      const m = L.circleMarker([p.lat, p.lng], {
+        radius: 4,
+        className: 'sv-dot',
+        weight: 1,
+      });
+      m.on('click', () => {
+        const t = I18N[currentLang];
+        const title = (t && t.svTitleGuemes) || 'Street View · Güemes';
+        openStreetViewByPano(p.id, p.lat, p.lng, p.heading || 0, 0, title);
+      });
+      svLayer.addLayer(m);
+    });
+    if (svLayerVisible && mode === 'local') svLayer.addTo(map);
+    document.getElementById('sv-toggle').style.display = (mode === 'local') ? 'inline-block' : 'none';
+  }
+
+  function removeStreetViewLayer() {
+    if (svLayer) { svLayer.remove(); }
+    document.getElementById('sv-toggle').style.display = 'none';
+  }
+
+  function toggleStreetViewLayer() {
+    svLayerVisible = !svLayerVisible;
+    const btn = document.getElementById('sv-toggle');
+    if (!svLayer) return;
+    if (svLayerVisible) {
+      svLayer.addTo(map);
+      btn.classList.add('active');
+    } else {
+      svLayer.remove();
+      btn.classList.remove('active');
+    }
   }
   function closeStreetView() {
     document.getElementById('sv-modal').classList.remove('open');
