@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentación gráfica — Güemes 2026</title>
+<meta name="description" content="Material gráfico, enlaces digitales, tour aéreo 360° y web de la candidatura · Güemes Pueblo de Cantabria 2026">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-deep: #0a1120;
+    --bg-navy: #101a30;
+    --bg-card: #141f38;
+    --corten: #c89450;
+    --corten-br: #f4c77b;
+    --corten-dk: #7a5a30;
+    --text: #e8e6e1;
+    --text-dim: #b8b5af;
+    --text-mut: #8a8680;
+    --line: rgba(244, 199, 123, 0.22);
+    --line-soft: rgba(232, 230, 225, 0.08);
+    --ok: #7bc6f4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-deep); color: var(--text);
+    font-family: 'Satoshi', system-ui, sans-serif;
+    font-weight: 300; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Instrument Serif', serif; font-weight: 400; line-height: 1.15; }
+  em { font-style: italic; color: var(--corten-br); font-weight: 500; }
+  strong { color: var(--text); font-weight: 500; }
+  a { color: var(--ok); text-decoration: none; border-bottom: 1px solid rgba(123,198,244,0.3); transition: all 0.2s; }
+  a:hover { color: var(--corten-br); border-bottom-color: var(--corten-br); }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,17,32,0.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav .brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text); border-bottom: none;
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 16px; font-weight: 400;
+  }
+  .nav .brand small {
+    font-family: 'Satoshi', sans-serif; font-style: normal;
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--corten-br); font-weight: 500; margin-left: 10px;
+  }
+  .nav .nav-center {
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--text-mut); font-weight: 500;
+  }
+  .nav .actions { display: flex; gap: 8px; }
+  .nav .actions button {
+    background: transparent; border: 1px solid var(--line);
+    color: var(--text-dim); padding: 7px 14px; border-radius: 2px;
+    font-family: 'Satoshi', sans-serif; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav .actions button:hover { background: var(--corten-br); color: var(--bg-deep); border-color: var(--corten-br); }
+
+  .hero {
+    padding: 80px 28px 60px;
+    max-width: 1000px; margin: 0 auto;
+    text-align: left;
+  }
+  .hero .eyebrow {
+    font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--corten-br); font-weight: 500; margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 80px); font-style: italic; font-weight: 400;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .hero .sub {
+    font-size: 17px; color: var(--text-dim); max-width: 720px;
+  }
+  .hero .sub em { color: var(--corten-br); font-style: italic; }
+
+  .main { max-width: 1000px; margin: 0 auto; padding: 0 28px 80px; }
+
+  .card {
+    background: var(--bg-navy);
+    border: 1px solid var(--line-soft);
+    border-radius: 2px;
+    padding: 40px 36px;
+    margin-bottom: 24px;
+  }
+
+  .card > h2 {
+    font-size: 30px; font-style: italic;
+    padding-bottom: 18px; margin-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 20px;
+  }
+  .card > h2 .amount {
+    font-family: 'Satoshi', sans-serif; font-style: normal; font-weight: 500;
+    font-size: 12px; color: var(--corten-br); letter-spacing: 0.18em;
+    text-transform: uppercase; white-space: nowrap;
+  }
+
+  h3 {
+    font-size: 19px; color: var(--text); font-style: italic;
+    margin: 26px 0 12px;
+  }
+
+  p { color: var(--text-dim); margin-bottom: 12px; font-size: 14.5px; }
+  .card p:last-child { margin-bottom: 0; }
+  ul { color: var(--text-dim); padding-left: 20px; margin: 8px 0 14px; font-size: 14.5px; }
+  ul li { margin-bottom: 6px; }
+
+  /* URL hero block */
+  .web-hero {
+    background: linear-gradient(135deg, rgba(244,199,123,0.08), rgba(123,198,244,0.04));
+    border: 1px solid var(--line);
+    padding: 28px 30px;
+    margin: 8px 0 22px;
+    border-radius: 2px;
+  }
+  .web-hero .label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--corten-br); margin-bottom: 10px; font-weight: 500;
+  }
+  .web-hero .url {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(20px, 3vw, 30px);
+    color: var(--text); word-break: break-all; line-height: 1.2;
+  }
+  .web-hero .url a { color: var(--text); border-bottom-color: var(--corten); }
+  .web-hero .url a:hover { color: var(--corten-br); }
+
+  /* Link grid */
+  .link-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--line-soft);
+    margin: 18px 0 6px;
+    border: 1px solid var(--line-soft);
+  }
+  @media (max-width: 720px) { .link-grid { grid-template-columns: 1fr; } }
+  .link-item {
+    background: var(--bg-card);
+    padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .link-item .lbl {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--corten); font-weight: 500;
+  }
+  .link-item a {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 18px; color: var(--text); border-bottom: none;
+    line-height: 1.2;
+  }
+  .link-item a:hover { color: var(--corten-br); }
+  .link-item .desc {
+    font-size: 12.5px; color: var(--text-mut); margin-top: 2px;
+  }
+
+  /* Embed wrappers */
+  .embed-wrap {
+    position: relative; width: 100%; aspect-ratio: 16/10;
+    margin: 14px 0 8px;
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    overflow: hidden; border-radius: 2px;
+  }
+  .embed-wrap iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+  }
+  .embed-caption {
+    font-size: 12px; color: var(--text-mut);
+    letter-spacing: 0.04em; margin-top: 6px;
+    text-align: center; font-style: italic;
+  }
+
+  .callout {
+    border-left: 2px solid var(--corten-br);
+    padding: 14px 20px; margin: 20px 0;
+    font-size: 14px; color: var(--text-dim);
+    background: rgba(200, 148, 80, 0.05);
+  }
+  .callout strong { color: var(--corten-br); font-weight: 500; }
+  .callout.blue {
+    border-left-color: var(--ok);
+    background: rgba(123, 198, 244, 0.06);
+  }
+  .callout.blue strong { color: var(--ok); }
+
+  .placeholder {
+    border: 1px dashed var(--line);
+    background: rgba(255,255,255,0.015);
+    padding: 28px;
+    margin: 14px 0;
+    text-align: center;
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-mut);
+  }
+
+  .footer {
+    text-align: center; padding: 60px 28px 40px;
+    border-top: 1px solid var(--line-soft);
+    color: var(--text-mut); font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .footer strong { color: var(--corten-br); font-weight: 500; }
+
+  @media print {
+    @page { margin: 14mm; size: A4; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    .nav { position: static; display: none; }
+    .hero { padding: 0 0 40px; }
+    .main { padding: 0; }
+    .card { break-inside: avoid; margin-bottom: 18px; }
+    .embed-wrap { aspect-ratio: 16/9; }
+  }
+
+  @media (max-width: 720px) {
+    .nav { padding: 10px 16px; }
+    .nav .nav-center { display: none; }
+    .nav .actions button { padding: 6px 10px; font-size: 9px; }
+    .hero { padding: 50px 20px 40px; }
+    .main { padding: 0 18px 60px; }
+    .card { padding: 26px 22px; }
+    .card > h2 { flex-direction: column; gap: 4px; font-size: 22px; }
+    h3 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="./" class="brand">
+    Güemes <small>Documentación gráfica</small>
+  </a>
+  <div class="nav-center">Candidatura Pueblo de Cantabria 2026</div>
+  <div class="actions">
+    <button onclick="window.print()">↓ Imprimir</button>
+    <button onclick="history.back()">← Volver</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">02 · Documentación gráfica</div>
+  <h1>Güemes en imágenes y enlaces.</h1>
+  <p class="sub">Este documento reúne el material gráfico de la candidatura, los <em>enlaces digitales</em> a la web pública creada para el jurado y el <em>tour virtual aéreo</em> sobre la ruta circular del pueblo. Todo el contenido visual está disponible online en alta resolución y actualizado en tiempo real.</p>
+</section>
+
+<div class="main">
+
+<!-- ============ WEB DE LA CANDIDATURA ============ -->
+<div class="card">
+  <h2>
+    <span>Web de la candidatura</span>
+    <span class="amount">Acceso público</span>
+  </h2>
+
+  <p>Para esta candidatura, la Junta Vecinal de Güemes ha desarrollado una <strong>web pública específica</strong> que consolida toda la documentación, el material audiovisual y los recursos interactivos en un único punto de acceso para el jurado, los vecinos y cualquier interesado.</p>
+
+  <div class="web-hero">
+    <div class="label">URL pública de la candidatura</div>
+    <div class="url"><a href="https://guemes-pueblo-cantabria-2026.vercel.app/" target="_blank" rel="noopener">guemes-pueblo-cantabria-2026.vercel.app</a></div>
+  </div>
+
+  <h3>Qué encuentra el jurado en la web</h3>
+  <ul>
+    <li><strong>Landing narrativa</strong> en 10 secciones: las 900 años documentados, el albergue del Padre Ernesto Bustio, los 4 Güemes del mundo, el plan de actuación de 160.000 €, etc.</li>
+    <li><strong>Mapa interactivo mundial</strong> con los 4 Güemes (España, México, Argentina, EE.UU.), arcos animados, modo "pueblo" local con Street View embebido y visor aéreo de 23 fotos del pueblo.</li>
+    <li><strong>11 documentos oficiales</strong> de la candidatura: solicitud, memoria económica, memoria de actuación, dossier histórico, cartas de apoyo, acta de la Junta, paneles de la Senda, itinerario para el jurado, etc.</li>
+    <li><strong>Documentación descargable</strong> en PDF (informe histórico de Luis de Escallada, historia del viaje a los 4 Güemes, biografía del Padre Ernesto, GPX de la ruta circular).</li>
+    <li><strong>Versión bilingüe</strong> ES/EN en el mapa mundial para visitantes internacionales.</li>
+  </ul>
+
+  <div class="callout blue">
+    <strong>Compromiso digital:</strong> la web se mantiene actualizada hasta la resolución del premio y, en caso de ganar, se transformará en el portal oficial de seguimiento de las actuaciones (cronograma, hitos, fotografías de obra, justificación económica), garantizando <strong>transparencia total</strong> ante los vecinos, la administración y el público.
+  </div>
+</div>
+
+<!-- ============ ENLACES DIGITALES ============ -->
+<div class="card">
+  <h2>
+    <span>Enlaces digitales directos</span>
+    <span class="amount">Clicables en PDF</span>
+  </h2>
+
+  <p>Cada enlace lleva a una sección concreta de la web, accesible 24/7 sin instalación ni registro:</p>
+
+  <div class="link-grid">
+    <div class="link-item">
+      <div class="lbl">Landing principal</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/" target="_blank" rel="noopener">Inicio · 10 secciones narrativas</a>
+      <div class="desc">Recorrido completo: historia, presente, plan de futuro.</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Mapa interactivo</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/mapa/mapa_mundial_hermanos.html" target="_blank" rel="noopener">Los 4 Güemes del mundo</a>
+      <div class="desc">Mapa Leaflet con arcos animados + visor aéreo del pueblo.</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Memoria económica</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/docs/memoria-economica" target="_blank" rel="noopener">Desglose 160.000 € · 4 bloques</a>
+      <div class="desc">Tablas detalladas, cronograma, financiación y origen de fondos.</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Memoria de actuación</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/docs/memoria-actuacion" target="_blank" rel="noopener">Justificación técnica</a>
+      <div class="desc">Descripción de cada actuación, objetivos e indicadores.</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Senda de las Estatuas</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/paneles/" target="_blank" rel="noopener">Paneles de las 4 esculturas</a>
+      <div class="desc">Material interpretativo de los 4 hitos en acero corten.</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Dossier histórico</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/docs/dossier-historico" target="_blank" rel="noopener">900 años de Güemes (1084–2026)</a>
+      <div class="desc">Síntesis del informe de Luis de Escallada (CEM, 2010).</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Itinerario del jurado</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/docs/itinerario-jurado" target="_blank" rel="noopener">Visita guiada propuesta</a>
+      <div class="desc">Ruta de 2 horas por los puntos clave del pueblo.</div>
+    </div>
+    <div class="link-item">
+      <div class="lbl">Acta de la Junta</div>
+      <a href="https://guemes-pueblo-cantabria-2026.vercel.app/docs/acta-junta" target="_blank" rel="noopener">13 abril 2026 · Aprobación</a>
+      <div class="desc">Acuerdo formal de presentación a la convocatoria.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Acceso PDF:</strong> versiones imprimibles de cada documento en <a href="https://guemes-pueblo-cantabria-2026.vercel.app/docs/" target="_blank" rel="noopener">guemes-pueblo-cantabria-2026.vercel.app/docs/</a>
+  </div>
+</div>
+
+<!-- ============ TOUR 360 AEREO ============ -->
+<div class="card">
+  <h2>
+    <span>Tour virtual aéreo 360°</span>
+    <span class="amount">Ruta circular</span>
+  </h2>
+
+  <p>Tour <strong>360° interactivo</strong> con fotografías aéreas tomadas sobre la <strong>ruta circular actual del pueblo</strong>. Permite recorrer el perímetro de Güemes desde el aire, observar los puntos de instalación previstos para las 4 esculturas de la <em>Senda de las Estatuas</em>, el trazado del Camino de Santiago a su paso por el municipio y la disposición del núcleo respecto a la Ermita de San Julián, la Iglesia de San Vicente y el albergue del Padre Ernesto.</p>
+
+  <div class="embed-wrap">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1777446315823!6m8!1m7!1sCAoSHENJQUJJaEN2ZXJBdlpNXzdXUXViQ0o3aDRmYms.!2m2!1d43.4474917!2d-3.6275194!3f122.21314580027145!4f-26.011243226833308!5f0.7820865974627469" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <p class="embed-caption">Tour virtual aéreo 360° sobre la ruta circular actual del pueblo · Google Street View</p>
+
+  <div class="callout blue">
+    <strong>Cómo navegar:</strong> arrastra con el ratón para girar la cámara 360°, usa la rueda para acercar/alejar, y haz clic en las flechas del suelo para avanzar al siguiente punto de la ruta. La experiencia completa en pantalla grande está disponible en la web pública.
+  </div>
+</div>
+
+<!-- ============ PANELES SENDA ============ -->
+<div class="card">
+  <h2>
+    <span>Senda de las Estatuas · Paneles interpretativos</span>
+    <span class="amount">4 hitos</span>
+  </h2>
+
+  <p>Cuatro paneles divulgativos, uno por cada escultura de acero corten, conectan al visitante con el Güemes correspondiente del mundo (España, Argentina, México, EE.UU.) y con la historia del viaje impulsado por el Padre Ernesto Bustio en <em>2009</em>.</p>
+
+  <div class="placeholder">— Imágenes de los 4 paneles · pendientes de incorporar al PDF —</div>
+
+  <p>Versión interactiva online: <a href="https://guemes-pueblo-cantabria-2026.vercel.app/paneles/" target="_blank" rel="noopener">guemes-pueblo-cantabria-2026.vercel.app/paneles/</a></p>
+</div>
+
+<!-- ============ FOTOGRAFIA DEL PUEBLO ============ -->
+<div class="card">
+  <h2>
+    <span>Fotografía del pueblo y su entorno</span>
+    <span class="amount">Material gráfico</span>
+  </h2>
+
+  <p>Selección fotográfica de Güemes y su patrimonio: la Ermita de San Julián (s. XIII), la Iglesia de San Vicente, el albergue del Padre Ernesto, las plazoletas previstas para las esculturas, el paisaje rural, la costa próxima y los hitos del Camino de Santiago a su paso por Bareyo.</p>
+
+  <div class="placeholder">— Galería fotográfica · pendiente de incorporar al PDF —</div>
+
+  <p>Visor aéreo completo (23 fotografías locales) en el mapa interactivo: <a href="https://guemes-pueblo-cantabria-2026.vercel.app/mapa/mapa_mundial_hermanos.html" target="_blank" rel="noopener">mapa mundial de los 4 Güemes</a></p>
+</div>
+
+</div>
+
+<footer class="footer">
+  <strong>Abriendo caminos de amistad</strong> — Documentación gráfica · Candidatura Pueblo de Cantabria 2026<br>
+  Junta Vecinal de Güemes · Ayuntamiento de Bareyo · Cantabria
+</footer>
+
+</body>
+</html>
