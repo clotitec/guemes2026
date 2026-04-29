@@ -372,8 +372,6 @@
             <button class="mapa-btn" id="btn-3d">Vista aérea 3D</button>
             <button class="mapa-btn" id="btn-reset">Centrar ruta</button>
             <button class="mapa-btn mapa-btn-tour" id="btn-tour-360">Visor aéreo 360° · 30 vistas</button>
-            <button class="mapa-btn" id="btn-toggle-panos">Mostrar puntos 360°</button>
-            <button class="mapa-btn" id="btn-toggle-streetview">Street View Google</button>
         </div>
         <div class="elevation-profile">
             <div class="ep-header">
@@ -432,7 +430,7 @@
             <div class="zn-num" style="background:var(--azul-profundo);">✚</div>
             <div class="zn-info">
                 <div class="zn-title">Iglesia de San Vicente Mártir</div>
-                <div class="zn-desc">s. XVI-XVII · tour Matterport disponible</div>
+                <div class="zn-desc">s. XVI-XVII · interior visitable</div>
             </div>
         </div>
         <div class="zone-item mon-item" data-mon="palacio">
@@ -461,21 +459,16 @@
             <strong>Círculos dorados</strong> = 4 estatuas de la senda. <strong>Círculos azules</strong> = monumentos patrimoniales. Haz clic en cualquiera para centrarlo y ver más info.
         </div>
 
-        <div class="sidebar-h">Rutas disponibles</div>
+        <div class="sidebar-h">Ruta</div>
         <div class="route-legend">
-            <div><span class="sw sw-full"></span><strong>Ruta completa · 6,9 km</strong><br><small style="color:var(--texto-muted);">Circular · 1h 45' · desnivel 80 m</small></div>
-            <div style="margin-top:0.5rem;"><span class="sw sw-jurado"></span><strong>Ruta del jurado · Wikiloc</strong><br><small style="color:var(--texto-muted);">Iglesia → Ermita → Albergue — propuesta visita oficial</small></div>
-        </div>
-        <div style="display:flex; gap:0.4rem; margin-top:0.5rem;">
-            <button class="mapa-btn route-toggle active" data-route="both" style="flex:1; font-size:0.72rem; padding:0.4rem 0.5rem;">Ambas</button>
-            <button class="mapa-btn route-toggle" data-route="full" style="flex:1; font-size:0.72rem; padding:0.4rem 0.5rem;">Completa</button>
-            <button class="mapa-btn route-toggle" data-route="jurado" style="flex:1; font-size:0.72rem; padding:0.4rem 0.5rem;">Jurado</button>
+            <div><span class="sw sw-full"></span><strong>Ruta circular · 6,9 km</strong><br><small style="color:var(--texto-muted);">1h 45' · desnivel 80 m · 4 plazoletas</small></div>
         </div>
 
-        <div class="sidebar-h">Patrimonio 3D</div>
+        <div class="sidebar-h">Interiores</div>
         <div style="display:flex; gap:0.5rem; flex-direction:column;">
-            <a href="app/index.html" style="display:block; padding:0.75rem 1rem; background:var(--azul-profundo); color:white; text-decoration:none; border-radius:10px; font-size:0.85rem; font-weight:600;">Tour Matterport Iglesia + Ermita →</a>
-            <a href="06_Memoria_Actuacion/MEMORIA_ACTUACION.html" target="_blank" style="display:block; padding:0.75rem 1rem; background:var(--dorado); color:white; text-decoration:none; border-radius:10px; font-size:0.85rem; font-weight:600;">Leer Memoria de Actuación →</a>
+            <button type="button" class="btn-matterport" data-matterport="https://my.matterport.com/show/?m=ayHJDVioJ3J" data-mptitle="Iglesia de San Vicente Mártir" style="display:block; padding:0.75rem 1rem; background:var(--azul-profundo); color:white; border:none; border-radius:10px; font-size:0.85rem; font-weight:600; cursor:pointer; text-align:left;">Ver interior de la iglesia →</button>
+            <button type="button" class="btn-matterport" data-matterport="https://my.matterport.com/show/?m=jRKb9SMvGgV" data-mptitle="Ermita de San Julián" style="display:block; padding:0.75rem 1rem; background:var(--azul-profundo); color:white; border:none; border-radius:10px; font-size:0.85rem; font-weight:600; cursor:pointer; text-align:left;">Ver interior de la ermita →</button>
+            <a href="/docs/memoria-actuacion" target="_blank" style="display:block; padding:0.75rem 1rem; background:var(--dorado); color:white; text-decoration:none; border-radius:10px; font-size:0.85rem; font-weight:600;">Leer Memoria de Actuación →</a>
         </div>
     </aside>
 
@@ -937,7 +930,7 @@ function haversine(lat1, lon1, lat2, lon2) {
 // MAP READY
 // ============================================================
 let gpxData = null;        // ruta completa (perfil altimetrico principal)
-let gpxJurado = null;      // ruta propuesta para el jurado
+let gpxJurado = null;      // (legacy · no usado)
 let statueMarkers = [];
 let monMarkers = [];
 let activeId = null;
@@ -945,7 +938,6 @@ let activeId = null;
 map.on('load', async () => {
     try {
         gpxData = await loadGPX('ruta_guemes.gpx');
-        try { gpxJurado = await loadGPX('ruta_jurado.gpx'); } catch(e) { console.warn('GPX jurado no disponible', e); }
     } catch(e) {
         console.error('Error cargando GPX', e);
         document.getElementById('loading').innerHTML = '<div style="text-align:center;">No se pudo cargar la ruta GPX.<br><small style="opacity:0.7;">' + e.message + '</small></div>';
@@ -1146,36 +1138,7 @@ function addRouteLayers() {
     map.addLayer({ id: 'ruta-line', type: 'line', source: 'ruta', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 3, 'line-opacity': 0.9 } });
     map.addLayer({ id: 'ruta-dash', type: 'line', source: 'ruta', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#1e3a5f', 'line-width': 1.5, 'line-dasharray': [2, 3] } });
 
-    // Ruta del jurado (dorada — más destacada)
-    if (gpxJurado) {
-        map.addSource('ruta-jurado', {
-            type: 'geojson',
-            data: { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: gpxJurado.coords } }
-        });
-        map.addLayer({ id: 'jurado-glow', type: 'line', source: 'ruta-jurado', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#d4a853', 'line-width': 14, 'line-opacity': 0.45, 'line-blur': 3 } });
-        map.addLayer({ id: 'jurado-line', type: 'line', source: 'ruta-jurado', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#d4a853', 'line-width': 4, 'line-opacity': 1 } });
-        map.addLayer({ id: 'jurado-center', type: 'line', source: 'ruta-jurado', layout: { 'line-join': 'round', 'line-cap': 'round' }, paint: { 'line-color': '#ffffff', 'line-width': 1, 'line-dasharray': [3, 2], 'line-opacity': 0.9 } });
-    }
 }
-
-function setRouteVisibility(mode) {
-    // mode: 'both' | 'full' | 'jurado'
-    const show = (id, visible) => {
-        if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
-    };
-    const fullVisible = (mode === 'both' || mode === 'full');
-    const juradoVisible = (mode === 'both' || mode === 'jurado');
-    ['ruta-glow', 'ruta-line', 'ruta-dash'].forEach(id => show(id, fullVisible));
-    ['jurado-glow', 'jurado-line', 'jurado-center'].forEach(id => show(id, juradoVisible));
-}
-
-document.querySelectorAll('.route-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.route-toggle').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        setRouteVisibility(btn.dataset.route);
-    });
-});
 
 // ============================================================
 // ELEVATION PROFILE (SVG)
@@ -1294,86 +1257,6 @@ function buildPanoMarkers() {
         panoMarkers.push(m);
     });
 }
-
-document.getElementById('btn-toggle-panos').addEventListener('click', (e) => {
-    panoMarkersVisible = !panoMarkersVisible;
-    panoMarkers.forEach(m => {
-        m.getElement().style.display = panoMarkersVisible ? '' : 'none';
-    });
-    e.target.textContent = panoMarkersVisible ? 'Ocultar puntos 360°' : 'Mostrar puntos 360°';
-    e.target.classList.toggle('active', panoMarkersVisible);
-});
-
-// ============================================================
-// MARKERS DE GOOGLE STREET VIEW (730+ puntos clicables)
-// ============================================================
-let streetViewMarkers = [];
-let streetViewVisible = false;
-let streetViewLoaded = false;
-
-async function loadStreetViewMarkers() {
-    if (streetViewLoaded) return;
-    streetViewLoaded = true;
-    try {
-        const [a, b] = await Promise.all([
-            fetch('../streetview/guemes.json').then(r => r.json()).catch(() => ({photos:[]})),
-            fetch('../streetview/wemes.json').then(r => r.json()).catch(() => ({photos:[]})),
-        ]);
-        const all = [...(a.photos || []), ...(b.photos || [])];
-        const seen = new Set();
-        const points = all.filter(p => p.id && !seen.has(p.id) && (seen.add(p.id), true));
-
-        points.forEach(p => {
-            if (typeof p.lat !== 'number' || typeof p.lng !== 'number') return;
-            const el = document.createElement('div');
-            el.className = 'marker-streetview';
-            el.style.display = streetViewVisible ? '' : 'none';
-            el.title = 'Street View · Güemes';
-            el.addEventListener('click', (e) => {
-                e.stopPropagation();
-                openStreetView(p.id, p.lat, p.lng, p.heading || 0);
-            });
-            const m = new maplibregl.Marker({ element: el, anchor: 'center' })
-                .setLngLat([p.lng, p.lat])
-                .addTo(map);
-            streetViewMarkers.push(m);
-        });
-    } catch (err) {
-        console.warn('No se pudieron cargar puntos Street View:', err);
-    }
-}
-
-function openStreetView(pano, lat, lng, heading) {
-    const src = 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s' + pano +
-        '!2m2!1d' + lat + '!2d' + lng +
-        '!3f' + (heading || 0) + '!4f0!5f0.7820865974627469';
-    document.getElementById('streetviewIframe').src = src;
-    const modal = document.getElementById('streetviewModal');
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-}
-
-document.getElementById('streetviewClose').addEventListener('click', () => {
-    const modal = document.getElementById('streetviewModal');
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.getElementById('streetviewIframe').src = '';
-});
-
-document.getElementById('btn-toggle-streetview').addEventListener('click', async (e) => {
-    if (!streetViewLoaded) {
-        e.target.textContent = 'Cargando…';
-        e.target.disabled = true;
-        await loadStreetViewMarkers();
-        e.target.disabled = false;
-    }
-    streetViewVisible = !streetViewVisible;
-    streetViewMarkers.forEach(m => {
-        m.getElement().style.display = streetViewVisible ? '' : 'none';
-    });
-    e.target.textContent = streetViewVisible ? 'Ocultar Street View' : 'Street View Google';
-    e.target.classList.toggle('active', streetViewVisible);
-});
 
 document.getElementById('btn-tour-360').addEventListener('click', () => {
     if (!HAS_TOUR) return;
@@ -1533,26 +1416,12 @@ document.addEventListener('keydown', (e) => {
 <div id="matterportModal" class="tour360-modal" aria-hidden="true">
     <div class="tour360-header">
         <div>
-            <div class="tour360-eyebrow">Interior · Tour 3D</div>
+            <div class="tour360-eyebrow">Visita interior</div>
             <h3 id="matterportTitle">Ver el interior</h3>
         </div>
         <button id="matterportClose" class="tour360-close" type="button" aria-label="Cerrar">✕</button>
     </div>
     <iframe id="matterportIframe" class="tour360-viewer" src="" frameborder="0" allow="xr-spatial-tracking; gyroscope; accelerometer; fullscreen" allowfullscreen></iframe>
-</div>
-
-<!-- ============================================================
-     MODAL STREET VIEW GOOGLE · panorámicas embebidas
-     ============================================================ -->
-<div id="streetviewModal" class="tour360-modal" aria-hidden="true">
-    <div class="tour360-header">
-        <div>
-            <div class="tour360-eyebrow">Google Street View</div>
-            <h3 id="streetviewTitle">Vista 360° del pueblo</h3>
-        </div>
-        <button id="streetviewClose" class="tour360-close" type="button" aria-label="Cerrar">✕</button>
-    </div>
-    <iframe id="streetviewIframe" class="tour360-viewer" src="" frameborder="0" allow="fullscreen" allowfullscreen referrerpolicy="no-referrer-when-downgrade" loading="lazy"></iframe>
 </div>
 
 </body>
