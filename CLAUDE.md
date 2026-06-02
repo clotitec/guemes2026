@@ -60,7 +60,7 @@ Total prize budget: **160.000 €**, in 4 blocks. Every draft of the *memoria ec
 |---|---|---|
 | A | 60.000 € | Senda de las Estatuas (4 acero corten sculptures + plazoletas urbanization, mobiliario, señalización, obra civil, proyecto técnico, plantación de árbol emblemático por plazoleta) |
 | B | 45.000 € | Preservation works + 14 km of Camino de Santiago in Bareyo |
-| C | 15.000 € | "Enróllate en Güemes" — rural arts festival (renamed from "Güemes en Bolas" on 21 Apr 2026 — never use the old name) |
+| C | 15.000 € | "Enróllate en Güemes" — **recuperación de la bolera de Güemes** (bolo palma): cerramiento de tapia de piedra (4.500), alumbrado con luz de jardinera (3.500), base de hormigón (1.500), **panel interpretativo del bolo palma** (1.300), mobiliario (1.200), zona de estancia con troncos (1.000), señalización (800), acondicionamiento del tiro · material + mano de obra vecinal (500), imprevistos (700). The silo-ball ("bolas de silo") art is a **voluntary, NON-budgeted** touch — the jury doesn't count it as investment (cost removed 2 Jun 2026; reallocated to alumbrado + panel). Concept changed from "rural arts festival" to bolera recovery. Renamed from "Güemes en Bolas" on 21 Apr 2026 — never use the old name. |
 | D | 40.000 € | Pádel court replacement, athletics fencing, **Centro de Interpretación Digital del Peregrino** in the Ermita de San Julián |
 
 ## Repository layout
