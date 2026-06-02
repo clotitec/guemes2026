@@ -7,7 +7,7 @@ Página única de presentación de la candidatura — diseñada como **landing n
 ## Qué contiene (11 secciones)
 
 1. **Hero** — Título cinematográfico con fondo aéreo rotativo (4 fotos alternándose)
-2. **El pueblo** — 4 contadores: 301 hab. · 942 años · 50.000 peregrinos · 4 Güemes en el mundo
+2. **El pueblo** — 4 contadores: 315 hab. · 942 años · 50.000 peregrinos · 4 Güemes en el mundo
 3. **Origen** — Timeline vertical con 10 hitos de 1084 a 2026
 4. **Los artífices** — 6 canteros y fundidores de Güemes que levantaron catedrales (Segovia, Ciudad Rodrigo, Pamplona, Santiago, Oviedo)
 5. **El Camino** — Hospital medieval de San Julián → Albergue La Cabaña del Abuelo Peuto
