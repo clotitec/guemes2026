@@ -3,188 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enróllate en Güemes — Güemes 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Enróllate en Güemes · Recuperación de la Bolera — Güemes 2026</title>
+<meta name="description" content="Bloque C de la candidatura Pueblo de Cantabria 2026: recuperación y puesta en valor de la bolera de Güemes como espacio de encuentro vecinal, deportivo e intergeneracional. 15.000 €.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
 <style>
-:root{--g6:#1b4332;--g5:#2d6a4f;--g4:#40916c;--g0:#f0f7f2;--go4:#c9a227;--go3:#d4a853;--go1:#fdf8ed;--o5:#b85c14;--o4:#d4841a;--o3:#e8a929;--o0:#fef7ec;--x9:#111827;--x7:#374151;--x6:#4b5563;--x5:#6b7280;--x4:#9ca3af;--x2:#e5e7eb;--x1:#f3f4f6;--x0:#f9fafb;--w:#fff;--r:12px;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06)}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--x0);color:var(--x7);line-height:1.6;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:100;background:var(--w);border-bottom:1px solid var(--x2);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:48px}
-.nav a{text-decoration:none;color:var(--g6);font-weight:600;font-size:.85rem;display:flex;align-items:center;gap:.4rem}.nav a svg{width:16px;height:16px}
-.nav .title{font-size:.82rem;color:var(--x5);font-weight:500}
-.nav .actions{display:flex;gap:.5rem}.nav .actions button{background:var(--x1);border:1px solid var(--x2);border-radius:6px;padding:.3rem .7rem;font-size:.75rem;font-weight:600;color:var(--x6);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.3rem;transition:all .15s}.nav .actions button:hover{background:var(--x2);color:var(--x9)}
-.hero{background:linear-gradient(135deg,var(--o3) 0%,var(--o4) 50%,var(--o5) 100%);color:var(--w);padding:3rem 2rem;text-align:center}
-.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;letter-spacing:.03em;text-transform:uppercase}
-.hero .line{width:60px;height:3px;background:var(--w);margin:.75rem auto;border-radius:2px}
-.hero .sub{font-size:1rem;font-weight:300;opacity:.9;margin-bottom:.5rem}
-.hero .budget{font-size:1.8rem;font-weight:800;margin:.5rem 0}
-.hero .badge{display:inline-block;background:rgba(255,255,255,.15);padding:.3rem 1rem;border-radius:50px;font-size:.78rem;backdrop-filter:blur(4px)}
-.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.card{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:1.75rem;margin-bottom:1.25rem;border:1px solid var(--x1)}
-.card h2{font-size:1rem;font-weight:700;color:var(--o5);margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid #f0d9a8;text-transform:uppercase;letter-spacing:.03em}
-.card h3{font-size:.88rem;font-weight:700;color:var(--o4);margin:1rem 0 .4rem}
-.card p{color:var(--x6);margin-bottom:.5rem;font-size:.85rem;text-align:justify}
-.card ul,.card ol{margin:.4rem 0 .8rem 1.4rem;color:var(--x6);font-size:.85rem}
-.card li{margin-bottom:.25rem}
-.hl{background:var(--o0);border-left:3px solid var(--o3);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#6b5e4a;margin:.75rem 0}.hl strong{color:var(--o5)}
-.hlg{background:var(--g0);border-left:3px solid var(--g5);padding:.7rem .9rem;border-radius:0 8px 8px 0;font-size:.82rem;color:#2d5040;margin:.75rem 0}
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
-.vs-c{padding:1rem;border-radius:8px}.vs-c.ref{background:#f0f4f8;border-top:3px solid #4a90d9}.vs-c.prop{background:var(--o0);border-top:3px solid var(--o3)}
-.vs-c h4{margin-bottom:.5rem;font-size:.88rem}.vs-c.ref h4{color:#2b6cb0}.vs-c.prop h4{color:var(--o5)}
-.vs-c ul{margin:0 0 0 1.1rem;font-size:.8rem}.vs-c li{margin-bottom:.2rem}
-.loc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin:1rem 0}
-.loc{background:var(--o0);border-radius:8px;padding:.9rem;border-left:3px solid var(--o3)}
-.loc .name{font-weight:700;color:var(--o5);font-size:.88rem}.loc .desc{font-size:.75rem;color:#6b5e4a;margin-top:.15rem}.loc .count{font-size:.72rem;color:var(--o4);font-weight:600;margin-top:.25rem}
-.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:1rem 0}
-.imp{background:var(--o0);border-radius:8px;padding:.9rem;text-align:center}
-.imp .t{font-weight:700;color:var(--o5);font-size:.82rem;margin-bottom:.15rem}.imp .d{font-size:.75rem;color:#6b5e4a}
-table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.82rem}
-th{background:var(--o5);color:var(--w);padding:.45rem .6rem;text-align:left;font-weight:600;font-size:.75rem}
-td{padding:.4rem .6rem;border-bottom:1px solid #f0e6d6;color:var(--x6)}
-td:last-child,th:last-child{text-align:right}
-.total td{font-weight:700;color:var(--o5);border-top:2px solid var(--o5)}
-.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.5rem;margin:1rem 0}
-.tl-s{background:var(--o0);border-radius:6px;padding:.7rem;text-align:center}.tl-s .d{font-weight:700;color:var(--o5);font-size:.75rem;text-transform:uppercase}.tl-s .a{font-size:.72rem;color:#6b5e4a;margin-top:.15rem}
-.footer{text-align:center;padding:2rem;color:var(--x4);font-size:.75rem;border-top:1px solid var(--x2);margin-top:1rem}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--x9);color:var(--w);padding:.6rem 1.25rem;border-radius:50px;font-size:.82rem;opacity:0;transition:all .3s;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-@media(max-width:768px){.vs{grid-template-columns:1fr}.main{padding:1.25rem 1rem}.card{padding:1.25rem}}
-@media print{.nav{position:static}.card{box-shadow:none;border:1px solid #ddd}.hero{padding:1.5rem}}
+  :root { --bg-deep:#0a1120; --bg-navy:#101a30; --bg-card:#141f38; --corten:#c89450; --corten-br:#f4c77b; --corten-dk:#7a5a30; --text:#e8e6e1; --text-dim:#b8b5af; --text-mut:#8a8680; --line:rgba(244,199,123,0.22); --line-soft:rgba(232,230,225,0.08); --ok:#7bc6f4; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg-deep); color:var(--text); font-family:'Satoshi',system-ui,sans-serif; font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,h4 { font-family:'Instrument Serif',serif; font-weight:400; line-height:1.15; }
+  em { font-style:italic; color:var(--corten-br); font-weight:500; }
+  strong { color:var(--text); font-weight:500; }
+  a { color:var(--corten-br); text-decoration:none; }
+
+  .nav { position:sticky; top:0; z-index:50; background:rgba(10,17,32,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line-soft); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; }
+  .nav .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-family:'Instrument Serif',serif; font-style:italic; font-size:16px; }
+  .nav .brand small { font-family:'Satoshi',sans-serif; font-style:normal; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--corten-br); font-weight:500; margin-left:10px; }
+  .nav .nav-center { font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--text-mut); font-weight:500; }
+  .nav .actions { display:flex; gap:8px; }
+  .nav .actions button { background:transparent; border:1px solid var(--line); color:var(--text-dim); padding:7px 14px; border-radius:2px; font-family:'Satoshi',sans-serif; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer; transition:all .15s; }
+  .nav .actions button:hover { background:var(--corten-br); color:var(--bg-deep); border-color:var(--corten-br); }
+
+  .hero { padding:80px 28px 56px; max-width:1000px; margin:0 auto; }
+  .hero .eyebrow { font-size:11px; letter-spacing:0.35em; text-transform:uppercase; color:var(--corten-br); font-weight:500; margin-bottom:18px; }
+  .hero h1 { font-size:clamp(44px,6vw,80px); font-style:italic; font-weight:400; letter-spacing:-0.02em; margin-bottom:16px; }
+  .hero .sub { font-size:17px; color:var(--text-dim); max-width:760px; }
+
+  .main { max-width:1000px; margin:0 auto; padding:0 28px 80px; }
+
+  .stats { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:2px; margin:0 0 36px; background:var(--line-soft); }
+  .st { background:var(--bg-navy); padding:24px 20px; border-top:3px solid var(--corten-dk); }
+  .st .v { font-family:'Instrument Serif',serif; font-style:italic; font-size:32px; color:var(--corten-br); line-height:1; }
+  .st .l { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-mut); margin-top:8px; font-weight:500; }
+
+  .card { background:var(--bg-navy); border:1px solid var(--line-soft); border-radius:2px; padding:40px 36px; margin-bottom:24px; }
+  .card > h2 { font-size:30px; font-style:italic; padding-bottom:18px; margin-bottom:22px; border-bottom:1px solid var(--line); }
+  .card p { font-size:14.5px; color:var(--text-dim); margin-bottom:12px; }
+  .card p:last-child { margin-bottom:0; }
+
+  .callout { border-left:2px solid var(--corten-br); padding:14px 20px; margin:20px 0 0; font-size:14px; color:var(--text-dim); background:rgba(200,148,80,0.05); }
+  .callout strong { color:var(--corten-br); font-weight:500; }
+  .callout em { color:var(--corten-br); font-style:italic; }
+  .callout.ok { border-left-color:var(--ok); background:rgba(123,198,244,0.06); }
+  .callout.ok strong { color:var(--ok); }
+
+  .fig { margin:24px 0 0; border:1px solid var(--line-soft); }
+  .fig img { width:100%; display:block; height:auto; }
+  .fig figcaption { font-size:12.5px; color:var(--text-mut); padding:12px 16px; background:var(--bg-card); border-top:1px solid var(--line-soft); }
+  .fig figcaption em { color:var(--corten-br); font-style:italic; }
+
+  .act-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:14px; margin:22px 0 0; }
+  .act { background:var(--bg-card); border-left:3px solid var(--corten-br); padding:18px 20px; }
+  .act .name { font-family:'Satoshi',sans-serif; font-weight:500; color:var(--text); font-size:15px; margin-bottom:6px; }
+  .act .desc { font-size:13px; color:var(--text-dim); line-height:1.5; }
+  .act .price { font-family:'Instrument Serif',serif; font-style:italic; color:var(--corten-br); font-size:22px; margin-top:12px; }
+
+  .gallery { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin:22px 0 0; }
+  .gitem { position:relative; display:block; overflow:hidden; aspect-ratio:4/5; border:1px solid var(--line-soft); }
+  .gitem img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
+  .gitem:hover img { transform:scale(1.06); }
+  .gitem .gcap { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(transparent, rgba(10,17,32,0.94)); color:var(--text); font-family:'Satoshi',sans-serif; font-size:12px; font-weight:500; line-height:1.3; padding:30px 14px 12px; }
+
+  .imp-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:14px; margin:22px 0 0; }
+  .imp { background:var(--bg-card); padding:22px 18px; border-top:3px solid var(--corten-dk); }
+  .imp .t { font-family:'Instrument Serif',serif; font-style:italic; font-size:20px; color:var(--corten-br); margin-bottom:6px; }
+  .imp .d { font-size:13px; color:var(--text-dim); line-height:1.5; }
+
+  table { width:100%; border-collapse:collapse; margin:22px 0 0; font-size:14px; }
+  th { text-align:left; font-family:'Satoshi',sans-serif; font-weight:500; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--corten-br); padding:12px 14px; border-bottom:1px solid var(--line); }
+  td { padding:11px 14px; border-bottom:1px solid var(--line-soft); color:var(--text-dim); }
+  td:last-child, th:last-child { text-align:right; white-space:nowrap; }
+  tr.total td { font-family:'Instrument Serif',serif; font-style:italic; font-size:19px; color:var(--corten-br); border-top:1px solid var(--line); border-bottom:none; padding-top:14px; }
+
+  .tl { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; margin:22px 0 0; }
+  .tl-s { background:var(--bg-card); border-left:3px solid var(--corten-br); padding:16px 18px; }
+  .tl-s .d { font-family:'Satoshi',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--corten-br); }
+  .tl-s .a { font-size:13px; color:var(--text-dim); margin-top:8px; line-height:1.5; }
+
+  .footer { text-align:center; padding:60px 28px 40px; border-top:1px solid var(--line-soft); color:var(--text-mut); font-size:11px; letter-spacing:0.15em; text-transform:uppercase; }
+  .footer strong { color:var(--corten-br); font-weight:500; }
+
+  .toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(100px); background:var(--bg-card); border:1px solid var(--line); color:var(--text); padding:.6rem 1.25rem; border-radius:2px; font-family:'Satoshi',sans-serif; font-size:.8rem; letter-spacing:0.05em; opacity:0; transition:all .3s; z-index:1000; }
+  .toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+
+  @media print {
+    @page { margin:14mm; size:A4; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; color-adjust:exact !important; }
+    .nav { display:none; } .hero { padding:0 0 30px; } .main { padding:0; }
+    .card, .act, .imp, .gitem { break-inside:avoid; }
+    .card { padding:26px 24px; }
+  }
+  @media (max-width:720px) {
+    .nav { padding:12px 16px; } .nav .nav-center { display:none; }
+    .hero { padding:50px 20px 40px; } .main { padding:0 18px 60px; }
+    .card { padding:26px 22px; }
+  }
 </style>
 </head>
 <body>
+
 <div class="nav">
-<a href="./index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l5-5M5 12l5 5"/></svg>Güemes 2026</a>
-<span class="title">Enróllate en Güemes</span>
-<div class="actions"><button onclick="sharePage()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>Compartir</button><button onclick="window.print()"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir</button></div>
+  <a href="/" class="brand">Güemes <small>Enróllate · La Bolera</small></a>
+  <div class="nav-center">Candidatura Pueblo de Cantabria 2026</div>
+  <div class="actions">
+    <button onclick="sharePage()">↗ Compartir</button>
+    <button onclick="window.print()">↓ Imprimir</button>
+    <button onclick="history.back()">← Volver</button>
+  </div>
 </div>
 
-<div class="hero">
-<h1>Enróllate en Güemes</h1>
-<div class="line"></div>
-<div class="sub">Festival de arte rural, gamificación y promoción comarcal</div>
-<div class="budget">15.000 &euro;</div>
-<div class="badge">Verano 2026 · Municipio de Bareyo</div>
-</div>
+<section class="hero">
+  <div class="eyebrow">Bloque C · Aporte físico al pueblo</div>
+  <h1>Enróllate en Güemes.</h1>
+  <p class="sub">Recuperación y puesta en valor de la <em>bolera de Güemes</em> como espacio de encuentro vecinal, deportivo e intergeneracional — coronado por una composición artística hecha con bolas de silo reutilizadas.</p>
+</section>
 
 <div class="main">
 
-<div class="card">
-<h2>Resumen ejecutivo</h2>
-<p><strong>"Enróllate en Güemes"</strong> transforma bolas de ensilado pintadas en una red de puntos de interes por todo Bareyo, conectando el Faro de Ajo (200.000 visitantes/año), las playas y la ruta circular de Güemes en un circuito de arte al aire libre con gamificación, QR interactivos y eventos festivos.</p>
-<div class="hl"><strong>La idea en una frase:</strong> Bolas de silo pintadas por artistas cántabros distribuidas desde el Faro de Ajo hasta las 4 plazoletas de la Senda de las Estatuas, con QR que cuentan historias, proponen retos y guian a los 200.000 visitantes del faro hacia Güemes por una ruta llana de 6 km ciclable y familiar.</div>
+<div class="stats">
+  <div class="st"><div class="v">15.000 €</div><div class="l">presupuesto</div></div>
+  <div class="st"><div class="v">Bloque C</div><div class="l">aporte físico</div></div>
+  <div class="st"><div class="v">8</div><div class="l">actuaciones</div></div>
+  <div class="st"><div class="v">5+</div><div class="l">usos del espacio</div></div>
 </div>
 
 <div class="card">
-<h2>Modelo de referencia vs. propuesta</h2>
-<div class="vs">
-<div class="vs-c ref"><h4>Porrua en Bolas (Llanes)</h4><ul><li>Desde 2021 (5 ediciones)</li><li>~400 habitantes</li><li>~12 artistas por edición</li><li>1 fin de semana en julio</li><li>Solo en Porrua</li><li>Patrocinio empresarial (Ibersa)</li></ul></div>
-<div class="vs-c prop"><h4>Enróllate en Güemes (propuesta)</h4><ul><li>Primera edición verano 2026</li><li>315 hab + 200K visitantes Faro</li><li>15-20 artistas cántabros</li><li>2 fines de semana con eventos</li><li>Expansión a todo Bareyo</li><li>Gamificación QR + storytelling IA</li><li>Taller peregrinos + difusión intl.</li></ul></div>
-</div>
-</div>
-
-<div class="card">
-<h2>Distribución de bolas por el municipio</h2>
-<div class="loc-grid">
-<div class="loc"><div class="name">Faro de Ajo</div><div class="desc">Estructura 2 alturas junto al faro. Punto de inicio del circuito.</div><div class="count">5-10 bolas + estructura</div></div>
-<div class="loc"><div class="name">Playa de Cuberros</div><div class="desc">Entrada de la playa. Reclamo visual para banistas.</div><div class="count">2 bolas</div></div>
-<div class="loc"><div class="name">Playa de la Antuerta</div><div class="desc">Entrada playa. Conexion costa-interior.</div><div class="count">2 bolas</div></div>
-<div class="loc"><div class="name">Oficina Turismo Ajo</div><div class="desc">Info completa de ruta. Punto de distribución mapas.</div><div class="count">1 bola</div></div>
-<div class="loc"><div class="name">Iglesia Sta. Maria Bareyo</div><div class="desc">Entrada iglesia. Patrimonio religioso.</div><div class="count">1 bola</div></div>
-<div class="loc"><div class="name">Senda de las Estatuas</div><div class="desc">4 plazoletas. Destino final del circuito.</div><div class="count">4-8 bolas</div></div>
-</div>
-<div class="hl"><strong>Total: 20-25 bolas pintadas.</strong> Cada bola lleva QR con historia, ficha del artista, reto de gamificación y enlace a la ruta completa.</div>
+  <h2>Resumen ejecutivo</h2>
+  <p>El Bloque C de la candidatura se concreta como un <strong>aporte físico</strong> al pueblo: la <strong>recuperación, acondicionamiento y puesta en valor de la bolera de Güemes</strong>, un espacio tradicional de gran relevancia patrimonial, deportiva y social, con el fin de consolidarlo como lugar de encuentro, convivencia y desarrollo de actividades culturales al aire libre.</p>
+  <p>Todas las intervenciones se realizan respetando la estética tradicional de Güemes y su integración en el entorno rural. Como elemento singular y en continuidad con el programa <em>«Enróllate en Güemes»</em>, se incorpora una composición artística semipermanente realizada con <strong>bolas de silo reutilizadas</strong>.</p>
+  <div class="callout"><strong>La idea en una frase:</strong> recuperar la bolera como corazón social del pueblo — un espacio para el bolo palma, los conciertos de pequeño formato y los encuentros vecinales, coronado por una obra de arte hecha con bolas de silo que da una segunda vida a un material del medio rural.</div>
+  <figure class="fig">
+    <img src="../imagenes/bolera/bolera-tiro-iglesia.jpg" alt="Bolera de Güemes: el tiro acondicionado para el bolo palma con la iglesia del pueblo al fondo" loading="lazy">
+    <figcaption><em>La bolera de Güemes</em> — el tiro acondicionado para el bolo palma, con la iglesia del pueblo al fondo.</figcaption>
+  </figure>
 </div>
 
 <div class="card">
-<h2>Gamificación y experiencia digital</h2>
-<h3>Retos y puntos</h3>
-<ul><li><strong>Colecciona las bolas:</strong> Escanea el QR de cada bola para sumar puntos. Completa todas = diploma "Explorador de Güemes".</li><li><strong>Reto fotografico:</strong> Foto con cada bola + #GuemesEnBolas = participar en sorteo.</li><li><strong>Quiz de historia:</strong> Pregunta en cada QR. Acierta todas = premio en el bar del pueblo.</li></ul>
-<h3>Storytelling con IA</h3>
-<ul><li><strong>Videos 1-2 min</strong> con historia de cada lugar narrada de forma cinematica.</li><li><strong>4 Güemes del mundo:</strong> Conexion Cantabria-Argentina-EEUU-Canada.</li><li><strong>Camino de Santiago:</strong> Testimonios peregrinos e historia del Padre Ernesto.</li></ul>
-<h3>Para niños y familias</h3>
-<ul><li><strong>Pasaporte de las bolas:</strong> Cuadernillo con sellos en cada bola.</li><li><strong>Busqueda del tesoro:</strong> Pistas en QR hacia "tesoro" en el albergue.</li><li><strong>Pinta tu mini-bola:</strong> Bolas pequenas para pintar in situ.</li></ul>
+  <h2>Actuaciones previstas</h2>
+  <p>La actuación comprende un conjunto de obras físicas permanentes sobre el recinto de la bolera y su entorno inmediato:</p>
+  <div class="act-grid">
+    <div class="act"><div class="name">Cerramiento en tapia de piedra</div><div class="desc">Construcción de un cerramiento tradicional en la parte posterior del recinto.</div><div class="price">4.000 €</div></div>
+    <div class="act"><div class="name">Mejora del tiro de la bolera</div><div class="desc">Aporte de materiales adecuados y acondicionamiento de la superficie de juego.</div><div class="price">2.500 €</div></div>
+    <div class="act"><div class="name">Alumbrado</div><div class="desc">Instalación de farolas para el uso del espacio en horario de tarde-noche.</div><div class="price">2.000 €</div></div>
+    <div class="act"><div class="name">Base de hormigón</div><div class="desc">Plataforma destinada a la instalación del mobiliario urbano.</div><div class="price">1.500 €</div></div>
+    <div class="act"><div class="name">Mobiliario urbano</div><div class="desc">Colocación de dos bancos y una papelera de estética tradicional.</div><div class="price">1.200 €</div></div>
+    <div class="act"><div class="name">Composición artística</div><div class="desc">Bolas de silo reutilizadas como elemento ornamental e identitario.</div><div class="price">1.300 €</div></div>
+    <div class="act"><div class="name">Zona de estancia y observación</div><div class="desc">Asientos de troncos de madera dispuestos sobre la tapia existente.</div><div class="price">1.000 €</div></div>
+    <div class="act"><div class="name">Señalización e integración</div><div class="desc">Señalética e integración estética del conjunto en el entorno rural.</div><div class="price">800 €</div></div>
+  </div>
+  <div class="callout"><strong>Zona de estancia:</strong> la instalación de asientos de troncos sobre la tapia existente crea una grada natural que favorece la participación y el disfrute de vecinos y visitantes durante las partidas de bolos y los eventos culturales y comunitarios.</div>
 </div>
 
 <div class="card">
-<h2>Programa de eventos</h2>
-<h3>Fin de semana 1: "Festival de las Bolas" (julio)</h3>
-<p><strong>Viernes:</strong> 18h inauguración + presentación artistas · 19:30 aperitivo local · 21h concierto acustico</p>
-<p><strong>Sabado:</strong> 10-14h pintura en directo · 11-13h taller infantil + taller peregrinos · 14h parrillada popular · 17h taller intergeneracional · 18:30 ruta guiada Bolas+Senda · 20:30 tardeo con musica</p>
-<p><strong>Domingo:</strong> 10-13h acabado bolas · 11h mercadillo artesanía · 13h inauguración circuito · 13:30 jornada de sidra</p>
-<h3>Fin de semana 2: "Tardeo de las Bolas" (agosto)</h3>
-<p>Sabado: tardeo musical + bar comisión · Repintado y mantenimiento · Taller artistas. Domingo: ruta ciclable familiar · Premios gamificación y sorteo.</p>
-<div class="hl"><strong>Despues:</strong> Las bolas permanecen todo el verano/otono como ruta de arte visitable. Los QR siguen activos. Al final del otono las bolas se abren para alimentar al ganado: el arte vuelve a la tierra.</div>
+  <h2>Continuidad artística · bolas de silo</h2>
+  <p>En continuidad con el espíritu del proyecto <em>«Enróllate en Güemes»</em>, se instala de forma semipermanente una composición artística realizada con <strong>bolas de ensilado reutilizadas</strong>. Esta intervención permite dar una segunda vida a materiales vinculados al medio rural, convirtiéndolos en un elemento ornamental e identificativo del espacio.</p>
+  <div class="callout ok"><strong>Por qué encaja:</strong> refuerza la identidad visual de la localidad y promueve valores de sostenibilidad, creatividad y respeto por las tradiciones rurales, manteniendo el guiño artístico que dio origen al nombre del bloque — ahora como elemento estable y duradero, no como evento efímero.</div>
 </div>
 
 <div class="card">
-<h2>Estrategia: del Faro de Ajo a Güemes</h2>
-<ol>
-<li><strong>Captacion en el Faro:</strong> Visitante ve estructura de bolas de 2 alturas. Escanea QR.</li>
-<li><strong>Descubrimiento:</strong> QR muestra mapa completo de bolas y ruta de 6 km.</li>
-<li><strong>Playas:</strong> Ve bolas en Cuberros y Antuerta. Cada bola tiene un reto.</li>
-<li><strong>Llegada a Güemes:</strong> Completa ruta circular (1h a pie, llana, ciclable, familiar).</li>
-<li><strong>Esculturas:</strong> En las 4 plazoletas descubre los 4 Güemes del mundo.</li>
-<li><strong>Experiencia completa:</strong> Albergue, ermita, palacio. Come en el pueblo. Comparte en redes.</li>
-</ol>
-<div class="hlg"><strong>Objetivo:</strong> 2% de visitantes del Faro = <strong>5.000 visitantes/año a Güemes</strong>. Multiplicar x16 el trafico actual.</div>
+  <h2>La bolera hoy</h2>
+  <p>Imágenes del estado actual de la bolera de Güemes: el tiro con las dianas del bolo palma, el entorno arbolado junto a la iglesia y el alumbrado nocturno. La actuación parte de este espacio para consolidarlo como lugar de encuentro vecinal, deportivo e intergeneracional.</p>
+  <div class="gallery">
+    <a class="gitem" href="../imagenes/bolera/bolera-tiro-iglesia.jpg" target="_blank" rel="noopener"><img src="../imagenes/bolera/thumbs/bolera-tiro-iglesia.jpg" alt="El tiro de la bolera con la iglesia del pueblo al fondo" loading="lazy"><span class="gcap">El tiro y la iglesia al fondo</span></a>
+    <a class="gitem" href="../imagenes/bolera/bolera-tiro-dianas.jpg" target="_blank" rel="noopener"><img src="../imagenes/bolera/thumbs/bolera-tiro-dianas.jpg" alt="Dianas del bolo palma pintadas sobre el tiro de la bolera" loading="lazy"><span class="gcap">Dianas del bolo palma</span></a>
+    <a class="gitem" href="../imagenes/bolera/bolera-atardecer.jpg" target="_blank" rel="noopener"><img src="../imagenes/bolera/thumbs/bolera-atardecer.jpg" alt="La bolera de Güemes al atardecer" loading="lazy"><span class="gcap">La bolera al atardecer</span></a>
+    <a class="gitem" href="../imagenes/bolera/bolera-noche-alumbrado.jpg" target="_blank" rel="noopener"><img src="../imagenes/bolera/thumbs/bolera-noche-alumbrado.jpg" alt="Alumbrado nocturno del recinto de la bolera" loading="lazy"><span class="gcap">Alumbrado nocturno</span></a>
+    <a class="gitem" href="../imagenes/bolera/bolera-recinto.jpg" target="_blank" rel="noopener"><img src="../imagenes/bolera/thumbs/bolera-recinto.jpg" alt="El recinto de la bolera y su caseta bajo el arbolado" loading="lazy"><span class="gcap">El recinto y la caseta</span></a>
+    <a class="gitem" href="../imagenes/bolera/bolera-conjunto.jpg" target="_blank" rel="noopener"><img src="../imagenes/bolera/thumbs/bolera-conjunto.jpg" alt="Vista de conjunto de la bolera bajo el arbolado" loading="lazy"><span class="gcap">Vista de conjunto</span></a>
+  </div>
 </div>
 
 <div class="card">
-<h2>Modelo de patrocinio</h2>
-<table><tr><th>Empresa/Entidad</th><th>Colaboracion</th></tr>
-<tr><td><strong>Pinturas Nisol</strong></td><td>Suministro pintura exteriores. Logo en bolas y cartelería.</td></tr>
-<tr><td><strong>Lupa</strong></td><td>Patrocinio comida popular. Logo en eventos.</td></tr>
-<tr><td><strong>Banco Santander</strong></td><td>Patrocinio principal. Publicidad y gamificación.</td></tr>
-<tr><td><strong>Asoc. artistas cántabros</strong></td><td>Coordinación artistas participantes.</td></tr>
-<tr><td><strong>Albergue Güemes</strong></td><td>Taller peregrinos. Difusión internacional.</td></tr>
-<tr><td><strong>Of. Turismo Ajo</strong></td><td>Distribución mapas y promoción circuito.</td></tr></table>
-<p style="margin-top:.5rem"><strong>Ingresos Junta Vecinal:</strong> Bar en comisión (tardeos, bebidas), publicidad en bolas, merchandising (camisetas, imanes, postales).</p>
+  <h2>Usos del espacio recuperado</h2>
+  <div class="imp-grid">
+    <div class="imp"><div class="t">Bolo palma</div><div class="d">Práctica del deporte tradicional de Cantabria en un espacio propio y digno.</div></div>
+    <div class="imp"><div class="t">Conciertos</div><div class="d">Música en directo de pequeño formato al aire libre.</div></div>
+    <div class="imp"><div class="t">Encuentros vecinales</div><div class="d">Jornadas participativas y convivencia comunitaria.</div></div>
+    <div class="imp"><div class="t">Intergeneracional</div><div class="d">Un punto de encuentro compartido por todas las edades del pueblo.</div></div>
+    <div class="imp"><div class="t">Peregrinos y visitantes</div><div class="d">Espacio abierto, junto al Camino y a la ermita de San Julián.</div></div>
+  </div>
 </div>
 
 <div class="card">
-<h2>Presupuesto: 15.000 &euro;</h2>
-<table><tr><th>Concepto</th><th>Importe</th></tr>
-<tr><td>Bolas secas de silo y preparacion (20-25 uds.)</td><td>1.500 &euro;</td></tr>
-<tr><td>Pinturas y materiales artisticos</td><td>1.800 &euro;</td></tr>
-<tr><td>Instalación y transporte puntos estrategicos</td><td>1.200 &euro;</td></tr>
-<tr><td>Eventos musicales (2 fines de semana)</td><td>3.000 &euro;</td></tr>
-<tr><td>Catering (parrillada, sidra, comida popular)</td><td>2.000 &euro;</td></tr>
-<tr><td>Talleres (infantil + artistas)</td><td>1.200 &euro;</td></tr>
-<tr><td>QR, gamificación, contenido digital</td><td>1.000 &euro;</td></tr>
-<tr><td>Carteleria y difusión</td><td>1.000 &euro;</td></tr>
-<tr><td>Seguros y logistica</td><td>800 &euro;</td></tr>
-<tr><td>Coordinación artistas</td><td>500 &euro;</td></tr>
-<tr><td>Imprevistos</td><td>1.000 &euro;</td></tr>
-<tr class="total"><td>TOTAL</td><td>15.000 &euro;</td></tr></table>
+  <h2>Presupuesto · 15.000 €</h2>
+  <table>
+    <tr><th>Concepto</th><th>Importe</th></tr>
+    <tr><td>Cerramiento en tapia de piedra (parte posterior del recinto)</td><td>4.000 €</td></tr>
+    <tr><td>Mejora del tiro de la bolera (materiales y acondicionamiento)</td><td>2.500 €</td></tr>
+    <tr><td>Mejora del alumbrado (instalación de farolas)</td><td>2.000 €</td></tr>
+    <tr><td>Base de hormigón para mobiliario urbano</td><td>1.500 €</td></tr>
+    <tr><td>Mobiliario urbano (2 bancos + 1 papelera)</td><td>1.200 €</td></tr>
+    <tr><td>Composición artística con bolas de silo reutilizadas</td><td>1.300 €</td></tr>
+    <tr><td>Zona de estancia: asientos de troncos sobre la tapia existente</td><td>1.000 €</td></tr>
+    <tr><td>Señalización e integración estética en el entorno</td><td>800 €</td></tr>
+    <tr><td>Imprevistos</td><td>700 €</td></tr>
+    <tr class="total"><td>TOTAL</td><td>15.000 €</td></tr>
+  </table>
+  <div class="callout">Importes estimados por partida, pendientes de validación técnica. El total del bloque se mantiene en <strong>15.000 €</strong>.</div>
 </div>
 
 <div class="card">
-<h2>Impacto esperado</h2>
-<div class="impact-grid">
-<div class="imp"><div class="t">200K visitantes</div><div class="d">Publico del Faro de Ajo como objetivo. 2,5% = 5.000 nuevos a Güemes.</div></div>
-<div class="imp"><div class="t">Difusión intl.</div><div class="d">Peregrinos de +80 países comparten en redes. Organica, sin coste.</div></div>
-<div class="imp"><div class="t">Cohesion</div><div class="d">Parrilladas, talleres, tardeos. El pueblo se activa.</div></div>
-<div class="imp"><div class="t">Candidatura</div><div class="d">Originalidad, cultura, utilidad, belleza. Diferenciador claro.</div></div>
-<div class="imp"><div class="t">Escalable</div><div class="d">2a edición mas grande. Expansión Trasmiera. Modelo exportable.</div></div>
-</div>
+  <h2>Impacto esperado</h2>
+  <div class="imp-grid">
+    <div class="imp"><div class="t">Patrimonio</div><div class="d">Recupera un espacio tradicional en desuso y lo devuelve a la vida del pueblo.</div></div>
+    <div class="imp"><div class="t">Infraestructura</div><div class="d">Mejora del equipamiento público: cerramiento, alumbrado, mobiliario.</div></div>
+    <div class="imp"><div class="t">Sostenibilidad</div><div class="d">Segunda vida a las bolas de silo del medio rural.</div></div>
+    <div class="imp"><div class="t">Identidad</div><div class="d">Imagen reconocible y fotografiable de Güemes.</div></div>
+    <div class="imp"><div class="t">Cohesión</div><div class="d">El pueblo se reúne, juega y celebra. Convivencia intergeneracional.</div></div>
+  </div>
 </div>
 
 <div class="card">
-<h2>Cronograma</h2>
-<div class="tl">
-<div class="tl-s"><div class="d">Abril</div><div class="a">Aprobación. Contacto ganaderos y artistas.</div></div>
-<div class="tl-s"><div class="d">Mayo</div><div class="a">Convocatoria artistas. Patrocinadores.</div></div>
-<div class="tl-s"><div class="d">Junio</div><div class="a">Selección. Compra materiales. Plataforma QR.</div></div>
-<div class="tl-s"><div class="d">Julio</div><div class="a">Fin semana 1: Festival de las Bolas.</div></div>
-<div class="tl-s"><div class="d">Agosto</div><div class="a">Fin semana 2: Tardeo de las Bolas.</div></div>
-<div class="tl-s"><div class="d">Sep-Nov</div><div class="a">Ruta visitable. Evaluacion. Plan 2a edición.</div></div>
-</div>
+  <h2>Cronograma</h2>
+  <div class="tl">
+    <div class="tl-s"><div class="d">Abr–Jun</div><div class="a">Proyecto y permisos. Contacto con cantero y proveedores.</div></div>
+    <div class="tl-s"><div class="d">Jun–Jul</div><div class="a">Cerramiento de tapia y acondicionamiento del tiro.</div></div>
+    <div class="tl-s"><div class="d">Julio</div><div class="a">Alumbrado, base de hormigón y mobiliario urbano.</div></div>
+    <div class="tl-s"><div class="d">Jul–Ago</div><div class="a">Zona de estancia y composición artística de bolas de silo.</div></div>
+    <div class="tl-s"><div class="d">Agosto</div><div class="a">Inauguración. Primeras partidas de bolo palma y encuentros.</div></div>
+    <div class="tl-s"><div class="d">Sep en adelante</div><div class="a">Programación de conciertos y actividades vecinales.</div></div>
+  </div>
 </div>
 
 </div>
-<div class="footer">Propuesta Enróllate en Güemes · Junta Vecinal de Güemes (Bareyo) · Abril 2026</div>
+
+<footer class="footer">
+  <strong>Enróllate en Güemes</strong> · Recuperación de la Bolera · Junta Vecinal de Güemes (Bareyo) · 2026
+</footer>
+
 <div class="toast" id="toast"></div>
 <script>
-async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Güemes 2026 — Enróllate en Güemes',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}
+async function sharePage(){const u=window.location.href;if(navigator.share){try{await navigator.share({title:'Güemes 2026 — Enróllate en Güemes · La Bolera',url:u})}catch(e){copyUrl(u)}}else{copyUrl(u)}}
 function copyUrl(u){navigator.clipboard.writeText(u).then(()=>showToast('Enlace copiado')).catch(()=>{const t=document.createElement('textarea');t.value=u;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);showToast('Enlace copiado')})}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
 </script>

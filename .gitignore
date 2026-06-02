@@ -21,6 +21,9 @@ desktop.ini
 /*.jpg
 /*.jpeg
 /*.png
+/*.JPG
+/*.JPEG
+/*.PNG
 !/CLAUDE.md
 
 # Carpeta de entrega para Google Drive (generada bajo demanda — no versionar)
