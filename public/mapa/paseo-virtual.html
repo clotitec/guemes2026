@@ -14,10 +14,16 @@
     </style>
     
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <!-- Mapa base vectorial sin clave (OpenFreeMap) dentro de Leaflet: sustituye a CARTO light_all -->
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin=""></script>
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js" integrity="sha384-LIxE/QjpJKC2A91yD40ZisdYtFbgAjl58jqpo9/MUZNgwhqsTfzwrTlqv6nDdzzB" crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin=""/>
+    <!-- la base vectorial queda encima del satélite al inicio, como estaba la de CARTO -->
+    <style>.leaflet-gl-layer { z-index: 2; }</style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
@@ -129,7 +135,7 @@
   "maxZoom": 19,
   "maxNativeZoom": 19,
   "noWrap": false,
-  "attribution": "Esri",
+  "attribution": "Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community",
   "subdomains": "abc",
   "detectRetina": false,
   "tms": false,
@@ -142,21 +148,20 @@
             tile_layer_3951f920a18df0e2af7b755caddb62e8.addTo(map_8c8b5ff10b63766fa875c9f678ae2278);
         
     
-            var tile_layer_988454c13a22ce11eba4257081c79ff2 = L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+            // Mapa base: OpenFreeMap Positron (vectorial, sin clave) vía maplibre-gl-leaflet;
+            // sustituye a CARTO light_all, que sin clave pinta «API KEY REQUIRED».
+            // La atribución (OpenFreeMap © OpenMapTiles Data from OpenStreetMap) la añade sola el plugin.
+            var tile_layer_988454c13a22ce11eba4257081c79ff2 = L.maplibreGL(
                 {
-  "minZoom": 0,
+  "style": "https://tiles.openfreemap.org/styles/positron",
   "maxZoom": 20,
-  "maxNativeZoom": 20,
-  "noWrap": false,
-  "attribution": "\u00a9 OpenStreetMap contributors \u00a9 CARTO",
-  "subdomains": "abcd",
-  "detectRetina": false,
-  "tms": false,
-  "opacity": 1,
 }
 
             );
+            // Leaflet solo cuenta el maxZoom de las capas de teselas: se registra a mano, como hace GridLayer,
+            // para conservar el zoom máximo 20 que daba la capa CARTO.
+            tile_layer_988454c13a22ce11eba4257081c79ff2.beforeAdd = function (m) { m._addZoomLimit(this); };
+            tile_layer_988454c13a22ce11eba4257081c79ff2.on("remove", function () { map_8c8b5ff10b63766fa875c9f678ae2278._removeZoomLimit(this); });
         
     
             tile_layer_988454c13a22ce11eba4257081c79ff2.addTo(map_8c8b5ff10b63766fa875c9f678ae2278);

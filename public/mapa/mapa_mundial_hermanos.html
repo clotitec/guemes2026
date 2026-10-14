@@ -11,6 +11,8 @@
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+  integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin=""/>
 
 <style>
   :root {
@@ -393,6 +395,11 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<!-- Mapa base vectorial sin clave (OpenFreeMap) dentro de Leaflet: sustituye a CARTO raster -->
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+  integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin=""></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.3/leaflet-maplibre-gl.js"
+  integrity="sha384-LIxE/QjpJKC2A91yD40ZisdYtFbgAjl58jqpo9/MUZNgwhqsTfzwrTlqv6nDdzzB" crossorigin=""></script>
 
 <script>
   // ==========================================
@@ -603,11 +610,11 @@
     boxZoom: false, keyboard: false,
   });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OSM &copy; CARTO', subdomains: 'abcd', maxZoom: 19,
-  }).addTo(map);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 19, opacity: 0.85,
+  // Mapa base: OpenFreeMap Liberty (vectorial, sin clave) vía maplibre-gl-leaflet.
+  // Sustituye a CARTO raster voyager, que sin clave pinta «API KEY REQUIRED».
+  // El plugin añade sola la atribución del estilo: OpenFreeMap © OpenMapTiles Data from OpenStreetMap.
+  L.maplibreGL({
+    style: 'https://tiles.openfreemap.org/styles/liberty',
   }).addTo(map);
 
   // ==========================================
