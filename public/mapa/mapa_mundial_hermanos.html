@@ -34,10 +34,12 @@
 
   #map { position: absolute; inset: 0; background: var(--bg-deep); z-index: 1; }
 
+  /* Viñeta dentro de #map: encima de los panes de Leaflet (400) y debajo de sus controles (1000),
+     para que no tape el crédito de OpenFreeMap / OpenStreetMap. */
   .vignette {
     position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(ellipse at center, transparent 30%, var(--bg-deep) 95%);
-    z-index: 2;
+    z-index: 900;
   }
 
   /* Hero title */
@@ -221,7 +223,7 @@
   /* Tile overrides */
   .leaflet-tile-pane { filter: sepia(0.12) saturate(0.88) brightness(0.96); }
   .leaflet-container { background: var(--bg-deep); }
-  .leaflet-control-attribution { background: rgba(10, 17, 32, 0.8) !important; color: var(--text-mut) !important; font-size: 9px !important; }
+  .leaflet-control-attribution { background: rgba(10, 17, 32, 0.8) !important; color: var(--text) !important; font-size: 9px !important; }
   .leaflet-control-attribution a { color: var(--corten) !important; }
 
   /* Aerial Gallery */
@@ -350,8 +352,7 @@
 <body>
 
 <div id="app">
-  <div id="map"></div>
-  <div class="vignette"></div>
+  <div id="map"><div class="vignette"></div></div>
 
   <div class="hero">
     <div class="eyebrow" data-i18n="eyebrow">Güemes · Bareyo · Cantabria</div>
